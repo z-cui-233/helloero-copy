@@ -8,6 +8,8 @@ const Header: React.FC = () => {
 const Container = styled.header`
   height: 6rem;
   width: 100%;
+  background-color: #3f72af;
+  color: #fff;
 `;
 
 export default Header;
