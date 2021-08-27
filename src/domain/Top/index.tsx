@@ -2,18 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import withLayout from 'src/shared/components/Layout';
 import styled from 'styled-components';
-import { useSession } from 'next-auth/client';
 
 const Top: React.FC = () => {
-  const [session, loading] = useSession();
-
-  console.log({ session, loading });
   return (
     <Container>
-      <h1>THIS IS TOP PAGE</h1>
-      <Link href="/test-mypage" passHref>
-        <a>test-mypage</a>
-      </Link>
+      <h1>THIS IS TOP</h1>
+      <div>
+        <Link href="/my-library" passHref>
+          <a>my-library</a>
+        </Link>
+      </div>
     </Container>
   );
 };

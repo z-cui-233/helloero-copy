@@ -11,7 +11,7 @@ export default createGlobalStyle`
     letter-spacing: 1px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: -apple-system, BlinkMacSystemFont, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'メイリオ', Meiryo, "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'メイリオ', Meiryo, "Helvetica Neue", Helvetica, Arial, Sans-Serif;
     font-size: 16px;
     line-height: 1.7;
     min-width: 320px;

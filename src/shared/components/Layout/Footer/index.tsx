@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Footer: React.FC = () => {
-  return <Container>Header</Container>;
+  return <Container>Footer</Container>;
 };
 
 const Container = styled.footer`

@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import React from 'react';
-import TestMyPage from 'src/domain/TestMyPage';
+import Login from 'src/domain/Login';
 
 const Page: NextPage = () => {
-  return <TestMyPage />;
+  return <Login />;
 };
 
 export default Page;
