@@ -1,69 +1,58 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  AuthState,
-  CognitoUserInterface,
-  onAuthUIStateChange,
-} from '@aws-amplify/ui-components';
-import { Auth } from 'aws-amplify';
+import React, { useContext } from 'react';
+import { useSession } from 'next-auth/client';
 
 interface UserInfo {
-  isSignedIn: boolean;
+  isLoggedIn: boolean;
+  email: string;
+  name: string;
 }
 
 const initialState: UserInfo = {
-  isSignedIn: false,
+  isLoggedIn: false,
+  email: '',
+  name: '',
 };
 
-const UserInfoContext = React.createContext({ userInfo: initialState });
+const UserInfoContext = React.createContext({
+  isLoadedUserInfo: false,
+  userInfo: initialState,
+});
 
 const UserInfoContextProvider: React.FC = ({ children }) => {
-  const [currentAuthState, setCurrentAuthState] = useState<AuthState>();
-  const [user, setUser] = useState<CognitoUserInterface>();
-
-  useEffect(() => {
-    console.log('UserInfoContextProvider.useEffect');
-    (async () => {
-      console.log('UserInfoContextProvider.useEffect2');
-      const test = await Auth.currentUserInfo().catch((err) =>
-        console.log(err)
-      );
-
-      console.log('UserInfoContextProvider.useEffect3', test);
-
-      onAuthUIStateChange((nextAuthState, authData) => {
-        console.log('onAuthUIStateChange', { nextAuthState, authData });
-        setCurrentAuthState(nextAuthState);
-        setUser(authData as CognitoUserInterface);
-      });
-    })();
-  }, []);
+  const [session, loading] = useSession();
 
   const mergedUserInfo: UserInfo = {
-    isSignedIn: !!AuthState.SignedIn && !!user,
+    isLoggedIn: !loading && !!session,
+    email: session?.user?.email ?? '',
+    name: session?.user?.name ?? '',
   };
 
-  console.log('UserInfoContextProvider', {
-    user,
-    AuthState,
-    currentAuthState,
-    mergedUserInfo,
-  });
+  console.log(session);
 
   return (
-    <UserInfoContext.Provider value={{ userInfo: mergedUserInfo }}>
+    <UserInfoContext.Provider
+      value={{
+        isLoadedUserInfo: !loading,
+        userInfo: mergedUserInfo,
+      }}
+    >
       {children}
     </UserInfoContext.Provider>
   );
 };
 
-const useUserInfoContext = (): { userInfo: UserInfo } => {
-  const { userInfo } = useContext(UserInfoContext);
+const useUserInfoContext = (): {
+  isLoadedUserInfo: boolean;
+  userInfo: UserInfo;
+} => {
+  const { isLoadedUserInfo, userInfo } = useContext(UserInfoContext);
 
   if (userInfo === null) {
     throw new Error('can not find UserInfoContextProvider');
   }
 
   return {
+    isLoadedUserInfo,
     userInfo,
   };
 };
