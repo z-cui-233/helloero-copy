@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 // 34
 const Heading1 = css`
-  font-size: 2.125rem;
+  font-size: 2.5rem;
   font-weight: bold;
   line-height: 1.4;
 `;
