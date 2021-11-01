@@ -15,8 +15,8 @@ const withLayout = <P extends Record<string, unknown>>(
   const ComponentWithLayout: React.FC<P> = (props) => {
     return (
       <Container>
-        <Header />
         <Main>
+          <Header />
           <WrappedComponent {...props} />
         </Main>
         <Footer />
@@ -31,13 +31,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  background-color: ${({ theme }) => theme.background.primary};
+  padding: 1rem;
 `;
 
 const Main = styled.div`
   flex: 1 1 auto;
-  padding: 0 0 8rem;
   position: relative;
   width: 100%;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.background.standard};
 `;
 
 export default withLayout;

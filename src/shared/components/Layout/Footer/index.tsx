@@ -6,10 +6,9 @@ const Footer: React.FC = () => {
 };
 
 const Container = styled.footer`
-  margin: 6rem 0 0;
-  padding: 4rem 2rem;
+  margin: 5rem auto;
   width: 100%;
-  background-color: #112d4e;
+  max-width: 800px;
   color: #fff;
 `;
 
