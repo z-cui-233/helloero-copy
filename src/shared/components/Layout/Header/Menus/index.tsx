@@ -89,37 +89,36 @@ const Container = styled.div<{
 
 const Grid = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5rem;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
 
   @media ${device.ltSd} {
-    display: flex;
     flex-direction: column-reverse;
-    padding: 1rem;
-    max-width: 30rem;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0 1rem;
     margin: 0 auto;
   }
 `;
 
 const LogoContainer = styled.div`
-  background-color: ${({ theme }) => theme.background.secondary};
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1;
+  width: 50%;
 
   @media ${device.ltSd} {
-    aspect-ratio: 2 / 1;
+    margin: 4rem 0 0;
+    width: 100%;
   }
 `;
 
 const MenuContainer = styled.div`
-  max-width: 35rem;
-  width: 100%;
+  padding: 0 4rem;
+  width: 50%;
+  max-width: 800px;
 
   @media ${device.ltSd} {
     padding: 0;
-    max-width: 100%;
+    width: 100%;
   }
 `;
 
