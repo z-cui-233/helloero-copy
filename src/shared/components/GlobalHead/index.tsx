@@ -4,7 +4,7 @@ import React from 'react';
 const GlobalHead: React.FC = () => {
   return (
     <Head>
-      <title>TITLE</title>
+      <title>HELLO ERO powered by H2U</title>
     </Head>
   );
 };

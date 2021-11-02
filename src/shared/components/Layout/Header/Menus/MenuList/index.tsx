@@ -16,24 +16,24 @@ const MenuList: React.FC = () => {
           {isLoadedUserInfo && (
             <React.Fragment>
               {!userInfo.isLoggedIn && (
-                <ListItem>
+                <li>
                   <Link href="/login" passHref>
                     <StyledLink>
                       ログイン
                       <StyledArrowLogo />
                     </StyledLink>
                   </Link>
-                </ListItem>
+                </li>
               )}
               {userInfo.isLoggedIn && (
-                <ListItem>
+                <li>
                   <Link href="/logout" passHref>
                     <StyledLink>
                       ログアウト
                       <StyledArrowLogo />
                     </StyledLink>
                   </Link>
-                </ListItem>
+                </li>
               )}
             </React.Fragment>
           )}
@@ -42,7 +42,7 @@ const MenuList: React.FC = () => {
       <Section>
         <Title>ヘルプ</Title>
         <List>
-          <ListItem>
+          <li>
             <StyledLink
               href="https://video.unext.jp"
               target="_blank"
@@ -51,8 +51,8 @@ const MenuList: React.FC = () => {
               利用規約
               <StyledArrowLogo />
             </StyledLink>
-          </ListItem>
-          <ListItem>
+          </li>
+          <li>
             <StyledLink
               href="https://video.unext.jp"
               target="_blank"
@@ -61,7 +61,7 @@ const MenuList: React.FC = () => {
               お問い合わせ
               <StyledArrowLogo />
             </StyledLink>
-          </ListItem>
+          </li>
         </List>
       </Section>
     </React.Fragment>
@@ -81,10 +81,6 @@ const List = styled.ul`
   margin: 1.5rem 0 0;
 `;
 
-const ListItem = styled.li`
-  margin: 1rem 0 0;
-`;
-
 const StyledLink = styled.a`
   ${typo.Heading2};
   font-weight: bold;
@@ -93,6 +89,7 @@ const StyledLink = styled.a`
   display: block;
   text-decoration: none;
   transition: color 0.3s ease;
+  padding: 0.5rem 0;
 
   & svg path {
     transition: fill 0.3s ease;

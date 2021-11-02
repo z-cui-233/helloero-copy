@@ -1,15 +1,15 @@
 import { css } from 'styled-components';
 
-// 34
+// 48
 const Heading1 = css`
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   line-height: 1.4;
 `;
 
-// 30
+// 32
 const Heading2 = css`
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: bold;
   line-height: 1.4;
 `;

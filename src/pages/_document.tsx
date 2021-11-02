@@ -46,6 +46,25 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap"
             rel="stylesheet"
           />
+          <meta
+            key="viewport"
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0"
+          />
+          <meta
+            key="X-UA-Compatible"
+            httpEquiv="X-UA-Compatible"
+            content="ie=edge"
+          />
+          <link
+            rel="shortcut icon"
+            type="image/png"
+            href="/images/favicon.png?t=20211101"
+          />
+          <link
+            rel="apple-touch-icon"
+            href="/images/apple-touch-icon.png?t=20211101"
+          />
         </Head>
         <body>
           <Main />
