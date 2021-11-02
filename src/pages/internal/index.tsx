@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import React from 'react';
-import Login from 'src/domain/Login';
+import Internal from 'src/domain/Internal';
 
 const Page: NextPage = () => {
-  return <Login />;
+  return <Internal />;
 };
 
 export default Page;

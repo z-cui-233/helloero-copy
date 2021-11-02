@@ -1,8 +1,8 @@
 import { css } from 'styled-components';
 
-// 48
+// 40
 const Heading1 = css`
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   line-height: 1.4;
 `;
@@ -24,11 +24,15 @@ const Heading3 = css`
 // 20
 const Lead1 = css`
   font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.4;
 `;
 
 // 18
 const Lead2 = css`
   font-size: 1.125rem;
+  font-weight: bold;
+  line-height: 1.4;
 `;
 
 // 16

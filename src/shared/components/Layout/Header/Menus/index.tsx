@@ -22,18 +22,18 @@ const Menus: React.FC<Props> = ({ isDisplayedMenu }) => {
   return (
     <Container haveNeverShow={haveNeverShow} isDisplayedMenu={isDisplayedMenu}>
       <Grid>
-        <LogoContainer>
+        <GridContainer>
           <LogoMark />
-        </LogoContainer>
-        <MenuContainer>
+        </GridContainer>
+        <GridContainer>
           <MenuList />
-        </MenuContainer>
+        </GridContainer>
       </Grid>
     </Container>
   );
 };
 
-const showingSubMenu = keyframes`
+const fadeIn = keyframes`
   from {
     opacity: 0;
     visibility: hidden;
@@ -45,7 +45,7 @@ const showingSubMenu = keyframes`
   }
 `;
 
-const closingSubMenu = keyframes`
+const fadeOut = keyframes`
   from {
     opacity: 1;
     visibility: visible;
@@ -73,23 +73,22 @@ const Container = styled.div<{
   visibility: hidden;
   opacity: 0;
   transition: 0.3s ease-in-out;
-  padding: 1rem;
 
-  ${({ isDisplayedMenu, haveNeverShow }) =>
+  animation: ${({ isDisplayedMenu, haveNeverShow }) =>
     isDisplayedMenu
       ? css`
-          animation: ${showingSubMenu} 0.3s ease-out forwards;
+          ${fadeIn} 0.3s ease-out forwards
         `
       : haveNeverShow
-      ? ``
+      ? `none`
       : css`
-          animation: ${closingSubMenu} 0.3s ease-out forwards;
+          ${fadeOut} 0.3s ease-out forwards
         `};
 `;
 
 const Grid = styled.div`
-  width: 100%;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
 
@@ -97,27 +96,13 @@ const Grid = styled.div`
     flex-direction: column-reverse;
     flex-wrap: wrap;
     height: auto;
-    padding: 0 1rem;
-    margin: 0 auto;
   }
 `;
 
-const LogoContainer = styled.div`
+const GridContainer = styled.div`
   width: 50%;
 
   @media ${device.ltSd} {
-    margin: 4rem 0 0;
-    width: 100%;
-  }
-`;
-
-const MenuContainer = styled.div`
-  padding: 0 4rem;
-  width: 50%;
-  max-width: 800px;
-
-  @media ${device.ltSd} {
-    padding: 0;
     width: 100%;
   }
 `;

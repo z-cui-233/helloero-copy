@@ -18,7 +18,7 @@ const withAmplifyAuth = <P extends Record<string, unknown>>(
         return;
       }
 
-      router.push(`/login?backurl=${encodeURIComponent(window.location.href)}`);
+      router.push('/');
     }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
 
     return isLoadedUserInfo && userInfo.isLoggedIn ? (
@@ -27,6 +27,7 @@ const withAmplifyAuth = <P extends Record<string, unknown>>(
       <div />
     );
   };
+
   return ComponentWithAmplifyAuth;
 };
 
