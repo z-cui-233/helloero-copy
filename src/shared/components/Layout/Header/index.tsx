@@ -1,17 +1,13 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import Logo from '../../../assets/logo/ColorBlack.svg';
 import HamburgerButton from './HamburgerButton';
 import device from 'src/shared/styles/device';
 import Menus from './Menus';
 
 const Header: React.FC = () => {
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [isDisplayedMenu, setIsDisplayedMenu] = useState<boolean>(false);
-
-  console.log(isLoadedUserInfo, userInfo);
 
   const handleClickHamburger = (): void => {
     setIsDisplayedMenu(!isDisplayedMenu);
