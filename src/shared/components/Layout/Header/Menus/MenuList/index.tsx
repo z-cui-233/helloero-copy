@@ -4,76 +4,67 @@ import typo from 'src/shared/styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import Link from 'next/link';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
+import device from 'src/shared/styles/device';
 
 const MenuList: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return (
-    <React.Fragment>
-      <Section>
-        <Title>設定</Title>
-        <List>
-          {isLoadedUserInfo && (
-            <React.Fragment>
-              {!userInfo.isLoggedIn && (
-                <li>
-                  <Link href="/login" passHref>
-                    <StyledLink>
-                      ログイン
-                      <StyledArrowLogo />
-                    </StyledLink>
-                  </Link>
-                </li>
-              )}
-              {userInfo.isLoggedIn && (
-                <li>
-                  <Link href="/logout" passHref>
-                    <StyledLink>
-                      ログアウト
-                      <StyledArrowLogo />
-                    </StyledLink>
-                  </Link>
-                </li>
-              )}
-            </React.Fragment>
-          )}
-        </List>
-      </Section>
-      <Section>
-        <Title>ヘルプ</Title>
-        <List>
-          <li>
-            <StyledLink
-              href="https://video.unext.jp"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              利用規約
-              <StyledArrowLogo />
-            </StyledLink>
-          </li>
-          <li>
-            <StyledLink
-              href="https://video.unext.jp"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              お問い合わせ
-              <StyledArrowLogo />
-            </StyledLink>
-          </li>
-        </List>
-      </Section>
-    </React.Fragment>
+    <Container>
+      {isLoadedUserInfo && userInfo.isLoggedIn && (
+        <React.Fragment>
+          <Title>設定</Title>
+          <List>
+            <li>
+              <Link href="/logout" passHref>
+                <StyledLink>
+                  ログアウト
+                  <StyledArrowLogo />
+                </StyledLink>
+              </Link>
+            </li>
+          </List>
+        </React.Fragment>
+      )}
+      <Title>ヘルプ</Title>
+      <List>
+        <li>
+          <StyledLink
+            href="https://video.unext.jp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            利用規約
+            <StyledArrowLogo />
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink
+            href="https://video.unext.jp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            お問い合わせ
+            <StyledArrowLogo />
+          </StyledLink>
+        </li>
+      </List>
+    </Container>
   );
 };
 
-const Section = styled.div`
-  margin: 4rem 0 0;
+const Container = styled.div`
+  padding: 4rem 2rem 0;
+  max-width: 800px;
+
+  @media ${device.ltSd} {
+    max-width: 100%;
+  }
 `;
 
 const Title = styled.div`
   ${typo.Heading1};
+  margin: 4rem 0 0;
   color: ${({ theme }) => theme.text.primaryInverted};
 `;
 

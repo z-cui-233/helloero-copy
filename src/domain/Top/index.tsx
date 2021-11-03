@@ -1,38 +1,60 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import withLayout from 'src/shared/components/Layout';
 import styled from 'styled-components';
-import typo from 'src/shared/styles/typo';
+import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
+import { useRouter } from 'next/router';
+import {
+  AmplifyAuthContainer,
+  AmplifyAuthenticator,
+  AmplifySignUp,
+} from '@aws-amplify/ui-react';
 
 const Top: React.FC = () => {
+  const router = useRouter();
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+
+  useEffect(() => {
+    if (!isLoadedUserInfo) {
+      return;
+    }
+
+    if (!userInfo.isLoggedIn) {
+      setIsInitialized(true);
+      return;
+    }
+
+    router.replace('/my-library');
+  }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
+
   return (
     <Container>
-      <Title>TOP</Title>
-      <Contents>
-        <Link href="/my-library" passHref>
-          <a>my-library</a>
-        </Link>
-      </Contents>
+      {isInitialized && (
+        <React.Fragment>
+          <AmplifyAuthContainer>
+            <AmplifyAuthenticator>
+              <AmplifySignUp
+                slot="sign-up"
+                formFields={[
+                  { type: 'username' },
+                  { type: 'password' },
+                  { type: 'email' },
+                ]}
+              />
+            </AmplifyAuthenticator>
+          </AmplifyAuthContainer>
+        </React.Fragment>
+      )}
     </Container>
   );
 };
 
 const Container = styled.div`
-  max-width: 840px;
-  margin: 3rem auto 0;
+  max-width: 640px;
+  margin: 2rem auto 0;
   width: calc(100% - 2rem);
-  background-color: #dbe2ef;
-  padding: 1rem;
-`;
-
-const Title = styled.div`
-  ${typo.Heading3};
-  color: ${({ theme }) => theme.text.primary};
-  line-height: 1.4;
-`;
-
-const Contents = styled.div`
-  margin: 2rem 0 0;
+  padding: 4rem 0;
+  position: relative;
 `;
 
 export default withLayout(Top);

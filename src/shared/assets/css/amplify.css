@@ -1,0 +1,49 @@
+:root {
+  --amplify-font-family: -apple-system, BlinkMacSystemFont,
+    'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    'メイリオ', Meiryo, 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  --amplify-text-xxs: 0.75rem;
+  --amplify-text-xs: 0.875rem;
+  --amplify-text-sm: 1rem;
+  --amplify-text-md: 1.125rem;
+  --amplify-text-md-sub: 1.25rem;
+  --amplify-text-lg: 1.5rem;
+  --amplify-text-xl: 2rem;
+  --amplify-text-xxl: 3rem;
+
+  --amplify-primary-color: rgba(0, 0, 0, 1);
+  --amplify-primary-contrast: var(--amplify-white);
+  --amplify-primary-tint: rgba(0, 0, 0, 1);
+  --amplify-primary-shade: var(--amplify-grey);
+
+  --amplify-secondary-color: rgba(0, 0, 0, 1);
+  --amplify-secondary-contrast: var(--amplify-white);
+  --amplify-secondary-tint: rgba(0, 0, 0, 1);
+  --amplify-secondary-shade: var(--amplify-grey);
+
+  --amplify-tertiary-color: var(--amplify-blue);
+  --amplify-tertiary-contrast: var(--amplify-white);
+  --amplify-tertiary-tint: var(--amplify-grey);
+  --amplify-tertiary-shade: var(--amplify-light-grey);
+
+  --amplify-background-color: var(--amplify-white);
+  --amplify-grey: rgba(127, 127, 127, 1);
+  --amplify-light-grey: rgba(204, 204, 204, 1);
+  --amplify-white: rgba(255, 255, 255, 1);
+  --amplify-smoke-white: rgba(242, 242, 242, 1);
+  --amplify-red: rgba(255, 0, 50, 1);
+  --amplify-blue: rgba(73, 95, 124, 1);
+}
+
+amplify-authenticator {
+  --width: 640px;
+  --min-width: 320px;
+  --box-shadow: none;
+  --border-radius: 0;
+  --padding: 0;
+  --margin-bottom: 0;
+  --container-height: auto;
+  --container-display: flex;
+  --container-justify: center;
+  --container-align: center;
+}

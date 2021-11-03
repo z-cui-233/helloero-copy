@@ -9,6 +9,8 @@ import { LoginStateContextProvider } from 'src/shared/context/LoginStateContext'
 import Amplify, { I18n } from 'aws-amplify';
 import config from '../aws-exports';
 import { vocabularies } from 'src/shared/assets/i18n/amplify/vocabularies';
+import 'src/shared/assets/css/amplify.css';
+import 'src/shared/assets/css/prettify.css';
 
 Amplify.configure({
   ...config,

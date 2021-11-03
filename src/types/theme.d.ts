@@ -12,6 +12,27 @@ declare module 'styled-components' {
       primary: string;
       standard: string;
       secondary: string;
+      tertiary: string;
+    };
+    filter: {
+      primary: string;
+      standard: string;
+      secondary: string;
+    };
+    input: {
+      background: string;
+      border: string;
+      warning: string;
+    };
+    button: {
+      background: {
+        default: string;
+        hover: string;
+      };
+      text: {
+        default: string;
+        hover: string;
+      };
     };
     menuButton: {
       background: {

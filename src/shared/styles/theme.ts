@@ -7,6 +7,9 @@ const colors = {
   blue: 'rgba(73, 95, 124, 1)',
   white: 'rgba(255, 255, 255, 1)',
   black: 'rgba(0, 0, 0, 1)',
+  black_60: 'rgba(0, 0, 0, 0.6)',
+  black_40: 'rgba(0, 0, 0, 0.4)',
+  black_20: 'rgba(0, 0, 0, 0.2)',
   grey_50: 'rgba(127, 127, 127, 1)',
   grey_40: 'rgba(153, 153, 153, 1)',
   grey_20: 'rgba(204, 204, 204, 1)',
@@ -18,13 +21,34 @@ const themeColors: DefaultTheme = {
   text: {
     primary: colors.black,
     primaryInverted: colors.white,
-    standard: colors.grey_50,
-    secondary: colors.grey_40,
+    standard: colors.black,
+    secondary: colors.grey_50,
   },
   background: {
     primary: colors.red,
     standard: colors.white,
     secondary: colors.pink,
+    tertiary: colors.grey_10,
+  },
+  filter: {
+    primary: colors.black_60,
+    standard: colors.black_40,
+    secondary: colors.black_20,
+  },
+  input: {
+    background: colors.white,
+    border: colors.black_60,
+    warning: colors.red,
+  },
+  button: {
+    background: {
+      default: colors.red,
+      hover: colors.red,
+    },
+    text: {
+      default: colors.white,
+      hover: colors.black,
+    },
   },
   menuButton: {
     background: {
