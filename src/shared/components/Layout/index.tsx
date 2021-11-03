@@ -9,7 +9,8 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const withLayout = <P extends Record<string, unknown>>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const withLayout = <P extends Record<string, any>>(
   WrappedComponent: React.FC<P>
 ): React.FC<P> => {
   const ComponentWithLayout: React.FC<P> = (props) => {

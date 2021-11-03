@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
@@ -11,7 +12,11 @@ const ContentsCard: React.FC = () => {
         alt=""
       />
       <Control>
-        <PlayButton />
+        <Link href="/play" passHref>
+          <a>
+            <PlayButton />
+          </a>
+        </Link>
         <DetailButton>
           <div>詳細を見る</div>
         </DetailButton>

@@ -3,11 +3,7 @@ import withLayout from 'src/shared/components/Layout';
 import styled from 'styled-components';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
-import {
-  AmplifyAuthContainer,
-  AmplifyAuthenticator,
-  AmplifySignUp,
-} from '@aws-amplify/ui-react';
+import AuthenticationForm from 'src/shared/components/AuthenticationForm';
 
 const Top: React.FC = () => {
   const router = useRouter();
@@ -27,26 +23,7 @@ const Top: React.FC = () => {
     router.replace('/my-library');
   }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
 
-  return (
-    <Container>
-      {isInitialized && (
-        <React.Fragment>
-          <AmplifyAuthContainer>
-            <AmplifyAuthenticator>
-              <AmplifySignUp
-                slot="sign-up"
-                formFields={[
-                  { type: 'username' },
-                  { type: 'password' },
-                  { type: 'email' },
-                ]}
-              />
-            </AmplifyAuthenticator>
-          </AmplifyAuthContainer>
-        </React.Fragment>
-      )}
-    </Container>
-  );
+  return <Container>{isInitialized && <AuthenticationForm />}</Container>;
 };
 
 const Container = styled.div`
