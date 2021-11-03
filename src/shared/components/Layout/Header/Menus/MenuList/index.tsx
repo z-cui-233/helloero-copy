@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import typo from 'src/shared/styles/typo';
-import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
+import ArrowLogo from 'src/shared/assets/icon/arrow_right_white.svg';
 import Link from 'next/link';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import device from 'src/shared/styles/device';
@@ -75,7 +75,7 @@ const List = styled.ul`
 const StyledLink = styled.a`
   ${typo.Heading2};
   font-weight: bold;
-  color: ${({ theme }) => theme.text.primaryInverted};
+  color: ${({ theme }) => theme.button.text.default};
   position: relative;
   display: block;
   text-decoration: none;
@@ -87,11 +87,11 @@ const StyledLink = styled.a`
   }
 
   &:hover {
-    color: ${({ theme }) => theme.text.primary};
+    color: ${({ theme }) => theme.button.text.hover};
     text-decoration: underline;
 
     & svg path {
-      fill: ${({ theme }) => theme.text.primary};
+      fill: ${({ theme }) => theme.button.text.hover};
     }
   }
 `;

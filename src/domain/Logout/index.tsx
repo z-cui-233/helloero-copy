@@ -1,11 +1,11 @@
 import { Auth, Hub } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import PrimaryButton from 'src/shared/components/Form/PrimaryButton';
 import withLayout from 'src/shared/components/Layout';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
+import ButtonStandard from 'src/shared/components/Form/ButtonStandard';
 
 const Logout: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,7 +53,7 @@ const Logout: React.FC = () => {
           <Title>HELLOERO からログアウトしますか？</Title>
           <Text>再度ログインするには、ログインIDとパスワードが必要です。</Text>
           <ButtonSection>
-            <PrimaryButton
+            <ButtonStandard
               onClick={() => {
                 handleClickLogout();
               }}
@@ -77,7 +77,6 @@ const Container = styled.div`
 
 const Title = styled.div`
   ${typo.Heading2};
-  line-height: 1.4;
 `;
 
 const Text = styled.div`

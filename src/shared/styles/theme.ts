@@ -19,7 +19,7 @@ const colors = {
 
 const themeColors: DefaultTheme = {
   text: {
-    primary: colors.black,
+    primary: colors.red,
     primaryInverted: colors.white,
     standard: colors.black,
     secondary: colors.grey_50,

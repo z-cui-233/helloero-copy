@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppProps } from 'next/app';
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'src/shared/styles/globalStyle';
 import GlobalHead from 'src/shared/components/GlobalHead';
@@ -26,10 +26,21 @@ const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       <GlobalHead />
       <LoginStateContextProvider>
         <Component {...pageProps} />
+        <div id="modal" />
       </LoginStateContextProvider>
       <GlobalScripts />
     </ThemeProvider>
   );
+};
+
+CoreApp.getInitialProps = async (
+  appContext: AppContext
+): Promise<AppInitialProps> => {
+  const appProps = await App.getInitialProps(appContext);
+
+  return {
+    ...appProps,
+  };
 };
 
 export default CoreApp;
