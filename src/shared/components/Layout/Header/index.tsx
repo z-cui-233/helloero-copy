@@ -1,10 +1,8 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Logo from '../../../assets/logo/ColorBlack.svg';
 import HamburgerButton from './HamburgerButton';
-import device from 'src/shared/styles/device';
 import Menus from './Menus';
+import SiteLogo from './SiteLogo';
 
 const Header: React.FC = () => {
   const [isDisplayedMenu, setIsDisplayedMenu] = useState<boolean>(false);
@@ -15,43 +13,35 @@ const Header: React.FC = () => {
 
   return (
     <Container>
-      <Link href="/" passHref>
-        <a>
-          <StyledLogo />
-        </a>
-      </Link>
-      <HamburgerButton
-        isDisplayedMenu={isDisplayedMenu}
-        onClick={handleClickHamburger}
-      />
-      <Menus isDisplayedMenu={isDisplayedMenu} />
+      <HeaderContents>
+        <SiteLogo />
+        <HamburgerButton
+          isDisplayedMenu={isDisplayedMenu}
+          onClick={handleClickHamburger}
+        />
+        <Menus isDisplayedMenu={isDisplayedMenu} />
+      </HeaderContents>
     </Container>
   );
 };
 
 const Container = styled.header`
-  height: 4rem;
-  width: 100%;
-  position: relative;
+  background-color: ${({ theme }) => theme.background.primary};
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 5rem;
+  z-index: 100;
 `;
 
-const StyledLogo = styled(Logo)`
-  &&& {
-    position: absolute;
-    top: 0.75rem;
-    left: 0;
-    right: 0;
-    bottom: 0.75rem;
-    margin: auto;
-    height: 2.5rem;
-    width: auto;
-    display: block;
-
-    @media ${device.ltSd} {
-      right: auto;
-      left: 1rem;
-    }
-  }
+const HeaderContents = styled.div`
+  background-color: ${({ theme }) => theme.background.standard};
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  height: 4rem;
 `;
 
 export default Header;

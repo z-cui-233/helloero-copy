@@ -36,14 +36,14 @@
 }
 
 amplify-authenticator {
-  --width: 640px;
-  --min-width: 320px;
+  --width: 100%;
+  --min-width: 200px;
   --box-shadow: none;
   --border-radius: 0;
   --padding: 0;
   --margin-bottom: 0;
   --container-height: auto;
-  --container-display: flex;
+  --container-display: block;
   --container-justify: center;
   --container-align: center;
 }
