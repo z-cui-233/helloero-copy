@@ -22,7 +22,9 @@ const Container = styled.div<{ isDisplayedMenu: boolean }>`
   right: 0;
   bottom: 0;
   width: 4rem;
+  height: 4rem;
   z-index: 1000;
+
   background-color: ${({ theme, isDisplayedMenu }) =>
     isDisplayedMenu
       ? theme.menuButton.background.active

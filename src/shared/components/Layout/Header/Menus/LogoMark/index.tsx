@@ -20,13 +20,12 @@ const LogoMark: React.FC = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
   height: 100%;
+  width: 100%;
   padding: 1rem;
 
   @media ${device.ltSd} {
-    margin: 4rem 0 0;
-    padding: 0 2rem;
+    padding: 4rem 2rem;
   }
 `;
 
@@ -37,6 +36,7 @@ const BackGroundColor = styled.div`
   position: relative;
 
   @media ${device.ltSd} {
+    padding: 4rem 0;
     height: auto;
   }
 `;
@@ -67,7 +67,6 @@ const LogoContainer = styled.div`
   display: none;
 
   @media ${device.ltSd} {
-    padding: 4rem 0;
     display: block;
   }
 `;
