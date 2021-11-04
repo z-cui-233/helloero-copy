@@ -10,6 +10,7 @@ declare module 'styled-components' {
     };
     background: {
       primary: string;
+      primaryInverted: string;
       standard: string;
       secondary: string;
       tertiary: string;
