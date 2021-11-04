@@ -55,7 +55,7 @@ const Button = styled.button<{ hasIcon: boolean }>`
   max-width: 400px;
   margin: 0 auto;
   position: relative;
-  padding: ${({ hasIcon }) => (hasIcon ? '0 1rem 0 2rem' : '0 1rem')};
+  padding: ${({ hasIcon }) => (hasIcon ? '0 1.5rem 0 2rem' : '0 1rem')};
 
   height: 3.5rem;
   background-color: ${({ theme }) => theme.button.background.default};
@@ -77,13 +77,17 @@ const Button = styled.button<{ hasIcon: boolean }>`
 
 const Icon = styled.div`
   & svg {
-    height: 1rem;
-    width: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
     position: absolute;
     top: 0;
-    left: 1rem;
+    left: 0.5rem;
     bottom: 0;
     margin: auto 0;
+
+    path {
+      transition: fill 0.3s ease-out;
+    }
   }
 `;
 

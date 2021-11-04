@@ -26,6 +26,7 @@ const themeColors: DefaultTheme = {
   },
   background: {
     primary: colors.red,
+    primaryInverted: colors.black,
     standard: colors.white,
     secondary: colors.pink,
     tertiary: colors.grey_10,
