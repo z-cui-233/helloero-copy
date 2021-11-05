@@ -1,60 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import withLayout from 'src/shared/components/Layout';
+import React from 'react';
 import styled from 'styled-components';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import AuthenticationForm from 'src/shared/components/AuthenticationForm';
+import withLayout from 'src/shared/components/Layout';
+import {
+  FLOW_STATUS,
+  useWabikenEntryContext,
+  WabikenEntryProvider,
+} from 'src/shared/context/WabikenEntryContext';
+import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
 import InputForm from './InputForm';
+import ConfirmForm from './ConfirmForm';
+import NoticeComplete from './NoticeComplete';
 
-const PAGE_STATUS = {
-  INIT: 'INIT',
-  LOGIN: 'LOGIN',
-  INPUT: 'INPUT',
-  CONFIRM: 'CONFIRM',
-} as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
-
-interface Props {
-  wabiken: string;
-}
-
-const Entry: React.FC<Props> = ({ wabiken }) => {
-  const [pageState, setPageState] = useState<PageStatus>(PAGE_STATUS.INIT);
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-
-  useEffect(() => {
-    if (!isLoadedUserInfo) {
-      return;
-    }
-
-    if (!userInfo.isLoggedIn) {
-      setPageState(PAGE_STATUS.LOGIN);
-      return;
-    }
-
-    if (!wabiken) {
-      setPageState(PAGE_STATUS.INPUT);
-      return;
-    }
-
-    setPageState(PAGE_STATUS.CONFIRM);
-  }, [isLoadedUserInfo, userInfo.isLoggedIn, wabiken]);
+const Entry: React.FC = () => {
+  const { state } = useWabikenEntryContext();
 
   return (
     <Container>
-      {pageState === PAGE_STATUS.INIT && <div>init</div>}
-      {pageState === PAGE_STATUS.LOGIN && <AuthenticationForm />}
-      {pageState === PAGE_STATUS.INPUT && <InputForm />}
-      {pageState === PAGE_STATUS.CONFIRM && <div>confirm</div>}
+      {state.flowStatus === FLOW_STATUS.INPUT && <InputForm />}
+      {state.flowStatus === FLOW_STATUS.CONFIRM && <ConfirmForm />}
+      {state.flowStatus === FLOW_STATUS.COMPLETE && <NoticeComplete />}
     </Container>
   );
 };
 
 const Container = styled.div`
   max-width: 640px;
-  margin: 2rem auto 0;
+  margin: 4rem auto 0;
   width: calc(100% - 2rem);
-  padding: 4rem 0;
-  position: relative;
 `;
 
-export default withLayout(Entry);
+const WrappedComponent: React.FC = () => (
+  <WabikenEntryProvider>
+    <Entry />
+  </WabikenEntryProvider>
+);
+
+export default withLayout(withAmplifyAuth(WrappedComponent));

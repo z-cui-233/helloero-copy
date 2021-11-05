@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import withLayout from 'src/shared/components/Layout';
-import styled from 'styled-components';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
 import AuthenticationForm from 'src/shared/components/AuthenticationForm';
@@ -20,18 +19,14 @@ const Top: React.FC = () => {
       return;
     }
 
-    router.replace('/my-library');
+    const backPath = router.query.backpath
+      ? (router.query.backpath as string)
+      : '';
+
+    router.replace(backPath ? decodeURIComponent(backPath) : '/my-library');
   }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
 
-  return <Container>{isInitialized && <AuthenticationForm />}</Container>;
+  return isInitialized ? <AuthenticationForm /> : <div />;
 };
-
-const Container = styled.div`
-  max-width: 640px;
-  margin: 2rem auto 0;
-  width: calc(100% - 2rem);
-  padding: 4rem 0;
-  position: relative;
-`;
 
 export default withLayout(Top);

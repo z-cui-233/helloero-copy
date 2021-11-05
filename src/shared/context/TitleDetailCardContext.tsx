@@ -71,8 +71,7 @@ const reducer: React.Reducer<Store, Action> = (state, action) => {
 // @ts-ignore
 const TitleDetailCardContext: React.Context<ContextProps> = React.createContext(
   {
-    isDisplayed: false as boolean,
-    wabiken: '',
+    state: initialState,
   }
 );
 
