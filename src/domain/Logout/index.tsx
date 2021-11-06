@@ -5,7 +5,8 @@ import withLayout from 'src/shared/components/Layout';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import ButtonStandard from 'src/shared/components/Form/ButtonStandard';
+import ButtonStandard from 'src/shared/components/atomic/parts/ButtonStandard';
+import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
 
 const Logout: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,7 +48,7 @@ const Logout: React.FC = () => {
   };
 
   return (
-    <Container>
+    <MainContainer>
       {isInitialized && (
         <React.Fragment>
           <Title>HELLOERO からログアウトしますか？</Title>
@@ -65,15 +66,9 @@ const Logout: React.FC = () => {
           </ButtonSection>
         </React.Fragment>
       )}
-    </Container>
+    </MainContainer>
   );
 };
-
-const Container = styled.div`
-  max-width: 640px;
-  margin: 4rem auto 0;
-  width: calc(100% - 2rem);
-`;
 
 const Title = styled.div`
   ${typo.Heading2};

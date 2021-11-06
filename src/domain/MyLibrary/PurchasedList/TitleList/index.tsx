@@ -1,14 +1,14 @@
 import React from 'react';
 import device from 'src/shared/styles/device';
 import styled from 'styled-components';
-import ContentsCard from './ContentsCard';
+import TitleCard from './TitleCard';
 
-const ContentsCardList: React.FC = () => {
+const TitleList: React.FC = () => {
   return (
     <Container>
       <List>
         {[...Array(30)].map((_, i) => (
-          <ContentsCard key={i} />
+          <TitleCard key={i} />
         ))}
       </List>
     </Container>
@@ -29,4 +29,4 @@ const List = styled.div`
   }
 `;
 
-export default ContentsCardList;
+export default TitleList;

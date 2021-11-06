@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
+import ValidateMessage from 'src/shared/components/atomic/parts/ValidateMessage';
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
@@ -18,13 +19,13 @@ const TextField: React.FC<Props> = ({
   fieldOptions,
 }) => {
   return (
-    <React.Fragment>
+    <div>
       <Container>
         <Input {...fieldOptions} />
         <Label>{label}</Label>
       </Container>
-      {validateMessage && <ValidateMessage>{validateMessage}</ValidateMessage>}
-    </React.Fragment>
+      {validateMessage && <ValidateMessage message={validateMessage} />}
+    </div>
   );
 };
 
@@ -82,14 +83,6 @@ const Input = styled.input<CustomInputProps>`
   &:focus::placeholder {
     opacity: 1;
   }
-`;
-
-const ValidateMessage = styled.div`
-  ${typo.Body};
-  color: ${({ theme }) => theme.input.warning};
-  margin: 0.5rem 0 0;
-  line-height: 1.4;
-  font-weight: bold;
 `;
 
 export default TextField;

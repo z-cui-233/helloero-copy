@@ -29,7 +29,7 @@ const themeColors: DefaultTheme = {
     primaryInverted: colors.black,
     standard: colors.white,
     secondary: colors.pink,
-    tertiary: colors.grey_10,
+    tertiary: colors.skin,
   },
   filter: {
     primary: colors.black_60,

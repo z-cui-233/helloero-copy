@@ -1,11 +1,13 @@
 import React from 'react';
-import ButtonStandard from 'src/shared/components/Form/ButtonStandard';
+import ButtonStandard from 'src/shared/components/atomic/parts/ButtonStandard';
+import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
 import {
   ACTION_TYPE,
   useWabikenEntryContext,
 } from 'src/shared/context/WabikenEntryContext';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
+import TitleInfo from './TitleInfo';
 
 const ConfirmForm: React.FC = () => {
   const { state, dispatch } = useWabikenEntryContext();
@@ -20,14 +22,14 @@ const ConfirmForm: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <MainContainer>
       <Title>購入した動画の登録</Title>
-      <Text>内容を確認してください。</Text>
-      <FieldSection></FieldSection>
+      <Text>内容を確認の上、登録をして下さい。</Text>
+      <TitleInfo />
       <ButtonSection>
-        <ButtonStandard onClick={() => handleOnClick()} label={'登録する'} />
+        <ButtonStandard onClick={() => handleOnClick()} label={'動画を登録'} />
       </ButtonSection>
-    </React.Fragment>
+    </MainContainer>
   );
 };
 
@@ -37,10 +39,6 @@ const Title = styled.div`
 
 const Text = styled.div`
   margin: 1rem 0 0;
-`;
-
-const FieldSection = styled.div`
-  margin: 2rem 0 0;
 `;
 
 const ButtonSection = styled.div`
