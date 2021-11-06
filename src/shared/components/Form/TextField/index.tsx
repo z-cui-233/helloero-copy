@@ -8,7 +8,7 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 interface Props {
   label: string;
-  validateMessage?: string;
+  validateMessage?: string | undefined;
   fieldOptions: CustomInputProps;
 }
 
