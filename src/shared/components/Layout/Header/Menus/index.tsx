@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import device from 'src/shared/styles/device';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import LogoMark from './LogoMark';
 import MenuList from './MenuList';
 
@@ -9,18 +9,8 @@ interface Props {
 }
 
 const Menus: React.FC<Props> = ({ isDisplayedMenu }) => {
-  const [haveNeverShow, setHaveNeverShow] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (!isDisplayedMenu) {
-      return;
-    }
-
-    setHaveNeverShow(false);
-  }, [isDisplayedMenu]);
-
   return (
-    <Container haveNeverShow={haveNeverShow} isDisplayedMenu={isDisplayedMenu}>
+    <Container isDisplayedMenu={isDisplayedMenu}>
       <Grid>
         <GridContainer>
           <LogoMark />
@@ -33,34 +23,7 @@ const Menus: React.FC<Props> = ({ isDisplayedMenu }) => {
   );
 };
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  to {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
-
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-`;
-
-const Container = styled.div<{
-  isDisplayedMenu: boolean;
-  haveNeverShow: boolean;
-}>`
+const Container = styled.div<{ isDisplayedMenu: boolean }>`
   overflow-y: scroll;
   position: fixed;
   top: 0;
@@ -70,20 +33,10 @@ const Container = styled.div<{
   background-color: ${({ theme }) => theme.background.primary};
   z-index: 100;
 
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.3s ease-in-out;
-
-  animation: ${({ isDisplayedMenu, haveNeverShow }) =>
-    isDisplayedMenu
-      ? css`
-          ${fadeIn} 0.3s ease-out forwards
-        `
-      : haveNeverShow
-      ? `none`
-      : css`
-          ${fadeOut} 0.3s ease-out forwards
-        `};
+  visibility: ${({ isDisplayedMenu }) =>
+    isDisplayedMenu ? 'visible' : 'hidden'};
+  opacity: ${({ isDisplayedMenu }) => (isDisplayedMenu ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const Grid = styled.div`
