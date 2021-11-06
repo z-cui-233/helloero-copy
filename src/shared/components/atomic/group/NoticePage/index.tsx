@@ -6,7 +6,7 @@ import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
 
 interface Props {
   title: string;
-  texts: string[];
+  texts: string | string[];
   links: { href: string; label: string }[];
 }
 
@@ -15,9 +15,15 @@ const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
     <MainContainer>
       <Title>{title}</Title>
       <Text>
-        {texts.map((val) => (
-          <div key={val}>{val}</div>
-        ))}
+        {texts instanceof Array ? (
+          <div>
+            {texts.map((val) => (
+              <div key={val}>{val}</div>
+            ))}
+          </div>
+        ) : (
+          <div>{texts}</div>
+        )}
       </Text>
       <LinkContainer>
         {links.map(({ href, label }) => (
