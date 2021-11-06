@@ -61,8 +61,8 @@ const StyledIcon = styled(Icon)`
     right: 0.5rem;
     bottom: 0.5rem;
     margin: auto;
-    height: auto;
-    width: auto;
+    height: 2.5rem;
+    width: 2.5rem;
     display: block;
 
     path {
