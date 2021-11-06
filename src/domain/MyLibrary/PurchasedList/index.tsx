@@ -1,13 +1,13 @@
 import React from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
-import ContentsCardList from './ContentsCardList';
+import TitleList from './TitleList';
 
-const PurchasedContents: React.FC = () => {
+const PurchasedList: React.FC = () => {
   return (
     <Container>
       <Title>登録済みの動画</Title>
-      <ContentsCardList />
+      <TitleList />
     </Container>
   );
 };
@@ -21,4 +21,4 @@ const Title = styled.div`
   line-height: 1.4;
 `;
 
-export default PurchasedContents;
+export default PurchasedList;

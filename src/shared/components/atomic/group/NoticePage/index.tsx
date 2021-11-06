@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
+import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
 
 interface Props {
   title: string;
@@ -11,7 +12,7 @@ interface Props {
 
 const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
   return (
-    <React.Fragment>
+    <MainContainer>
       <Title>{title}</Title>
       <Text>
         {texts.map((val) => (
@@ -27,7 +28,7 @@ const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
           </div>
         ))}
       </LinkContainer>
-    </React.Fragment>
+    </MainContainer>
   );
 };
 

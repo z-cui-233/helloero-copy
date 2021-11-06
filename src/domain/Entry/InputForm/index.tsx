@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import ButtonStandard from 'src/shared/components/Form/ButtonStandard';
-import TextField from 'src/shared/components/Form/TextField';
+import ButtonStandard from 'src/shared/components/atomic/parts/ButtonStandard';
+import TextField from 'src/shared/components/atomic/parts/TextField';
 import typo from 'src/shared/styles/typo';
 import {
   ACTION_TYPE,
   useWabikenEntryContext,
 } from 'src/shared/context/WabikenEntryContext';
+import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
 
 interface FormValues {
   wabiken: string;
@@ -45,7 +46,7 @@ const InputForm: React.FC = () => {
   });
 
   return (
-    <React.Fragment>
+    <MainContainer>
       <Title>購入した動画の登録</Title>
       <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
       <FieldSection>
@@ -69,10 +70,10 @@ const InputForm: React.FC = () => {
       <ButtonSection>
         <ButtonStandard
           onClick={() => formik.handleSubmit()}
-          label={'登録する'}
+          label={'シリアルコードを確認'}
         />
       </ButtonSection>
-    </React.Fragment>
+    </MainContainer>
   );
 };
 

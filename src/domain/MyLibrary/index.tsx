@@ -3,19 +3,19 @@ import withLayout from 'src/shared/components/Layout';
 import { TitleDetailCardProvider } from 'src/shared/context/TitleDetailCardContext';
 import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
-import ContentsDetail from './ContentsDetail';
-import PurchasedContents from './PurchasedContents';
+import TitleDetail from './TitleDetail';
+import PurchasedList from './PurchasedList';
 import WabikenForm from './WabikenForm';
 
 const MyLibrary: React.FC = () => {
   return (
-    <Container>
-      <TitleDetailCardProvider>
+    <TitleDetailCardProvider>
+      <Container>
         <WabikenForm />
-        <PurchasedContents />
-        <ContentsDetail />
-      </TitleDetailCardProvider>
-    </Container>
+        <PurchasedList />
+        <TitleDetail />
+      </Container>
+    </TitleDetailCardProvider>
   );
 };
 

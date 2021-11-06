@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal from 'src/shared/components/Modal';
-import Portal from 'src/shared/components/Portal';
+import PortalModal from 'src/shared/components/atomic/group/PortalModal';
 import {
   ACTION_TYPE,
   FLOW_STATUS,
@@ -11,7 +10,7 @@ import styled from 'styled-components';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
 
-const ContentsDetail: React.FC = () => {
+const TitleDetail: React.FC = () => {
   const { state, dispatch } = useTitleDetailCardContext();
 
   const handleOnClickClose = (): void => {
@@ -25,18 +24,16 @@ const ContentsDetail: React.FC = () => {
   };
 
   return state.flowStatus === FLOW_STATUS.SHRINK ? null : (
-    <Portal>
-      <Modal onClickClose={handleOnClickClose}>
-        <Container>
-          <div>
-            <Thumbnail />
-          </div>
-          <div>
-            <MetaInfo />
-          </div>
-        </Container>
-      </Modal>
-    </Portal>
+    <PortalModal onClickClose={handleOnClickClose}>
+      <Container>
+        <div>
+          <Thumbnail />
+        </div>
+        <div>
+          <MetaInfo />
+        </div>
+      </Container>
+    </PortalModal>
   );
 };
 
@@ -51,4 +48,4 @@ const Container = styled.div`
   }
 `;
 
-export default ContentsDetail;
+export default TitleDetail;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import withLayout from 'src/shared/components/Layout';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
-import AuthenticationForm from 'src/shared/components/AuthenticationForm';
+import AuthenticationForm from './AuthenticationForm';
 
 const Top: React.FC = () => {
   const router = useRouter();

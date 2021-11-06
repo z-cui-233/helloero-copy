@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { createPortal } from 'react-dom';
 
 interface Props {
   onClickClose: (e: unknown) => unknown;
 }
 
-const Modal: React.FC<Props> = ({ children, onClickClose }) => {
-  return (
-    <Container>
-      <ModalContainer>
-        <ModalContents>{children}</ModalContents>
-        <CloseButton onClick={onClickClose} />
-      </ModalContainer>
-    </Container>
-  );
+const PortalModal: React.FC<Props> = ({ children, onClickClose }) => {
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return mounted
+    ? createPortal(
+        <Container>
+          <ModalContainer>
+            <ModalContents>{children}</ModalContents>
+            <CloseButton onClick={onClickClose} />
+          </ModalContainer>
+        </Container>,
+        document.getElementById('modal') as Element
+      )
+    : null;
 };
 
 const fadeIn = keyframes`
@@ -102,4 +112,4 @@ const CloseButton = styled.div`
   }
 `;
 
-export default Modal;
+export default PortalModal;
