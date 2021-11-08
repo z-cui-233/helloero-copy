@@ -17,21 +17,15 @@ const Landing: React.FC = () => {
       <Grid>
         <div>
           <Artwork>
-            <Image src="/images/dummy/600x600.png" alt="hello ero" />
+            <Image src="/images/dummy/600x600.png" alt="HELLOERO(ハローエロ)" />
           </Artwork>
         </div>
         <div>
           <Title>
-            この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+            シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
           </Title>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
           </Text>
           <ButtonContainer>
             <ButtonStandard
@@ -47,12 +41,13 @@ const Landing: React.FC = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.section`
   max-width: 1024px;
   margin: 4rem auto 0;
   width: calc(100% - 4rem);
 
-  @media ${device.ltTablet} {
+  @media ${device.ltSd} {
+    max-width: 640px;
     width: calc(100% - 2rem);
   }
 `;
@@ -62,7 +57,7 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 3rem;
 
-  @media ${device.ltTablet} {
+  @media ${device.ltSd} {
     grid-template-columns: 1fr;
     grid-gap: 6rem;
   }
@@ -92,11 +87,11 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   ${typo.Heading1};
 `;
 
-const Text = styled.div`
+const Text = styled.p`
   margin: 1.5rem 0 0;
 `;
 
