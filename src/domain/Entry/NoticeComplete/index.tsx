@@ -1,5 +1,5 @@
 import React from 'react';
-import NoticePage from 'src/shared/components/atomic/group/NoticePage';
+import NoticePage from 'src/shared/components/NoticePage';
 
 const NoticeComplete: React.FC = () => {
   return (

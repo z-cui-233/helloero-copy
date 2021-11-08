@@ -11,21 +11,29 @@ const MenuList: React.FC = () => {
 
   return (
     <Container>
-      {isLoadedUserInfo && userInfo.isLoggedIn && (
-        <React.Fragment>
-          <Title>設定</Title>
-          <List>
-            <li>
+      <React.Fragment>
+        <Title>設定</Title>
+        <List>
+          <li>
+            {isLoadedUserInfo && !userInfo.isLoggedIn && (
+              <Link href="/login" passHref>
+                <StyledLink>
+                  ログイン
+                  <StyledArrowLogo />
+                </StyledLink>
+              </Link>
+            )}
+            {isLoadedUserInfo && userInfo.isLoggedIn && (
               <Link href="/logout" passHref>
                 <StyledLink>
                   ログアウト
                   <StyledArrowLogo />
                 </StyledLink>
               </Link>
-            </li>
-          </List>
-        </React.Fragment>
-      )}
+            )}
+          </li>
+        </List>
+      </React.Fragment>
       <Title>ヘルプ</Title>
       <List>
         <li>

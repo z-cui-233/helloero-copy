@@ -1,5 +1,5 @@
 import React from 'react';
-import TitleThumbnail from 'src/shared/components/atomic/parts/TitleThumbnail';
+import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import ButtonStandard, {
   BUTTON_ICONS,
-} from 'src/shared/components/atomic/parts/ButtonStandard';
+} from 'src/shared/components/parts/ButtonStandard';
 import device from 'src/shared/styles/device';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
-import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
+import MainContainer from 'src/shared/components/parts/MainContainer';
 
 interface Props {
   title: string;
