@@ -1,5 +1,5 @@
 import React from 'react';
-import NoticePage from 'src/shared/components/atomic/group/NoticePage';
+import NoticePage from 'src/shared/components/NoticePage';
 import withLayout from 'src/shared/components/Layout';
 
 interface Props {

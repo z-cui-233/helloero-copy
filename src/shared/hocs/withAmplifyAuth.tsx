@@ -15,7 +15,7 @@ const withAmplifyAuth = <P extends Record<string, unknown>>(
       }
 
       if (!userInfo.isLoggedIn) {
-        router.push(`/?backpath=${encodeURIComponent(router.asPath)}`);
+        router.push(`/login?backpath=${encodeURIComponent(router.asPath)}`);
         return;
       }
     }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);

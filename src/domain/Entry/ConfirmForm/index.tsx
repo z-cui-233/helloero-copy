@@ -1,6 +1,6 @@
 import React from 'react';
-import ButtonStandard from 'src/shared/components/atomic/parts/ButtonStandard';
-import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
+import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
+import MainContainer from 'src/shared/components/parts/MainContainer';
 import {
   ACTION_TYPE,
   useWabikenEntryContext,

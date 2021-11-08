@@ -5,8 +5,8 @@ import withLayout from 'src/shared/components/Layout';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import ButtonStandard from 'src/shared/components/atomic/parts/ButtonStandard';
-import MainContainer from 'src/shared/components/atomic/parts/MainContainer';
+import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
+import MainContainer from 'src/shared/components/parts/MainContainer';
 
 const Logout: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

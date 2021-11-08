@@ -1,5 +1,5 @@
 import React from 'react';
-import PortalModal from 'src/shared/components/atomic/group/PortalModal';
+import PortalModal from 'src/shared/components/PortalModal';
 import {
   ACTION_TYPE,
   FLOW_STATUS,
