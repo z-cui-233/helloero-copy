@@ -27,10 +27,14 @@ const TitleDetail: React.FC = () => {
     <PortalModal onClickClose={handleOnClickClose}>
       <Container>
         <div>
-          <Thumbnail />
+          <ThumbnailContainer>
+            <Thumbnail />
+          </ThumbnailContainer>
         </div>
         <div>
-          <MetaInfo />
+          <MetaContainer>
+            <MetaInfo />
+          </MetaContainer>
         </div>
       </Container>
     </PortalModal>
@@ -46,6 +50,20 @@ const Container = styled.div`
     display: block;
     max-width: 400px;
   }
+`;
+
+const ThumbnailContainer = styled.div`
+  padding: 1.5rem 0 1.5rem 1.5rem;
+
+  @media ${device.ltTablet} {
+    padding: 3rem 1.5rem 0;
+  }
+`;
+
+const MetaContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
 `;
 
 export default TitleDetail;
