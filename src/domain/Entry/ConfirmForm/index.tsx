@@ -27,7 +27,12 @@ const ConfirmForm: React.FC = () => {
       <Text>内容を確認の上、登録をして下さい。</Text>
       <TitleInfo />
       <ButtonSection>
-        <ButtonStandard onClick={() => handleOnClick()} label={'動画を登録'} />
+        <ButtonStandard
+          onClick={() => {
+            handleOnClick();
+          }}
+          label={'動画を登録'}
+        />
       </ButtonSection>
     </MainContainer>
   );

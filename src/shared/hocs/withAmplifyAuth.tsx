@@ -14,17 +14,16 @@ const withAmplifyAuth = <P extends Record<string, unknown>>(
         return;
       }
 
-      if (!userInfo.isLoggedIn) {
-        router.push(`/login?backpath=${encodeURIComponent(router.asPath)}`);
+      if (userInfo.isLoggedIn) {
         return;
       }
+
+      router.replace(`/login?backpath=${encodeURIComponent(router.asPath)}`);
     }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
 
     return isLoadedUserInfo && userInfo.isLoggedIn ? (
       <WrappedComponent {...props} />
-    ) : (
-      <div />
-    );
+    ) : null;
   };
 
   return ComponentWithAmplifyAuth;

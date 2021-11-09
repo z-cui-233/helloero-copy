@@ -4,7 +4,7 @@ import typo from 'src/shared/styles/typo';
 import Link from 'next/link';
 import ArrowLogo from 'src/shared/assets/icon/arrow_right.svg';
 
-const WabikenForm: React.FC = () => {
+const WabikenMenu: React.FC = () => {
   return (
     <Container>
       <Title>購入した動画の登録</Title>
@@ -83,4 +83,4 @@ const StyledLink = styled.a`
   }
 `;
 
-export default WabikenForm;
+export default WabikenMenu;

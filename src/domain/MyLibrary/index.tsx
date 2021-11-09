@@ -5,13 +5,13 @@ import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
 import TitleDetail from './TitleDetail';
 import PurchasedList from './PurchasedList';
-import WabikenForm from './WabikenForm';
+import WabikenMenu from './WabikenMenu';
 
 const MyLibrary: React.FC = () => {
   return (
     <TitleDetailCardProvider>
       <Container>
-        <WabikenForm />
+        <WabikenMenu />
         <PurchasedList />
         <TitleDetail />
       </Container>
