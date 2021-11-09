@@ -17,7 +17,7 @@ const PortalModal: React.FC<Props> = ({ children, onClickClose }) => {
     ? createPortal(
         <Container>
           <ModalContainer>
-            <ModalContents>{children}</ModalContents>
+            {children}
             <CloseButton onClick={onClickClose} />
           </ModalContainer>
         </Container>,
@@ -46,6 +46,7 @@ const Container = styled.div`
   z-index: 2000;
   animation: ${fadeIn} 0.3s ease;
   overflow: scroll;
+  padding: 0 1rem;
 
   display: flex;
   justify-content: center;
@@ -53,22 +54,17 @@ const Container = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.background.primary};
-  padding: 1rem;
-  max-width: calc(800px - 2rem);
+  background-color: ${({ theme }) => theme.background.standard};
+  max-width: 800px;
   position: relative;
   overflow: hidden;
-`;
-
-const ModalContents = styled.div`
-  background-color: ${({ theme }) => theme.background.standard};
 `;
 
 const CloseButton = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0;
+  right: 0;
   width: 2.5rem;
   height: 2.5rem;
   content: '';
