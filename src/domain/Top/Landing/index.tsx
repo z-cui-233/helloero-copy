@@ -20,22 +20,24 @@ const Landing: React.FC = () => {
             <Image src="/images/dummy/600x600.png" alt="HELLOERO(ハローエロ)" />
           </Artwork>
         </div>
-        <div>
-          <Title>
-            シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
-          </Title>
-          <Text>
-            ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
-          </Text>
-          <ButtonContainer>
-            <ButtonStandard
-              onClick={() => {
-                handleClickLogin();
-              }}
-              label={'ログイン/アカウント登録'}
-            />
-          </ButtonContainer>
-        </div>
+        <LeadTexts>
+          <div>
+            <Title>
+              シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
+            </Title>
+            <Text>
+              ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
+            </Text>
+            <ButtonContainer>
+              <ButtonStandard
+                onClick={() => {
+                  handleClickLogin();
+                }}
+                label={'ログイン/アカウント登録'}
+              />
+            </ButtonContainer>
+          </div>
+        </LeadTexts>
       </Grid>
     </Container>
   );
@@ -55,25 +57,23 @@ const Container = styled.section`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 3rem;
+  grid-gap: 4rem;
 
   @media ${device.ltSd} {
     grid-template-columns: 1fr;
-    grid-gap: 6rem;
   }
 `;
 
 const Artwork = styled.div`
   position: relative;
   aspect-ratio: 1 / 1;
-  width: calc(100% - 2rem);
 
   &:before {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
-    right: -2rem;
-    bottom: -2rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    right: 0;
+    bottom: 0;
     content: '';
     display: block;
     background-color: ${({ theme }) => theme.background.tertiary};
@@ -82,9 +82,14 @@ const Artwork = styled.div`
 
 const Image = styled.img`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
   object-fit: contain;
+`;
+
+const LeadTexts = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Title = styled.h2`

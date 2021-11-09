@@ -69,7 +69,9 @@ const InputForm: React.FC = () => {
       </FieldSection>
       <ButtonSection>
         <ButtonStandard
-          onClick={() => formik.handleSubmit()}
+          onClick={() => {
+            formik.handleSubmit();
+          }}
           label={'シリアルコードを確認'}
         />
       </ButtonSection>
