@@ -25,6 +25,13 @@ declare module 'styled-components' {
       border: string;
       warning: string;
     };
+    searchInput: {
+      background: string;
+      icon: string;
+    };
+    filterButton: {
+      color: string;
+    };
     button: {
       background: {
         default: string;

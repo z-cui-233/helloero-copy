@@ -21,11 +21,11 @@ const Container = styled.div`
 
 const List = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1.5rem 0.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem 0.5rem;
 
   @media ${device.mobile} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
