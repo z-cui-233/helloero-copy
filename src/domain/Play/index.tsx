@@ -6,7 +6,7 @@ const Play: React.FC = () => {
   return (
     <Container>
       <DummyText>
-        <div>THIS IS PLAYER</div>
+        <div>COME ON BABY STAR</div>
       </DummyText>
     </Container>
   );

@@ -41,6 +41,13 @@ const themeColors: DefaultTheme = {
     border: colors.black_60,
     warning: colors.red,
   },
+  searchInput: {
+    background: colors.grey_05,
+    icon: colors.grey_40,
+  },
+  filterButton: {
+    color: colors.blue,
+  },
   button: {
     background: {
       default: colors.red,
