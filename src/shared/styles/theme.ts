@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 const colors = {
-  red: 'rgba(255, 0, 50, 1)',
+  red: 'rgba(230, 0, 50, 1)',
   pink: 'rgba(255, 204, 214, 1)',
   skin: 'rgba(245, 226, 226, 1)',
   blue: 'rgba(73, 95, 124, 1)',
