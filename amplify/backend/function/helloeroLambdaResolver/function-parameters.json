@@ -1,0 +1,10 @@
+{
+  "lambdaLayers": [],
+  "permissions": {},
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "wabitUrl",
+      "environmentVariableName": "WABIT_URL"
+    }
+  ]
+}

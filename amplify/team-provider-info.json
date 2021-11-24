@@ -1,4 +1,61 @@
 {
+  "prci": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-helloero-prci-41204-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-prci-41204-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-prci-41204-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-helloero-prci-41204-deployment",
+      "UnauthRoleName": "amplify-helloero-prci-41204-unauthRole",
+      "StackName": "amplify-helloero-prci-41204",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-prci-41204/5a2a56b0-4b4a-11ec-9b16-069d1cdf7719",
+      "AmplifyAppId": "d2lpn6hawe153k"
+    },
+    "categories": {
+      "function": {
+        "helloeroLambdaResolver": {
+          "deploymentBucketName": "amplify-helloero-prci-41204-deployment",
+          "s3Key": "amplify-builds/helloeroLambdaResolver-5a78386c33505448306d-build.zip",
+          "wabitUrl": "http://cfn-wab-alb-l679i7iig7oi-375596238.ap-northeast-1.elb.amazonaws.com"
+        }
+      },
+      "auth": {
+        "helloerof377b7dd": {}
+      }
+    }
+  },
+  "prce": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-helloero-prce-82642-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-prce-82642-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-prce-82642-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-helloero-prce-82642-deployment",
+      "UnauthRoleName": "amplify-helloero-prce-82642-unauthRole",
+      "StackName": "amplify-helloero-prce-82642",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-prce-82642/ef1eecd0-41ff-11ec-a9ff-0a93909845f9",
+      "AmplifyAppId": "d2lpn6hawe153k"
+    },
+    "categories": {
+      "auth": {
+        "helloerof377b7dd": {}
+      },
+      "function": {
+        "titleLambdaResolver2": {
+          "deploymentBucketName": "amplify-helloero-prce-82642-deployment",
+          "s3Key": "amplify-builds/titleLambdaResolver2-67717a746e494743674d-build.zip"
+        },
+        "helloEroLambdaResolver": {
+          "deploymentBucketName": "amplify-helloero-prce-82642-deployment",
+          "s3Key": "amplify-builds/helloEroLambdaResolver-67717a746e494743674d-build.zip"
+        },
+        "helloeroLambdaResolver": {
+          "deploymentBucketName": "amplify-helloero-prce-82642-deployment",
+          "s3Key": "amplify-builds/helloeroLambdaResolver-465a49515373642b5532-build.zip"
+        }
+      }
+    }
+  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-helloero-dev-175146-authRole",
