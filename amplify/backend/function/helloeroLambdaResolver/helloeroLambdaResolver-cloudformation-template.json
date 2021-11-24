@@ -15,9 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "wabitUrl": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -72,9 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "WABIT_URL": {
-              "Ref": "wabitUrl"
             }
           }
         },

@@ -15,8 +15,7 @@
       "function": {
         "helloeroLambdaResolver": {
           "deploymentBucketName": "amplify-helloero-prci-41204-deployment",
-          "s3Key": "amplify-builds/helloeroLambdaResolver-5a78386c33505448306d-build.zip",
-          "wabitUrl": "http://cfn-wab-alb-l679i7iig7oi-375596238.ap-northeast-1.elb.amazonaws.com"
+          "s3Key": "amplify-builds/helloeroLambdaResolver-5a78386c33505448306d-build.zip"
         }
       },
       "auth": {
