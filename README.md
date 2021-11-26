@@ -33,9 +33,18 @@ const awsmobile = {
 export default awsmobile;
 ```
 
-### start
+### Development guide
+
+## Start
 
 ```
-$ npm install
-$ npm run dev
+npm install
+npm run dev
 ```
+
+## Setting amplify backend
+
+for only front-end development, please use `dev` backend by setting amplify backend env as follows:
+`amplify env checkout dev`
+
+if updating backend, can use a separate feature-backend env or can directly use dev if not modifying existing backend resources

@@ -103,10 +103,25 @@ type SceneSearchList {
   IMS_S: [SceneSearch!]!
 }
 
+type ISemMeta {
+  version: String!
+  endpoint: AWSURL!
+  isemToken: String!
+}
+
+type PlayInfoEndpointExtra {
+  play_token: String!
+  play_token_hash: String!
+  beacon_intreval: String!
+}
+
 type PlayInfoEndpoint {
   id: ID!
   display_name: String!
   scene_search_list: SceneSearchList
+  playables: PlayableList!
+  isem: ISemMeta!
+  extra: PlayInfoEndpointExtra!
 }
 
 type LicenseUrl {
@@ -126,17 +141,15 @@ type Playable {
   license_url_list: LicenseUrlList
 }
 
-type PlayableList {
-  dash: [Playable!]!
-  smooth: [Playable!]!
+type PlayableList { # TBD
+  dash: [Playable!]
+  smooth: [Playable!]
 }
 
 type PlayInfo { # TBD
   type: String!
   landing_page: String!
   endpoints: [PlayInfoEndpoint!]!
-  playables: PlayableList!
-  isem_token: String!
   refresh_token: String!
   playback_remain: Int!
   not_valid_before: AWSTimestamp!

@@ -28,8 +28,30 @@
 - [x] Complete remaining query/mutations
 - [x] Add custom error-handling
 - [ ] Make GQL/DyanmoDB code production-ready
+- [ ] Confirm
+  - [ ] required/null values in apis, cuz this might break GQL resovlers (one common meeting to sync-up with wabit-api team)
+  - [ ] lock-value for activation of wabit-token should be cognitoIdentityId or something else?
+- [x] Make a test release to main branch
+  - [x] to setup/test AWS amplify `prod` env
+  - [x] Cognito pool for main/prod
+  - [x] (delete master branch to avoid confusion)
+- [ ] Domain setting
 - [ ] Keep learning about AWS Amplify, Cognito, AppSync GQL and update the code with best practices
-- [ ] Confirm required/null values in apis, cuz this might break GQL resovlers (one common meeting to sync-up with wabit-api team)
+
+## Notes on deployment so far
+
+- On merging PR into master, I had to duplicate some of the steps I did for adding a new lambda resolver
+  - Go to `Function` and had to add `WABIT_URL` env var manually from `Configuration` tab
+  - Go to `Api`
+    - Update response mapping to `Function`
+    - Update role for lambda function data source
+
+## Production ready
+
+- DyanmoDB
+  - AWS Backup
+    - Setup automatic backup daily-monthly-yearly retention
+    - Enabled point-in-time recovery
 
 ## References
 

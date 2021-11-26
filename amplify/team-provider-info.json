@@ -70,6 +70,12 @@
     "categories": {
       "auth": {
         "helloerof377b7dd": {}
+      },
+      "function": {
+        "helloeroLambdaResolver": {
+          "deploymentBucketName": "amplify-helloero-dev-175146-deployment",
+          "s3Key": "amplify-builds/helloeroLambdaResolver-6d6465466e336179544f-build.zip"
+        }
       }
     }
   }

@@ -24,7 +24,7 @@ const mapWabikenResponse = (wabikenRespone) => {
 ## correspoinding VDL response mapper should be: 
 ## Raise a GraphQL field error in case of a datasource invocation error
 #if($ctx.result.errorInfo)
-$util.error($ctx.result.errorMessage, $ctx.result.errorType, null, $context.result.errorInfo)
+  $util.error($ctx.result.errorMessage, $ctx.result.errorType, null, $context.result.errorInfo)
 #end
 
 $util.toJson($context.result)
@@ -45,13 +45,28 @@ const getPlayinfo = async (event) => {
     return mapWabitErrorResponse(response);
   }
 
-  return response.data;
+  const { result, playinfo } = response.data;
+
+  return {
+    result,
+    playinfo: {
+      ...playinfo,
+      endpoints: playinfo.endpoints.map(({ endpoint }) => ({
+        ...endpoint,
+        isem: {
+          version: endpoint.isem.version,
+          endpoint: endpoint.isem.endpoint,
+          isemToken: endpoint.isem.header['U-Isem-Token'],
+        },
+      })),
+    },
+  };
 };
 
 const activateWabiken = async (event) => {
   const { token, lockTo } = event.arguments;
   const response = await axios.put(`/v1/wabiken/${token}`, {
-    locked_to: lockTo,
+    locked_to: lockTo, // TBD: use context.identity.cognitoIdentityId insted??
   });
 
   if (response.data.error) {
