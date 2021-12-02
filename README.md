@@ -1,8 +1,6 @@
 # HELLOERO（ハローエロ）
 
-## set up
-
-### Prepare config file for local development
+## Prepare config file for local development
 
 `/src/aws-exports.js`
 
@@ -33,16 +31,9 @@ const awsmobile = {
 export default awsmobile;
 ```
 
-### Development guide
-
-## Start
-
-```
-npm install
-npm run dev
-```
-
 ## Docker Local Development Start
+
+### Start
 
 ```
 npm install
@@ -50,8 +41,19 @@ docker compose down
 docker compose up --build
 ```
 
-Web Page URL
-https://helloero.local.h2u.jp
+### Add hosts
+
+```
+127.0.0.1  helloero.local.h2u.jp
+```
+
+#### Clear DNS cache
+
+if you can not access local url, you should clear your dns cache.
+
+```
+sudo dscacheutil -flushcache
+```
 
 ## Setting amplify backend
 

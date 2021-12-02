@@ -6,18 +6,15 @@ import styled from 'styled-components';
 import TitleDetail from './TitleDetail';
 import PurchasedList from './PurchasedList';
 import WabikenMenu from './WabikenMenu';
-import { TitleListProvider } from 'src/shared/context/TitleListContext';
 
 const MyLibrary: React.FC = () => {
   return (
     <TitleDetailCardProvider>
-      <TitleListProvider>
-        <Container>
-          <WabikenMenu />
-          <PurchasedList />
-          <TitleDetail />
-        </Container>
-      </TitleListProvider>
+      <Container>
+        <WabikenMenu />
+        <PurchasedList />
+        <TitleDetail />
+      </Container>
     </TitleDetailCardProvider>
   );
 };

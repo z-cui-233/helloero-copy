@@ -68,7 +68,7 @@ const Detail = styled.div`
 
 const JsonData = styled.div`
   ${typo.Body};
-  background-color: ${({ theme }) => theme.background.tertiary};
+  background-color: ${({ theme }) => theme.keyColor.color3};
   padding: 1.5rem;
   overflow: scroll;
   font-family: sans-serif;

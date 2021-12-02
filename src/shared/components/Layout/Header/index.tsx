@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 };
 
 const Container = styled.header`
-  background-color: ${({ theme }) => theme.background.primary};
+  background-color: ${({ theme }) => theme.keyColor.color1};
   position: fixed;
   top: 0;
   left: 1rem;
@@ -36,7 +36,7 @@ const Container = styled.header`
 `;
 
 const HeaderContents = styled.div`
-  background-color: ${({ theme }) => theme.background.standard};
+  background-color: ${({ theme }) => theme.background.primary};
   position: absolute;
   top: 1rem;
   left: 0;

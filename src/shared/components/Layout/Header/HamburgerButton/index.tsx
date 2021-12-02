@@ -26,18 +26,14 @@ const Container = styled.div<{ isDisplayedMenu: boolean }>`
   z-index: 1000;
 
   background-color: ${({ theme, isDisplayedMenu }) =>
-    isDisplayedMenu
-      ? theme.menuButton.background.active
-      : theme.menuButton.background.default};
+    isDisplayedMenu ? theme.keyColor.color3 : theme.background.primaryInverted};
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${({ theme, isDisplayedMenu }) =>
-      isDisplayedMenu
-        ? theme.menuButton.background.active
-        : theme.menuButton.background.hover};
+      isDisplayedMenu ? theme.keyColor.color3 : theme.keyColor.color1};
   }
 `;
 
@@ -45,9 +41,7 @@ const TopLine = styled.div<{ isDisplayedMenu: boolean }>`
   content: '';
   display: block;
   background-color: ${({ theme, isDisplayedMenu }) =>
-    isDisplayedMenu
-      ? theme.menuButton.icon.active
-      : theme.menuButton.icon.default};
+    isDisplayedMenu ? theme.keyColor.color1 : theme.background.primary};
   height: 2px;
   width: 2rem;
   position: absolute;
@@ -64,9 +58,7 @@ const TopLine = styled.div<{ isDisplayedMenu: boolean }>`
 
 const CenterLine = styled.div<{ isDisplayedMenu: boolean }>`
   background-color: ${({ theme, isDisplayedMenu }) =>
-    isDisplayedMenu
-      ? theme.menuButton.icon.active
-      : theme.menuButton.icon.default};
+    isDisplayedMenu ? theme.keyColor.color1 : theme.background.primary};
   height: 2px;
   width: 2rem;
   position: absolute;
@@ -85,9 +77,7 @@ const BottomLine = styled.div<{ isDisplayedMenu: boolean }>`
   content: '';
   display: block;
   background-color: ${({ theme, isDisplayedMenu }) =>
-    isDisplayedMenu
-      ? theme.menuButton.icon.active
-      : theme.menuButton.icon.default};
+    isDisplayedMenu ? theme.keyColor.color1 : theme.background.primary};
   height: 2px;
   width: 2rem;
   position: absolute;

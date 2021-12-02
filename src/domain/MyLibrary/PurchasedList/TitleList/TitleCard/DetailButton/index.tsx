@@ -34,8 +34,8 @@ const Container = styled.div`
   ${typo.Standard};
   cursor: pointer;
   font-weight: bold;
-  background-color: ${({ theme }) => theme.button.background.default};
-  color: ${({ theme }) => theme.button.text.default};
+  background-color: ${({ theme }) => theme.keyColor.color1};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
   transition: color 0.2s ease-out;
 
   position: absolute;
@@ -48,7 +48,7 @@ const Container = styled.div`
   align-items: center;
 
   &:hover {
-    color: ${({ theme }) => theme.button.text.hover};
+    color: ${({ theme }) => theme.foreground.primary};
   }
 `;
 

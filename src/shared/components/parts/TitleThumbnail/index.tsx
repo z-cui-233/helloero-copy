@@ -17,7 +17,7 @@ const TitleThumbnail: React.FC<Props> = ({ src }) => {
 };
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.background.tertiary};
+  background-color: ${({ theme }) => theme.keyColor.color3};
   position: relative;
   aspect-ratio: 5 / 7;
   width: 100%;

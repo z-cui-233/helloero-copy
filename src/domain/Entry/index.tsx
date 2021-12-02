@@ -1,32 +1,22 @@
 import React from 'react';
 import withLayout from 'src/shared/components/Layout';
-import {
-  FLOW_STATUS,
-  useWabikenEntryContext,
-  WabikenEntryProvider,
-} from 'src/shared/context/WabikenEntryContext';
 import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
 import InputForm from './InputForm';
 import ConfirmForm from './ConfirmForm';
 import NoticeComplete from './NoticeComplete';
+import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 
 const Entry: React.FC = () => {
-  const WrappedComponent: React.FC = () => {
-    const { state } = useWabikenEntryContext();
-
-    return (
-      <React.Fragment>
-        {state.flowStatus === FLOW_STATUS.INPUT && <InputForm />}
-        {state.flowStatus === FLOW_STATUS.CONFIRM && <ConfirmForm />}
-        {state.flowStatus === FLOW_STATUS.COMPLETE && <NoticeComplete />}
-      </React.Fragment>
-    );
-  };
+  const store = useEntryWabiken();
 
   return (
-    <WabikenEntryProvider>
-      <WrappedComponent />
-    </WabikenEntryProvider>
+    <React.Fragment>
+      {store.state.pageStatus === PAGE_STATUS.INPUT && <InputForm {...store} />}
+      {store.state.pageStatus === PAGE_STATUS.CONFIRM && (
+        <ConfirmForm {...store} />
+      )}
+      {store.state.pageStatus === PAGE_STATUS.COMPLETE && <NoticeComplete />}
+    </React.Fragment>
   );
 };
 

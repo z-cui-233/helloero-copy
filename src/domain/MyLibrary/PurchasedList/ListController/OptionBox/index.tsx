@@ -3,25 +3,26 @@ import styled from 'styled-components';
 import SortIcon from 'src/shared/assets/icon/sort.svg';
 import ViewListIcon from 'src/shared/assets/icon/view_list.svg';
 import ViewModuleIcon from 'src/shared/assets/icon/view_module.svg';
-import {
-  displayOrder,
-  DISPLAY_ORDER,
-  useTitleListContext,
-} from 'src/shared/context/TitleListContext';
 import device from 'src/shared/styles/device';
+import {
+  DisplayOrder,
+  DISPLAY_ORDER,
+  UsePurchasedList,
+} from '../../usePurchasedList';
 
-const OptionBox: React.FC = () => {
-  const { isCardStyle, toggleListStyle, updateDisplayOrder } =
-    useTitleListContext();
-
+const OptionBox: React.FC<UsePurchasedList> = ({
+  state,
+  toggleListStyle,
+  updateDisplayOrder,
+}) => {
   return (
     <Container>
       <SelectContainer>
         <SortIcon />
-        <DisplayOrder
+        <SortList
           defaultValue={DISPLAY_ORDER.NAME_DESC}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            updateDisplayOrder(e.target.value as displayOrder);
+            updateDisplayOrder(e.target.value as DisplayOrder);
           }}
         >
           <option value={DISPLAY_ORDER.ADD} key={DISPLAY_ORDER.ADD}>
@@ -33,10 +34,10 @@ const OptionBox: React.FC = () => {
           <option value={DISPLAY_ORDER.NAME_DESC} key={DISPLAY_ORDER.NAME_DESC}>
             50音順（わ→あ）順
           </option>
-        </DisplayOrder>
+        </SortList>
       </SelectContainer>
       <ListSwitchButton onClick={toggleListStyle} tabIndex={0}>
-        {isCardStyle ? <ViewModuleIcon /> : <ViewListIcon />}
+        {state.isCardStyle ? <ViewModuleIcon /> : <ViewListIcon />}
       </ListSwitchButton>
     </Container>
   );
@@ -54,7 +55,7 @@ const Container = styled.div`
 `;
 
 const SelectContainer = styled.div`
-  border: 2px solid ${({ theme }) => theme.filterButton.color};
+  border: 2px solid ${({ theme }) => theme.keyColor.color4};
   border-radius: 0.25rem;
   position: relative;
   opacity: 0.75;
@@ -82,12 +83,12 @@ const SelectContainer = styled.div`
   }
 `;
 
-const DisplayOrder = styled.select`
+const SortList = styled.select`
   appearance: none;
   box-shadow: none;
   border: none;
   background-color: transparent;
-  color: ${({ theme }) => theme.filterButton.color};
+  color: ${({ theme }) => theme.keyColor.color4};
   height: 2rem;
   height: 100%;
   padding: 0 0 0 2.5rem;
@@ -117,7 +118,7 @@ const ListSwitchButton = styled.div`
   cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
-  border: 2px solid ${({ theme }) => theme.filterButton.color};
+  border: 2px solid ${({ theme }) => theme.keyColor.color4};
   border-radius: 0.25rem;
   opacity: 0.75;
   position: relative;

@@ -5,8 +5,8 @@ export default createGlobalStyle`
   ${reset}
 
   html, body {
-    background-color: ${({ theme }) => theme.background.standard};
-    color: ${({ theme }) => theme.text.standard};
+    background-color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme }) => theme.foreground.primary};
     font-feature-settings: "palt";
     letter-spacing: 1px;
     -webkit-font-smoothing: antialiased;

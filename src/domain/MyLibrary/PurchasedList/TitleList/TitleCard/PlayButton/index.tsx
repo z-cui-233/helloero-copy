@@ -24,7 +24,7 @@ const Container = styled.a`
   bottom: 3rem;
   margin: auto;
 
-  background-color: ${({ theme }) => theme.filter.primary};
+  background-color: ${({ theme }) => theme.foreground.secondary};
   content: '';
   display: block;
   border-radius: 50%;
@@ -35,7 +35,7 @@ const Container = styled.a`
     left: 4px;
     right: 4px;
     bottom: 4px;
-    border: 2px solid ${({ theme }) => theme.background.standard};
+    border: 2px solid ${({ theme }) => theme.background.primary};
     content: '';
     display: block;
     border-radius: 50%;
@@ -44,11 +44,11 @@ const Container = styled.a`
 
   &:hover {
     &:after {
-      border: 2px solid ${({ theme }) => theme.background.primary};
+      border: 2px solid ${({ theme }) => theme.keyColor.color1};
     }
 
     svg path {
-      fill: ${({ theme }) => theme.background.primary};
+      fill: ${({ theme }) => theme.keyColor.color1};
     }
   }
 `;

@@ -85,7 +85,7 @@ const ButtonSection = styled.div`
 
 const StyledLink = styled.a`
   ${typo.Standard};
-  color: ${({ theme }) => theme.text.standard};
+  color: ${({ theme }) => theme.foreground.primary};
   text-decoration: underline;
   display: inline-block;
   margin: 1.5rem auto 0;

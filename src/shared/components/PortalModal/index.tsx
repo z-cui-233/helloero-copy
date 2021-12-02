@@ -41,7 +41,7 @@ const Container = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${({ theme }) => theme.filter.primary};
+  background-color: ${({ theme }) => theme.foreground.secondary};
   backdrop-filter: blur(0.25rem);
   z-index: 2000;
   animation: ${fadeIn} 0.3s ease;
@@ -54,7 +54,7 @@ const Container = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.background.standard};
+  background-color: ${({ theme }) => theme.background.primary};
   max-width: 800px;
   position: relative;
   overflow: hidden;
@@ -69,11 +69,11 @@ const CloseButton = styled.div`
   height: 2.5rem;
   content: '';
   display: block;
-  background-color: ${({ theme }) => theme.menuButton.background.default};
+  background-color: ${({ theme }) => theme.background.primaryInverted};
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.menuButton.background.hover};
+    background-color: ${({ theme }) => theme.keyColor.color1};
   }
 
   &:before {
@@ -81,7 +81,7 @@ const CloseButton = styled.div`
     width: 1.5rem;
     content: '';
     display: block;
-    background-color: ${({ theme }) => theme.menuButton.icon.default};
+    background-color: ${({ theme }) => theme.background.primary};
 
     position: absolute;
     top: 0;
@@ -97,7 +97,7 @@ const CloseButton = styled.div`
     width: 1.5rem;
     content: '';
     display: block;
-    background-color: ${({ theme }) => theme.menuButton.icon.default};
+    background-color: ${({ theme }) => theme.background.primary};
 
     position: absolute;
     top: 0;

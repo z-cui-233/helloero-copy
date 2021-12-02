@@ -44,7 +44,7 @@ const Title = styled.div`
 
 const Text = styled.div`
   ${typo.Standard};
-  color: ${({ theme }) => theme.text.standard};
+  color: ${({ theme }) => theme.foreground.primary};
   margin: 1.5rem 0 0;
 `;
 
@@ -54,7 +54,7 @@ const LinkContainer = styled.div`
 
 const StyledLink = styled.a`
   ${typo.Standard};
-  color: ${({ theme }) => theme.text.standard};
+  color: ${({ theme }) => theme.foreground.primary};
   font-weight: bold;
   text-decoration: underline;
   display: inline-block;

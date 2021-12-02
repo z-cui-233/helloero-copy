@@ -49,7 +49,7 @@ const Container = styled.div`
 
 const TitleName = styled.div`
   ${typo.Heading3};
-  line-height: 1.4em;
+  line-height: 1.4;
   height: 2.8em;
   overflow: hidden;
   display: -webkit-box;

@@ -32,7 +32,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background-color: ${({ theme }) => theme.background.primary};
+  background-color: ${({ theme }) => theme.keyColor.color1};
   padding: 0 1rem;
 `;
 
@@ -42,7 +42,7 @@ const Main = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 5rem 0;
-  background-color: ${({ theme }) => theme.background.standard};
+  background-color: ${({ theme }) => theme.background.primary};
 `;
 
 export default withLayout;

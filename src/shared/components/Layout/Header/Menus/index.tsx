@@ -30,7 +30,7 @@ const Container = styled.div<{ isDisplayedMenu: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${({ theme }) => theme.background.primary};
+  background-color: ${({ theme }) => theme.keyColor.color1};
   z-index: 100;
 
   visibility: ${({ isDisplayedMenu }) =>

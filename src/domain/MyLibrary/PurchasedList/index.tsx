@@ -3,12 +3,15 @@ import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import ListController from './ListController';
 import TitleList from './TitleList';
+import usePurchasedList from './usePurchasedList';
 
 const PurchasedList: React.FC = () => {
+  const store = usePurchasedList();
+
   return (
     <Container>
       <Title>登録済みの動画</Title>
-      <ListController />
+      <ListController {...store} />
       <TitleList />
     </Container>
   );

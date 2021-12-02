@@ -30,7 +30,7 @@ const Container = styled.div`
 `;
 
 const BackGroundColor = styled.div`
-  background-color: ${({ theme }) => theme.background.secondary};
+  background-color: ${({ theme }) => theme.keyColor.color2};
   width: 100%;
   height: 100%;
   position: relative;

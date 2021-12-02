@@ -14,7 +14,7 @@ const Play: React.FC = () => {
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.background.primaryInverted};
-  color: ${({ theme }) => theme.text.primaryInverted};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
   height: 100%;
   width: 100%;
   position: relative;

@@ -76,7 +76,7 @@ const Artwork = styled.div`
     bottom: 0;
     content: '';
     display: block;
-    background-color: ${({ theme }) => theme.background.tertiary};
+    background-color: ${({ theme }) => theme.keyColor.color3};
   }
 `;
 

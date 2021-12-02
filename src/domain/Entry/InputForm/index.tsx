@@ -5,19 +5,9 @@ import * as Yup from 'yup';
 import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
 import TextField from 'src/shared/components/parts/TextField';
 import typo from 'src/shared/styles/typo';
-import {
-  ACTION_TYPE,
-  useWabikenEntryContext,
-} from 'src/shared/context/WabikenEntryContext';
 import MainContainer from 'src/shared/components/parts/MainContainer';
-
-interface FormValues {
-  wabiken: string;
-}
-
-const initialValues: FormValues = {
-  wabiken: '',
-};
+import { UseEntryWabiken } from '../useEntryWabiken';
+import FormErrorMessage from 'src/shared/components/FormErrorMessage';
 
 const validationSchema = Yup.object().shape({
   wabiken: Yup.string()
@@ -26,27 +16,18 @@ const validationSchema = Yup.object().shape({
     .length(16, 'シリアルコードは16文字で入力してください。'),
 });
 
-const InputForm: React.FC = () => {
-  const { state, dispatch } = useWabikenEntryContext();
-
-  const handleOnClick = ({ wabiken }: FormValues): void => {
-    dispatch({
-      type: ACTION_TYPE.INPUTTED,
-      payload: {
-        ...state,
-        wabiken,
-      },
-    });
-  };
-
+const InputForm: React.FC<UseEntryWabiken> = (props) => {
   const formik = useFormik({
-    initialValues,
+    initialValues: props.state.formValues,
     validationSchema,
-    onSubmit: handleOnClick,
+    onSubmit: (values: UseEntryWabiken['state']['formValues']): void => {
+      props.confirmWabiken(values);
+    },
   });
 
   return (
     <MainContainer>
+      <FormErrorMessage message={props.state.errorMessage} />
       <Title>購入した動画の登録</Title>
       <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
       <FieldSection>

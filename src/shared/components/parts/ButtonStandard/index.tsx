@@ -52,25 +52,24 @@ const Button = styled.button<{ hasIcon: boolean }>`
   display: block;
   border: none;
   width: 100%;
-  max-width: 400px;
+  max-width: 260px;
   margin: 0 auto;
   position: relative;
   padding: ${({ hasIcon }) => (hasIcon ? '0 1.5rem 0 2rem' : '0 1rem')};
 
   height: 3.5rem;
-  background-color: ${({ theme }) => theme.button.background.default};
-  color: ${({ theme }) => theme.button.text.default};
+  background-color: ${({ theme }) => theme.keyColor.color1};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
   transition: color 0.3s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background-color: ${({ theme }) => theme.button.background.hover};
-    color: ${({ theme }) => theme.button.text.hover};
+    color: ${({ theme }) => theme.foreground.primary};
 
     path {
-      fill: ${({ theme }) => theme.button.text.hover};
+      fill: ${({ theme }) => theme.foreground.primary};
     }
   }
 `;

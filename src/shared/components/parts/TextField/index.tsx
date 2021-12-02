@@ -35,7 +35,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   ${typo.Standard};
-  color: ${({ theme }) => theme.text.secondary};
+  color: ${({ theme }) => theme.foreground.tertiary};
   pointer-events: none;
   padding: 0 0.5rem;
   transition: all 0.1s ease;
@@ -53,12 +53,12 @@ const Input = styled.input<CustomInputProps>`
   ${typo.Standard};
   border-radius: 0.25rem;
   appearance: none;
-  background-color: ${({ theme }) => theme.input.background};
+  background-color: ${({ theme }) => theme.background.primary};
   border: 2px solid
     ${({ theme, isError = false }) =>
-      isError ? theme.input.warning : theme.input.border};
+      isError ? theme.keyColor.color5 : theme.foreground.secondary};
   box-shadow: none;
-  color: ${({ theme }) => theme.text.standard};
+  color: ${({ theme }) => theme.foreground.primary};
   padding: 1rem 0.5rem 0;
   height: 3.5rem;
   width: 100%;

@@ -73,7 +73,7 @@ const Container = styled.div`
 const Title = styled.div`
   ${typo.Heading1};
   margin: 4rem 0 0;
-  color: ${({ theme }) => theme.text.primaryInverted};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
 `;
 
 const List = styled.ul`
@@ -83,7 +83,7 @@ const List = styled.ul`
 const StyledLink = styled.a`
   ${typo.Heading2};
   font-weight: bold;
-  color: ${({ theme }) => theme.button.text.default};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
   position: relative;
   display: block;
   text-decoration: none;
@@ -95,11 +95,11 @@ const StyledLink = styled.a`
   }
 
   &:hover {
-    color: ${({ theme }) => theme.button.text.hover};
+    color: ${({ theme }) => theme.foreground.primary};
     text-decoration: underline;
 
     & svg path {
-      fill: ${({ theme }) => theme.button.text.hover};
+      fill: ${({ theme }) => theme.foreground.primary};
     }
   }
 `;

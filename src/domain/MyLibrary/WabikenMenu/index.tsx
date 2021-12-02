@@ -48,7 +48,7 @@ const Contents = styled.div`
 
 const StyledLink = styled.a`
   ${typo.Standard};
-  color: ${({ theme }) => theme.text.standard};
+  color: ${({ theme }) => theme.foreground.primary};
   font-weight: bold;
   display: inline-block;
   padding: 0.5rem 1rem 0.5rem 0;
@@ -73,11 +73,11 @@ const StyledLink = styled.a`
   }
 
   &:hover {
-    color: ${({ theme }) => theme.text.primary};
+    color: ${({ theme }) => theme.keyColor.color1};
 
     & svg {
       path {
-        fill: ${({ theme }) => theme.text.primary};
+        fill: ${({ theme }) => theme.keyColor.color1};
       }
     }
   }

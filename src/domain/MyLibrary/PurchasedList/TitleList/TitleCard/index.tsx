@@ -39,13 +39,13 @@ const TitleCard: React.FC = () => {
 };
 
 const Container = styled.div`
-  box-shadow: 0px 4px 24px 0px ${({ theme }) => theme.filter.secondary};
+  box-shadow: 0px 4px 24px 0px ${({ theme }) => theme.background.quaternary};
   position: relative;
 `;
 
 const HoverControl = styled.div`
   transition: opacity 0.3s ease-out;
-  background-color: ${({ theme }) => theme.filter.standard};
+  background-color: ${({ theme }) => theme.foreground.secondary};
   position: absolute;
   top: 0;
   left: 0;

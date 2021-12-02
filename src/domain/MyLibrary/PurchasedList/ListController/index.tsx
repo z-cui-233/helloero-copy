@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { UsePurchasedList } from '../usePurchasedList';
 import OptionBox from './OptionBox';
 import SearchBox from './SearchBox';
 
-const ListController: React.FC = () => {
+const ListController: React.FC<UsePurchasedList> = (props) => {
   return (
     <Container>
       <SearchContainer>
-        <SearchBox />
+        <SearchBox {...props} />
       </SearchContainer>
       <OptionContainer>
-        <OptionBox />
+        <OptionBox {...props} />
       </OptionContainer>
     </Container>
   );
