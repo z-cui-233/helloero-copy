@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  helloero-app:
+    build: .
+    environment:
+      - APP_ENV=local
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./:/app
+      - /node_modules
+      - /.next
+      - ~/.npmrc:/.npmrc
+    networks:
+      - helloero
+  helloero-nginx:
+    image: nginx
+    networks:
+      - helloero
+    ports:
+      # Docker for mac unable to compose ip based connection
+      # https://docs.docker.com/docker-for-mac/networking/#i-cannot-ping-my-containers
+      - "80:80"
+      - "443:443"
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/config/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/config/tls:/etc/nginx/tls:ro
+    depends_on:
+      - helloero-app
+networks:
+  helloero:
+
