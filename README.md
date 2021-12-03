@@ -42,6 +42,17 @@ npm install
 npm run dev
 ```
 
+## Docker Local Development Start
+
+```
+npm install
+docker compose down
+docker compose up --build
+```
+
+Web Page URL
+https://helloero.local.h2u.jp
+
 ## Setting amplify backend
 
 for only front-end development, please use `dev` backend by setting amplify backend env as follows:
