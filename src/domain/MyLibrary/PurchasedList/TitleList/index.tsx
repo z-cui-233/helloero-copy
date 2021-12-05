@@ -2,16 +2,31 @@ import React from 'react';
 import device from 'src/shared/styles/device';
 import styled from 'styled-components';
 import TitleCard from './TitleCard';
+import TitleDetail from './TitleDetail';
+import useTitleDetail from './useTitleList';
 
 const TitleList: React.FC = () => {
+  const store = useTitleDetail();
+
   return (
-    <Container>
-      <List>
-        {[...Array(30)].map((_, i) => (
-          <TitleCard key={i} />
-        ))}
-      </List>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <List>
+          {[...Array(30)].map((_, i) => (
+            <div key={i}>
+              <TitleCard
+                {...{
+                  wabiken: `this_is_wabiken_${i}`,
+                  goToPlay: store.goToPlay,
+                  openTitleDetail: store.openTitleDetail,
+                }}
+              />
+            </div>
+          ))}
+        </List>
+      </Container>
+      <TitleDetail {...store} />
+    </React.Fragment>
   );
 };
 

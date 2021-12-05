@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import { UsePurchasedList } from '../usePurchasedList';
 import OptionBox from './OptionBox';
 import SearchBox from './SearchBox';
+import SortBox from './SortBox';
 
 const ListController: React.FC<UsePurchasedList> = (props) => {
   return (
     <Container>
-      <SearchContainer>
+      <div>
         <SearchBox {...props} />
-      </SearchContainer>
-      <OptionContainer>
+      </div>
+      <div>
+        <SortBox {...props} />
+      </div>
+      <div>
         <OptionBox {...props} />
-      </OptionContainer>
+      </div>
     </Container>
   );
 };
@@ -20,16 +24,8 @@ const ListController: React.FC<UsePurchasedList> = (props) => {
 const Container = styled.div`
   margin: 1.5rem 0 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 2.5rem 2.5rem;
   grid-gap: 0.5rem;
-`;
-
-const SearchContainer = styled.div`
-  grid-column: 1 / 4;
-`;
-
-const OptionContainer = styled.div`
-  grid-column: 4 / 5;
 `;
 
 export default ListController;

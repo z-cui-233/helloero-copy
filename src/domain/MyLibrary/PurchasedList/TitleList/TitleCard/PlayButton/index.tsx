@@ -1,19 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'src/shared/assets/icon/play_arrow.svg';
-import Link from 'next/link';
 
-const PlayButton: React.FC = () => {
-  return (
-    <Link href="/play" passHref>
-      <Container>
-        <StyledIcon />
-      </Container>
-    </Link>
-  );
-};
+interface Props {
+  onClick: () => void;
+}
 
-const Container = styled.a`
+const PlayButton: React.FC<Props> = ({ onClick }) => (
+  <Container onClick={onClick}>
+    <StyledIcon />
+  </Container>
+);
+
+const Container = styled.div`
   cursor: pointer;
   width: 4rem;
   height: 4rem;

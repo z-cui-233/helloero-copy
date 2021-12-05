@@ -3,15 +3,13 @@ import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
 import device from 'src/shared/styles/device';
 import styled from 'styled-components';
 
-const Thumbnail: React.FC = () => {
-  return (
-    <Container>
-      <ImageAdjust>
-        <TitleThumbnail src="https://metac.nxtv.jp/img/bookimg/pubridge/00002017/BT000020170201501501.jpg" />
-      </ImageAdjust>
-    </Container>
-  );
-};
+const Thumbnail: React.FC = () => (
+  <Container>
+    <ImageAdjust>
+      <TitleThumbnail src="https://metac.nxtv.jp/img/bookimg/pubridge/00002017/BT000020170201501501.jpg" />
+    </ImageAdjust>
+  </Container>
+);
 
 const Container = styled.div`
   position: relative;

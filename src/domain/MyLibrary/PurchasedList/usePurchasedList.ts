@@ -5,7 +5,6 @@ export const DISPLAY_ORDER = {
   NAME_ASC: 'name_asc',
   NAME_DESC: 'name_desc',
 } as const;
-
 export type DisplayOrder = typeof DISPLAY_ORDER[keyof typeof DISPLAY_ORDER];
 
 export interface UsePurchasedList {

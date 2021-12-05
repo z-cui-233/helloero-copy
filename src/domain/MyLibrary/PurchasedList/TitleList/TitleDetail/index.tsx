@@ -1,30 +1,18 @@
 import React from 'react';
 import PortalModal from 'src/shared/components/PortalModal';
-import {
-  ACTION_TYPE,
-  FLOW_STATUS,
-  useTitleDetailCardContext,
-} from 'src/shared/context/TitleDetailCardContext';
 import device from 'src/shared/styles/device';
 import styled from 'styled-components';
+import { UseTitleList } from '../useTitleList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
 
-const TitleDetail: React.FC = () => {
-  const { state, dispatch } = useTitleDetailCardContext();
-
-  const handleOnClickClose = (): void => {
-    dispatch({
-      type: ACTION_TYPE.CLOSE,
-      payload: {
-        ...state,
-        wabiken: '',
-      },
-    });
-  };
-
-  return state.flowStatus === FLOW_STATUS.SHRINK ? null : (
-    <PortalModal onClickClose={handleOnClickClose}>
+const TitleDetail: React.FC<UseTitleList> = ({
+  state,
+  goToPlay,
+  closeTitleDetail,
+}) => {
+  return state.isShownDetail ? (
+    <PortalModal onClickClose={closeTitleDetail}>
       <Container>
         <div>
           <ThumbnailContainer>
@@ -33,12 +21,16 @@ const TitleDetail: React.FC = () => {
         </div>
         <div>
           <MetaContainer>
-            <MetaInfo />
+            <MetaInfo
+              onClick={() => {
+                goToPlay(state.wabiken);
+              }}
+            />
           </MetaContainer>
         </div>
       </Container>
     </PortalModal>
-  );
+  ) : null;
 };
 
 const Container = styled.div`

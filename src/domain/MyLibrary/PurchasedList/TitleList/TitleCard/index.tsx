@@ -1,39 +1,34 @@
 import React from 'react';
 import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
-import {
-  ACTION_TYPE,
-  useTitleDetailCardContext,
-} from 'src/shared/context/TitleDetailCardContext';
 import device from 'src/shared/styles/device';
 import styled from 'styled-components';
+import { UseTitleList } from '../useTitleList';
 import DetailButton from './DetailButton';
 import PlayButton from './PlayButton';
 
-const TitleCard: React.FC = () => {
-  const { state, dispatch } = useTitleDetailCardContext();
+interface Props {
+  wabiken: string;
+  goToPlay: UseTitleList['goToPlay'];
+  openTitleDetail: UseTitleList['openTitleDetail'];
+}
 
-  const handleOnClick = (): void => {
-    dispatch({
-      type: ACTION_TYPE.REQUEST_OPEN,
-      payload: {
-        ...state,
-        wabiken: '123',
-      },
-    });
+const TitleCard: React.FC<Props> = ({ wabiken, goToPlay, openTitleDetail }) => {
+  const handleClickOpenDetail = (): void => {
+    openTitleDetail(wabiken);
+  };
+
+  const handleClickPlay = (): void => {
+    goToPlay(wabiken);
   };
 
   return (
     <Container>
       <TitleThumbnail src="https://metac.nxtv.jp/img/bookimg/pubridge/00002017/BT000020170201501501.jpg" />
       <HoverControl>
-        <PlayButton />
-        <DetailButton />
+        <PlayButton onClick={handleClickPlay} />
+        <DetailButton onClick={handleClickOpenDetail} />
       </HoverControl>
-      <TapControl
-        onClick={() => {
-          handleOnClick();
-        }}
-      />
+      <TapControl onClick={handleClickOpenDetail} />
     </Container>
   );
 };

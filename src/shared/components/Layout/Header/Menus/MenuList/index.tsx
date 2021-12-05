@@ -77,7 +77,7 @@ const Title = styled.div`
 `;
 
 const List = styled.ul`
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
 `;
 
 const StyledLink = styled.a`
