@@ -14,10 +14,7 @@ export const getWabikenMeta = /* GraphQL */ `
         lock_required
         playback_remain
         validity_period
-        issuer_tracer
         created_at
-        activated_at
-        locked_to
         content {
           id
           catchphrase
@@ -27,6 +24,9 @@ export const getWabikenMeta = /* GraphQL */ `
           release_date
           main_episode_code
         }
+        issuer_trace
+        locked_to
+        activated_at
       }
       result
     }
@@ -52,7 +52,6 @@ export const getPlayinfo = /* GraphQL */ `
           id
           display_name
         }
-        isem_token
         refresh_token
         playback_remain
         not_valid_before
@@ -73,9 +72,8 @@ export const getUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -109,10 +107,16 @@ export const getUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt
@@ -140,9 +144,8 @@ export const listUserWabikenMetas = /* GraphQL */ `
         lock_required
         playback_remain
         validity_period
-        issuer_tracer
+        issuer_trace
         created_at
-        activated_at
         content {
           id
           catchphrase
@@ -152,6 +155,7 @@ export const listUserWabikenMetas = /* GraphQL */ `
           release_date
           main_episode_code
         }
+        activated_at
         locked_to
         createdAt
         updatedAt

@@ -3,6 +3,22 @@ const axios = require('axios');
 axios.defaults.baseURL = process.env.WABIT_URL;
 axios.defaults.validateStatus = (status) => status >= 200 && status < 500;
 
+const mapPlayableCdn = (cdn) => ({
+  ...cdn,
+  license_url_list: Object.entries(cdn.license_url_list).map(
+    ([key, value]) => ({
+      drmType: key,
+      ...value,
+    })
+  ),
+});
+
+const mapPlayables = (playables) =>
+  Object.entries(playables).map(([type, cdns]) => ({
+    type,
+    cdns: cdns.map(mapPlayableCdn),
+  }));
+
 const mapWabikenResponse = (wabikenRespone) => {
   const { wabiken, result } = wabikenRespone;
   const { token, content } = wabiken;
@@ -38,7 +54,7 @@ const mapWabitErrorResponse = (response) => ({
 const getPlayinfo = async (event) => {
   const { token, deviceCode, lock, deviceId } = event.arguments;
   const response = await axios.get(
-    `/v1/playinfo/${token}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
+    `/v2/playinfo/${token}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
   );
 
   if (response.data.error) {
@@ -51,8 +67,9 @@ const getPlayinfo = async (event) => {
     result,
     playinfo: {
       ...playinfo,
-      endpoints: playinfo.endpoints.map(({ endpoint }) => ({
+      endpoints: playinfo.endpoints.map((endpoint) => ({
         ...endpoint,
+        playables: mapPlayables(endpoint.playables),
         isem: {
           version: endpoint.isem.version,
           endpoint: endpoint.isem.endpoint,
@@ -65,8 +82,8 @@ const getPlayinfo = async (event) => {
 
 const activateWabiken = async (event) => {
   const { token, lockTo } = event.arguments;
-  const response = await axios.put(`/v1/wabiken/${token}`, {
-    locked_to: lockTo, // TBD: use context.identity.cognitoIdentityId insted??
+  const response = await axios.put(`/v2/wabiken/${token}`, {
+    locked_to: lockTo, // TBD: use context.identity.cognitoIdentityId instead??
   });
 
   if (response.data.error) {
@@ -79,7 +96,7 @@ const activateWabiken = async (event) => {
 const getWabikenMeta = async (event) => {
   const { id } = event.arguments;
 
-  const response = await axios.get(`/v1/wabiken/${id}`);
+  const response = await axios.get(`/v2/wabiken/${id}`);
 
   if (response.data.error) {
     return mapWabitErrorResponse(response);

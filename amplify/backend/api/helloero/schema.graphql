@@ -1,6 +1,4 @@
-type UserWabikenMeta
-  @model
-  @auth(rules: [{ allow: owner, operations: [create, update, read] }]) {
+type UserWabikenMeta @model @auth(rules: [{ allow: owner }]) {
   """
   same as token
   """
@@ -12,13 +10,13 @@ type UserWabikenMeta
   lock_required: Boolean!
   playback_remain: Int!
   validity_period: Int!
-  issuer_tracer: String
+  issuer_trace: String
   created_at: AWSTimestamp!
-  activated_at: AWSTimestamp!
   content: ContentMeta!
   """
-  required field in UserWabikenMeta, compared to optional in WabikenMeta
+  following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
+  activated_at: AWSTimestamp!
   locked_to: String!
 }
 
@@ -34,11 +32,11 @@ type WabikenMeta {
   lock_required: Boolean!
   playback_remain: Int!
   validity_period: Int!
-  issuer_tracer: String
   created_at: AWSTimestamp!
-  activated_at: AWSTimestamp!
-  locked_to: String
   content: ContentMeta!
+  issuer_trace: String
+  locked_to: String # This will be null for non-activated wabiken
+  activated_at: AWSTimestamp # This will be null for non-activated wabiken
 }
 
 type CodeName {
@@ -57,8 +55,13 @@ type ContentMetaKey {
   provider_id: String!
 }
 
-type Thumbnail { # TBD
-  url: AWSURL!
+type ContentMetaThumbnail {
+  package_l: String
+  package_m: String
+  package_s: String
+  standard: String
+  tspt_fhds: String
+  tspt_fwxga: String
 }
 
 type ContentMeta {
@@ -74,7 +77,7 @@ type ContentMeta {
   public_period: Period!
   sale_period: Period!
   payment_badge: CodeName!
-  thumbnails: [Thumbnail!]
+  thumbnails: ContentMetaThumbnail!
   main_episode_code: String!
 }
 type ErrorCodeMessage {
@@ -97,10 +100,10 @@ type SceneSearch {
 }
 
 type SceneSearchList {
-  IMS_AD1: [SceneSearch!]!
-  IMS_L: [SceneSearch!]!
-  IMS_M: [SceneSearch!]!
-  IMS_S: [SceneSearch!]!
+  IMS_AD1: [SceneSearch!]
+  IMS_L: [SceneSearch!]
+  IMS_M: [SceneSearch!]
+  IMS_S: [SceneSearch!]
 }
 
 type ISemMeta {
@@ -112,41 +115,34 @@ type ISemMeta {
 type PlayInfoEndpointExtra {
   play_token: String!
   play_token_hash: String!
-  beacon_intreval: String!
 }
 
 type PlayInfoEndpoint {
   id: ID!
   display_name: String!
   scene_search_list: SceneSearchList
-  playables: PlayableList!
+  playables: [Playable!]!
   isem: ISemMeta!
   extra: PlayInfoEndpointExtra!
 }
 
 type LicenseUrl {
+  drmType: String!
   version: String!
   endpoint: AWSURL!
 }
-
-type LicenseUrlList {
-  playready: LicenseUrl
-  widevine: LicenseUrl
-}
-
-type Playable {
+type PlayableCdn {
+  cdn_id: String!
   weight: Int!
-  cdn_idn: String!
   playlist_url: AWSURL!
-  license_url_list: LicenseUrlList
+  license_url_list: [LicenseUrl!]!
+}
+type Playable {
+  type: String!
+  cdns: [PlayableCdn!]!
 }
 
-type PlayableList { # TBD
-  dash: [Playable!]
-  smooth: [Playable!]
-}
-
-type PlayInfo { # TBD
+type PlayInfo {
   type: String!
   landing_page: String!
   endpoints: [PlayInfoEndpoint!]!
@@ -164,7 +160,7 @@ type PlayInfoResponse {
 type Query {
   getWabikenMeta(id: ID!): WabikenMetaResponse
     @function(name: "helloeroLambdaResolver")
-  getPlayinfo(
+  getPlayInfo(
     token: String!
     deviceCode: String!
     lock: String!

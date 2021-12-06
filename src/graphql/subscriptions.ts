@@ -13,9 +13,8 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -49,10 +48,16 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt
@@ -71,9 +76,8 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -107,10 +111,16 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt
@@ -129,9 +139,8 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -165,10 +174,16 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt

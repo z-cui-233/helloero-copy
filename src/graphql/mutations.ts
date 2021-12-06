@@ -14,10 +14,7 @@ export const activateWabiken = /* GraphQL */ `
         lock_required
         playback_remain
         validity_period
-        issuer_tracer
         created_at
-        activated_at
-        locked_to
         content {
           id
           catchphrase
@@ -27,6 +24,9 @@ export const activateWabiken = /* GraphQL */ `
           release_date
           main_episode_code
         }
+        issuer_trace
+        locked_to
+        activated_at
       }
       result
     }
@@ -46,9 +46,8 @@ export const createUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -82,10 +81,16 @@ export const createUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt
@@ -107,9 +112,8 @@ export const updateUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -143,10 +147,16 @@ export const updateUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt
@@ -168,9 +178,8 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
       lock_required
       playback_remain
       validity_period
-      issuer_tracer
+      issuer_trace
       created_at
-      activated_at
       content {
         id
         key {
@@ -204,10 +213,16 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
           name
         }
         thumbnails {
-          url
+          package_l
+          package_m
+          package_s
+          standard
+          tspt_fhds
+          tspt_fwxga
         }
         main_episode_code
       }
+      activated_at
       locked_to
       createdAt
       updatedAt

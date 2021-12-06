@@ -5,6 +5,10 @@
     {
       "cloudFormationParameterName": "wabitUrl",
       "environmentVariableName": "WABIT_URL"
+    },
+    {
+      "cloudFormationParameterName": "wabitUrl",
+      "environmentVariableName": "WABIT_URL"
     }
   ]
 }
