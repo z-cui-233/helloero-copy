@@ -667,15 +667,15 @@ export type GetWabikenMetaQuery = {
   } | null;
 };
 
-export type GetPlayinfoQueryVariables = {
+export type GetPlayInfoQueryVariables = {
   token: string;
   deviceCode: string;
   lock: string;
   deviceId: string;
 };
 
-export type GetPlayinfoQuery = {
-  getPlayinfo?: {
+export type GetPlayInfoQuery = {
+  getPlayInfo?: {
     __typename: 'PlayInfoResponse';
     playinfo: {
       __typename: 'PlayInfo';

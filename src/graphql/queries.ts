@@ -32,14 +32,14 @@ export const getWabikenMeta = /* GraphQL */ `
     }
   }
 `;
-export const getPlayinfo = /* GraphQL */ `
-  query GetPlayinfo(
+export const getPlayInfo = /* GraphQL */ `
+  query GetPlayInfo(
     $token: String!
     $deviceCode: String!
     $lock: String!
     $deviceId: String!
   ) {
-    getPlayinfo(
+    getPlayInfo(
       token: $token
       deviceCode: $deviceCode
       lock: $lock
