@@ -3,21 +3,20 @@ type UserWabikenMeta @model @auth(rules: [{ allow: owner }]) {
   same as token
   """
   id: ID!
-  token: String!
   version: Int!
-  not_valid_before: AWSTimestamp!
-  not_valid_after: AWSTimestamp!
-  lock_required: Boolean!
-  playback_remain: Int!
-  validity_period: Int!
-  issuer_trace: String
-  created_at: AWSTimestamp!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemain: Int!
+  validityPeriod: Int!
+  issuerTrace: String
+  createdAt: AWSTimestamp!
   content: ContentMeta!
   """
   following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
-  activated_at: AWSTimestamp!
-  locked_to: String!
+  activatedAt: AWSTimestamp!
+  lockedTo: String!
 }
 
 type WabikenMeta {
@@ -25,18 +24,17 @@ type WabikenMeta {
   """
   token
   """
-  token: String!
   version: Int!
-  not_valid_before: AWSTimestamp!
-  not_valid_after: AWSTimestamp!
-  lock_required: Boolean!
-  playback_remain: Int!
-  validity_period: Int!
-  created_at: AWSTimestamp!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemaining: Int!
+  validityPeriod: Int!
+  createdAt: AWSTimestamp!
   content: ContentMeta!
-  issuer_trace: String
-  locked_to: String # This will be null for non-activated wabiken
-  activated_at: AWSTimestamp # This will be null for non-activated wabiken
+  issuerTrace: String
+  lockedTo: String # This will be null for non-activated wabiken
+  activatedAt: AWSTimestamp # This will be null for non-activated wabiken
 }
 
 type CodeName {
@@ -52,16 +50,16 @@ type Period {
 type ContentMetaKey {
   id: ID!
   type: String!
-  provider_id: String!
+  providerId: String!
 }
 
 type ContentMetaThumbnail {
-  package_l: String
-  package_m: String
-  package_s: String
+  packageL: String
+  packageM: String
+  packageS: String
   standard: String
-  tspt_fhds: String
-  tspt_fwxga: String
+  tsptFhds: String
+  tsptFwxga: String
 }
 
 type ContentMeta {
@@ -70,15 +68,15 @@ type ContentMeta {
   catchphrase: String!
   comment: String!
   duration: Int!
-  evaluation_point: Int
+  evaluationPoint: Int
   maker: CodeName!
   series: CodeName!
-  release_date: String!
-  public_period: Period!
-  sale_period: Period!
-  payment_badge: CodeName!
-  thumbnails: ContentMetaThumbnail!
-  main_episode_code: String!
+  releaseDate: String!
+  publicPeriod: Period!
+  salePeriod: Period!
+  paymentBadge: CodeName!
+  thumbnails: ContentMetaThumbnail # verify: content meta except key is not being returned by activated wabiken put request
+  mainEpisodeCode: String!
 }
 type ErrorCodeMessage {
   code: Int!
@@ -94,16 +92,14 @@ type SceneSearchSize {
   height: Int!
 }
 
-type SceneSearch {
-  scene_search_url: AWSURL!
+type SceneSearchCdn {
+  sceneSearchUrl: AWSURL!
   extra: SceneSearchSize!
 }
 
-type SceneSearchList {
-  IMS_AD1: [SceneSearch!]
-  IMS_L: [SceneSearch!]
-  IMS_M: [SceneSearch!]
-  IMS_S: [SceneSearch!]
+type SceneSearch {
+  type: String!
+  cdns: [SceneSearchCdn!]!
 }
 
 type ISemMeta {
@@ -113,14 +109,14 @@ type ISemMeta {
 }
 
 type PlayInfoEndpointExtra {
-  play_token: String!
-  play_token_hash: String!
+  playToken: String!
+  playTokenHash: String!
 }
 
 type PlayInfoEndpoint {
   id: ID!
-  display_name: String!
-  scene_search_list: SceneSearchList
+  displayName: String!
+  sceneSearchList: [SceneSearch!]!
   playables: [Playable!]!
   isem: ISemMeta!
   extra: PlayInfoEndpointExtra!
@@ -132,10 +128,10 @@ type LicenseUrl {
   endpoint: AWSURL!
 }
 type PlayableCdn {
-  cdn_id: String!
+  cdnId: String
   weight: Int!
-  playlist_url: AWSURL!
-  license_url_list: [LicenseUrl!]!
+  playlistUrl: AWSURL!
+  licenseUrlList: [LicenseUrl!]!
 }
 type Playable {
   type: String!
@@ -144,16 +140,16 @@ type Playable {
 
 type PlayInfo {
   type: String!
-  landing_page: String!
+  landingPage: String!
   endpoints: [PlayInfoEndpoint!]!
-  refresh_token: String!
-  playback_remain: Int!
-  not_valid_before: AWSTimestamp!
-  not_valid_after: AWSTimestamp!
+  refreshToken: String!
+  playbackRemaining: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
 }
 
 type PlayInfoResponse {
-  playinfo: PlayInfo!
+  playInfo: PlayInfo!
   result: Boolean!
 }
 

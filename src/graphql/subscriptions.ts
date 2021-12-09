@@ -6,26 +6,25 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
   subscription OnCreateUserWabikenMeta($owner: String!) {
     onCreateUserWabikenMeta(owner: $owner) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -34,32 +33,31 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }
@@ -69,26 +67,25 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
   subscription OnUpdateUserWabikenMeta($owner: String!) {
     onUpdateUserWabikenMeta(owner: $owner) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -97,32 +94,31 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }
@@ -132,26 +128,25 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
   subscription OnDeleteUserWabikenMeta($owner: String!) {
     onDeleteUserWabikenMeta(owner: $owner) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -160,32 +155,31 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }

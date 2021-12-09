@@ -1,57 +1,15 @@
-// eslint-disable-next-line
+/* eslint-disable @typescript-eslint/no-var-requires */
 const axios = require('axios');
 axios.defaults.baseURL = process.env.WABIT_URL;
 axios.defaults.validateStatus = (status) => status >= 200 && status < 500;
 
-const mapPlayableCdn = (cdn) => ({
-  ...cdn,
-  license_url_list: Object.entries(cdn.license_url_list).map(
-    ([key, value]) => ({
-      drmType: key,
-      ...value,
-    })
-  ),
-});
+const {
+  mapWabitErrorResponse,
+  mapWabikenResponse,
+  mapPlayInfo,
+} = require('./converters/index.js');
 
-const mapPlayables = (playables) =>
-  Object.entries(playables).map(([type, cdns]) => ({
-    type,
-    cdns: cdns.map(mapPlayableCdn),
-  }));
-
-const mapWabikenResponse = (wabikenRespone) => {
-  const { wabiken, result } = wabikenRespone;
-  const { token, content } = wabiken;
-
-  return {
-    result,
-    wabiken: {
-      ...wabiken,
-      id: token,
-      content: {
-        ...content,
-        id: content.key.id,
-      },
-    },
-  };
-};
-
-/* 
-## correspoinding VDL response mapper should be: 
-## Raise a GraphQL field error in case of a datasource invocation error
-#if($ctx.result.errorInfo)
-  $util.error($ctx.result.errorMessage, $ctx.result.errorType, null, $context.result.errorInfo)
-#end
-
-$util.toJson($context.result)
-*/
-const mapWabitErrorResponse = (response) => ({
-  errorMessage: response.data.error.message,
-  errorType: `${response.status}`,
-  errorInfo: response.data.error,
-});
-
-const getPlayinfo = async (event) => {
+const getPlayInfo = async (event) => {
   const { token, deviceCode, lock, deviceId } = event.arguments;
   const response = await axios.get(
     `/v2/playinfo/${token}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
@@ -65,18 +23,7 @@ const getPlayinfo = async (event) => {
 
   return {
     result,
-    playinfo: {
-      ...playinfo,
-      endpoints: playinfo.endpoints.map((endpoint) => ({
-        ...endpoint,
-        playables: mapPlayables(endpoint.playables),
-        isem: {
-          version: endpoint.isem.version,
-          endpoint: endpoint.isem.endpoint,
-          isemToken: endpoint.isem.header['U-Isem-Token'],
-        },
-      })),
-    },
+    playInfo: mapPlayInfo(playinfo),
   };
 };
 
@@ -110,8 +57,8 @@ const resolvers = {
     getWabikenMeta: (event) => {
       return getWabikenMeta(event);
     },
-    getPlayinfo: (event) => {
-      return getPlayinfo(event);
+    getPlayInfo: (event) => {
+      return getPlayInfo(event);
     },
   },
   Mutation: {

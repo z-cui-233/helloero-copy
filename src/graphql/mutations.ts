@@ -7,26 +7,25 @@ export const activateWabiken = /* GraphQL */ `
     activateWabiken(token: $token, lockTo: $lockTo) {
       wabiken {
         id
-        token
         version
-        not_valid_before
-        not_valid_after
-        lock_required
-        playback_remain
-        validity_period
-        created_at
+        notValidBefore
+        notValidAfter
+        lockRequired
+        playbackRemaining
+        validityPeriod
+        createdAt
         content {
           id
           catchphrase
           comment
           duration
-          evaluation_point
-          release_date
-          main_episode_code
+          evaluationPoint
+          releaseDate
+          mainEpisodeCode
         }
-        issuer_trace
-        locked_to
-        activated_at
+        issuerTrace
+        lockedTo
+        activatedAt
       }
       result
     }
@@ -39,26 +38,25 @@ export const createUserWabikenMeta = /* GraphQL */ `
   ) {
     createUserWabikenMeta(input: $input, condition: $condition) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -67,32 +65,31 @@ export const createUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }
@@ -105,26 +102,25 @@ export const updateUserWabikenMeta = /* GraphQL */ `
   ) {
     updateUserWabikenMeta(input: $input, condition: $condition) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -133,32 +129,31 @@ export const updateUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }
@@ -171,26 +166,25 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
   ) {
     deleteUserWabikenMeta(input: $input, condition: $condition) {
       id
-      token
       version
-      not_valid_before
-      not_valid_after
-      lock_required
-      playback_remain
-      validity_period
-      issuer_trace
-      created_at
+      notValidBefore
+      notValidAfter
+      lockRequired
+      playbackRemain
+      validityPeriod
+      issuerTrace
+      createdAt
       content {
         id
         key {
           id
           type
-          provider_id
+          providerId
         }
         catchphrase
         comment
         duration
-        evaluation_point
+        evaluationPoint
         maker {
           code
           name
@@ -199,32 +193,31 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
           code
           name
         }
-        release_date
-        public_period {
+        releaseDate
+        publicPeriod {
           since
           until
         }
-        sale_period {
+        salePeriod {
           since
           until
         }
-        payment_badge {
+        paymentBadge {
           code
           name
         }
         thumbnails {
-          package_l
-          package_m
-          package_s
+          packageL
+          packageM
+          packageS
           standard
-          tspt_fhds
-          tspt_fwxga
+          tsptFhds
+          tsptFwxga
         }
-        main_episode_code
+        mainEpisodeCode
       }
-      activated_at
-      locked_to
-      createdAt
+      activatedAt
+      lockedTo
       updatedAt
       owner
     }
