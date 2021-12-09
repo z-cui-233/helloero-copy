@@ -16,11 +16,44 @@ export const getWabikenMeta = /* GraphQL */ `
         createdAt
         content {
           id
+          key {
+            id
+            type
+            providerId
+          }
           catchphrase
           comment
           duration
           evaluationPoint
+          maker {
+            code
+            name
+          }
+          series {
+            code
+            name
+          }
           releaseDate
+          publicPeriod {
+            since
+            until
+          }
+          salePeriod {
+            since
+            until
+          }
+          paymentBadge {
+            code
+            name
+          }
+          thumbnails {
+            packageL
+            packageM
+            packageS
+            standard
+            tsptFhds
+            tsptFwxga
+          }
           mainEpisodeCode
         }
         issuerTrace
@@ -50,6 +83,29 @@ export const getPlayInfo = /* GraphQL */ `
         endpoints {
           id
           displayName
+          sceneSearchList {
+            type
+            cdns {
+              sceneSearchUrl
+            }
+          }
+          playables {
+            type
+            cdns {
+              cdnId
+              weight
+              playlistUrl
+            }
+          }
+          isem {
+            version
+            endpoint
+            isemToken
+          }
+          extra {
+            playToken
+            playTokenHash
+          }
         }
         refreshToken
         playbackRemaining
@@ -144,11 +200,44 @@ export const listUserWabikenMetas = /* GraphQL */ `
         createdAt
         content {
           id
+          key {
+            id
+            type
+            providerId
+          }
           catchphrase
           comment
           duration
           evaluationPoint
+          maker {
+            code
+            name
+          }
+          series {
+            code
+            name
+          }
           releaseDate
+          publicPeriod {
+            since
+            until
+          }
+          salePeriod {
+            since
+            until
+          }
+          paymentBadge {
+            code
+            name
+          }
+          thumbnails {
+            packageL
+            packageM
+            packageS
+            standard
+            tsptFhds
+            tsptFwxga
+          }
           mainEpisodeCode
         }
         activatedAt

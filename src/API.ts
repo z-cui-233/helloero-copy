@@ -378,11 +378,51 @@ export type ActivateWabikenMutation = {
       content: {
         __typename: 'ContentMeta';
         id: string;
+        key: {
+          __typename: 'ContentMetaKey';
+          id: string;
+          type: string;
+          providerId: string;
+        };
         catchphrase: string;
         comment: string;
         duration: number;
         evaluationPoint?: number | null;
+        maker: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        series: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
         releaseDate: string;
+        publicPeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        salePeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        paymentBadge: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        thumbnails?: {
+          __typename: 'ContentMetaThumbnail';
+          packageL?: string | null;
+          packageM?: string | null;
+          packageS?: string | null;
+          standard?: string | null;
+          tsptFhds?: string | null;
+          tsptFwxga?: string | null;
+        } | null;
         mainEpisodeCode: string;
       };
       issuerTrace?: string | null;
@@ -635,11 +675,51 @@ export type GetWabikenMetaQuery = {
       content: {
         __typename: 'ContentMeta';
         id: string;
+        key: {
+          __typename: 'ContentMetaKey';
+          id: string;
+          type: string;
+          providerId: string;
+        };
         catchphrase: string;
         comment: string;
         duration: number;
         evaluationPoint?: number | null;
+        maker: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        series: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
         releaseDate: string;
+        publicPeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        salePeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        paymentBadge: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        thumbnails?: {
+          __typename: 'ContentMetaThumbnail';
+          packageL?: string | null;
+          packageM?: string | null;
+          packageS?: string | null;
+          standard?: string | null;
+          tsptFhds?: string | null;
+          tsptFwxga?: string | null;
+        } | null;
         mainEpisodeCode: string;
       };
       issuerTrace?: string | null;
@@ -668,6 +748,35 @@ export type GetPlayInfoQuery = {
         __typename: 'PlayInfoEndpoint';
         id: string;
         displayName: string;
+        sceneSearchList: Array<{
+          __typename: 'SceneSearch';
+          type: string;
+          cdns: Array<{
+            __typename: 'SceneSearchCdn';
+            sceneSearchUrl: string;
+          }>;
+        }>;
+        playables: Array<{
+          __typename: 'Playable';
+          type: string;
+          cdns: Array<{
+            __typename: 'PlayableCdn';
+            cdnId?: string | null;
+            weight: number;
+            playlistUrl: string;
+          }>;
+        }>;
+        isem: {
+          __typename: 'ISemMeta';
+          version: string;
+          endpoint: string;
+          isemToken: string;
+        };
+        extra: {
+          __typename: 'PlayInfoEndpointExtra';
+          playToken: string;
+          playTokenHash: string;
+        };
       }>;
       refreshToken: string;
       playbackRemaining: number;
@@ -774,11 +883,51 @@ export type ListUserWabikenMetasQuery = {
       content: {
         __typename: 'ContentMeta';
         id: string;
+        key: {
+          __typename: 'ContentMetaKey';
+          id: string;
+          type: string;
+          providerId: string;
+        };
         catchphrase: string;
         comment: string;
         duration: number;
         evaluationPoint?: number | null;
+        maker: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        series: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
         releaseDate: string;
+        publicPeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        salePeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        paymentBadge: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        thumbnails?: {
+          __typename: 'ContentMetaThumbnail';
+          packageL?: string | null;
+          packageM?: string | null;
+          packageS?: string | null;
+          standard?: string | null;
+          tsptFhds?: string | null;
+          tsptFwxga?: string | null;
+        } | null;
         mainEpisodeCode: string;
       };
       activatedAt: number;

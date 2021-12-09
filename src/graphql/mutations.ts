@@ -16,11 +16,44 @@ export const activateWabiken = /* GraphQL */ `
         createdAt
         content {
           id
+          key {
+            id
+            type
+            providerId
+          }
           catchphrase
           comment
           duration
           evaluationPoint
+          maker {
+            code
+            name
+          }
+          series {
+            code
+            name
+          }
           releaseDate
+          publicPeriod {
+            since
+            until
+          }
+          salePeriod {
+            since
+            until
+          }
+          paymentBadge {
+            code
+            name
+          }
+          thumbnails {
+            packageL
+            packageM
+            packageS
+            standard
+            tsptFhds
+            tsptFwxga
+          }
           mainEpisodeCode
         }
         issuerTrace
