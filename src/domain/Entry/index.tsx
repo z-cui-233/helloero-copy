@@ -9,6 +9,8 @@ import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 const Entry: React.FC = () => {
   const store = useEntryWabiken();
 
+  console.log(store.state);
+
   return (
     <React.Fragment>
       {store.state.pageStatus === PAGE_STATUS.INPUT && <InputForm {...store} />}

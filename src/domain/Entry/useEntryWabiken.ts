@@ -1,5 +1,9 @@
+import { GraphQLResult } from '@aws-amplify/api';
+import { API, graphqlOperation } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { GetWabikenMetaQuery } from 'src/API';
+import { getWabikenMeta } from 'src/graphql/queries';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -16,8 +20,11 @@ export interface UseEntryWabiken {
     formValues: {
       wabiken: string;
     };
+    getWabikenMetaQuery: GetWabikenMetaQuery | null;
   };
-  confirmWabiken: (values: UseEntryWabiken['state']['formValues']) => void;
+  confirmWabiken: (
+    values: UseEntryWabiken['state']['formValues']
+  ) => Promise<void>;
   consumeWabiken: () => void;
 }
 
@@ -29,6 +36,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
     formValues: {
       wabiken: '',
     },
+    getWabikenMetaQuery: null,
   });
 
   useEffect(() => {
@@ -42,22 +50,37 @@ const useEntryWabiken = (): UseEntryWabiken => {
     }));
   }, [router.query.wabiken]);
 
-  const confirmWabiken = (
+  const confirmWabiken = async (
     values: UseEntryWabiken['state']['formValues']
-  ): void => {
+  ): Promise<void> => {
     const wabiken = values.wabiken;
-    const errorMessage =
-      wabiken === 'ABCDABCDABCDABCD'
-        ? '予期せぬエラーが発生しました。もう一度お試しください。'
-        : '';
-    setState((state) => ({
-      ...state,
-      pageStatus: errorMessage !== '' ? PAGE_STATUS.INPUT : PAGE_STATUS.CONFIRM,
-      errorMessage,
-      formValues: {
-        wabiken,
-      },
-    }));
+
+    try {
+      const wabikenGQLData = (await API.graphql(
+        graphqlOperation(getWabikenMeta, {
+          id: wabiken,
+        })
+      )) as GraphQLResult<GetWabikenMetaQuery>;
+
+      setState((state) => ({
+        ...state,
+        pageStatus: PAGE_STATUS.CONFIRM,
+        errorMessage: '',
+        formValues: {
+          wabiken,
+        },
+        getWabikenMetaQuery: wabikenGQLData.data ?? null,
+      }));
+    } catch (error) {
+      setState((state) => ({
+        ...state,
+        pageStatus: PAGE_STATUS.INPUT,
+        errorMessage: '予期せぬエラーが発生しました。もう一度お試しください。',
+        formValues: {
+          wabiken,
+        },
+      }));
+    }
   };
 
   const consumeWabiken = (): void => {
