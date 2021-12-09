@@ -84,10 +84,10 @@ const useEntryWabiken = (): UseEntryWabiken => {
       }));
     } catch (error) {
       const errorCode = (error as GraphQLResultEx<GetWabikenMetaQuery>)
-        .errors?.[0].errorInfo.code as number;
+        .errors?.[0]?.errorInfo?.code;
 
       const errorMessage =
-        errorMessages.getWabikenMeta[errorCode.toString()] ??
+        errorMessages.getWabikenMeta[errorCode?.toString()] ??
         errorMessages.default;
 
       setEntryWabikenState((entryWabikenState) => ({
@@ -139,10 +139,10 @@ const useEntryWabiken = (): UseEntryWabiken => {
       await API.graphql(graphqlOperation(activateWabiken, activateWabikenData));
     } catch (error) {
       const errorCode = (error as GraphQLResultEx<GetWabikenMetaQuery>)
-        .errors?.[0].errorInfo.code as number;
+        .errors?.[0]?.errorInfo?.code;
 
       const errorMessage =
-        errorMessages.activateWabiken[errorCode.toString()] ??
+        errorMessages.activateWabiken[errorCode?.toString()] ??
         errorMessages.default;
 
       setEntryWabikenState((entryWabikenState) => ({
