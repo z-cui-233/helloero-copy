@@ -9,15 +9,19 @@ import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 const Entry: React.FC = () => {
   const store = useEntryWabiken();
 
-  console.log(store.state);
+  console.log(store.entryWabikenState);
 
   return (
     <React.Fragment>
-      {store.state.pageStatus === PAGE_STATUS.INPUT && <InputForm {...store} />}
-      {store.state.pageStatus === PAGE_STATUS.CONFIRM && (
+      {store.entryWabikenState.pageStatus === PAGE_STATUS.INPUT && (
+        <InputForm {...store} />
+      )}
+      {store.entryWabikenState.pageStatus === PAGE_STATUS.CONFIRM && (
         <ConfirmForm {...store} />
       )}
-      {store.state.pageStatus === PAGE_STATUS.COMPLETE && <NoticeComplete />}
+      {store.entryWabikenState.pageStatus === PAGE_STATUS.COMPLETE && (
+        <NoticeComplete />
+      )}
     </React.Fragment>
   );
 };

@@ -61,3 +61,27 @@ for only front-end development, please use `dev` backend by setting amplify back
 `amplify env checkout dev`
 
 if updating backend, can use a separate feature-backend env or can directly use dev if not modifying existing backend resources
+
+## How can we get new wabiken
+
+you can get wabiken for IT-env by this command.
+
+```
+curl -X POST -H "Content-Type: application/json" \
+    -d '{
+    "market": "unext",
+    "content": {
+        "key": {
+            "id": "AID0198621",
+            "type": "vod",
+            "provider_id": "amazonppv"
+        }
+    },
+    "not_valid_before": 1531284488,
+    "not_valid_after": 1831384488,
+    "validity_period": 86400,
+    "lock_required": true,
+    "playback_remain": 1000
+}' \
+  https://wabit-api.awsdev.unext.dev/v2/wabiken
+```

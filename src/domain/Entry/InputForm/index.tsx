@@ -18,16 +18,18 @@ const validationSchema = Yup.object().shape({
 
 const InputForm: React.FC<UseEntryWabiken> = (props) => {
   const formik = useFormik({
-    initialValues: props.state.formValues,
+    initialValues: props.entryWabikenState.formValues,
     validationSchema,
-    onSubmit: (values: UseEntryWabiken['state']['formValues']): void => {
+    onSubmit: (
+      values: UseEntryWabiken['entryWabikenState']['formValues']
+    ): void => {
       props.confirmWabiken(values);
     },
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.state.errorMessage} />
+      <FormErrorMessage message={props.entryWabikenState.errorMessage} />
       <Title>購入した動画の登録</Title>
       <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
       <FieldSection>

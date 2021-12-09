@@ -1,66 +1,79 @@
 import React from 'react';
-import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
+import device from 'src/shared/styles/device';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
+import Thumbnail from './Thumbnail';
 
 interface Props {
   thumbnail: string;
   titleName: string;
   expireDate: Date;
-  castName: string;
 }
 
-const TitleInfo: React.FC<Props> = ({
-  thumbnail,
-  titleName,
-  expireDate,
-  castName,
-}) => {
+const TitleInfo: React.FC<Props> = ({ thumbnail, titleName, expireDate }) => {
   return (
     <Container>
-      <ThumbnailContainer>
-        <TitleThumbnail src={thumbnail} />
-      </ThumbnailContainer>
+      <div>
+        <ThumbnailContainer>
+          <Thumbnail src={thumbnail} />
+        </ThumbnailContainer>
+      </div>
       <MetaContainer>
-        <TitleName>{titleName}</TitleName>
-        {expireDate && (
-          <ExpireDate>
-            {expireDate.toISOString()}
-            まで視聴可能
-          </ExpireDate>
-        )}
-        <Casts>{castName}</Casts>
+        <div>
+          <TitleName>{titleName}</TitleName>
+          {expireDate && (
+            <ExpireDate>
+              {expireDate.toISOString()}
+              まで視聴可能
+            </ExpireDate>
+          )}
+        </div>
       </MetaContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin: 2rem 0 0;
-  background-color: ${({ theme }) => theme.keyColor.color3};
-  padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  grid-gap: 2rem;
+  margin: 2rem auto 0;
+
+  @media ${device.ltTablet} {
+    display: block;
+    max-width: 400px;
+  }
 `;
 
 const ThumbnailContainer = styled.div`
-  margin: 0 auto;
-  max-width: 200px;
+  @media ${device.ltTablet} {
+    max-width: 180px;
+    margin: 0 auto;
+  }
 `;
 
 const MetaContainer = styled.div`
-  margin: 2rem 0 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  @media ${device.ltTablet} {
+    margin: 2rem 0 0;
+  }
 `;
 
 const TitleName = styled.div`
   ${typo.Heading3};
+  line-height: 1.4;
+  max-height: 8.4rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 `;
 
 const ExpireDate = styled.div`
   margin: 1rem 0 0;
-`;
-
-const Casts = styled.div`
-  margin: 1rem 0 0;
-  color: ${({ theme }) => theme.foreground.secondary};
 `;
 
 export default TitleInfo;

@@ -18,9 +18,6 @@ const MetaInfo: React.FC<Props> = ({ onClick }) => (
     <ExpireDate>
       2021年12月31日 23:59まで視聴可能 2021年12月31日 23:59まで視聴可能
     </ExpireDate>
-    <Casts>
-      ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。ここは女優名です。
-    </Casts>
     <Button>
       <ButtonStandard
         iconType={BUTTON_ICONS.PLAY}
@@ -43,7 +40,7 @@ const Container = styled.div`
 const TitleName = styled.div`
   ${typo.Heading3};
   line-height: 1.4;
-  height: 2.8em;
+  height: 6.3rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -52,13 +49,6 @@ const TitleName = styled.div`
 
 const ExpireDate = styled.div`
   margin: 1rem 0 0;
-`;
-
-const Casts = styled.div`
-  margin: 1rem 0 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 `;
 
 const Button = styled.div`
