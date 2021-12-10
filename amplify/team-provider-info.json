@@ -15,7 +15,7 @@
       "function": {
         "helloeroLambdaResolver": {
           "deploymentBucketName": "amplify-helloero-dev-175146-deployment",
-          "s3Key": "amplify-builds/helloeroLambdaResolver-355051624e6538344f73-build.zip",
+          "s3Key": "amplify-builds/helloeroLambdaResolver-48705876353078367168-build.zip",
           "wabitUrl": "https://wabit-api.awsdev.unext.dev"
         }
       },

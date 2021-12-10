@@ -24,22 +24,77 @@ export type WabikenMeta = {
   activatedAt?: number | null;
 };
 
-export type ContentMeta = {
-  __typename: 'ContentMeta';
+export type WabikenMetaBase = {
+  __typename: 'WabikenMetaBase';
+  id: string;
+  version: number;
+  notValidBefore: number;
+  notValidAfter: number;
+  lockRequired: boolean;
+  playbackRemaining: number;
+  validityPeriod: number;
+  issuerTrace?: string | null;
+  createdAt: number;
+};
+
+export type UserWabikenMeta = {
+  __typename: 'UserWabikenMeta';
+  id: string;
+  version: number;
+  notValidBefore: number;
+  notValidAfter: number;
+  lockRequired: boolean;
+  playbackRemaining: number;
+  validityPeriod: number;
+  issuerTrace?: string | null;
+  createdAt: number;
+  content: UserContentMeta;
+  activatedAt: number;
+  lockedTo: string;
+  updatedAt: string;
+  owner?: string | null;
+};
+
+export type UserContentMeta = {
+  __typename: 'UserContentMeta';
   id: string;
   key: ContentMetaKey;
   catchphrase: string;
   comment: string;
   duration: number;
-  evaluationPoint?: number | null;
+  evaluationPoint: number;
   maker: CodeName;
   series: CodeName;
   releaseDate: string;
   publicPeriod: Period;
   salePeriod: Period;
   paymentBadge: CodeName;
-  thumbnails?: ContentMetaThumbnail | null;
+  thumbnails: ContentMetaThumbnail;
   mainEpisodeCode: string;
+};
+
+export type ContentMetaBase = {
+  __typename: 'ContentMetaBase';
+  id: string;
+  key: ContentMetaKey;
+};
+
+export type ContentMeta = {
+  __typename: 'ContentMeta';
+  id: string;
+  key: ContentMetaKey;
+  catchphrase?: string | null;
+  comment?: string | null;
+  duration?: number | null;
+  evaluationPoint?: number | null;
+  maker?: CodeName | null;
+  series?: CodeName | null;
+  releaseDate?: string | null;
+  publicPeriod?: Period | null;
+  salePeriod?: Period | null;
+  paymentBadge?: CodeName | null;
+  thumbnails?: ContentMetaThumbnail | null;
+  mainEpisodeCode?: string | null;
 };
 
 export type ContentMetaKey = {
@@ -77,29 +132,29 @@ export type CreateUserWabikenMetaInput = {
   notValidBefore: number;
   notValidAfter: number;
   lockRequired: boolean;
-  playbackRemain: number;
+  playbackRemaining: number;
   validityPeriod: number;
   issuerTrace?: string | null;
   createdAt: number;
-  content: ContentMetaInput;
+  content: UserContentMetaInput;
   activatedAt: number;
   lockedTo: string;
 };
 
-export type ContentMetaInput = {
+export type UserContentMetaInput = {
   id: string;
   key: ContentMetaKeyInput;
   catchphrase: string;
   comment: string;
   duration: number;
-  evaluationPoint?: number | null;
+  evaluationPoint: number;
   maker: CodeNameInput;
   series: CodeNameInput;
   releaseDate: string;
   publicPeriod: PeriodInput;
   salePeriod: PeriodInput;
   paymentBadge: CodeNameInput;
-  thumbnails?: ContentMetaThumbnailInput | null;
+  thumbnails: ContentMetaThumbnailInput;
   mainEpisodeCode: string;
 };
 
@@ -133,7 +188,7 @@ export type ModelUserWabikenMetaConditionInput = {
   notValidBefore?: ModelIntInput | null;
   notValidAfter?: ModelIntInput | null;
   lockRequired?: ModelBooleanInput | null;
-  playbackRemain?: ModelIntInput | null;
+  playbackRemaining?: ModelIntInput | null;
   validityPeriod?: ModelIntInput | null;
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
@@ -202,35 +257,17 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type UserWabikenMeta = {
-  __typename: 'UserWabikenMeta';
-  id: string;
-  version: number;
-  notValidBefore: number;
-  notValidAfter: number;
-  lockRequired: boolean;
-  playbackRemain: number;
-  validityPeriod: number;
-  issuerTrace?: string | null;
-  createdAt: number;
-  content: ContentMeta;
-  activatedAt: number;
-  lockedTo: string;
-  updatedAt: string;
-  owner?: string | null;
-};
-
 export type UpdateUserWabikenMetaInput = {
   id: string;
   version?: number | null;
   notValidBefore?: number | null;
   notValidAfter?: number | null;
   lockRequired?: boolean | null;
-  playbackRemain?: number | null;
+  playbackRemaining?: number | null;
   validityPeriod?: number | null;
   issuerTrace?: string | null;
   createdAt?: number | null;
-  content?: ContentMetaInput | null;
+  content?: UserContentMetaInput | null;
   activatedAt?: number | null;
   lockedTo?: string | null;
 };
@@ -324,7 +361,7 @@ export type ModelUserWabikenMetaFilterInput = {
   notValidBefore?: ModelIntInput | null;
   notValidAfter?: ModelIntInput | null;
   lockRequired?: ModelBooleanInput | null;
-  playbackRemain?: ModelIntInput | null;
+  playbackRemaining?: ModelIntInput | null;
   validityPeriod?: ModelIntInput | null;
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
@@ -358,7 +395,7 @@ export type ModelUserWabikenMetaConnection = {
 };
 
 export type ActivateWabikenMutationVariables = {
-  token: string;
+  id: string;
   lockTo: string;
 };
 
@@ -384,36 +421,36 @@ export type ActivateWabikenMutation = {
           type: string;
           providerId: string;
         };
-        catchphrase: string;
-        comment: string;
-        duration: number;
+        catchphrase?: string | null;
+        comment?: string | null;
+        duration?: number | null;
         evaluationPoint?: number | null;
-        maker: {
+        maker?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
-        series: {
+        } | null;
+        series?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
+        } | null;
+        releaseDate?: string | null;
+        publicPeriod?: {
           __typename: 'Period';
           since?: number | null;
           until?: number | null;
-        };
-        salePeriod: {
+        } | null;
+        salePeriod?: {
           __typename: 'Period';
           since?: number | null;
           until?: number | null;
-        };
-        paymentBadge: {
+        } | null;
+        paymentBadge?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
+        } | null;
         thumbnails?: {
           __typename: 'ContentMetaThumbnail';
           packageL?: string | null;
@@ -423,7 +460,7 @@ export type ActivateWabikenMutation = {
           tsptFhds?: string | null;
           tsptFwxga?: string | null;
         } | null;
-        mainEpisodeCode: string;
+        mainEpisodeCode?: string | null;
       };
       issuerTrace?: string | null;
       lockedTo?: string | null;
@@ -446,12 +483,12 @@ export type CreateUserWabikenMetaMutation = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -462,7 +499,7 @@ export type CreateUserWabikenMetaMutation = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -489,7 +526,7 @@ export type CreateUserWabikenMetaMutation = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -497,7 +534,7 @@ export type CreateUserWabikenMetaMutation = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -520,12 +557,12 @@ export type UpdateUserWabikenMetaMutation = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -536,7 +573,7 @@ export type UpdateUserWabikenMetaMutation = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -563,7 +600,7 @@ export type UpdateUserWabikenMetaMutation = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -571,7 +608,7 @@ export type UpdateUserWabikenMetaMutation = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -594,12 +631,12 @@ export type DeleteUserWabikenMetaMutation = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -610,7 +647,7 @@ export type DeleteUserWabikenMetaMutation = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -637,7 +674,7 @@ export type DeleteUserWabikenMetaMutation = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -645,7 +682,7 @@ export type DeleteUserWabikenMetaMutation = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -681,36 +718,36 @@ export type GetWabikenMetaQuery = {
           type: string;
           providerId: string;
         };
-        catchphrase: string;
-        comment: string;
-        duration: number;
+        catchphrase?: string | null;
+        comment?: string | null;
+        duration?: number | null;
         evaluationPoint?: number | null;
-        maker: {
+        maker?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
-        series: {
+        } | null;
+        series?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
+        } | null;
+        releaseDate?: string | null;
+        publicPeriod?: {
           __typename: 'Period';
           since?: number | null;
           until?: number | null;
-        };
-        salePeriod: {
+        } | null;
+        salePeriod?: {
           __typename: 'Period';
           since?: number | null;
           until?: number | null;
-        };
-        paymentBadge: {
+        } | null;
+        paymentBadge?: {
           __typename: 'CodeName';
           code: string;
           name: string;
-        };
+        } | null;
         thumbnails?: {
           __typename: 'ContentMetaThumbnail';
           packageL?: string | null;
@@ -720,7 +757,7 @@ export type GetWabikenMetaQuery = {
           tsptFhds?: string | null;
           tsptFwxga?: string | null;
         } | null;
-        mainEpisodeCode: string;
+        mainEpisodeCode?: string | null;
       };
       issuerTrace?: string | null;
       lockedTo?: string | null;
@@ -731,7 +768,7 @@ export type GetWabikenMetaQuery = {
 };
 
 export type GetPlayInfoQueryVariables = {
-  token: string;
+  wabikenId: string;
   deviceCode: string;
   lock: string;
   deviceId: string;
@@ -799,12 +836,12 @@ export type GetUserWabikenMetaQuery = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -815,7 +852,7 @@ export type GetUserWabikenMetaQuery = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -842,7 +879,7 @@ export type GetUserWabikenMetaQuery = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -850,7 +887,7 @@ export type GetUserWabikenMetaQuery = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -876,12 +913,12 @@ export type ListUserWabikenMetasQuery = {
       notValidBefore: number;
       notValidAfter: number;
       lockRequired: boolean;
-      playbackRemain: number;
+      playbackRemaining: number;
       validityPeriod: number;
       issuerTrace?: string | null;
       createdAt: number;
       content: {
-        __typename: 'ContentMeta';
+        __typename: 'UserContentMeta';
         id: string;
         key: {
           __typename: 'ContentMetaKey';
@@ -892,7 +929,7 @@ export type ListUserWabikenMetasQuery = {
         catchphrase: string;
         comment: string;
         duration: number;
-        evaluationPoint?: number | null;
+        evaluationPoint: number;
         maker: {
           __typename: 'CodeName';
           code: string;
@@ -919,7 +956,7 @@ export type ListUserWabikenMetasQuery = {
           code: string;
           name: string;
         };
-        thumbnails?: {
+        thumbnails: {
           __typename: 'ContentMetaThumbnail';
           packageL?: string | null;
           packageM?: string | null;
@@ -927,7 +964,7 @@ export type ListUserWabikenMetasQuery = {
           standard?: string | null;
           tsptFhds?: string | null;
           tsptFwxga?: string | null;
-        } | null;
+        };
         mainEpisodeCode: string;
       };
       activatedAt: number;
@@ -951,12 +988,12 @@ export type OnCreateUserWabikenMetaSubscription = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -967,7 +1004,7 @@ export type OnCreateUserWabikenMetaSubscription = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -994,7 +1031,7 @@ export type OnCreateUserWabikenMetaSubscription = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -1002,7 +1039,7 @@ export type OnCreateUserWabikenMetaSubscription = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -1024,12 +1061,12 @@ export type OnUpdateUserWabikenMetaSubscription = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -1040,7 +1077,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -1067,7 +1104,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -1075,7 +1112,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;
@@ -1097,12 +1134,12 @@ export type OnDeleteUserWabikenMetaSubscription = {
     notValidBefore: number;
     notValidAfter: number;
     lockRequired: boolean;
-    playbackRemain: number;
+    playbackRemaining: number;
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
     content: {
-      __typename: 'ContentMeta';
+      __typename: 'UserContentMeta';
       id: string;
       key: {
         __typename: 'ContentMetaKey';
@@ -1113,7 +1150,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
       catchphrase: string;
       comment: string;
       duration: number;
-      evaluationPoint?: number | null;
+      evaluationPoint: number;
       maker: {
         __typename: 'CodeName';
         code: string;
@@ -1140,7 +1177,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
         code: string;
         name: string;
       };
-      thumbnails?: {
+      thumbnails: {
         __typename: 'ContentMetaThumbnail';
         packageL?: string | null;
         packageM?: string | null;
@@ -1148,7 +1185,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
         standard?: string | null;
         tsptFhds?: string | null;
         tsptFwxga?: string | null;
-      } | null;
+      };
       mainEpisodeCode: string;
     };
     activatedAt: number;

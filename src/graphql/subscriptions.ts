@@ -10,7 +10,7 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt
@@ -71,7 +71,7 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt
@@ -132,7 +132,7 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt

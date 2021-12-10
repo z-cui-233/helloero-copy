@@ -10,9 +10,9 @@ const {
 } = require('./converters/index.js');
 
 const getPlayInfo = async (event) => {
-  const { token, deviceCode, lock, deviceId } = event.arguments;
+  const { wabikenId, deviceCode, lock, deviceId } = event.arguments;
   const response = await axios.get(
-    `/v2/playinfo/${token}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
+    `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
   );
 
   if (response.data.error) {
@@ -28,8 +28,8 @@ const getPlayInfo = async (event) => {
 };
 
 const activateWabiken = async (event) => {
-  const { token, lockTo } = event.arguments;
-  const response = await axios.put(`/v2/wabiken/${token}`, {
+  const { id, lockTo } = event.arguments;
+  const response = await axios.put(`/v2/wabiken/${id}`, {
     locked_to: lockTo, // TBD: use context.identity.cognitoIdentityId instead??
   });
 

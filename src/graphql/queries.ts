@@ -66,13 +66,13 @@ export const getWabikenMeta = /* GraphQL */ `
 `;
 export const getPlayInfo = /* GraphQL */ `
   query GetPlayInfo(
-    $token: String!
+    $wabikenId: String!
     $deviceCode: String!
     $lock: String!
     $deviceId: String!
   ) {
     getPlayInfo(
-      token: $token
+      wabikenId: $wabikenId
       deviceCode: $deviceCode
       lock: $lock
       deviceId: $deviceId
@@ -124,7 +124,7 @@ export const getUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt
@@ -194,7 +194,7 @@ export const listUserWabikenMetas = /* GraphQL */ `
         notValidBefore
         notValidAfter
         lockRequired
-        playbackRemain
+        playbackRemaining
         validityPeriod
         issuerTrace
         createdAt

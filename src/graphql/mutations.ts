@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const activateWabiken = /* GraphQL */ `
-  mutation ActivateWabiken($token: String!, $lockTo: String!) {
-    activateWabiken(token: $token, lockTo: $lockTo) {
+  mutation ActivateWabiken($id: ID!, $lockTo: String!) {
+    activateWabiken(id: $id, lockTo: $lockTo) {
       wabiken {
         id
         version
@@ -75,7 +75,7 @@ export const createUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt
@@ -139,7 +139,7 @@ export const updateUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt
@@ -203,7 +203,7 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
       notValidBefore
       notValidAfter
       lockRequired
-      playbackRemain
+      playbackRemaining
       validityPeriod
       issuerTrace
       createdAt

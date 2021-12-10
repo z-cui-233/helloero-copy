@@ -1,17 +1,31 @@
-type UserWabikenMeta @model @auth(rules: [{ allow: owner }]) {
+interface WabikenMetaBase {
+  id: ID!
+  version: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemaining: Int!
+  validityPeriod: Int!
+  issuerTrace: String
+  createdAt: AWSTimestamp!
+}
+
+type UserWabikenMeta implements WabikenMetaBase
+  @model
+  @auth(rules: [{ allow: owner }]) {
   """
-  same as token
+  id is same as token
   """
   id: ID!
   version: Int!
   notValidBefore: AWSTimestamp!
   notValidAfter: AWSTimestamp!
   lockRequired: Boolean!
-  playbackRemain: Int!
+  playbackRemaining: Int!
   validityPeriod: Int!
   issuerTrace: String
   createdAt: AWSTimestamp!
-  content: ContentMeta!
+  content: UserContentMeta!
   """
   following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
@@ -19,11 +33,11 @@ type UserWabikenMeta @model @auth(rules: [{ allow: owner }]) {
   lockedTo: String!
 }
 
-type WabikenMeta {
-  id: ID!
+type WabikenMeta implements WabikenMetaBase {
   """
   token
   """
+  id: ID!
   version: Int!
   notValidBefore: AWSTimestamp!
   notValidAfter: AWSTimestamp!
@@ -35,6 +49,44 @@ type WabikenMeta {
   issuerTrace: String
   lockedTo: String # This will be null for non-activated wabiken
   activatedAt: AWSTimestamp # This will be null for non-activated wabiken
+}
+
+interface ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+}
+
+type ContentMeta implements ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+  catchphrase: String
+  comment: String
+  duration: Int
+  evaluationPoint: Int
+  maker: CodeName
+  series: CodeName
+  releaseDate: String
+  publicPeriod: Period
+  salePeriod: Period
+  paymentBadge: CodeName
+  thumbnails: ContentMetaThumbnail
+  mainEpisodeCode: String
+}
+type UserContentMeta implements ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+  catchphrase: String!
+  comment: String!
+  duration: Int!
+  evaluationPoint: Int!
+  maker: CodeName!
+  series: CodeName!
+  releaseDate: String!
+  publicPeriod: Period!
+  salePeriod: Period!
+  paymentBadge: CodeName!
+  thumbnails: ContentMetaThumbnail!
+  mainEpisodeCode: String!
 }
 
 type CodeName {
@@ -60,23 +112,6 @@ type ContentMetaThumbnail {
   standard: String
   tsptFhds: String
   tsptFwxga: String
-}
-
-type ContentMeta {
-  id: ID!
-  key: ContentMetaKey!
-  catchphrase: String!
-  comment: String!
-  duration: Int!
-  evaluationPoint: Int
-  maker: CodeName!
-  series: CodeName!
-  releaseDate: String!
-  publicPeriod: Period!
-  salePeriod: Period!
-  paymentBadge: CodeName!
-  thumbnails: ContentMetaThumbnail # verify: content meta except key is not being returned by activated wabiken put request
-  mainEpisodeCode: String!
 }
 type ErrorCodeMessage {
   code: Int!
@@ -152,12 +187,11 @@ type PlayInfoResponse {
   playInfo: PlayInfo!
   result: Boolean!
 }
-
 type Query {
   getWabikenMeta(id: ID!): WabikenMetaResponse
     @function(name: "helloeroLambdaResolver")
   getPlayInfo(
-    token: String!
+    wabikenId: String!
     deviceCode: String!
     lock: String!
     deviceId: String!
@@ -165,6 +199,6 @@ type Query {
 }
 
 type Mutation {
-  activateWabiken(token: String!, lockTo: String!): WabikenMetaResponse
+  activateWabiken(id: ID!, lockTo: String!): WabikenMetaResponse
     @function(name: "helloeroLambdaResolver")
 }
