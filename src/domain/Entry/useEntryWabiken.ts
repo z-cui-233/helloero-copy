@@ -1,14 +1,18 @@
-import { GraphQLResult } from '@aws-amplify/api';
-import { API, graphqlOperation } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { CreateUserWabikenMetaInput, GetWabikenMetaQuery } from 'src/API';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  ActivateWabikenMutation,
+  ActivateWabikenMutationVariables,
+  CreateUserWabikenMetaMutation,
+  CreateUserWabikenMetaMutationVariables,
+  GetWabikenMetaQuery,
+} from 'src/API';
 import { activateWabiken, createUserWabikenMeta } from 'src/graphql/mutations';
 import { getWabikenMeta } from 'src/graphql/queries';
 import { API_VERSION } from 'src/shared/constants';
 import { errorMessages } from 'src/shared/constants/errorMessages';
 import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import { GraphQLResultEx } from 'src/types/amplify';
+import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -33,19 +37,33 @@ export interface UseEntryWabiken {
   consumeWabiken: () => Promise<void>;
 }
 
+const initialState: UseEntryWabiken['entryWabikenState'] = {
+  pageStatus: PAGE_STATUS.INIT,
+  errorMessage: '',
+  formValues: { wabiken: '' },
+  getWabikenMetaQuery: null,
+};
+
 const useEntryWabiken = (): UseEntryWabiken => {
   const router = useRouter();
+
   const { userInfo } = useLoginStateContext();
-  const [entryWabikenState, setEntryWabikenState] = useState<
-    UseEntryWabiken['entryWabikenState']
-  >({
-    pageStatus: PAGE_STATUS.INIT,
-    errorMessage: '',
-    formValues: {
-      wabiken: '',
-    },
-    getWabikenMetaQuery: null,
-  });
+
+  const [entryWabikenState, setEntryWabikenState] =
+    useState<UseEntryWabiken['entryWabikenState']>(initialState);
+
+  const { fetcher: getWabikenMetaQueryFetcher } =
+    useAmplifyFetcher<GetWabikenMetaQuery>();
+
+  const { fetcher: activateWabikenFetcher } = useAmplifyFetcher<
+    ActivateWabikenMutation,
+    ActivateWabikenMutationVariables
+  >();
+
+  const { fetcher: createUserWabikenMetaFetcher } = useAmplifyFetcher<
+    CreateUserWabikenMetaMutation,
+    CreateUserWabikenMetaMutationVariables
+  >();
 
   useEffect(() => {
     const wabiken = router.query.wabiken
@@ -54,54 +72,47 @@ const useEntryWabiken = (): UseEntryWabiken => {
 
     setEntryWabikenState((entryWabikenState) => ({
       ...entryWabikenState,
-      formValues: {
-        wabiken,
-      },
       pageStatus: PAGE_STATUS.INPUT,
+      formValues: { wabiken },
     }));
   }, [router.query.wabiken]);
 
-  const confirmWabiken = async (
-    values: UseEntryWabiken['entryWabikenState']['formValues']
-  ): Promise<void> => {
-    const wabiken = values.wabiken;
+  const confirmWabiken = useCallback(
+    async (
+      values: UseEntryWabiken['entryWabikenState']['formValues']
+    ): Promise<void> => {
+      const { wabiken } = values;
 
-    try {
-      const getWabikenMetaQueryResponse = (await API.graphql(
-        graphqlOperation(getWabikenMeta, {
-          id: wabiken,
-        })
-      )) as GraphQLResult<GetWabikenMetaQuery>;
+      const apiData = await getWabikenMetaQueryFetcher(getWabikenMeta, {
+        id: wabiken,
+      });
+
+      if (apiData.errors) {
+        const errorCode = apiData.errors?.[0]?.errorInfo?.code;
+
+        setEntryWabikenState((entryWabikenState) => ({
+          ...entryWabikenState,
+          pageStatus: PAGE_STATUS.INPUT,
+          errorMessage:
+            errorMessages.getWabikenMeta[errorCode?.toString()] ??
+            errorMessages.default,
+          formValues: { wabiken },
+        }));
+        return;
+      }
 
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
         pageStatus: PAGE_STATUS.CONFIRM,
         errorMessage: '',
-        formValues: {
-          wabiken,
-        },
-        getWabikenMetaQuery: getWabikenMetaQueryResponse.data ?? null,
+        formValues: { wabiken },
+        getWabikenMetaQuery: apiData.data ?? null,
       }));
-    } catch (error) {
-      const errorCode = (error as GraphQLResultEx<GetWabikenMetaQuery>)
-        .errors?.[0]?.errorInfo?.code;
+    },
+    [getWabikenMetaQueryFetcher]
+  );
 
-      const errorMessage =
-        errorMessages.getWabikenMeta[errorCode?.toString()] ??
-        errorMessages.default;
-
-      setEntryWabikenState((entryWabikenState) => ({
-        ...entryWabikenState,
-        pageStatus: PAGE_STATUS.INPUT,
-        errorMessage,
-        formValues: {
-          wabiken,
-        },
-      }));
-    }
-  };
-
-  const consumeWabiken = async (): Promise<void> => {
+  const consumeWabiken = useCallback(async (): Promise<void> => {
     const lockTo = userInfo.userInfo?.username as string;
     const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
       ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
@@ -114,52 +125,48 @@ const useEntryWabiken = (): UseEntryWabiken => {
       return;
     }
 
-    const activateWabikenData = {
-      token: entryWabikenState.formValues.wabiken,
-      lockTo,
-    };
+    // 1. consume wabiken
+    const activateWabikenApiData = await activateWabikenFetcher(
+      activateWabiken,
+      {
+        id: entryWabikenState.formValues.wabiken,
+        lockTo,
+      }
+    );
 
-    const createUserWabikenMetaInputData: CreateUserWabikenMetaInput = {
-      id: getWabikenMeta.wabiken.id as string,
-      version: API_VERSION,
-      notValidBefore: getWabikenMeta.wabiken.notValidBefore as number,
-      notValidAfter: getWabikenMeta.wabiken.notValidAfter as number,
-      lockRequired: getWabikenMeta.wabiken.lockRequired as boolean,
-      playbackRemain: getWabikenMeta.wabiken.playbackRemaining as number,
-      validityPeriod: getWabikenMeta.wabiken.validityPeriod as number,
-      issuerTrace: getWabikenMeta.wabiken.issuerTrace,
-      createdAt: getWabikenMeta.wabiken.createdAt as number,
-      content: getWabikenMeta.wabiken.content,
-      activatedAt: getWabikenMeta.wabiken.activatedAt as number,
-      lockedTo: lockTo,
-    };
-
-    try {
-      // 1. consume wabiken
-      await API.graphql(graphqlOperation(activateWabiken, activateWabikenData));
-    } catch (error) {
-      const errorCode = (error as GraphQLResultEx<GetWabikenMetaQuery>)
-        .errors?.[0]?.errorInfo?.code;
-
-      const errorMessage =
-        errorMessages.activateWabiken[errorCode?.toString()] ??
-        errorMessages.default;
-
+    if (activateWabikenApiData.errors) {
+      const errorCode = activateWabikenApiData.errors?.[0]?.errorInfo?.code;
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
-        errorMessage,
+        errorMessage:
+          errorMessages.getWabikenMeta[errorCode?.toString()] ??
+          errorMessages.default,
       }));
       return;
     }
 
-    try {
-      // 2. save dynamoDb
-      await API.graphql(
-        graphqlOperation(createUserWabikenMeta, {
-          input: createUserWabikenMetaInputData,
-        })
-      );
-    } catch (error) {
+    // 2. save dynamoDb
+    const createUserWabikenMetaApiData = await createUserWabikenMetaFetcher(
+      createUserWabikenMeta,
+      {
+        input: {
+          id: getWabikenMeta.wabiken.id as string,
+          version: API_VERSION,
+          notValidBefore: getWabikenMeta.wabiken.notValidBefore as number,
+          notValidAfter: getWabikenMeta.wabiken.notValidAfter as number,
+          lockRequired: getWabikenMeta.wabiken.lockRequired as boolean,
+          playbackRemain: getWabikenMeta.wabiken.playbackRemaining as number,
+          validityPeriod: getWabikenMeta.wabiken.validityPeriod as number,
+          issuerTrace: getWabikenMeta.wabiken.issuerTrace,
+          createdAt: getWabikenMeta.wabiken.createdAt as number,
+          content: getWabikenMeta.wabiken.content,
+          activatedAt: getWabikenMeta.wabiken.activatedAt as number,
+          lockedTo: lockTo,
+        },
+      }
+    );
+
+    if (createUserWabikenMetaApiData.errors) {
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
         errorMessage: errorMessages.default,
@@ -171,7 +178,13 @@ const useEntryWabiken = (): UseEntryWabiken => {
       ...entryWabikenState,
       pageStatus: PAGE_STATUS.COMPLETE,
     }));
-  };
+  }, [
+    activateWabikenFetcher,
+    createUserWabikenMetaFetcher,
+    entryWabikenState.formValues.wabiken,
+    entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
+    userInfo.userInfo?.username,
+  ]);
 
   return {
     entryWabikenState,
