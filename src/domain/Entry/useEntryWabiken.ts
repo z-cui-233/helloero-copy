@@ -135,7 +135,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
     );
 
     if (activateWabikenApiData.errors) {
-      const errorCode = activateWabikenApiData.errors?.[0]?.errorInfo?.code;
+      const errorCode = activateWabikenApiData.errors?.[0]?.errorInfo?.code; // 400001
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
         errorMessage:
@@ -155,12 +155,13 @@ const useEntryWabiken = (): UseEntryWabiken => {
           notValidBefore: getWabikenMeta.wabiken.notValidBefore as number,
           notValidAfter: getWabikenMeta.wabiken.notValidAfter as number,
           lockRequired: getWabikenMeta.wabiken.lockRequired as boolean,
-          playbackRemain: getWabikenMeta.wabiken.playbackRemaining as number,
+          playbackRemaining: getWabikenMeta.wabiken.playbackRemaining as number,
           validityPeriod: getWabikenMeta.wabiken.validityPeriod as number,
           issuerTrace: getWabikenMeta.wabiken.issuerTrace,
           createdAt: getWabikenMeta.wabiken.createdAt as number,
           content: getWabikenMeta.wabiken.content,
-          activatedAt: getWabikenMeta.wabiken.activatedAt as number,
+          activatedAt: activateWabikenApiData.data?.activateWabiken?.wabiken
+            .activatedAt as number,
           lockedTo: lockTo,
         },
       }
