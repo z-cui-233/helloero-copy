@@ -8,6 +8,7 @@ interface Props {
   onClick: (e: unknown) => unknown;
   label: string;
   iconType?: ButtonIcons;
+  disabled?: boolean;
 }
 
 export const BUTTON_ICONS = {
@@ -29,12 +30,22 @@ const getIcon = (iconType: ButtonIcons): JSX.Element => {
   }
 };
 
-const ButtonStandard: React.FC<Props> = ({ onClick, label, iconType }) => {
+const ButtonStandard: React.FC<Props> = ({
+  onClick,
+  label,
+  iconType,
+  disabled,
+}) => {
   const hasIcon = !!iconType;
 
   return (
     <div>
-      <Button onClick={onClick} type="button" hasIcon={hasIcon}>
+      <Button
+        onClick={onClick}
+        type="button"
+        hasIcon={hasIcon}
+        disabled={disabled}
+      >
         {hasIcon && <Icon>{getIcon(iconType)}</Icon>}
         <div>{label}</div>
       </Button>

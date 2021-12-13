@@ -2,22 +2,19 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { useCallback, useState } from 'react';
 import { GraphQLResultEx } from 'src/types/amplify';
 
-const useAmplifyFetcher = <TData, TVariables = any>(): {
+const useAmplifyFetcher = <TData, TVariables>(): {
   loading: boolean;
   data: GraphQLResultEx<TData> | null;
   fetcher: (
     query: string,
-    variables?: TVariables
+    variables: TVariables
   ) => Promise<GraphQLResultEx<TData>>;
 } => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<GraphQLResultEx<TData> | null>(null);
 
   const fetcher = useCallback(
-    (
-      query: string,
-      variables?: TVariables
-    ): Promise<GraphQLResultEx<TData>> => {
+    (query: string, variables: TVariables): Promise<GraphQLResultEx<TData>> => {
       setLoading(true);
 
       return (
