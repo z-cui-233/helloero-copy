@@ -1,5 +1,3 @@
-import dateFormat from 'dateformat';
-
 export const createTitleThumbnailUrl = (
   url: string | undefined | null
 ): string => {
@@ -12,19 +10,4 @@ export const createTitleThumbnailUrl = (
   const protocol = url.indexOf('http') !== -1 ? '' : 'https://';
 
   return `${protocol}${url}${query}`;
-};
-
-export const createExpireDateFromValidityPeriod = (
-  validityPeriod: number | undefined,
-  startingDate?: Date
-): string => {
-  // 0sec = EST. we should not show expireDate
-  if (!validityPeriod || validityPeriod === 0) {
-    return '';
-  }
-
-  const date = startingDate ? startingDate : new Date();
-  date.setSeconds(validityPeriod);
-
-  return dateFormat(date, 'yyyy年m月d日 HH:MM');
 };

@@ -8,14 +8,18 @@ import styled from 'styled-components';
 
 interface Props {
   titleName: string;
-  expireDate: string;
+  displayExpireDate: string;
   onClick: () => void;
 }
 
-const MetaInfo: React.FC<Props> = ({ titleName, expireDate, onClick }) => (
+const MetaInfo: React.FC<Props> = ({
+  titleName,
+  displayExpireDate,
+  onClick,
+}) => (
   <Container>
     <TitleName>{titleName}</TitleName>
-    {expireDate && <ExpireDate>{expireDate}まで視聴可能</ExpireDate>}
+    <ExpireDate>{displayExpireDate}</ExpireDate>
     <Button>
       <ButtonStandard
         iconType={BUTTON_ICONS.PLAY}

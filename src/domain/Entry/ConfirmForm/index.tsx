@@ -1,15 +1,27 @@
 import React from 'react';
+import dateFormat from 'dateformat';
 import FormErrorMessage from 'src/shared/components/FormErrorMessage';
 import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
 import MainContainer from 'src/shared/components/parts/MainContainer';
 import typo from 'src/shared/styles/typo';
-import {
-  createExpireDateFromValidityPeriod,
-  createTitleThumbnailUrl,
-} from 'src/shared/utils';
+import { createTitleThumbnailUrl } from 'src/shared/utils';
 import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
+
+const createExpireDateFromValidityPeriod = (
+  validityPeriod: number | undefined
+): string => {
+  // 0sec = EST. we should not show expireDate
+  if (!validityPeriod || validityPeriod === 0) {
+    return '無期限';
+  }
+
+  const date = new Date();
+  date.setSeconds(validityPeriod);
+
+  return `${dateFormat(date, 'yyyy年m月d日 HH:MM')}まで視聴可能`;
+};
 
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
   const titleName =
@@ -32,7 +44,7 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
         titleName={titleName}
-        expireDate={createExpireDateFromValidityPeriod(validityPeriod)}
+        displayExpireDate={createExpireDateFromValidityPeriod(validityPeriod)}
       />
       <ButtonSection>
         <ButtonStandard
