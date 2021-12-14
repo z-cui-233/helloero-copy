@@ -21,6 +21,7 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -57,7 +58,6 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }
@@ -82,6 +82,7 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -118,7 +119,6 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }
@@ -143,6 +143,7 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -179,7 +180,6 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }

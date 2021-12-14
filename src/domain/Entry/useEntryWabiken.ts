@@ -14,7 +14,6 @@ import { activateWabiken, createUserWabikenMeta } from 'src/graphql/mutations';
 import { getWabikenMeta } from 'src/graphql/queries';
 import { API_VERSION } from 'src/shared/constants';
 import { errorMessages } from 'src/shared/constants/errorMessages';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
 import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
@@ -50,12 +49,17 @@ const initialState: UseEntryWabiken['entryWabikenState'] = {
 const isCreateUserWabikenMetaInput = (
   input: WabikenMeta | CreateUserWabikenMetaInput | undefined
 ): input is CreateUserWabikenMetaInput => {
-  return !!input?.content.key;
+  return !!(
+    input &&
+    input.activatedAt &&
+    input.content &&
+    input.content.key &&
+    input.content.thumbnails
+  );
 };
 
 const useEntryWabiken = (): UseEntryWabiken => {
   const router = useRouter();
-  const { userInfo } = useLoginStateContext();
 
   const [entryWabikenState, setEntryWabikenState] =
     useState<UseEntryWabiken['entryWabikenState']>(initialState);
@@ -134,7 +138,6 @@ const useEntryWabiken = (): UseEntryWabiken => {
       return;
     }
 
-    const lockTo = userInfo.userInfo?.username as string;
     const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
       ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
 
@@ -154,7 +157,6 @@ const useEntryWabiken = (): UseEntryWabiken => {
       activateWabiken,
       {
         id: entryWabikenState.formValues.wabiken,
-        lockTo,
       }
     );
 
@@ -186,7 +188,6 @@ const useEntryWabiken = (): UseEntryWabiken => {
           content: getWabikenMeta.wabiken.content,
           activatedAt: activateWabikenApiData.data?.activateWabiken?.wabiken
             .activatedAt as number,
-          lockedTo: lockTo,
         },
       }
     );
@@ -210,7 +211,6 @@ const useEntryWabiken = (): UseEntryWabiken => {
     createUserWabikenMetaLoading,
     entryWabikenState.formValues.wabiken,
     entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
-    userInfo.userInfo?.username,
   ]);
 
   return {

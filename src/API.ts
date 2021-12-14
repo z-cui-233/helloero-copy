@@ -20,7 +20,6 @@ export type WabikenMeta = {
   createdAt: number;
   content: ContentMeta;
   issuerTrace?: string | null;
-  lockedTo?: string | null;
   activatedAt?: number | null;
 };
 
@@ -50,7 +49,6 @@ export type UserWabikenMeta = {
   createdAt: number;
   content: UserContentMeta;
   activatedAt: number;
-  lockedTo: string;
   updatedAt: string;
   owner?: string | null;
 };
@@ -59,6 +57,7 @@ export type UserContentMeta = {
   __typename: 'UserContentMeta';
   id: string;
   key: ContentMetaKey;
+  displayName: string;
   catchphrase: string;
   comment: string;
   duration: number;
@@ -83,6 +82,7 @@ export type ContentMeta = {
   __typename: 'ContentMeta';
   id: string;
   key: ContentMetaKey;
+  displayName?: string | null;
   catchphrase?: string | null;
   comment?: string | null;
   duration?: number | null;
@@ -138,12 +138,12 @@ export type CreateUserWabikenMetaInput = {
   createdAt: number;
   content: UserContentMetaInput;
   activatedAt: number;
-  lockedTo: string;
 };
 
 export type UserContentMetaInput = {
   id: string;
   key: ContentMetaKeyInput;
+  displayName: string;
   catchphrase: string;
   comment: string;
   duration: number;
@@ -193,7 +193,6 @@ export type ModelUserWabikenMetaConditionInput = {
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
   activatedAt?: ModelIntInput | null;
-  lockedTo?: ModelStringInput | null;
   and?: Array<ModelUserWabikenMetaConditionInput | null> | null;
   or?: Array<ModelUserWabikenMetaConditionInput | null> | null;
   not?: ModelUserWabikenMetaConditionInput | null;
@@ -269,7 +268,6 @@ export type UpdateUserWabikenMetaInput = {
   createdAt?: number | null;
   content?: UserContentMetaInput | null;
   activatedAt?: number | null;
-  lockedTo?: string | null;
 };
 
 export type DeleteUserWabikenMetaInput = {
@@ -366,7 +364,6 @@ export type ModelUserWabikenMetaFilterInput = {
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
   activatedAt?: ModelIntInput | null;
-  lockedTo?: ModelStringInput | null;
   and?: Array<ModelUserWabikenMetaFilterInput | null> | null;
   or?: Array<ModelUserWabikenMetaFilterInput | null> | null;
   not?: ModelUserWabikenMetaFilterInput | null;
@@ -396,7 +393,6 @@ export type ModelUserWabikenMetaConnection = {
 
 export type ActivateWabikenMutationVariables = {
   id: string;
-  lockTo: string;
 };
 
 export type ActivateWabikenMutation = {
@@ -421,6 +417,7 @@ export type ActivateWabikenMutation = {
           type: string;
           providerId: string;
         };
+        displayName?: string | null;
         catchphrase?: string | null;
         comment?: string | null;
         duration?: number | null;
@@ -463,7 +460,6 @@ export type ActivateWabikenMutation = {
         mainEpisodeCode?: string | null;
       };
       issuerTrace?: string | null;
-      lockedTo?: string | null;
       activatedAt?: number | null;
     };
     result: boolean;
@@ -496,6 +492,7 @@ export type CreateUserWabikenMetaMutation = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -538,7 +535,6 @@ export type CreateUserWabikenMetaMutation = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -570,6 +566,7 @@ export type UpdateUserWabikenMetaMutation = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -612,7 +609,6 @@ export type UpdateUserWabikenMetaMutation = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -644,6 +640,7 @@ export type DeleteUserWabikenMetaMutation = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -686,7 +683,6 @@ export type DeleteUserWabikenMetaMutation = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -718,6 +714,7 @@ export type GetWabikenMetaQuery = {
           type: string;
           providerId: string;
         };
+        displayName?: string | null;
         catchphrase?: string | null;
         comment?: string | null;
         duration?: number | null;
@@ -760,7 +757,6 @@ export type GetWabikenMetaQuery = {
         mainEpisodeCode?: string | null;
       };
       issuerTrace?: string | null;
-      lockedTo?: string | null;
       activatedAt?: number | null;
     };
     result: boolean;
@@ -849,6 +845,7 @@ export type GetUserWabikenMetaQuery = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -891,7 +888,6 @@ export type GetUserWabikenMetaQuery = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -926,6 +922,7 @@ export type ListUserWabikenMetasQuery = {
           type: string;
           providerId: string;
         };
+        displayName: string;
         catchphrase: string;
         comment: string;
         duration: number;
@@ -968,7 +965,6 @@ export type ListUserWabikenMetasQuery = {
         mainEpisodeCode: string;
       };
       activatedAt: number;
-      lockedTo: string;
       updatedAt: string;
       owner?: string | null;
     }>;
@@ -1001,6 +997,7 @@ export type OnCreateUserWabikenMetaSubscription = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -1043,7 +1040,6 @@ export type OnCreateUserWabikenMetaSubscription = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -1074,6 +1070,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -1116,7 +1113,6 @@ export type OnUpdateUserWabikenMetaSubscription = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;
@@ -1147,6 +1143,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
         type: string;
         providerId: string;
       };
+      displayName: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -1189,7 +1186,6 @@ export type OnDeleteUserWabikenMetaSubscription = {
       mainEpisodeCode: string;
     };
     activatedAt: number;
-    lockedTo: string;
     updatedAt: string;
     owner?: string | null;
   } | null;

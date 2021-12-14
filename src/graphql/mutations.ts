@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const activateWabiken = /* GraphQL */ `
-  mutation ActivateWabiken($id: ID!, $lockTo: String!) {
-    activateWabiken(id: $id, lockTo: $lockTo) {
+  mutation ActivateWabiken($id: ID!) {
+    activateWabiken(id: $id) {
       wabiken {
         id
         version
@@ -21,6 +21,7 @@ export const activateWabiken = /* GraphQL */ `
             type
             providerId
           }
+          displayName
           catchphrase
           comment
           duration
@@ -57,7 +58,6 @@ export const activateWabiken = /* GraphQL */ `
           mainEpisodeCode
         }
         issuerTrace
-        lockedTo
         activatedAt
       }
       result
@@ -86,6 +86,7 @@ export const createUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -122,7 +123,6 @@ export const createUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }
@@ -150,6 +150,7 @@ export const updateUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -186,7 +187,6 @@ export const updateUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }
@@ -214,6 +214,7 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
           type
           providerId
         }
+        displayName
         catchphrase
         comment
         duration
@@ -250,7 +251,6 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      lockedTo
       updatedAt
       owner
     }

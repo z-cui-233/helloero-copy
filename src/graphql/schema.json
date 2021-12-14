@@ -393,18 +393,6 @@
               "deprecationReason": null
             },
             {
-              "name": "lockedTo",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "activatedAt",
               "description": null,
               "args": [],
@@ -501,6 +489,18 @@
                   "name": "ContentMetaKey",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "displayName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2020,22 +2020,6 @@
               "deprecationReason": null
             },
             {
-              "name": "lockedTo",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "updatedAt",
               "description": null,
               "args": [],
@@ -2106,6 +2090,22 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "ContentMetaKey",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "displayName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -2475,16 +2475,6 @@
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "ModelIntInput",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "lockedTo",
-              "description": null,
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "ModelStringInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -3156,20 +3146,6 @@
                     }
                   },
                   "defaultValue": null
-                },
-                {
-                  "name": "lockTo",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
                 }
               ],
               "type": {
@@ -3448,20 +3424,6 @@
                 }
               },
               "defaultValue": null
-            },
-            {
-              "name": "lockedTo",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -3497,6 +3459,20 @@
                 "ofType": {
                   "kind": "INPUT_OBJECT",
                   "name": "ContentMetaKeyInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "displayName",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -3966,16 +3942,6 @@
               "defaultValue": null
             },
             {
-              "name": "lockedTo",
-              "description": null,
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "ModelStringInput",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
               "name": "and",
               "description": null,
               "type": {
@@ -4134,16 +4100,6 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "AWSTimestamp",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "lockedTo",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               },
               "defaultValue": null
@@ -4386,6 +4342,29 @@
           "possibleTypes": null
         },
         {
+          "kind": "ENUM",
+          "name": "ModelSortDirection",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
           "kind": "OBJECT",
           "name": "ErrorCodeMessage",
           "description": null,
@@ -4426,29 +4405,6 @@
           "inputFields": null,
           "interfaces": [],
           "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "ENUM",
-          "name": "ModelSortDirection",
-          "description": null,
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": [
-            {
-              "name": "ASC",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "DESC",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
           "possibleTypes": null
         },
         {
@@ -5356,15 +5312,6 @@
           "onField": false
         },
         {
-          "name": "aws_iam",
-          "description": "Tells the service this field/object has access authorized by sigv4 signing.",
-          "locations": ["OBJECT", "FIELD_DEFINITION"],
-          "args": [],
-          "onOperation": false,
-          "onFragment": false,
-          "onField": false
-        },
-        {
           "name": "deprecated",
           "description": null,
           "locations": ["FIELD_DEFINITION", "ENUM_VALUE"],
@@ -5380,6 +5327,15 @@
               "defaultValue": "\"No longer supported\""
             }
           ],
+          "onOperation": false,
+          "onFragment": false,
+          "onField": false
+        },
+        {
+          "name": "aws_iam",
+          "description": "Tells the service this field/object has access authorized by sigv4 signing.",
+          "locations": ["OBJECT", "FIELD_DEFINITION"],
+          "args": [],
           "onOperation": false,
           "onFragment": false,
           "onField": false

@@ -14,6 +14,7 @@ const mapContentMeta = (content) => ({
     type: content.key.type,
     providerId: content.key.provider_id,
   },
+  displayName: content.display_name,
   catchphrase: content.catchphrase,
   comment: content.comment,
   duration: content.duration,
@@ -39,7 +40,6 @@ const mapWabikenMeta = (wabiken) => ({
   createdAt: wabiken.created_at,
   content: mapContentMeta(wabiken.content),
   issuerTrace: wabiken.issuer_trace,
-  lockedTo: wabiken.locked_to,
   activatedAt: wabiken.activated_at,
 });
 

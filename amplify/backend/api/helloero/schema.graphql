@@ -30,7 +30,6 @@ type UserWabikenMeta implements WabikenMetaBase
   following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
   activatedAt: AWSTimestamp!
-  lockedTo: String!
 }
 
 type WabikenMeta implements WabikenMetaBase {
@@ -47,7 +46,6 @@ type WabikenMeta implements WabikenMetaBase {
   createdAt: AWSTimestamp!
   content: ContentMeta!
   issuerTrace: String
-  lockedTo: String # This will be null for non-activated wabiken
   activatedAt: AWSTimestamp # This will be null for non-activated wabiken
 }
 
@@ -59,6 +57,7 @@ interface ContentMetaBase {
 type ContentMeta implements ContentMetaBase {
   id: ID!
   key: ContentMetaKey!
+  displayName: String
   catchphrase: String
   comment: String
   duration: Int
@@ -75,6 +74,7 @@ type ContentMeta implements ContentMetaBase {
 type UserContentMeta implements ContentMetaBase {
   id: ID!
   key: ContentMetaKey!
+  displayName: String!
   catchphrase: String!
   comment: String!
   duration: Int!
@@ -199,6 +199,6 @@ type Query {
 }
 
 type Mutation {
-  activateWabiken(id: ID!, lockTo: String!): WabikenMetaResponse
+  activateWabiken(id: ID!): WabikenMetaResponse
     @function(name: "helloeroLambdaResolver")
 }
