@@ -30,7 +30,7 @@ const getPlayInfo = async (event) => {
 const activateWabiken = async (event) => {
   const { id } = event.arguments;
   const response = await axios.put(`/v2/wabiken/${id}`, {
-    locked_to: event.identity.claims['cognito:username'],
+    locked_to: event.identity.username,
   });
 
   if (response.data.error) {
