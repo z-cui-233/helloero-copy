@@ -1,8 +1,29 @@
-export const thumbnailUrlWithParams = (url: string): string => {
+import dateFormat from 'dateformat';
+
+export const createTitleThumbnailUrl = (
+  url: string | undefined | null
+): string => {
+  if (!url) {
+    return '';
+  }
+
   const query =
     '?output-quality=60&output-format=jpg&downsize=384px:*&letterbox=5:7&bgblur=50,0.5';
+  const protocol = url.indexOf('http') !== -1 ? '' : 'https://';
 
-  const hasProtocol = url.indexOf('http') !== -1;
+  return `${protocol}${url}${query}`;
+};
 
-  return `${hasProtocol ? '' : 'https://'}${url}${query}`;
+export const createExpireDateFromValidityPeriod = (
+  validityPeriod: number | undefined
+): string => {
+  // 0sec = EST. we should not show expireDate
+  if (!validityPeriod || validityPeriod === 0) {
+    return '';
+  }
+
+  const date = new Date();
+  date.setSeconds(validityPeriod);
+
+  return dateFormat(date, 'yyyy年m月d日 HH:MM');
 };

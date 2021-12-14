@@ -3,15 +3,22 @@ import FormErrorMessage from 'src/shared/components/FormErrorMessage';
 import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
 import MainContainer from 'src/shared/components/parts/MainContainer';
 import typo from 'src/shared/styles/typo';
-import { thumbnailUrlWithParams } from 'src/shared/utils';
+import {
+  createExpireDateFromValidityPeriod,
+  createTitleThumbnailUrl,
+} from 'src/shared/utils';
 import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
 
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
-  const now = new Date();
-  const thumbnail = props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta
-    ?.wabiken.content.thumbnails?.standard as string;
+  const thumbnail =
+    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
+      .thumbnails?.standard;
+
+  const validityPeriod =
+    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken
+      .validityPeriod;
 
   return (
     <MainContainer>
@@ -19,11 +26,11 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
       <Title>購入した動画の登録</Title>
       <Text>内容を確認の上、登録をして下さい。</Text>
       <TitleInfo
-        thumbnail={thumbnailUrlWithParams(thumbnail)}
+        thumbnail={createTitleThumbnailUrl(thumbnail)}
         titleName={
           'ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。'
         }
-        expireDate={now}
+        expireDate={createExpireDateFromValidityPeriod(validityPeriod)}
       />
       <ButtonSection>
         <ButtonStandard

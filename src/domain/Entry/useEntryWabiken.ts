@@ -13,7 +13,11 @@ import {
 import { activateWabiken, createUserWabikenMeta } from 'src/graphql/mutations';
 import { getWabikenMeta } from 'src/graphql/queries';
 import { API_VERSION } from 'src/shared/constants';
-import { errorMessages } from 'src/shared/constants/errorMessages';
+import {
+  ErrorCodeActivateWabiken,
+  ErrorCodeGetWabikenMeta,
+  errorMessages,
+} from 'src/shared/constants/errorMessages';
 import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
@@ -108,13 +112,15 @@ const useEntryWabiken = (): UseEntryWabiken => {
       });
 
       if (apiData.errors) {
-        const errorCode = apiData.errors?.[0]?.errorInfo?.code;
+        const errorMessage =
+          errorMessages.getWabikenMeta[
+            apiData.errors?.[0]?.errorInfo?.code as ErrorCodeGetWabikenMeta
+          ] ?? errorMessages.default;
 
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
           pageStatus: PAGE_STATUS.INPUT,
-          errorMessage:
-            errorMessages.getWabikenMeta[errorCode] ?? errorMessages.default,
+          errorMessage,
           formValues: {
             wabiken: values.wabiken,
           },
@@ -147,7 +153,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
     ) {
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
-        errorMessage: '予期せぬエラーが発生しました。もう一度お試しください。',
+        errorMessage: errorMessages.default,
       }));
       return;
     }
@@ -161,12 +167,15 @@ const useEntryWabiken = (): UseEntryWabiken => {
     );
 
     if (activateWabikenApiData.errors) {
-      const errorCode = activateWabikenApiData.errors?.[0]?.errorInfo?.code;
+      const errorMessage =
+        errorMessages.activateWabiken[
+          activateWabikenApiData.errors?.[0]?.errorInfo
+            ?.code as ErrorCodeActivateWabiken
+        ] ?? errorMessages.default;
 
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
-        errorMessage:
-          errorMessages.activateWabiken[errorCode] ?? errorMessages.default,
+        errorMessage,
       }));
       return;
     }
