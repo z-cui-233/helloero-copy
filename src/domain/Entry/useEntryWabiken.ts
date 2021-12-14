@@ -46,7 +46,9 @@ export interface UseEntryWabiken {
 const initialState: UseEntryWabiken['entryWabikenState'] = {
   pageStatus: PAGE_STATUS.INIT,
   errorMessage: '',
-  formValues: { wabiken: '' },
+  formValues: {
+    wabiken: '',
+  },
   getWabikenMetaQuery: null,
 };
 
@@ -86,22 +88,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
     CreateUserWabikenMetaMutationVariables
   >();
 
-  useEffect(() => {
-    const wabiken = router.query.wabiken
-      ? (router.query.wabiken as string)
-      : '';
-
-    setEntryWabikenState((entryWabikenState) => ({
-      ...entryWabikenState,
-      pageStatus: PAGE_STATUS.INPUT,
-      formValues: { wabiken },
-    }));
-  }, [router.query.wabiken]);
-
-  const confirmWabiken = useCallback(
-    async (
-      values: UseEntryWabiken['entryWabikenState']['formValues']
-    ): Promise<void> => {
+  const confirmWabiken: UseEntryWabiken['confirmWabiken'] = useCallback(
+    async (values) => {
       if (getWabikenMetaQueryLoading) {
         return;
       }
@@ -120,9 +108,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
           ...entryWabikenState,
           pageStatus: PAGE_STATUS.INPUT,
           errorMessage,
-          formValues: {
-            wabiken: values.wabiken,
-          },
+          formValues: values,
         }));
         return;
       }
@@ -131,95 +117,108 @@ const useEntryWabiken = (): UseEntryWabiken => {
         ...entryWabikenState,
         pageStatus: PAGE_STATUS.CONFIRM,
         errorMessage: '',
-        formValues: { wabiken: values.wabiken },
+        formValues: values,
         getWabikenMetaQuery: apiData.data ?? null,
       }));
     },
     [getWabikenMetaQueryFetcher, getWabikenMetaQueryLoading]
   );
 
-  const consumeWabiken = useCallback(async (): Promise<void> => {
-    if (activateWabikenLoading || createUserWabikenMetaLoading) {
-      return;
-    }
-
-    const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
-      ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
-
-    if (
-      !getWabikenMeta ||
-      !isCreateUserWabikenMetaInput(getWabikenMeta?.wabiken)
-    ) {
-      setEntryWabikenState((entryWabikenState) => ({
-        ...entryWabikenState,
-        errorMessage: errorMessages.default,
-      }));
-      return;
-    }
-
-    // 1. consume wabiken
-    const activateWabikenApiData = await activateWabikenFetcher(
-      activateWabiken,
-      {
-        id: entryWabikenState.formValues.wabiken,
+  const consumeWabiken: UseEntryWabiken['consumeWabiken'] =
+    useCallback(async () => {
+      if (activateWabikenLoading || createUserWabikenMetaLoading) {
+        return;
       }
-    );
 
-    if (activateWabikenApiData.errors) {
-      const errorMessage =
-        errorMessages.activateWabiken[
-          activateWabikenApiData.errors?.[0]?.errorInfo
-            ?.code as ErrorCodeActivateWabiken
-        ] ?? errorMessages.default;
+      const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
+        ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
 
-      setEntryWabikenState((entryWabikenState) => ({
-        ...entryWabikenState,
-        errorMessage,
-      }));
-      return;
-    }
-
-    // 2. save dynamoDb
-    const createUserWabikenMetaApiData = await createUserWabikenMetaFetcher(
-      createUserWabikenMeta,
-      {
-        input: {
-          id: getWabikenMeta.wabiken.id,
-          version: API_VERSION,
-          notValidBefore: getWabikenMeta.wabiken.notValidBefore,
-          notValidAfter: getWabikenMeta.wabiken.notValidAfter,
-          lockRequired: getWabikenMeta.wabiken.lockRequired,
-          playbackRemaining: getWabikenMeta.wabiken.playbackRemaining,
-          validityPeriod: getWabikenMeta.wabiken.validityPeriod,
-          issuerTrace: getWabikenMeta.wabiken.issuerTrace,
-          createdAt: getWabikenMeta.wabiken.createdAt,
-          content: getWabikenMeta.wabiken.content,
-          activatedAt: activateWabikenApiData.data?.activateWabiken?.wabiken
-            .activatedAt as number,
-        },
+      if (
+        !getWabikenMeta ||
+        !isCreateUserWabikenMetaInput(getWabikenMeta?.wabiken)
+      ) {
+        setEntryWabikenState((entryWabikenState) => ({
+          ...entryWabikenState,
+          errorMessage: errorMessages.default,
+        }));
+        return;
       }
-    );
 
-    if (createUserWabikenMetaApiData.errors) {
+      // 1. consume wabiken
+      const activateWabikenApiData = await activateWabikenFetcher(
+        activateWabiken,
+        {
+          id: entryWabikenState.formValues.wabiken,
+        }
+      );
+
+      if (activateWabikenApiData.errors) {
+        const errorMessage =
+          errorMessages.activateWabiken[
+            activateWabikenApiData.errors?.[0]?.errorInfo
+              ?.code as ErrorCodeActivateWabiken
+          ] ?? errorMessages.default;
+
+        setEntryWabikenState((entryWabikenState) => ({
+          ...entryWabikenState,
+          errorMessage,
+        }));
+        return;
+      }
+
+      // 2. save dynamoDb
+      const createUserWabikenMetaApiData = await createUserWabikenMetaFetcher(
+        createUserWabikenMeta,
+        {
+          input: {
+            id: getWabikenMeta.wabiken.id,
+            version: API_VERSION,
+            notValidBefore: getWabikenMeta.wabiken.notValidBefore,
+            notValidAfter: getWabikenMeta.wabiken.notValidAfter,
+            lockRequired: getWabikenMeta.wabiken.lockRequired,
+            playbackRemaining: getWabikenMeta.wabiken.playbackRemaining,
+            validityPeriod: getWabikenMeta.wabiken.validityPeriod,
+            issuerTrace: getWabikenMeta.wabiken.issuerTrace,
+            createdAt: getWabikenMeta.wabiken.createdAt,
+            content: getWabikenMeta.wabiken.content,
+            activatedAt: activateWabikenApiData.data?.activateWabiken?.wabiken
+              .activatedAt as number,
+          },
+        }
+      );
+
+      if (createUserWabikenMetaApiData.errors) {
+        setEntryWabikenState((entryWabikenState) => ({
+          ...entryWabikenState,
+          errorMessage: errorMessages.default,
+        }));
+        return;
+      }
+
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
-        errorMessage: errorMessages.default,
+        pageStatus: PAGE_STATUS.COMPLETE,
       }));
-      return;
-    }
+    }, [
+      activateWabikenFetcher,
+      activateWabikenLoading,
+      createUserWabikenMetaFetcher,
+      createUserWabikenMetaLoading,
+      entryWabikenState.formValues.wabiken,
+      entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
+    ]);
+
+  useEffect(() => {
+    const wabiken = router.query.wabiken
+      ? (router.query.wabiken as string)
+      : '';
 
     setEntryWabikenState((entryWabikenState) => ({
       ...entryWabikenState,
-      pageStatus: PAGE_STATUS.COMPLETE,
+      pageStatus: PAGE_STATUS.INPUT,
+      formValues: { wabiken },
     }));
-  }, [
-    activateWabikenFetcher,
-    activateWabikenLoading,
-    createUserWabikenMetaFetcher,
-    createUserWabikenMetaLoading,
-    entryWabikenState.formValues.wabiken,
-    entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
-  ]);
+  }, [router.query.wabiken]);
 
   return {
     entryWabikenState,

@@ -12,6 +12,10 @@ import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
 
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
+  const titleName =
+    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
+      .displayName ?? '';
+
   const thumbnail =
     props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
       .thumbnails?.standard;
@@ -27,9 +31,7 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
       <Text>内容を確認の上、登録をして下さい。</Text>
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
-        titleName={
-          'ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。ここはタイトルです。'
-        }
+        titleName={titleName}
         expireDate={createExpireDateFromValidityPeriod(validityPeriod)}
       />
       <ButtonSection>
