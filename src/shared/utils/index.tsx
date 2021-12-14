@@ -15,14 +15,15 @@ export const createTitleThumbnailUrl = (
 };
 
 export const createExpireDateFromValidityPeriod = (
-  validityPeriod: number | undefined
+  validityPeriod: number | undefined,
+  startingDate?: Date
 ): string => {
   // 0sec = EST. we should not show expireDate
   if (!validityPeriod || validityPeriod === 0) {
     return '';
   }
 
-  const date = new Date();
+  const date = startingDate ? startingDate : new Date();
   date.setSeconds(validityPeriod);
 
   return dateFormat(date, 'yyyy年m月d日 HH:MM');

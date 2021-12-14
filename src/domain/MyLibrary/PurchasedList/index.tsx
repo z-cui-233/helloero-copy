@@ -2,6 +2,7 @@ import React from 'react';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import ListController from './ListController';
+import TitleDetail from './TitleDetail';
 import TitleList from './TitleList';
 import usePurchasedList from './usePurchasedList';
 
@@ -12,7 +13,17 @@ const PurchasedList: React.FC = () => {
     <Container>
       <Title>登録済みの動画</Title>
       <ListController {...store} />
-      <TitleList listData={store.listData} />
+      <TitleList
+        listData={store.listData}
+        openTitleDetail={store.openTitleDetail}
+      />
+      {store.purchasedListState.currentUserWabikenMeta && (
+        <TitleDetail
+          userWabikenMeta={store.purchasedListState.currentUserWabikenMeta}
+          isShownDetail={store.purchasedListState.isShownDetail}
+          onClickClose={store.closeTitleDetail}
+        />
+      )}
     </Container>
   );
 };

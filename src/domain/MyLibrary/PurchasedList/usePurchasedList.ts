@@ -2,7 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   ListUserWabikenMetasQuery,
   ListUserWabikenMetasQueryVariables,
+  UserWabikenMeta,
 } from 'src/API';
+import { listUserWabikenMetas } from 'src/graphql/queries';
+import { LIST_PAGE_SIZE } from 'src/shared/constants';
 import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {
@@ -17,90 +20,24 @@ export interface UsePurchasedList {
     query: string;
     displayOrder: DisplayOrder;
     isCardStyle: boolean;
+    isShownDetail: boolean;
+    currentUserWabikenMeta: UserWabikenMeta | null;
   };
-  listData: ListUserWabikenMetasQuery | undefined;
+  listData: UserWabikenMeta[] | undefined;
   updateSearchQuery: (newValue: string) => void;
   updateDisplayOrder: (newValue: DisplayOrder) => void;
   toggleListStyle: () => void;
+  openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
+  closeTitleDetail: () => void;
 }
 
 const initialState: UsePurchasedList['purchasedListState'] = {
   query: '',
   displayOrder: DISPLAY_ORDER.ADD,
   isCardStyle: false,
+  isShownDetail: false,
+  currentUserWabikenMeta: null,
 };
-
-const ___listUserWabikenMetas = /* GraphQL */ `
-  query ListUserWabikenMetas(
-    $filter: ModelUserWabikenMetaFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserWabikenMetas(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        version
-        notValidBefore
-        notValidAfter
-        lockRequired
-        playbackRemaining
-        validityPeriod
-        issuerTrace
-        createdAt
-        content {
-          id
-          key {
-            id
-            type
-            providerId
-          }
-          catchphrase
-          comment
-          duration
-          evaluationPoint
-          maker {
-            code
-            name
-          }
-          series {
-            code
-            name
-          }
-          releaseDate
-          publicPeriod {
-            since
-            until
-          }
-          salePeriod {
-            since
-            until
-          }
-          paymentBadge {
-            code
-            name
-          }
-          thumbnails {
-            packageL
-            packageM
-            packageS
-            standard
-            tsptFhds
-            tsptFwxga
-          }
-          mainEpisodeCode
-        }
-        activatedAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 
 const usePurchasedList = (): UsePurchasedList => {
   const [purchasedListState, setPurchasedListState] =
@@ -110,14 +47,6 @@ const usePurchasedList = (): UsePurchasedList => {
     ListUserWabikenMetasQuery,
     ListUserWabikenMetasQueryVariables
   >();
-
-  useEffect(() => {
-    fetcher(___listUserWabikenMetas, {
-      filter: null,
-      limit: 20,
-      nextToken: null,
-    });
-  }, [fetcher]);
 
   const updateSearchQuery: UsePurchasedList['updateSearchQuery'] = useCallback(
     (newValue) => {
@@ -145,12 +74,42 @@ const usePurchasedList = (): UsePurchasedList => {
       }));
     }, []);
 
+  const openTitleDetail: UsePurchasedList['openTitleDetail'] = useCallback(
+    (data) => {
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        isShownDetail: true,
+        currentUserWabikenMeta: data,
+      }));
+    },
+    []
+  );
+
+  const closeTitleDetail: UsePurchasedList['closeTitleDetail'] =
+    useCallback(() => {
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        isShownDetail: false,
+        currentUserWabikenMeta: null,
+      }));
+    }, []);
+
+  useEffect(() => {
+    fetcher(listUserWabikenMetas, {
+      filter: null,
+      limit: LIST_PAGE_SIZE,
+      nextToken: null,
+    });
+  }, [fetcher]);
+
   return {
     purchasedListState,
-    listData: listData?.data,
+    listData: listData?.data?.listUserWabikenMetas?.items,
     updateSearchQuery,
     updateDisplayOrder,
     toggleListStyle,
+    openTitleDetail,
+    closeTitleDetail,
   };
 };
 
