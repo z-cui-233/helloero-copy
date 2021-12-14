@@ -4,10 +4,13 @@ import ViewListIcon from 'src/shared/assets/icon/view_list.svg';
 import ViewModuleIcon from 'src/shared/assets/icon/view_module.svg';
 import { UsePurchasedList } from '../../usePurchasedList';
 
-const OptionBox: React.FC<UsePurchasedList> = ({ state, toggleListStyle }) => {
+const OptionBox: React.FC<UsePurchasedList> = ({
+  purchasedListState,
+  toggleListStyle,
+}) => {
   return (
     <Container onClick={toggleListStyle} tabIndex={0}>
-      {state.isCardStyle ? <ViewModuleIcon /> : <ViewListIcon />}
+      {purchasedListState.isCardStyle ? <ViewModuleIcon /> : <ViewListIcon />}
     </Container>
   );
 };

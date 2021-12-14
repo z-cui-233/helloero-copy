@@ -1,4 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  ListUserWabikenMetasQuery,
+  ListUserWabikenMetasQueryVariables,
+} from 'src/API';
+import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {
   ADD: 'add',
@@ -8,46 +13,141 @@ export const DISPLAY_ORDER = {
 export type DisplayOrder = typeof DISPLAY_ORDER[keyof typeof DISPLAY_ORDER];
 
 export interface UsePurchasedList {
-  state: {
+  purchasedListState: {
     query: string;
     displayOrder: DisplayOrder;
     isCardStyle: boolean;
   };
+  listData: ListUserWabikenMetasQuery | undefined;
   updateSearchQuery: (newValue: string) => void;
   updateDisplayOrder: (newValue: DisplayOrder) => void;
   toggleListStyle: () => void;
 }
 
+const initialState: UsePurchasedList['purchasedListState'] = {
+  query: '',
+  displayOrder: DISPLAY_ORDER.ADD,
+  isCardStyle: false,
+};
+
+const ___listUserWabikenMetas = /* GraphQL */ `
+  query ListUserWabikenMetas(
+    $filter: ModelUserWabikenMetaFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserWabikenMetas(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        version
+        notValidBefore
+        notValidAfter
+        lockRequired
+        playbackRemaining
+        validityPeriod
+        issuerTrace
+        createdAt
+        content {
+          id
+          key {
+            id
+            type
+            providerId
+          }
+          catchphrase
+          comment
+          duration
+          evaluationPoint
+          maker {
+            code
+            name
+          }
+          series {
+            code
+            name
+          }
+          releaseDate
+          publicPeriod {
+            since
+            until
+          }
+          salePeriod {
+            since
+            until
+          }
+          paymentBadge {
+            code
+            name
+          }
+          thumbnails {
+            packageL
+            packageM
+            packageS
+            standard
+            tsptFhds
+            tsptFwxga
+          }
+          mainEpisodeCode
+        }
+        activatedAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+
 const usePurchasedList = (): UsePurchasedList => {
-  const [state, setState] = useState<UsePurchasedList['state']>({
-    query: '',
-    displayOrder: DISPLAY_ORDER.ADD,
-    isCardStyle: false,
-  });
+  const [purchasedListState, setPurchasedListState] =
+    useState<UsePurchasedList['purchasedListState']>(initialState);
 
-  const updateSearchQuery = (newValue: string): void => {
-    setState((state) => ({
-      ...state,
-      query: newValue,
-    }));
-  };
+  const { fetcher, data: listData } = useAmplifyFetcher<
+    ListUserWabikenMetasQuery,
+    ListUserWabikenMetasQueryVariables
+  >();
 
-  const updateDisplayOrder = (newValue: DisplayOrder): void => {
-    setState((state) => ({
-      ...state,
-      displayOrder: newValue,
-    }));
-  };
+  useEffect(() => {
+    fetcher(___listUserWabikenMetas, {
+      filter: null,
+      limit: 20,
+      nextToken: null,
+    });
+  }, [fetcher]);
 
-  const toggleListStyle = (): void => {
-    setState((state) => ({
-      ...state,
-      isCardStyle: !state.isCardStyle,
-    }));
-  };
+  const updateSearchQuery: UsePurchasedList['updateSearchQuery'] = useCallback(
+    (newValue) => {
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        query: newValue,
+      }));
+    },
+    []
+  );
+
+  const updateDisplayOrder: UsePurchasedList['updateDisplayOrder'] =
+    useCallback((newValue) => {
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        displayOrder: newValue,
+      }));
+    }, []);
+
+  const toggleListStyle: UsePurchasedList['toggleListStyle'] =
+    useCallback(() => {
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        isCardStyle: !purchasedListState.isCardStyle,
+      }));
+    }, []);
 
   return {
-    state,
+    purchasedListState,
+    listData: listData?.data,
     updateSearchQuery,
     updateDisplayOrder,
     toggleListStyle,

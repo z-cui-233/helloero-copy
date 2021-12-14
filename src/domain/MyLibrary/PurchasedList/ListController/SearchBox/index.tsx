@@ -5,7 +5,7 @@ import Icon from 'src/shared/assets/icon/search.svg';
 import { UsePurchasedList } from '../../usePurchasedList';
 
 const SearchBox: React.FC<UsePurchasedList> = ({
-  state,
+  purchasedListState,
   updateSearchQuery,
 }) => {
   return (
@@ -13,7 +13,7 @@ const SearchBox: React.FC<UsePurchasedList> = ({
       <StyledIcon />
       <Input
         type="text"
-        value={state.query}
+        value={purchasedListState.query}
         placeholder="タイトル名で検索"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           updateSearchQuery(e.target.value);

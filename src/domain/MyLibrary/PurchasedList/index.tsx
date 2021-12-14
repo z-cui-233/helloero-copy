@@ -12,7 +12,7 @@ const PurchasedList: React.FC = () => {
     <Container>
       <Title>登録済みの動画</Title>
       <ListController {...store} />
-      <TitleList />
+      <TitleList listData={store.listData} />
     </Container>
   );
 };

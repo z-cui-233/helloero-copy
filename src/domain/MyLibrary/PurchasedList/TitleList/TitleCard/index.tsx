@@ -7,12 +7,18 @@ import DetailButton from './DetailButton';
 import PlayButton from './PlayButton';
 
 interface Props {
+  thumbnailUrl: string;
   wabiken: string;
   goToPlay: UseTitleList['goToPlay'];
   openTitleDetail: UseTitleList['openTitleDetail'];
 }
 
-const TitleCard: React.FC<Props> = ({ wabiken, goToPlay, openTitleDetail }) => {
+const TitleCard: React.FC<Props> = ({
+  thumbnailUrl,
+  wabiken,
+  goToPlay,
+  openTitleDetail,
+}) => {
   const handleClickOpenDetail = (): void => {
     openTitleDetail(wabiken);
   };
@@ -23,7 +29,7 @@ const TitleCard: React.FC<Props> = ({ wabiken, goToPlay, openTitleDetail }) => {
 
   return (
     <Container>
-      <TitleThumbnail src="https://metac.nxtv.jp/img/bookimg/pubridge/00002017/BT000020170201501501.jpg" />
+      <TitleThumbnail src={thumbnailUrl} />
       <HoverControl>
         <PlayButton onClick={handleClickPlay} />
         <DetailButton onClick={handleClickOpenDetail} />
@@ -72,4 +78,4 @@ const TapControl = styled.div`
   }
 `;
 
-export default TitleCard;
+export default React.memo(TitleCard);

@@ -55,7 +55,6 @@ const isCreateUserWabikenMetaInput = (
 ): input is CreateUserWabikenMetaInput => {
   return !!(
     input &&
-    input.activatedAt &&
     input.content &&
     input.content.key &&
     input.content.thumbnails
