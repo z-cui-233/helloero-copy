@@ -1,38 +1,30 @@
 import React from 'react';
-import { ListUserWabikenMetasQuery } from 'src/API';
+import { UserWabikenMeta } from 'src/API';
 import device from 'src/shared/styles/device';
-import { createTitleThumbnailUrl } from 'src/shared/utils';
 import styled from 'styled-components';
+import { UsePurchasedList } from '../usePurchasedList';
 import TitleCard from './TitleCard';
-import TitleDetail from './TitleDetail';
-import useTitleDetail from './useTitleList';
 
 interface Props {
-  listData: ListUserWabikenMetasQuery | undefined;
+  listData: UserWabikenMeta[] | undefined;
+  openTitleDetail: UsePurchasedList['openTitleDetail'];
 }
 
-const TitleList: React.FC<Props> = ({ listData }) => {
-  const store = useTitleDetail();
-
+const TitleList: React.FC<Props> = ({ listData, openTitleDetail }) => {
   return (
     <React.Fragment>
       <Container>
         <List>
-          {listData?.listUserWabikenMetas?.items.map((data) => (
-            <div key={data.id}>
+          {listData?.map((userWabikenMeta) => (
+            <div key={userWabikenMeta.id}>
               <TitleCard
-                thumbnailUrl={createTitleThumbnailUrl(
-                  data.content.thumbnails.standard
-                )}
-                wabiken={data.id}
-                goToPlay={store.goToPlay}
-                openTitleDetail={store.openTitleDetail}
+                userWabikenMeta={userWabikenMeta}
+                openTitleDetail={openTitleDetail}
               />
             </div>
           ))}
         </List>
       </Container>
-      <TitleDetail {...store} />
     </React.Fragment>
   );
 };

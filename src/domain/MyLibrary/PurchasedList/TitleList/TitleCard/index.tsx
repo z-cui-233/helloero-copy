@@ -1,37 +1,39 @@
+import { useRouter } from 'next/router';
 import React from 'react';
+import { UserWabikenMeta } from 'src/API';
 import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
 import device from 'src/shared/styles/device';
+import { createTitleThumbnailUrl } from 'src/shared/utils';
 import styled from 'styled-components';
-import { UseTitleList } from '../useTitleList';
+import { UsePurchasedList } from '../../usePurchasedList';
 import DetailButton from './DetailButton';
 import PlayButton from './PlayButton';
 
 interface Props {
-  thumbnailUrl: string;
-  wabiken: string;
-  goToPlay: UseTitleList['goToPlay'];
-  openTitleDetail: UseTitleList['openTitleDetail'];
+  userWabikenMeta: UserWabikenMeta;
+  openTitleDetail: UsePurchasedList['openTitleDetail'];
 }
 
-const TitleCard: React.FC<Props> = ({
-  thumbnailUrl,
-  wabiken,
-  goToPlay,
-  openTitleDetail,
-}) => {
-  const handleClickOpenDetail = (): void => {
-    openTitleDetail(wabiken);
-  };
+const TitleCard: React.FC<Props> = ({ openTitleDetail, userWabikenMeta }) => {
+  const router = useRouter();
 
-  const handleClickPlay = (): void => {
-    goToPlay(wabiken);
+  const handleClickOpenDetail = (): void => {
+    openTitleDetail(userWabikenMeta);
   };
 
   return (
     <Container>
-      <TitleThumbnail src={thumbnailUrl} />
+      <TitleThumbnail
+        src={createTitleThumbnailUrl(
+          userWabikenMeta.content.thumbnails.standard
+        )}
+      />
       <HoverControl>
-        <PlayButton onClick={handleClickPlay} />
+        <PlayButton
+          onClick={() => {
+            router.push(`/play?wabiken=${userWabikenMeta.id}`);
+          }}
+        />
         <DetailButton onClick={handleClickOpenDetail} />
       </HoverControl>
       <TapControl onClick={handleClickOpenDetail} />
