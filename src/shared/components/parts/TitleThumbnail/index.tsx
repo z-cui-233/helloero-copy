@@ -8,10 +8,7 @@ interface Props {
 const TitleThumbnail: React.FC<Props> = ({ src }) => {
   return (
     <Container>
-      <Image
-        src={`${src}?output-format=jpg&output-quality=60&resize=300:*&letterbox=5:7&bgblur=50,0.5`}
-        alt=""
-      />
+      <Image src={src} alt="" />
     </Container>
   );
 };
