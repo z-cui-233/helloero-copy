@@ -99,7 +99,11 @@ const usePurchasedList = (): UsePurchasedList => {
   useEffect(() => {
     (async () => {
       await fetcher(listUserWabikenMetas, {
-        filter: null,
+        filter: {
+          notValidAfter: {
+            gt: Math.round(new Date().getTime() / 1000),
+          },
+        },
         limit: LIST_PAGE_SIZE,
         nextToken: null,
       });
