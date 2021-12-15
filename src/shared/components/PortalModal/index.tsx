@@ -42,11 +42,9 @@ const Container = styled.div`
   right: 0;
   bottom: 0;
   background-color: ${({ theme }) => theme.foreground.secondary};
-  backdrop-filter: blur(0.25rem);
   z-index: 2000;
   animation: ${fadeIn} 0.3s ease;
   overflow: scroll;
-  padding: 0 1rem;
 
   display: flex;
   justify-content: center;
@@ -58,6 +56,7 @@ const ModalContainer = styled.div`
   max-width: 800px;
   position: relative;
   overflow: hidden;
+  width: calc(100% - 2rem);
 `;
 
 const CloseButton = styled.div`
