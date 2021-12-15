@@ -57,7 +57,7 @@ const TitleDetail: React.FC<Props> = ({
                 userWabikenMeta.notValidAfter
               )}
               onClick={() => {
-                router.push(`/play?wabiken=${userWabikenMeta.id}`);
+                router.push(`/play/${userWabikenMeta.id}`);
               }}
             />
           </MetaContainer>
