@@ -6,23 +6,35 @@ import { UsePurchasedList } from '../usePurchasedList';
 import TitleCard from './TitleCard';
 
 interface Props {
+  isInitialized: boolean;
   listData: UserWabikenMeta[] | undefined;
   openTitleDetail: UsePurchasedList['openTitleDetail'];
 }
 
-const TitleList: React.FC<Props> = ({ listData, openTitleDetail }) => {
+const TitleList: React.FC<Props> = ({
+  isInitialized,
+  listData,
+  openTitleDetail,
+}) => {
   return (
     <React.Fragment>
       <Container>
         <List>
-          {listData?.map((userWabikenMeta) => (
-            <div key={userWabikenMeta.id}>
-              <TitleCard
-                userWabikenMeta={userWabikenMeta}
-                openTitleDetail={openTitleDetail}
-              />
-            </div>
-          ))}
+          {!isInitialized &&
+            [...Array(8)].map((_, i) => (
+              <div key={i}>
+                <DummyCard />
+              </div>
+            ))}
+          {isInitialized &&
+            listData?.map((userWabikenMeta) => (
+              <div key={userWabikenMeta.id}>
+                <TitleCard
+                  userWabikenMeta={userWabikenMeta}
+                  openTitleDetail={openTitleDetail}
+                />
+              </div>
+            ))}
         </List>
       </Container>
     </React.Fragment>
@@ -41,6 +53,12 @@ const List = styled.div`
   @media ${device.mobile} {
     grid-template-columns: repeat(2, 1fr);
   }
+`;
+
+const DummyCard = styled.div`
+  background-color: ${({ theme }) => theme.background.tertiary};
+  aspect-ratio: 5 / 7;
+  width: 100%;
 `;
 
 export default TitleList;

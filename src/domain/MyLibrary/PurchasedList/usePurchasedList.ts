@@ -17,6 +17,7 @@ export type DisplayOrder = typeof DISPLAY_ORDER[keyof typeof DISPLAY_ORDER];
 
 export interface UsePurchasedList {
   purchasedListState: {
+    isInitialized: boolean;
     query: string;
     displayOrder: DisplayOrder;
     isCardStyle: boolean;
@@ -32,6 +33,7 @@ export interface UsePurchasedList {
 }
 
 const initialState: UsePurchasedList['purchasedListState'] = {
+  isInitialized: false,
   query: '',
   displayOrder: DISPLAY_ORDER.ADD,
   isCardStyle: false,
@@ -95,11 +97,18 @@ const usePurchasedList = (): UsePurchasedList => {
     }, []);
 
   useEffect(() => {
-    fetcher(listUserWabikenMetas, {
-      filter: null,
-      limit: LIST_PAGE_SIZE,
-      nextToken: null,
-    });
+    (async () => {
+      await fetcher(listUserWabikenMetas, {
+        filter: null,
+        limit: LIST_PAGE_SIZE,
+        nextToken: null,
+      });
+
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        isInitialized: true,
+      }));
+    })();
   }, [fetcher]);
 
   return {

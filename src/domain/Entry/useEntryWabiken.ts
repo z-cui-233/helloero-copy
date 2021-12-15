@@ -174,7 +174,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
             id: getWabikenMeta.wabiken.id,
             version: API_VERSION,
             notValidBefore: getWabikenMeta.wabiken.notValidBefore,
-            notValidAfter: getWabikenMeta.wabiken.notValidAfter,
+            notValidAfter: activateWabikenApiData.data?.activateWabiken?.wabiken
+              .notValidAfter as number,
             lockRequired: getWabikenMeta.wabiken.lockRequired,
             playbackRemaining: getWabikenMeta.wabiken.playbackRemaining,
             validityPeriod: getWabikenMeta.wabiken.validityPeriod,

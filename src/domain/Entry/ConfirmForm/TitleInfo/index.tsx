@@ -7,10 +7,14 @@ import Thumbnail from './Thumbnail';
 interface Props {
   thumbnail: string;
   titleName: string;
-  expireDate: string;
+  displayExpireDate: string;
 }
 
-const TitleInfo: React.FC<Props> = ({ thumbnail, titleName, expireDate }) => {
+const TitleInfo: React.FC<Props> = ({
+  thumbnail,
+  titleName,
+  displayExpireDate,
+}) => {
   return (
     <Container>
       <div>
@@ -21,7 +25,7 @@ const TitleInfo: React.FC<Props> = ({ thumbnail, titleName, expireDate }) => {
       <MetaContainer>
         <div>
           <TitleName>{titleName}</TitleName>
-          {expireDate && <ExpireDate>{expireDate}まで視聴可能</ExpireDate>}
+          <ExpireDate>{displayExpireDate}</ExpireDate>
         </div>
       </MetaContainer>
     </Container>

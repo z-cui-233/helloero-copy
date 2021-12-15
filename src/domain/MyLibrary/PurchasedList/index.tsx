@@ -14,16 +14,15 @@ const PurchasedList: React.FC = () => {
       <Title>登録済みの動画</Title>
       <ListController {...store} />
       <TitleList
+        isInitialized={store.purchasedListState.isInitialized}
         listData={store.listData}
         openTitleDetail={store.openTitleDetail}
       />
-      {store.purchasedListState.currentUserWabikenMeta && (
-        <TitleDetail
-          userWabikenMeta={store.purchasedListState.currentUserWabikenMeta}
-          isShownDetail={store.purchasedListState.isShownDetail}
-          onClickClose={store.closeTitleDetail}
-        />
-      )}
+      <TitleDetail
+        userWabikenMeta={store.purchasedListState.currentUserWabikenMeta}
+        isShownDetail={store.purchasedListState.isShownDetail}
+        onClickClose={store.closeTitleDetail}
+      />
     </Container>
   );
 };
