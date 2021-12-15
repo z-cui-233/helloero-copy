@@ -68,13 +68,11 @@ export const getPlayInfo = /* GraphQL */ `
   query GetPlayInfo(
     $wabikenId: String!
     $deviceCode: String!
-    $lock: String!
     $deviceId: String!
   ) {
     getPlayInfo(
       wabikenId: $wabikenId
       deviceCode: $deviceCode
-      lock: $lock
       deviceId: $deviceId
     ) {
       playInfo {

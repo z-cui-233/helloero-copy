@@ -766,7 +766,6 @@ export type GetWabikenMetaQuery = {
 export type GetPlayInfoQueryVariables = {
   wabikenId: string;
   deviceCode: string;
-  lock: string;
   deviceId: string;
 };
 

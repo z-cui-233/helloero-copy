@@ -10,7 +10,8 @@ const {
 } = require('./converters/index.js');
 
 const getPlayInfo = async (event) => {
-  const { wabikenId, deviceCode, lock, deviceId } = event.arguments;
+  const { wabikenId, deviceCode, deviceId } = event.arguments;
+  const lock = event.identity.username;
   const response = await axios.get(
     `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
   );

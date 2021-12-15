@@ -193,7 +193,6 @@ type Query {
   getPlayInfo(
     wabikenId: String!
     deviceCode: String!
-    lock: String!
     deviceId: String!
   ): PlayInfoResponse @function(name: "helloeroLambdaResolver")
 }
