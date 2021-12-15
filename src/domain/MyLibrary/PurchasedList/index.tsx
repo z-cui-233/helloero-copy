@@ -15,7 +15,7 @@ const PurchasedList: React.FC = () => {
       <ListController {...store} />
       <TitleList
         isInitialized={store.purchasedListState.isInitialized}
-        listData={store.listData}
+        listData={store.purchasedListState.listData}
         openTitleDetail={store.openTitleDetail}
       />
       <TitleDetail

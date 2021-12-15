@@ -23,8 +23,8 @@ export interface UsePurchasedList {
     isCardStyle: boolean;
     isShownDetail: boolean;
     currentUserWabikenMeta: UserWabikenMeta | null;
+    listData: UserWabikenMeta[] | undefined;
   };
-  listData: UserWabikenMeta[] | undefined;
   updateSearchQuery: (newValue: string) => void;
   updateDisplayOrder: (newValue: DisplayOrder) => void;
   toggleListStyle: () => void;
@@ -39,13 +39,14 @@ const initialState: UsePurchasedList['purchasedListState'] = {
   isCardStyle: false,
   isShownDetail: false,
   currentUserWabikenMeta: null,
+  listData: undefined,
 };
 
 const usePurchasedList = (): UsePurchasedList => {
   const [purchasedListState, setPurchasedListState] =
     useState<UsePurchasedList['purchasedListState']>(initialState);
 
-  const { fetcher, data: listData } = useAmplifyFetcher<
+  const { fetcher } = useAmplifyFetcher<
     ListUserWabikenMetasQuery,
     ListUserWabikenMetasQueryVariables
   >();
@@ -98,7 +99,7 @@ const usePurchasedList = (): UsePurchasedList => {
 
   useEffect(() => {
     (async () => {
-      await fetcher(listUserWabikenMetas, {
+      const apiData = await fetcher(listUserWabikenMetas, {
         filter: {
           notValidAfter: {
             gt: Math.round(new Date().getTime() / 1000),
@@ -110,6 +111,7 @@ const usePurchasedList = (): UsePurchasedList => {
 
       setPurchasedListState((purchasedListState) => ({
         ...purchasedListState,
+        listData: apiData?.data?.listUserWabikenMetas?.items,
         isInitialized: true,
       }));
     })();
@@ -117,7 +119,6 @@ const usePurchasedList = (): UsePurchasedList => {
 
   return {
     purchasedListState,
-    listData: listData?.data?.listUserWabikenMetas?.items,
     updateSearchQuery,
     updateDisplayOrder,
     toggleListStyle,

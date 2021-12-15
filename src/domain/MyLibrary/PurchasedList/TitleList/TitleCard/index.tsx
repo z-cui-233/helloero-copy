@@ -31,7 +31,7 @@ const TitleCard: React.FC<Props> = ({ openTitleDetail, userWabikenMeta }) => {
       <HoverControl>
         <PlayButton
           onClick={() => {
-            router.push(`/play?wabiken=${userWabikenMeta.id}`);
+            router.push(`/play/${userWabikenMeta.id}`);
           }}
         />
         <DetailButton onClick={handleClickOpenDetail} />
