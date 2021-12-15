@@ -12,10 +12,12 @@ module.exports = {
             svgoConfig: {
               plugins: [
                 {
-                  cleanupIDs: true,
+                  name: 'cleanupIDs',
+                  active: true,
                 },
                 {
-                  removeViewBox: false,
+                  name: 'removeViewBox',
+                  active: false,
                 },
               ],
             },

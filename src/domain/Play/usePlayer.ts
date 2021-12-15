@@ -17,6 +17,7 @@ export interface UsePlayer {
   playerState: {
     pageStatus: PageStatus;
     wabiken: string;
+    deviceId: string;
     playInfo: GraphQLResultEx<GetPlayInfoQuery> | undefined;
   };
 }
@@ -24,6 +25,7 @@ export interface UsePlayer {
 const initialState: UsePlayer['playerState'] = {
   pageStatus: PAGE_STATUS.INIT,
   wabiken: '',
+  deviceId: '',
   playInfo: undefined,
 };
 
@@ -44,16 +46,19 @@ const usePlayer = (): UsePlayer => {
         ? (router.query.wabiken as string)
         : '';
 
+      const deviceId = encodeURIComponent(window.navigator.userAgent);
+
       const apiData = await fetcher(getPlayInfo, {
         wabikenId: wabiken,
         deviceCode: DEVICE_CODE,
-        deviceId: encodeURIComponent(window.navigator.userAgent),
+        deviceId,
       });
 
       setPlayerState((playerState) => ({
         ...playerState,
         pageStatus: !apiData.errors ? PAGE_STATUS.PLAY : PAGE_STATUS.ERROR,
         wabiken,
+        deviceId,
         playInfo: apiData,
       }));
     })();
