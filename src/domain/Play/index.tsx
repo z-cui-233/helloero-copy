@@ -1,26 +1,22 @@
 import React from 'react';
 import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
-import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
 import NoticeMessage from './NoticeMessage';
+import PlayerContainer from './PlayerContainer';
 import usePlayer, { PAGE_STATUS } from './usePlayer';
 
 const Play: React.FC = () => {
   const store = usePlayer();
 
-  console.log(store);
-
   return (
     <Container>
-      {store.playerState.pageStatus === PAGE_STATUS.PLAY && (
-        <DummyText>
-          <pre>
-            <code>
-              {JSON.stringify(store.playerState.playInfo, null, '\t')}
-            </code>
-          </pre>
-        </DummyText>
-      )}
+      {store.playerState.pageStatus === PAGE_STATUS.PLAY &&
+        !!store.playerState.playInfo?.data?.getPlayInfo?.playInfo && (
+          <PlayerContainer
+            deviceId={store.playerState.deviceId}
+            playInfo={store.playerState.playInfo.data.getPlayInfo.playInfo}
+          />
+        )}
       {store.playerState.pageStatus === PAGE_STATUS.ERROR && (
         <NoticeMessage playInfo={store.playerState.playInfo} />
       )}
@@ -34,13 +30,6 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   position: relative;
-`;
-
-const DummyText = styled.div`
-  ${typo.Body};
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
 `;
 
 export default withAmplifyAuth(Play);
