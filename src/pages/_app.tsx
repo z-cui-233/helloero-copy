@@ -14,6 +14,8 @@ import { vocabularies } from 'src/shared/assets/i18n/amplify/vocabularies';
 import 'src/shared/assets/css/amplify.css';
 import 'src/shared/assets/css/prettify.css';
 import { cookieParams } from 'src/shared/constants/cookies';
+import { IntlProvider } from 'react-intl';
+import { i18n_messages } from 'src/shared/constants/babystar';
 
 Amplify.configure({
   ...config,
@@ -24,15 +26,17 @@ I18n.setLanguage('ja');
 
 const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <GlobalHead />
-      <LoginStateContextProvider>
-        <Component {...pageProps} />
-        <div id="modal" />
-      </LoginStateContextProvider>
-      <GlobalScripts />
-    </ThemeProvider>
+    <IntlProvider locale="ja-JP" messages={i18n_messages}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <GlobalHead />
+        <LoginStateContextProvider>
+          <Component {...pageProps} />
+          <div id="modal" />
+        </LoginStateContextProvider>
+        <GlobalScripts />
+      </ThemeProvider>
+    </IntlProvider>
   );
 };
 
