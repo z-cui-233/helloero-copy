@@ -17,7 +17,10 @@ const Landing: React.FC = () => {
       <Grid>
         <div>
           <Artwork>
-            <Image src="/images/dummy/600x600.png" alt="HELLOERO(ハローエロ)" />
+            <Image
+              src={`/images/top/cover${Math.floor(Math.random() * 3)}.jpg`}
+              alt="HELLOERO(ハローエロ)"
+            />
           </Artwork>
         </div>
         <LeadTexts>
