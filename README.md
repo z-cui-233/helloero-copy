@@ -1,6 +1,8 @@
 # HELLOERO（ハローエロ）
 
-## Prepare config file for local development
+## Preparation for local development
+
+### STEP1: add config file
 
 `/src/aws-exports.js`
 
@@ -31,17 +33,11 @@ const awsmobile = {
 export default awsmobile;
 ```
 
-## Docker Local Development Start
+### STEP2: add ENV
 
-### Start
+add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 
-```
-npm install
-docker compose down
-docker compose up --build
-```
-
-### Add hosts
+### STEP3: Add hosts
 
 ```
 127.0.0.1  helloero.local.h2u.jp
@@ -55,6 +51,16 @@ if you can not access local url, you should clear your dns cache.
 sudo dscacheutil -flushcache
 ```
 
+## Docker Local Development Start
+
+### Start
+
+```
+npm install
+docker compose down
+docker compose up --build
+```
+
 ## Setting amplify backend
 
 for only front-end development, please use `dev` backend by setting amplify backend env as follows:
@@ -66,13 +72,15 @@ if updating backend, can use a separate feature-backend env or can directly use 
 
 you can get wabiken for IT-env by this command.
 
+https://wiki.unext-info.jp/pages/viewpage.action?pageId=110732068
+
 ```
 curl -X POST -H "Content-Type: application/json" \
     -d '{
-    "market": "unext",
+    "market": "amazon",
     "content": {
         "key": {
-            "id": "AID0198621",
+            "id": "AID0207894",
             "type": "vod",
             "provider_id": "amazonppv"
         }
