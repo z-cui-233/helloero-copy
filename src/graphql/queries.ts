@@ -85,6 +85,10 @@ export const getPlayInfo = /* GraphQL */ `
             type
             cdns {
               sceneSearchUrl
+              extra {
+                width
+                height
+              }
             }
           }
           playables {
@@ -93,6 +97,11 @@ export const getPlayInfo = /* GraphQL */ `
               cdnId
               weight
               playlistUrl
+              licenseUrlList {
+                drmType
+                version
+                endpoint
+              }
             }
           }
           isem {

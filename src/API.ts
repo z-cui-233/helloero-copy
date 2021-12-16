@@ -786,6 +786,11 @@ export type GetPlayInfoQuery = {
           cdns: Array<{
             __typename: 'SceneSearchCdn';
             sceneSearchUrl: string;
+            extra: {
+              __typename: 'SceneSearchSize';
+              width: number;
+              height: number;
+            };
           }>;
         }>;
         playables: Array<{
@@ -796,6 +801,12 @@ export type GetPlayInfoQuery = {
             cdnId?: string | null;
             weight: number;
             playlistUrl: string;
+            licenseUrlList: Array<{
+              __typename: 'LicenseUrl';
+              drmType: string;
+              version: string;
+              endpoint: string;
+            }>;
           }>;
         }>;
         isem: {
