@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import { GetPlayInfoQuery, GetPlayInfoQueryVariables } from 'src/API';
 import { getPlayInfo } from 'src/graphql/queries';
 import { DEVICE_CODE } from 'src/shared/constants';
+import { cookieParams } from 'src/shared/constants/cookies';
 import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
 import { GraphQLResultEx } from 'src/types/amplify';
 
@@ -46,8 +48,8 @@ const usePlayer = (): UsePlayer => {
         ? (router.query.wabiken as string)
         : '';
 
-      const deviceId = encodeURIComponent(window.navigator.userAgent);
-
+      const cookies = parseCookies();
+      const deviceId = encodeURIComponent(cookies[cookieParams.uuid.name]);
       const apiData = await fetcher(getPlayInfo, {
         wabikenId: wabiken,
         deviceCode: DEVICE_CODE,
