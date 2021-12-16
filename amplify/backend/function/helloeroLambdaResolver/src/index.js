@@ -9,11 +9,21 @@ const {
   mapPlayInfo,
 } = require('./converters/index.js');
 
+const getUserAgentHeader = (event) =>
+  event.request.headers['user-agent']
+    ? {
+        'user-agent': event.request.headers['user-agent'],
+      }
+    : {};
+
 const getPlayInfo = async (event) => {
   const { wabikenId, deviceCode, deviceId } = event.arguments;
   const lock = event.identity.username;
   const response = await axios.get(
-    `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`
+    `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`,
+    {
+      headers: { ...getUserAgentHeader(event) },
+    }
   );
 
   if (response.data.error) {
@@ -32,6 +42,7 @@ const activateWabiken = async (event) => {
   const { id } = event.arguments;
   const response = await axios.put(`/v2/wabiken/${id}`, {
     locked_to: event.identity.username,
+    headers: { ...getUserAgentHeader(event) },
   });
 
   if (response.data.error) {
@@ -44,7 +55,9 @@ const activateWabiken = async (event) => {
 const getWabikenMeta = async (event) => {
   const { id } = event.arguments;
 
-  const response = await axios.get(`/v2/wabiken/${id}`);
+  const response = await axios.get(`/v2/wabiken/${id}`, {
+    headers: { ...getUserAgentHeader(event) },
+  });
 
   if (response.data.error) {
     return mapWabitErrorResponse(response);
