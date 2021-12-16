@@ -1,34 +1,26 @@
 import Link from 'next/link';
 import React from 'react';
-import {
-  ErrorCodeGetPlayInfo,
-  errorMessages,
-} from 'src/shared/constants/errorMessages';
+import { errorMessages } from 'src/shared/constants/errorMessages';
 import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
-import { UsePlayer } from '../usePlayer';
 
 interface Props {
-  playInfo: UsePlayer['playerState']['playInfo'];
+  title: string;
+  text: string;
+  errorCode: string;
 }
 
-const NoticeMessage: React.FC<Props> = ({ playInfo }) => {
-  const errorCode = playInfo?.errors?.[0]?.errorInfo
-    ?.code as ErrorCodeGetPlayInfo;
-
-  const errorMessage =
-    errorMessages.getPlayInfo[errorCode] ?? errorMessages.default;
-
+const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
   return (
     <Container>
       <BodyContent>
-        <Title>再生できません</Title>
+        <Title>{title ? title : '再生できません'}</Title>
         <Text>
-          {errorMessage}
-          <br />({errorCode})
+          {text ? text : errorMessages.default}
+          {errorCode && <div>({errorCode})</div>}
         </Text>
         <LinkContainer>
-          <Link href={'/'} passHref>
+          <Link href="/" passHref>
             <StyledLink>ホーム</StyledLink>
           </Link>
         </LinkContainer>

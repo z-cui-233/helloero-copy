@@ -1,12 +1,16 @@
+import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useEffect, useState } from 'react';
-import { GetPlayInfoQuery, GetPlayInfoQueryVariables } from 'src/API';
+import { useCallback, useEffect, useState } from 'react';
+import { GetPlayInfoQuery, GetPlayInfoQueryVariables, PlayInfo } from 'src/API';
 import { getPlayInfo } from 'src/graphql/queries';
 import { DEVICE_CODE } from 'src/shared/constants';
 import { cookieParams } from 'src/shared/constants/cookies';
+import {
+  ErrorCodeGetPlayInfo,
+  errorMessages,
+} from 'src/shared/constants/errorMessages';
 import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
-import { GraphQLResultEx } from 'src/types/amplify';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -20,7 +24,12 @@ export interface UsePlayer {
     pageStatus: PageStatus;
     wabiken: string;
     deviceId: string;
-    playInfo: GraphQLResultEx<GetPlayInfoQuery> | undefined;
+    playerProps: PlayerProps | undefined;
+    errorMessage: {
+      title: string;
+      text: string;
+      errorCode: string;
+    };
   };
 }
 
@@ -28,7 +37,12 @@ const initialState: UsePlayer['playerState'] = {
   pageStatus: PAGE_STATUS.INIT,
   wabiken: '',
   deviceId: '',
-  playInfo: undefined,
+  playerProps: undefined,
+  errorMessage: {
+    title: '',
+    text: '',
+    errorCode: '',
+  },
 };
 
 const usePlayer = (): UsePlayer => {
@@ -41,6 +55,84 @@ const usePlayer = (): UsePlayer => {
     GetPlayInfoQuery,
     GetPlayInfoQueryVariables
   >();
+
+  const creatPlayerPropsFromPlayInfo = useCallback(
+    (playInfo: PlayInfo, deviceId: string): PlayerProps => {
+      return {
+        playbackAuthorization: 'playtoken',
+        authorizationToken: playInfo.endpoints[0].extra.playToken,
+        endPoints: playInfo.endpoints.map((endpointData) => {
+          return {
+            displayName: 'this is displayName',
+            playables: endpointData.playables.reduce((result, current) => {
+              if (
+                current.type === 'dash' ||
+                current.type === 'hls-cmaf' ||
+                current.type === 'hls-fp' ||
+                current.type === 'hls-s-aes'
+              ) {
+                return {
+                  [current.type]: current.cdns.map((cdnData) => {
+                    return {
+                      id: cdnData.cdnId,
+                      weight: cdnData.weight,
+                      licenseUrls:
+                        cdnData.licenseUrlList?.reduce(
+                          (result2, current2) => {
+                            result2[current2.drmType] = current2.endpoint;
+                            return result2;
+                          },
+                          {} as {
+                            [key: string]: string;
+                          }
+                        ) ?? [],
+                      manifestUrl: cdnData.playlistUrl,
+                    };
+                  }),
+                };
+              }
+              return result;
+            }, {}),
+            sceneSearchLists:
+              endpointData.sceneSearchList
+                .find((sceneSearchData) => sceneSearchData.type === 'IMS_M')
+                ?.cdns.map((sceneSearchData) => {
+                  return {
+                    sceneSearchUrl: sceneSearchData.sceneSearchUrl,
+                  };
+                }) ?? [],
+          };
+        }),
+        sessionArgs: {
+          type: 'isem',
+          isemToken: playInfo.endpoints[0].isem.isemToken,
+          baseUrl: playInfo.endpoints[0].isem.endpoint,
+          deviceId,
+          overwrite: true,
+        },
+        isRealtime: false,
+        onBackClick: () => {
+          router.back();
+        },
+        onError: (error: PlayerError) => {
+          const title = error.customTitle ?? '';
+          const text = error.customMessage ?? '';
+          const errorCode = error.customCode ? String(error.customCode) : '';
+
+          setPlayerState((playerState) => ({
+            ...playerState,
+            pageStatus: PAGE_STATUS.ERROR,
+            errorMessage: {
+              title,
+              text,
+              errorCode,
+            },
+          }));
+        },
+      };
+    },
+    [router]
+  );
 
   useEffect(() => {
     (async () => {
@@ -56,15 +148,41 @@ const usePlayer = (): UsePlayer => {
         deviceId,
       });
 
+      if (apiData.errors) {
+        const errorCode = apiData.errors?.[0]?.errorInfo
+          ?.code as ErrorCodeGetPlayInfo;
+
+        const errorMessage =
+          errorMessages.getPlayInfo[errorCode] ?? errorMessages.default;
+
+        setPlayerState((playerState) => ({
+          ...playerState,
+          pageStatus: PAGE_STATUS.ERROR,
+          errorMessage: {
+            title: '再生できません',
+            text: errorMessage,
+            errorCode: errorCode ? String(errorCode) : '',
+          },
+        }));
+        return;
+      }
+
+      const playerProps =
+        apiData.data?.getPlayInfo?.playInfo &&
+        creatPlayerPropsFromPlayInfo(
+          apiData.data.getPlayInfo.playInfo as PlayInfo,
+          deviceId
+        );
+
       setPlayerState((playerState) => ({
         ...playerState,
-        pageStatus: !apiData.errors ? PAGE_STATUS.PLAY : PAGE_STATUS.ERROR,
+        pageStatus: playerProps ? PAGE_STATUS.PLAY : PAGE_STATUS.ERROR,
         wabiken,
         deviceId,
-        playInfo: apiData,
+        playerProps,
       }));
     })();
-  }, [fetcher, router.query.wabiken]);
+  }, [creatPlayerPropsFromPlayInfo, fetcher, router.query.wabiken]);
 
   return {
     playerState,
