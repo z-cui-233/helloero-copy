@@ -16,10 +16,26 @@ import 'src/shared/assets/css/prettify.css';
 import { cookieParams } from 'src/shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
 import { i18n_messages } from 'src/shared/constants/babystar';
+import { globalConfig } from 'src/globalConfig';
 
 Amplify.configure({
   ...config,
   ssr: true,
+  Auth: {
+    cookieStorage: {
+      // REQUIRED - Cookie domain (only required if cookieStorage is provided)
+      domain: globalConfig.COOKIE_DOMAIN,
+      // OPTIONAL - Cookie path
+      path: '/',
+      // OPTIONAL - Cookie expiration in days
+      expires: 365,
+      // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+      sameSite: 'lax',
+      // OPTIONAL - Cookie secure flag
+      // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
+      secure: true,
+    },
+  },
 });
 I18n.putVocabularies(vocabularies);
 I18n.setLanguage('ja');
@@ -50,6 +66,7 @@ CoreApp.getInitialProps = async (
     const cookies = nookies.get(appContext.ctx);
     if (!cookies[cookieParams.uuid.name]) {
       nookies.set(appContext.ctx, cookieParams.uuid.name, uuidv4(), {
+        domain: globalConfig.COOKIE_DOMAIN,
         path: cookieParams.uuid.path,
         expires: cookieParams.uuid.expires(),
         httpOnly: cookieParams.uuid.httpOnly,
