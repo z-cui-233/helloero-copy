@@ -14,9 +14,9 @@ const PurchasedList: React.FC = () => {
       <Title>登録済みの動画</Title>
       <ListController {...store} />
       <TitleList
-        isInitialized={store.purchasedListState.isInitialized}
-        listData={store.purchasedListState.listData}
+        purchasedListState={store.purchasedListState}
         openTitleDetail={store.openTitleDetail}
+        fetchListData={store.fetchListData}
       />
       <TitleDetail
         userWabikenMeta={store.purchasedListState.currentUserWabikenMeta}
