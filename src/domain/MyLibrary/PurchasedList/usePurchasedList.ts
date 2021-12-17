@@ -23,13 +23,15 @@ export interface UsePurchasedList {
     isCardStyle: boolean;
     isShownDetail: boolean;
     currentUserWabikenMeta: UserWabikenMeta | null;
-    listData: UserWabikenMeta[] | undefined;
+    userWabikenMetas: UserWabikenMeta[] | [];
+    nextToken: string | undefined;
   };
   updateSearchQuery: (newValue: string) => void;
   updateDisplayOrder: (newValue: DisplayOrder) => void;
   toggleListStyle: () => void;
   openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
   closeTitleDetail: () => void;
+  fetchListData: (nextToken?: string) => Promise<void>;
 }
 
 const initialState: UsePurchasedList['purchasedListState'] = {
@@ -39,7 +41,8 @@ const initialState: UsePurchasedList['purchasedListState'] = {
   isCardStyle: false,
   isShownDetail: false,
   currentUserWabikenMeta: null,
-  listData: undefined,
+  userWabikenMetas: [],
+  nextToken: undefined,
 };
 
 const usePurchasedList = (): UsePurchasedList => {
@@ -97,8 +100,8 @@ const usePurchasedList = (): UsePurchasedList => {
       }));
     }, []);
 
-  useEffect(() => {
-    (async () => {
+  const fetchListData: UsePurchasedList['fetchListData'] = useCallback(
+    async (nextToken) => {
       const apiData = await fetcher(listUserWabikenMetas, {
         filter: {
           notValidAfter: {
@@ -106,16 +109,29 @@ const usePurchasedList = (): UsePurchasedList => {
           },
         },
         limit: LIST_PAGE_SIZE,
-        nextToken: null,
+        nextToken: nextToken ?? null,
       });
 
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
-        listData: apiData?.data?.listUserWabikenMetas?.items,
-        isInitialized: true,
-      }));
-    })();
-  }, [fetcher]);
+      const newList = apiData.data?.listUserWabikenMetas?.items ?? [];
+
+      setPurchasedListState((purchasedListState) => {
+        return {
+          ...purchasedListState,
+          isInitialized: true,
+          userWabikenMetas: [
+            ...purchasedListState.userWabikenMetas,
+            ...newList,
+          ],
+          nextToken: apiData.data?.listUserWabikenMetas?.nextToken ?? undefined,
+        };
+      });
+    },
+    [fetcher]
+  );
+
+  useEffect(() => {
+    fetchListData();
+  }, [fetchListData]);
 
   return {
     purchasedListState,
@@ -124,6 +140,7 @@ const usePurchasedList = (): UsePurchasedList => {
     toggleListStyle,
     openTitleDetail,
     closeTitleDetail,
+    fetchListData,
   };
 };
 
