@@ -6,6 +6,7 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
       - ./:/app
       - /node_modules
