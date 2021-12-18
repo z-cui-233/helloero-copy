@@ -1,6 +1,6 @@
 import React from 'react';
-import TitleThumbnail from 'src/shared/components/parts/TitleThumbnail';
-import device from 'src/shared/styles/device';
+import TitleThumbnail from '../../../../../shared/components/parts/TitleThumbnail';
+import device from '../../../../../shared/styles/device';
 import styled from 'styled-components';
 
 interface Props {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from 'src/shared/styles/typo';
-import Icon from 'src/shared/assets/icon/search.svg';
+import typo from '../../../../../shared/styles/typo';
+import Icon from '../../../../../shared/assets/icon/search.svg';
 import { UsePurchasedList } from '../../usePurchasedList';
 
 const SearchBox: React.FC<UsePurchasedList> = ({

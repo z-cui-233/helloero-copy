@@ -1,12 +1,12 @@
 import { Auth, Hub } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import withLayout from 'src/shared/components/Layout';
-import typo from 'src/shared/styles/typo';
+import withLayout from '../../shared/components/Layout';
+import typo from '../../shared/styles/typo';
 import styled from 'styled-components';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
-import MainContainer from 'src/shared/components/parts/MainContainer';
+import { useLoginStateContext } from '../../shared/context/LoginStateContext';
+import ButtonStandard from '../../shared/components/parts/ButtonStandard';
+import MainContainer from '../../shared/components/parts/MainContainer';
 
 const Logout: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -3,10 +3,10 @@ import {
   ListUserWabikenMetasQuery,
   ListUserWabikenMetasQueryVariables,
   UserWabikenMeta,
-} from 'src/API';
-import { listUserWabikenMetas } from 'src/graphql/queries';
-import { LIST_PAGE_SIZE } from 'src/shared/constants';
-import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
+} from '../../../API';
+import { listUserWabikenMetas } from '../../../graphql/queries';
+import { LIST_PAGE_SIZE } from '../../../shared/constants';
+import useAmplifyFetcher from '../../../shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {
   ADD: 'add',

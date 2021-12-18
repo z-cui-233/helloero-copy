@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
-import TextField from 'src/shared/components/parts/TextField';
-import typo from 'src/shared/styles/typo';
-import MainContainer from 'src/shared/components/parts/MainContainer';
+import ButtonStandard from '../../../shared/components/parts/ButtonStandard';
+import TextField from '../../../shared/components/parts/TextField';
+import typo from '../../../shared/styles/typo';
+import MainContainer from '../../../shared/components/parts/MainContainer';
 import { UseEntryWabiken } from '../useEntryWabiken';
-import FormErrorMessage from 'src/shared/components/FormErrorMessage';
+import FormErrorMessage from '../../../shared/components/FormErrorMessage';
 
 const validationSchema = Yup.object().shape({
   wabiken: Yup.string()

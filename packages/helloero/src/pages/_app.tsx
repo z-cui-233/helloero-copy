@@ -3,20 +3,20 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import nookies from 'nookies';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from 'src/shared/styles/globalStyle';
-import GlobalHead from 'src/shared/components/GlobalHead';
-import theme from 'src/shared/styles/theme';
-import GlobalScripts from 'src/shared/components/GlobalScripts';
-import { LoginStateContextProvider } from 'src/shared/context/LoginStateContext';
+import GlobalStyle from '../shared/styles/globalStyle';
+import GlobalHead from '../shared/components/GlobalHead';
+import theme from '../shared/styles/theme';
+import GlobalScripts from '../shared/components/GlobalScripts';
+import { LoginStateContextProvider } from '../shared/context/LoginStateContext';
 import Amplify, { I18n } from 'aws-amplify';
 import config from '../aws-exports';
-import { vocabularies } from 'src/shared/assets/i18n/amplify/vocabularies';
-import 'src/shared/assets/css/amplify.css';
-import 'src/shared/assets/css/prettify.css';
-import { cookieParams } from 'src/shared/constants/cookies';
+import { vocabularies } from '../shared/assets/i18n/amplify/vocabularies';
+import '../shared/assets/css/amplify.css';
+import '../shared/assets/css/prettify.css';
+import { cookieParams } from '../shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
-import { i18n_messages } from 'src/shared/constants/babystar';
-import { globalConfig } from 'src/globalConfig';
+import { i18n_messages } from '../shared/constants/babystar';
+import { globalConfig } from '../globalConfig';
 
 Amplify.configure({
   ...config,

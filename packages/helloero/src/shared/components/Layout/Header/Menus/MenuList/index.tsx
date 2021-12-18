@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from 'src/shared/styles/typo';
-import ArrowLogo from 'src/shared/assets/icon/arrow_right_white.svg';
 import Link from 'next/link';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
-import device from 'src/shared/styles/device';
+import typo from '../../../../../../shared/styles/typo';
+import ArrowLogo from '../../../../../../shared/assets/icon/arrow_right_white.svg';
+import { useLoginStateContext } from '../../../../../../shared/context/LoginStateContext';
+import device from '../../../../../../shared/styles/device';
 
 const MenuList: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();

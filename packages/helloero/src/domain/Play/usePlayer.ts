@@ -2,15 +2,19 @@ import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useCallback, useEffect, useState } from 'react';
-import { GetPlayInfoQuery, GetPlayInfoQueryVariables, PlayInfo } from 'src/API';
-import { getPlayInfo } from 'src/graphql/queries';
-import { DEVICE_CODE } from 'src/shared/constants';
-import { cookieParams } from 'src/shared/constants/cookies';
+import {
+  GetPlayInfoQuery,
+  GetPlayInfoQueryVariables,
+  PlayInfo,
+} from '../../API';
+import { getPlayInfo } from '../../graphql/queries';
+import { DEVICE_CODE } from '../../shared/constants';
+import { cookieParams } from '../../shared/constants/cookies';
 import {
   ErrorCodeGetPlayInfo,
   errorMessages,
-} from 'src/shared/constants/errorMessages';
-import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
+} from '../../shared/constants/errorMessages';
+import useAmplifyFetcher from '../../shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

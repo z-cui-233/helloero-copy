@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import ButtonStandard from 'src/shared/components/parts/ButtonStandard';
-import device from 'src/shared/styles/device';
-import typo from 'src/shared/styles/typo';
+import ButtonStandard from '../../../shared/components/parts/ButtonStandard';
+import device from '../../../shared/styles/device';
+import typo from '../../../shared/styles/typo';
 import styled from 'styled-components';
 
 const Landing: React.FC = () => {

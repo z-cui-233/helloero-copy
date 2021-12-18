@@ -9,16 +9,19 @@ import {
   GetWabikenMetaQuery,
   GetWabikenMetaQueryVariables,
   WabikenMeta,
-} from 'src/API';
-import { activateWabiken, createUserWabikenMeta } from 'src/graphql/mutations';
-import { getWabikenMeta } from 'src/graphql/queries';
-import { API_VERSION } from 'src/shared/constants';
+} from '../../API';
+import {
+  activateWabiken,
+  createUserWabikenMeta,
+} from '../../graphql/mutations';
+import { getWabikenMeta } from '../../graphql/queries';
+import { API_VERSION } from '../../shared/constants';
 import {
   ErrorCodeActivateWabiken,
   ErrorCodeGetWabikenMeta,
   errorMessages,
-} from 'src/shared/constants/errorMessages';
-import useAmplifyFetcher from 'src/shared/hooks/useAmplifyFetcher';
+} from '../../shared/constants/errorMessages';
+import useAmplifyFetcher from '../../shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
