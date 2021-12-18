@@ -11,11 +11,10 @@ import { LoginStateContextProvider } from '../shared/context/LoginStateContext';
 import Amplify, { I18n } from 'aws-amplify';
 import config from '../aws-exports';
 import { vocabularies } from '../shared/assets/i18n/amplify/vocabularies';
-import '../shared/assets/css/amplify.css';
-import '../shared/assets/css/prettify.css';
+import '../localShared/assets/css/amplify.css';
 import { cookieParams } from '../shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
-import { i18n_messages } from '../shared/constants/babystar';
+import { i18n_messages } from '../localShared/constants/babystar';
 import { globalConfig } from '../globalConfig';
 
 Amplify.configure({
