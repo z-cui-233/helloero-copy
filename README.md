@@ -63,10 +63,15 @@ docker compose up --build
 
 ## Setting amplify backend
 
-for only front-end development, please use `dev` backend by setting amplify backend env as follows:
+For only front-end development, please use `dev` backend by setting amplify backend env as follows:
 `amplify env checkout dev`
 
-if updating backend, can use a separate feature-backend env or can directly use dev if not modifying existing backend resources
+If need to updated backend, please use a separate env for dev/testing by following steps:
+
+    1. Pull dev-env: `amplify env pull dev`
+    2. Create a <new-env>: `amplify env add <new-env>`
+    3. Push pulled dev-env settings to <new-env>: `amplify push`
+    4. Start doing all your back-end changes to this env and use it for testing.
 
 ## How can we get new wabiken
 

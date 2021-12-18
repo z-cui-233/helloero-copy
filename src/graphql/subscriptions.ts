@@ -58,8 +58,8 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      updatedAt
       owner
+      updatedAt
     }
   }
 `;
@@ -119,8 +119,8 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      updatedAt
       owner
+      updatedAt
     }
   }
 `;
@@ -180,8 +180,8 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
         mainEpisodeCode
       }
       activatedAt
-      updatedAt
       owner
+      updatedAt
     }
   }
 `;
