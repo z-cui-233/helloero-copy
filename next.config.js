@@ -6,8 +6,8 @@ const loadConfig = (env) => {
   switch (env) {
     case 'prod':
       return require('./config/prod.js').default;
-    case 'dev':
-      return require('./config/dev.js').default;
+    case 'itstg':
+      return require('./config/itstg.js').default;
     default:
       return require('./config/local.js').default;
   }
