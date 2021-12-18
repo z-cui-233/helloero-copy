@@ -1,10 +1,12 @@
-# HELLOERO（ハローエロ）
+# h2u mono
+
+helloero, account, help sites for h2u
 
 ## Preparation for local development
 
 ### STEP1: add config file
 
-`/src/aws-exports.js`
+`{each package}/src/aws-exports.js`
 
 ```
 const awsmobile = {
@@ -40,7 +42,9 @@ add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 ### STEP3: Add hosts
 
 ```
+127.0.0.1  account.local.h2u.jp
 127.0.0.1  helloero.local.h2u.jp
+127.0.0.1  help.local.h2u.jp
 ```
 
 #### Clear DNS cache

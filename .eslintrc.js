@@ -20,5 +20,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'prettier',
+    'next/core-web-vitals',
   ],
 };
