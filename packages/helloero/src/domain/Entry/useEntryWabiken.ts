@@ -15,12 +15,12 @@ import {
   createUserWabikenMeta,
 } from '../../graphql/mutations';
 import { getWabikenMeta } from '../../graphql/queries';
-import { API_VERSION } from '../../shared/constants';
+import { API_VERSION } from '../../localShared/constants';
 import {
   ErrorCodeActivateWabiken,
   ErrorCodeGetWabikenMeta,
   errorMessages,
-} from '../../shared/constants/errorMessages';
+} from '../../localShared/constants/errorMessages';
 import useAmplifyFetcher from '../../shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {

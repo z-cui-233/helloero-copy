@@ -5,7 +5,7 @@ import {
   UserWabikenMeta,
 } from '../../../API';
 import { listUserWabikenMetas } from '../../../graphql/queries';
-import { LIST_PAGE_SIZE } from '../../../shared/constants';
+import { LIST_PAGE_SIZE } from '../../../localShared/constants';
 import useAmplifyFetcher from '../../../shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {

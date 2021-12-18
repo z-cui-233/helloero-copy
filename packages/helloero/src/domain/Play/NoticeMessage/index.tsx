@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { errorMessages } from '../../../shared/constants/errorMessages';
+import { errorMessages } from '../../../localShared/constants/errorMessages';
 import typo from '../../../shared/styles/typo';
 import styled from 'styled-components';
 
