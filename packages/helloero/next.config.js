@@ -5,11 +5,11 @@ const loadConfig = (env) => {
   console.log('env is =>', env);
   switch (env) {
     case 'prod':
-      return require('./config/prod.js').default;
+      return require('@u-next/site_config/prod.js').default;
     case 'itstg':
-      return require('./config/itstg.js').default;
+      return require('@u-next/site_config/itstg.js').default;
     default:
-      return require('./config/local.js').default;
+      return require('@u-next/site_config/local.js').default;
   }
 };
 
