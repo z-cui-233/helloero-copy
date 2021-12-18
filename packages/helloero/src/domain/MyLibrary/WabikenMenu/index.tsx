@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from 'src/shared/styles/typo';
+import typo from '../../../shared/styles/typo';
 import Link from 'next/link';
-import ArrowLogo from 'src/shared/assets/icon/arrow_right.svg';
+import ArrowLogo from '../../../shared/assets/icon/arrow_right.svg';
 
 const WabikenMenu: React.FC = () => {
   return (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import { errorMessages } from 'src/shared/constants/errorMessages';
-import typo from 'src/shared/styles/typo';
+import { errorMessages } from '../../../shared/constants/errorMessages';
+import typo from '../../../shared/styles/typo';
 import styled from 'styled-components';
 
 interface Props {

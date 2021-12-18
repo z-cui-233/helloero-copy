@@ -1,6 +1,6 @@
 import { API, graphqlOperation } from 'aws-amplify';
 import { useCallback, useState } from 'react';
-import { GraphQLResultEx } from 'src/types/amplify';
+import { GraphQLResultEx } from '../../types/amplify';
 
 const useAmplifyFetcher = <TData, TVariables>(): {
   loading: boolean;

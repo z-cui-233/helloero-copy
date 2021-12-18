@@ -1,5 +1,5 @@
 import React from 'react';
-import typo from 'src/shared/styles/typo';
+import typo from '../../../shared/styles/typo';
 import styled from 'styled-components';
 import ListController from './ListController';
 import TitleDetail from './TitleDetail';

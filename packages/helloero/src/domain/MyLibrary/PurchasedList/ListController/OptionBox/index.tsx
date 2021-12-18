@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import ViewListIcon from 'src/shared/assets/icon/view_list.svg';
-import ViewModuleIcon from 'src/shared/assets/icon/view_module.svg';
+import ViewListIcon from '../../../../../shared/assets/icon/view_list.svg';
+import ViewModuleIcon from '../../../../../shared/assets/icon/view_module.svg';
 import { UsePurchasedList } from '../../usePurchasedList';
 
 const OptionBox: React.FC<UsePurchasedList> = ({

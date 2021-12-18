@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import typo from 'src/shared/styles/typo';
+import typo from '../../../shared/styles/typo';
 import styled from 'styled-components';
 
 interface Props {

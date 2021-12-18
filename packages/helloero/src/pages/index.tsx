@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import React from 'react';
-import Top from 'src/domain/Top';
+import Top from '../domain/Top';
 
 const Page: NextPage = () => {
   return <Top />;

@@ -1,6 +1,6 @@
 import React from 'react';
-import device from 'src/shared/styles/device';
-import typo from 'src/shared/styles/typo';
+import device from '../../../../shared/styles/device';
+import typo from '../../../../shared/styles/typo';
 import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 

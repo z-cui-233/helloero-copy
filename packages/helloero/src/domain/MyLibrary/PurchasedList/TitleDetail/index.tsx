@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import dateFormat from 'dateformat';
 import React from 'react';
-import { UserWabikenMeta } from 'src/API';
-import PortalModal from 'src/shared/components/PortalModal';
-import device from 'src/shared/styles/device';
-import { createTitleThumbnailUrl } from 'src/shared/utils';
+import { UserWabikenMeta } from '../../../../API';
+import PortalModal from '../../../../shared/components/PortalModal';
+import device from '../../../../shared/styles/device';
+import { createTitleThumbnailUrl } from '../../../../shared/utils';
 import styled from 'styled-components';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';

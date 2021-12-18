@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
-import typo from 'src/shared/styles/typo';
 import styled from 'styled-components';
-import ValidateMessage from 'src/shared/components/parts/ValidateMessage';
+import typo from '../../../../shared/styles/typo';
+import ValidateMessage from '../../../../shared/components/parts/ValidateMessage';
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import withLayout from 'src/shared/components/Layout';
+import withLayout from '../../shared/components/Layout';
 import {
   AmplifyAuthContainer,
   AmplifyAuthenticator,
   AmplifySignUp,
 } from '@aws-amplify/ui-react';
-import { useLoginStateContext } from 'src/shared/context/LoginStateContext';
+import { useLoginStateContext } from '../../shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
 
 const Login: React.FC = () => {

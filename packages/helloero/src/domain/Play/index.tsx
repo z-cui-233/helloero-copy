@@ -1,5 +1,5 @@
 import React from 'react';
-import withAmplifyAuth from 'src/shared/hocs/withAmplifyAuth';
+import withAmplifyAuth from '../../shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
 import { Player as BabyStar } from '@u-next/videoplayer-react';
 import NoticeMessage from './NoticeMessage';

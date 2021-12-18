@@ -1,6 +1,6 @@
 import React from 'react';
-import NoticePage from 'src/shared/components/NoticePage';
-import withLayout from 'src/shared/components/Layout';
+import NoticePage from '../../shared/components/NoticePage';
+import withLayout from '../../shared/components/Layout';
 
 interface Props {
   statusCode: number;
