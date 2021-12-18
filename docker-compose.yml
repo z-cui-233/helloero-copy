@@ -21,9 +21,10 @@ services:
       - TZ=Asia/Tokyo
       - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
-      - ./packages/helloero:/app
-      - /app/node_modules
-      - /app/.next
+      - ./packages/helloero:/app/helloero
+      - ./packages/site_config:/app/site_config
+      - /app/helloero/node_modules
+      - /app/helloero/.next
       - ~/.npmrc:/.npmrc
     networks:
       - h2umono
