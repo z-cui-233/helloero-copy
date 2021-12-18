@@ -11,6 +11,7 @@ services:
       - ./packages/account:/app/account
       - ./packages/site_config:/app/site_config
       - ./packages/shared:/app/shared
+      - ./packages/shared:/app/types
       - /app/account/node_modules
       - /app/account/.next
       - ~/.npmrc:/.npmrc
@@ -26,6 +27,7 @@ services:
       - ./packages/helloero:/app/helloero
       - ./packages/site_config:/app/site_config
       - ./packages/shared:/app/shared
+      - ./packages/shared:/app/types
       - /app/helloero/node_modules
       - /app/helloero/.next
       - ~/.npmrc:/.npmrc
@@ -41,6 +43,7 @@ services:
       - ./packages/help:/app/help
       - ./packages/site_config:/app/site_config
       - ./packages/shared:/app/shared
+      - ./packages/shared:/app/types
       - /app/help/node_modules
       - /app/help/.next
       - ~/.npmrc:/.npmrc
