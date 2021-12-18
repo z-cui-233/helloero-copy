@@ -1,0 +1,203 @@
+interface WabikenMetaBase {
+  id: ID!
+  version: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemaining: Int!
+  validityPeriod: Int!
+  issuerTrace: String
+  createdAt: AWSTimestamp!
+}
+
+type UserWabikenMeta implements WabikenMetaBase
+  @model
+  @auth(rules: [{ allow: owner }]) {
+  """
+  id is same as token
+  """
+  id: ID!
+  version: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemaining: Int!
+  validityPeriod: Int!
+  issuerTrace: String
+  createdAt: AWSTimestamp!
+  content: UserContentMeta!
+  """
+  following are required fields in UserWabikenMeta (as they are activated wabikens)
+  """
+  activatedAt: AWSTimestamp!
+}
+
+type WabikenMeta implements WabikenMetaBase {
+  """
+  token
+  """
+  id: ID!
+  version: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+  lockRequired: Boolean!
+  playbackRemaining: Int!
+  validityPeriod: Int!
+  createdAt: AWSTimestamp!
+  content: ContentMeta!
+  issuerTrace: String
+  activatedAt: AWSTimestamp # This will be null for non-activated wabiken
+}
+
+interface ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+}
+
+type ContentMeta implements ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+  displayName: String
+  catchphrase: String
+  comment: String
+  duration: Int
+  evaluationPoint: Int
+  maker: CodeName
+  series: CodeName
+  releaseDate: String
+  publicPeriod: Period
+  salePeriod: Period
+  paymentBadge: CodeName
+  thumbnails: ContentMetaThumbnail
+  mainEpisodeCode: String
+}
+type UserContentMeta implements ContentMetaBase {
+  id: ID!
+  key: ContentMetaKey!
+  displayName: String!
+  catchphrase: String!
+  comment: String!
+  duration: Int!
+  evaluationPoint: Int!
+  maker: CodeName!
+  series: CodeName!
+  releaseDate: String!
+  publicPeriod: Period!
+  salePeriod: Period!
+  paymentBadge: CodeName!
+  thumbnails: ContentMetaThumbnail!
+  mainEpisodeCode: String!
+}
+
+type CodeName {
+  code: String!
+  name: String!
+}
+
+type Period {
+  since: AWSTimestamp
+  until: AWSTimestamp
+}
+
+type ContentMetaKey {
+  id: ID!
+  type: String!
+  providerId: String!
+}
+
+type ContentMetaThumbnail {
+  packageL: String
+  packageM: String
+  packageS: String
+  standard: String
+  tsptFhds: String
+  tsptFwxga: String
+}
+type ErrorCodeMessage {
+  code: Int!
+  message: String!
+}
+type WabikenMetaResponse {
+  wabiken: WabikenMeta!
+  result: Boolean!
+}
+
+type SceneSearchSize {
+  width: Int!
+  height: Int!
+}
+
+type SceneSearchCdn {
+  sceneSearchUrl: AWSURL!
+  extra: SceneSearchSize!
+}
+
+type SceneSearch {
+  type: String!
+  cdns: [SceneSearchCdn!]!
+}
+
+type ISemMeta {
+  version: String!
+  endpoint: AWSURL!
+  isemToken: String!
+}
+
+type PlayInfoEndpointExtra {
+  playToken: String!
+  playTokenHash: String!
+}
+
+type PlayInfoEndpoint {
+  id: ID!
+  displayName: String!
+  sceneSearchList: [SceneSearch!]!
+  playables: [Playable!]!
+  isem: ISemMeta!
+  extra: PlayInfoEndpointExtra!
+}
+
+type LicenseUrl {
+  drmType: String!
+  version: String!
+  endpoint: AWSURL!
+}
+type PlayableCdn {
+  cdnId: String
+  weight: Int!
+  playlistUrl: AWSURL!
+  licenseUrlList: [LicenseUrl!]!
+}
+type Playable {
+  type: String!
+  cdns: [PlayableCdn!]!
+}
+
+type PlayInfo {
+  type: String!
+  landingPage: String!
+  endpoints: [PlayInfoEndpoint!]!
+  refreshToken: String!
+  playbackRemaining: Int!
+  notValidBefore: AWSTimestamp!
+  notValidAfter: AWSTimestamp!
+}
+
+type PlayInfoResponse {
+  playInfo: PlayInfo!
+  result: Boolean!
+}
+type Query {
+  getWabikenMeta(id: ID!): WabikenMetaResponse
+    @function(name: "helloeroLambdaResolver")
+  getPlayInfo(
+    wabikenId: String!
+    deviceCode: String!
+    deviceId: String!
+  ): PlayInfoResponse @function(name: "helloeroLambdaResolver")
+}
+
+type Mutation {
+  activateWabiken(id: ID!): WabikenMetaResponse
+    @function(name: "helloeroLambdaResolver")
+}

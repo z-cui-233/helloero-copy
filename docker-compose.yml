@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  account-app:
+    build: env-local/account-app
+    environment:
+      - APP_ENV=local
+      - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
+    volumes:
+      - ./packages/account:/app
+      - /app/node_modules
+      - /app/.next
+      - ~/.npmrc:/.npmrc
+    networks:
+      - h2umono
   helloero-app:
     build: env-local/helloero-app
     environment:
@@ -8,16 +21,29 @@ services:
       - TZ=Asia/Tokyo
       - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
-      - ./:/app
-      - /node_modules
-      - /.next
+      - ./packages/helloero:/app
+      - /app/node_modules
+      - /app/.next
       - ~/.npmrc:/.npmrc
     networks:
-      - helloero
-  helloero-nginx:
+      - h2umono
+  help-app:
+    build: env-local/help-app
+    environment:
+      - APP_ENV=local
+      - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
+    volumes:
+      - ./packages/help:/app
+      - /app/node_modules
+      - /app/.next
+      - ~/.npmrc:/.npmrc
+    networks:
+      - h2umono
+  h2umono-nginx:
     image: nginx
     networks:
-      - helloero
+      - h2umono
     ports:
       # Docker for mac unable to compose ip based connection
       # https://docs.docker.com/docker-for-mac/networking/#i-cannot-ping-my-containers
@@ -30,6 +56,8 @@ services:
       - ./env-local/nginx/config/conf.d:/etc/nginx/conf.d:ro
       - ./env-local/nginx/config/tls:/etc/nginx/tls:ro
     depends_on:
+      - account-app
       - helloero-app
+      - help-app
 networks:
-  helloero:
+  h2umono:
