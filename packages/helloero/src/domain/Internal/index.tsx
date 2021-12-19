@@ -1,9 +1,9 @@
 import Script from 'next/script';
 import React from 'react';
 import styled from 'styled-components';
-import withLayout from '../../shared/components/Layout';
-import { useLoginStateContext } from '../../shared/context/LoginStateContext';
-import typo from '../../shared/styles/typo';
+import withLayout from '@/shared/components/Layout';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import typo from '@/shared/styles/typo';
 
 const Internal: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();

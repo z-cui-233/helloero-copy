@@ -1,6 +1,6 @@
 import React from 'react';
-import withAmplifyAuth from '../../shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import { Player as BabyStar } from '@u-next/videoplayer-react';
 import NoticeMessage from './NoticeMessage';
 import usePlayer, { PAGE_STATUS } from './usePlayer';

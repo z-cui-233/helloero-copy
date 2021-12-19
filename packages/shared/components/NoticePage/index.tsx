@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import typo from '../../../shared/styles/typo';
-import MainContainer from '../../../shared/components/parts/MainContainer';
+import typo from '../../styles/typo';
+import MainContainer from '../../components/parts/MainContainer';
 
 interface Props {
   title: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import device from '../../../../../shared/styles/device';
+import device from '../../../../styles/device';
 import styled from 'styled-components';
 import LogoMark from './LogoMark';
 import MenuList from './MenuList';

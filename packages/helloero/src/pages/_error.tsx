@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage, NextPageContext } from 'next';
 import { ErrorProps } from 'next/error';
-import CustomError from '../domain/CustomError';
+import CustomError from '@/domain/CustomError';
 
 const Page: NextPage<ErrorProps> = ({ statusCode }) => {
   return <CustomError statusCode={statusCode} />;

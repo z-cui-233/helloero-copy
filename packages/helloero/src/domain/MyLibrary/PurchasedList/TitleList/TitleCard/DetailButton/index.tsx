@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from '../../../../../../shared/styles/typo';
+import typo from '@/shared/styles/typo';
 
 interface Props {
   onClick: () => void;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Icon from '../../../../../../shared/assets/icon/play_arrow.svg';
+import Icon from '@/shared/assets/icon/play_arrow.svg';
 
 interface Props {
   onClick: () => void;

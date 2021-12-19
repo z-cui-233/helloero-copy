@@ -8,13 +8,13 @@ import {
   PlayInfo,
 } from '../../API';
 import { getPlayInfo } from '../../graphql/queries';
-import { DEVICE_CODE } from '../../localShared/constants';
-import { cookieParams } from '../../shared/constants/cookies';
+import { DEVICE_CODE } from '@/localShared/constants';
+import { cookieParams } from '@/shared/constants/cookies';
 import {
   ErrorCodeGetPlayInfo,
   errorMessages,
-} from '../../localShared/constants/errorMessages';
-import useAmplifyFetcher from '../../shared/hooks/useAmplifyFetcher';
+} from '@/localShared/constants/errorMessages';
+import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

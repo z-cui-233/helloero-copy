@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import withLayout from '../../shared/components/Layout';
-import { useLoginStateContext } from '../../shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
+import withLayout from '@/shared/components/Layout';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import Landing from './Landing';
 
 const Top: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import typo from '../../../shared/styles/typo';
+import typo from '../../styles/typo';
 
 interface Props {
   message: string;
