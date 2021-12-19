@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "build": "echo 'no build'",
     "lint": "eslint \"./**/*.{ts,tsx,js}\""
   },
   "dependencies": {
