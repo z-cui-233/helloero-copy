@@ -1,8 +1,8 @@
 import React from 'react';
 import device from '../../../../../styles/device';
 import styled from 'styled-components';
-import LogoRotate from '../../../../../assets/logo/ColorFullRedRotate.svg';
-import Logo from '../../../../../assets/logo/ColorFullRed.svg';
+import LogoRotate from '../../../../../assets/logo/helloeroFullRedRotate.svg';
+import Logo from '../../../../../assets/logo/helloeroFullRed.svg';
 
 const LogoMark: React.FC = () => {
   return (
