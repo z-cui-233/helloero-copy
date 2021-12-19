@@ -2,6 +2,7 @@
   "name": "@types/u-next",
   "private": true,
   "version": "1.0.0",
+  "types": "index.d.ts",
   "scripts": {
     "build": "echo 'no build'",
     "lint": "eslint \"./**/*.{ts,tsx,js}\""
