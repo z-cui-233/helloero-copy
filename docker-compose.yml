@@ -8,13 +8,15 @@ services:
       - TZ=Asia/Tokyo
       - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
-      - ./packages/account:/app/account
-      - ./packages/site_config:/app/site_config
-      - ./packages/shared:/app/shared
-      - ./packages/shared:/app/types
-      - /app/account/node_modules
-      - /app/account/.next
-      - ~/.npmrc:/.npmrc
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - .npmrc:/app/.npmrc
+      - ./packages/account:/app/packages/account
+      - ./packages/shared:/app/packages/shared
+      - ./packages/site_config:/app/packages/site_config
+      - ./packages/types:/app/packages/types
+      - /app/node_modules
+      - /app/packages/account/.next
     networks:
       - h2umono
   helloero-app:
@@ -24,13 +26,15 @@ services:
       - TZ=Asia/Tokyo
       - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
-      - ./packages/helloero:/app/helloero
-      - ./packages/site_config:/app/site_config
-      - ./packages/shared:/app/shared
-      - ./packages/shared:/app/types
-      - /app/helloero/node_modules
-      - /app/helloero/.next
-      - ~/.npmrc:/.npmrc
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - .npmrc:/app/.npmrc
+      - ./packages/helloero:/app/packages/helloero
+      - ./packages/shared:/app/packages/shared
+      - ./packages/site_config:/app/packages/site_config
+      - ./packages/types:/app/packages/types
+      - /app/node_modules
+      - /app/packages/helloero/.next
     networks:
       - h2umono
   help-app:
@@ -40,13 +44,15 @@ services:
       - TZ=Asia/Tokyo
       - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
-      - ./packages/help:/app/help
-      - ./packages/site_config:/app/site_config
-      - ./packages/shared:/app/shared
-      - ./packages/shared:/app/types
-      - /app/help/node_modules
-      - /app/help/.next
-      - ~/.npmrc:/.npmrc
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - .npmrc:/app/.npmrc
+      - ./packages/help:/app/packages/help
+      - ./packages/shared:/app/packages/shared
+      - ./packages/site_config:/app/packages/site_config
+      - ./packages/types:/app/packages/types
+      - /app/node_modules
+      - /app/packages/help/.next
     networks:
       - h2umono
   h2umono-nginx:

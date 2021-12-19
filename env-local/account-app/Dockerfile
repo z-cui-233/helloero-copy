@@ -1,4 +1,4 @@
 FROM node:16.13.1-buster-slim
-WORKDIR /app/account
+WORKDIR /app
 EXPOSE 3000
-CMD npm install --legacy-peer-deps && npm run dev
+CMD npm i --no-save --legacy-peer-deps && npm run dev -workspace account
