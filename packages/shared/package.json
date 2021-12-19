@@ -7,6 +7,7 @@
     "lint": "eslint \"./**/*.{ts,tsx,js}\""
   },
   "dependencies": {
+    "@aws-amplify/ui-components": "^1.9.6",
     "dateformat": "^5.0.2",
     "formik": "^2.2.9",
     "next": "^11.1.3",
