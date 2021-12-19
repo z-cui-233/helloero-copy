@@ -1,10 +1,10 @@
 import React from 'react';
 import dateFormat from 'dateformat';
-import FormErrorMessage from '../../../shared/components/FormErrorMessage';
-import ButtonStandard from '../../../shared/components/parts/ButtonStandard';
-import MainContainer from '../../../shared/components/parts/MainContainer';
-import typo from '../../../shared/styles/typo';
-import { createTitleThumbnailUrl } from '../../../shared/utils';
+import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import typo from '@/shared/styles/typo';
+import { createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';

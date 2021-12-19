@@ -15,13 +15,13 @@ import {
   createUserWabikenMeta,
 } from '../../graphql/mutations';
 import { getWabikenMeta } from '../../graphql/queries';
-import { API_VERSION } from '../../localShared/constants';
+import { API_VERSION } from '@/localShared/constants';
 import {
   ErrorCodeActivateWabiken,
   ErrorCodeGetWabikenMeta,
   errorMessages,
-} from '../../localShared/constants/errorMessages';
-import useAmplifyFetcher from '../../shared/hooks/useAmplifyFetcher';
+} from '@/localShared/constants/errorMessages';
+import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

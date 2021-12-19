@@ -1,5 +1,5 @@
 import React from 'react';
-import typo from '../../../../shared/styles/typo';
+import typo from '../../../styles/typo';
 import styled from 'styled-components';
 
 interface Props {

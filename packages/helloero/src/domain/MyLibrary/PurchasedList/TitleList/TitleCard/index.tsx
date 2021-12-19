@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { UserWabikenMeta } from '../../../../../API';
-import TitleThumbnail from '../../../../../shared/components/parts/TitleThumbnail';
-import device from '../../../../../shared/styles/device';
-import { createTitleThumbnailUrl } from '../../../../../shared/utils';
+import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
+import device from '@/shared/styles/device';
+import { createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
 import { UsePurchasedList } from '../../usePurchasedList';
 import DetailButton from './DetailButton';
