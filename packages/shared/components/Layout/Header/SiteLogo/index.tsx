@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../../../../assets/logo/ColorBlack.svg';
+import Logo from '../../../../assets/logo/helloeroBlack.svg';
 import device from '../../../../styles/device';
 import Link from 'next/link';
 
