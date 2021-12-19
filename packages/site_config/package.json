@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {},
-  "scripts": {}
+  "scripts": {
+    "build": "echo 'no build'",
+    "lint": "echo 'no lint'"
+  }
 }
