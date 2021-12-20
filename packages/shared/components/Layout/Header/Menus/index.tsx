@@ -3,12 +3,14 @@ import device from '../../../../styles/device';
 import styled from 'styled-components';
 import LogoMark from './LogoMark';
 import MenuList from './MenuList';
+import { Config } from 'u-next/config';
 
 interface Props {
   isDisplayedMenu: boolean;
+  options: Config;
 }
 
-const Menus: React.FC<Props> = ({ isDisplayedMenu }) => {
+const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
   return (
     <Container isDisplayedMenu={isDisplayedMenu}>
       <Grid>
@@ -16,7 +18,7 @@ const Menus: React.FC<Props> = ({ isDisplayedMenu }) => {
           <LogoMark />
         </GridContainer>
         <GridContainer>
-          <MenuList />
+          <MenuList options={options} />
         </GridContainer>
       </Grid>
     </Container>

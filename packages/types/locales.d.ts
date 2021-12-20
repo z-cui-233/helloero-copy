@@ -11,6 +11,14 @@ export interface LocaleData {
       home: string;
     };
   };
+  account: {
+    logout: {
+      title: string;
+      text: string;
+      button: string;
+      cancel: string;
+    };
+  };
   helloero: {
     menus: {
       settings: string;

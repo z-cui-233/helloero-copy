@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import withLayout from '@/shared/components/Layout';
 import {
@@ -6,30 +6,11 @@ import {
   AmplifyAuthenticator,
   AmplifySignUp,
 } from '@aws-amplify/ui-react';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { useRouter } from 'next/router';
+import useLogin from './useLogin';
+import { globalConfig } from 'src/globalConfig';
 
 const Login: React.FC = () => {
-  const router = useRouter();
-  const [isInitialized, setIsInitialized] = useState<boolean>(false);
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-
-  useEffect(() => {
-    if (!isLoadedUserInfo) {
-      return;
-    }
-
-    if (userInfo.isLoggedIn) {
-      const backPath = router.query.backpath
-        ? (router.query.backpath as string)
-        : '';
-
-      router.replace(backPath ? decodeURIComponent(backPath) : '/my-library');
-      return;
-    }
-
-    setIsInitialized(true);
-  }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
+  const { isInitialized } = useLogin();
 
   return isInitialized ? (
     <Container>
@@ -57,4 +38,4 @@ const Container = styled.div`
   position: relative;
 `;
 
-export default withLayout(Login);
+export default withLayout(Login, globalConfig);

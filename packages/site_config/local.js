@@ -3,7 +3,7 @@ const config = {
   VIDEO: 'https://video.h2u.unext.dev',
   HELLOERO: 'https://helloero.local.h2u.jp',
   HELP: 'https://help.local.h2u.jp',
-  ACCOUNT: 'https://account.wf.h2u.jp',
+  ACCOUNT: 'https://account.local.h2u.jp',
 };
 
 module.exports.default = config;

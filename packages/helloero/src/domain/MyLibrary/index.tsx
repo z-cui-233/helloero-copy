@@ -4,6 +4,7 @@ import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
 import PurchasedList from './PurchasedList';
 import WabikenMenu from './WabikenMenu';
+import { globalConfig } from 'src/globalConfig';
 
 const MyLibrary: React.FC = () => {
   return (
@@ -20,4 +21,7 @@ const Container = styled.div`
   width: calc(100% - 2rem);
 `;
 
-export default withLayout(withAmplifyAuth(MyLibrary));
+export default withLayout(
+  withAmplifyAuth(MyLibrary, globalConfig),
+  globalConfig
+);

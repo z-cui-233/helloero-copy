@@ -56,7 +56,7 @@ const ModalContainer = styled.div`
   max-width: 800px;
   position: relative;
   overflow: hidden;
-  width: calc(100% - 2rem);
+  width: calc(100% - 1rem);
 `;
 
 const CloseButton = styled.div`

@@ -6,8 +6,13 @@ import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
 import { useLocale } from '../../../../../context/LocaleContext';
+import { Config } from 'u-next/config';
 
-const MenuList: React.FC = () => {
+interface Props {
+  options: Config;
+}
+
+const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { locale, lang } = useLocale();
 
@@ -18,7 +23,7 @@ const MenuList: React.FC = () => {
         <List>
           <li>
             {isLoadedUserInfo && !userInfo.isLoggedIn && (
-              <Link href={`/${locale}/login`} passHref>
+              <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
                 <StyledLink>
                   {lang.helloero.menus.login}
                   <StyledArrowLogo />
@@ -26,7 +31,7 @@ const MenuList: React.FC = () => {
               </Link>
             )}
             {isLoadedUserInfo && userInfo.isLoggedIn && (
-              <Link href={`/${locale}/logout`} passHref>
+              <Link href={`${options.ACCOUNT}/${locale}/logout`} passHref>
                 <StyledLink>
                   {lang.helloero.menus.logout}
                   <StyledArrowLogo />

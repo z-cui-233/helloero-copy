@@ -2,6 +2,7 @@ import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
 import withLayout from '@/shared/components/Layout';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { globalConfig } from 'src/globalConfig';
 
 interface Props {
   statusCode: number;
@@ -34,4 +35,4 @@ const CustomError: React.FC<Props> = ({ statusCode }) => {
   );
 };
 
-export default withLayout(CustomError);
+export default withLayout(CustomError, globalConfig);
