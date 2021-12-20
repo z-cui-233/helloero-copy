@@ -16,22 +16,17 @@ import { cookieParams } from '@/shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
 import { i18n_messages } from '@/localShared/constants/babystar';
 import { globalConfig } from '../globalConfig';
+import { LocaleProvider } from '@/shared/context/LocaleContext';
 
 Amplify.configure({
   ...config,
   ssr: true,
   Auth: {
     cookieStorage: {
-      // REQUIRED - Cookie domain (only required if cookieStorage is provided)
       domain: globalConfig.COOKIE_DOMAIN,
-      // OPTIONAL - Cookie path
       path: '/',
-      // OPTIONAL - Cookie expiration in days
       expires: 365,
-      // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
       sameSite: 'lax',
-      // OPTIONAL - Cookie secure flag
-      // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
       secure: true,
     },
   },
@@ -43,13 +38,15 @@ const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <IntlProvider locale="ja-JP" messages={i18n_messages}>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <GlobalHead />
-        <LoginStateContextProvider>
-          <Component {...pageProps} />
-          <div id="modal" />
-        </LoginStateContextProvider>
-        <GlobalScripts />
+        <LocaleProvider>
+          <GlobalStyle />
+          <GlobalHead />
+          <LoginStateContextProvider>
+            <Component {...pageProps} />
+            <div id="modal" />
+          </LoginStateContextProvider>
+          <GlobalScripts />
+        </LocaleProvider>
       </ThemeProvider>
     </IntlProvider>
   );

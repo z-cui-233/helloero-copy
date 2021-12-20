@@ -2,7 +2,6 @@
 /** @type {import('next').NextConfig} */
 
 const loadConfig = (env) => {
-  console.log('env is =>', env);
   switch (env) {
     case 'prod':
       return require('@u-next/site_config/prod.js').default;
@@ -15,7 +14,13 @@ const loadConfig = (env) => {
 
 module.exports = {
   reactStrictMode: true,
+  poweredByHeader: false,
+  compress: false,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
