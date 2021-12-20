@@ -3,6 +3,7 @@ import React from 'react';
 import { errorMessages } from '@/localShared/constants/errorMessages';
 import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {
   title: string;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
+  const { locale } = useLocale();
+
   return (
     <Container>
       <BodyContent>
@@ -20,7 +23,7 @@ const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
           {errorCode && <div>({errorCode})</div>}
         </Text>
         <LinkContainer>
-          <Link href="/" passHref>
+          <Link href={`/${locale}`} passHref>
             <StyledLink>ホーム</StyledLink>
           </Link>
         </LinkContainer>

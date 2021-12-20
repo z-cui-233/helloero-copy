@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
 import Link from 'next/link';
 import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const WabikenMenu: React.FC = () => {
+  const { locale, lang } = useLocale();
+
   return (
     <Container>
-      <Title>購入した動画の登録</Title>
+      <Title>{lang.helloero.myLibrary.wabiken.title}</Title>
       <Contents>
-        <Link href="/entry" passHref>
+        <Link href={`/${locale}/entry`} passHref>
           <StyledLink>
             <div>
-              シリアルコードで登録
+              {lang.helloero.myLibrary.wabiken.entry}
               <ArrowLogo />
             </div>
           </StyledLink>
@@ -23,7 +26,7 @@ const WabikenMenu: React.FC = () => {
           rel="noopener noreferrer"
         >
           <div>
-            ストアに行く
+            {lang.helloero.myLibrary.wabiken.store}
             <ArrowLogo />
           </div>
         </StyledLink>

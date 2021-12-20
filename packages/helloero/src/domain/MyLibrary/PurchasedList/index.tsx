@@ -5,13 +5,15 @@ import ListController from './ListController';
 import TitleDetail from './TitleDetail';
 import TitleList from './TitleList';
 import usePurchasedList from './usePurchasedList';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const PurchasedList: React.FC = () => {
+  const { lang } = useLocale();
   const store = usePurchasedList();
 
   return (
     <Container>
-      <Title>登録済みの動画</Title>
+      <Title>{lang.helloero.myLibrary.purchased.title}</Title>
       <ListController {...store} />
       <TitleList
         purchasedListState={store.purchasedListState}

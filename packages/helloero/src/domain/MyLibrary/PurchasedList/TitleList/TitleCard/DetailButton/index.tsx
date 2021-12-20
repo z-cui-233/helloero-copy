@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {
   onClick: () => void;
 }
 
-const DetailButton: React.FC<Props> = ({ onClick }) => (
-  <Container onClick={onClick}>
-    <div>詳細を見る</div>
-  </Container>
-);
+const DetailButton: React.FC<Props> = ({ onClick }) => {
+  const { lang } = useLocale();
+
+  return (
+    <Container onClick={onClick}>
+      <div>{lang.helloero.myLibrary.purchased.detail}</div>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   ${typo.Standard};

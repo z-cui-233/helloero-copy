@@ -3,8 +3,11 @@ import { useRouter } from 'next/router';
 import withLayout from '@/shared/components/Layout';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import Landing from './Landing';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const Top: React.FC = () => {
+  const { locale } = useLocale();
+
   const router = useRouter();
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
@@ -15,12 +18,12 @@ const Top: React.FC = () => {
     }
 
     if (userInfo.isLoggedIn) {
-      router.replace('/my-library');
+      router.replace(`/${locale}/my-library`);
       return;
     }
 
     setIsInitialized(true);
-  }, [isLoadedUserInfo, router, userInfo.isLoggedIn]);
+  }, [isLoadedUserInfo, locale, router, userInfo.isLoggedIn]);
 
   return isInitialized ? <Landing /> : null;
 };

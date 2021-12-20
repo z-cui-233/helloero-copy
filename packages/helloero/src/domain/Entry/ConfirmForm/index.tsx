@@ -8,6 +8,7 @@ import { createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const createExpireDateFromValidityPeriod = (
   validityPeriod: number | undefined
@@ -24,6 +25,8 @@ const createExpireDateFromValidityPeriod = (
 };
 
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
+  const { lang } = useLocale();
+
   const titleName =
     props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
       .displayName ?? '';
@@ -39,8 +42,8 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.entryWabikenState.errorMessage} />
-      <Title>購入した動画の登録</Title>
-      <Text>内容を確認の上、登録をして下さい。</Text>
+      <Title>{lang.helloero.entry.confirm.title}</Title>
+      <Text>{lang.helloero.entry.confirm.text}</Text>
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
         titleName={titleName}
@@ -51,7 +54,7 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
           onClick={() => {
             props.consumeWabiken();
           }}
-          label={'動画を登録'}
+          label={lang.helloero.entry.confirm.button}
         />
       </ButtonSection>
     </MainContainer>
