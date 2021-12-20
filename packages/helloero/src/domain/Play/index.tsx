@@ -4,6 +4,7 @@ import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import { Player as BabyStar } from '@u-next/videoplayer-react';
 import NoticeMessage from './NoticeMessage';
 import usePlayer, { PAGE_STATUS } from './usePlayer';
+import { globalConfig } from 'src/globalConfig';
 
 const Play: React.FC = () => {
   const store = usePlayer();
@@ -33,4 +34,4 @@ const Container = styled.div`
   position: relative;
 `;
 
-export default withAmplifyAuth(Play);
+export default withAmplifyAuth(Play, globalConfig);

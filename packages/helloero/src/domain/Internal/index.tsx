@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import withLayout from '@/shared/components/Layout';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
+import { globalConfig } from 'src/globalConfig';
 
 const Internal: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
@@ -74,4 +75,4 @@ const JsonData = styled.div`
   font-family: sans-serif;
 `;
 
-export default withLayout(Internal);
+export default withLayout(Internal, globalConfig);

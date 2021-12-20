@@ -13,6 +13,14 @@ const lang: LocaleData = {
       home: 'ホーム',
     },
   },
+  account: {
+    logout: {
+      title: 'H2Uからログアウトしますか？',
+      text: '再度ログインするには、ログインIDとパスワードが必要です。',
+      button: 'ログアウト',
+      cancel: 'キャンセル',
+    },
+  },
   helloero: {
     menus: {
       settings: '設定',

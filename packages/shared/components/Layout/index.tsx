@@ -4,6 +4,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import Header from './Header';
 import Footer from './Footer';
+import { Config } from 'u-next/config';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -11,12 +12,13 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withLayout = <P extends Record<string, any>>(
-  WrappedComponent: React.FC<P>
+  WrappedComponent: React.FC<P>,
+  options: Config
 ): React.FC<P> => {
   const ComponentWithLayout: React.FC<P> = (props) => {
     return (
       <Container>
-        <Header />
+        <Header options={options} />
         <Main>
           <WrappedComponent {...props} />
         </Main>
@@ -33,7 +35,7 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 100%;
   background-color: ${({ theme }) => theme.keyColor.color1};
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 `;
 
 const Main = styled.div`
@@ -41,7 +43,7 @@ const Main = styled.div`
   position: relative;
   width: 100%;
   margin: 0 auto;
-  padding: 5rem 0;
+  padding: 4.5rem 0 0;
   background-color: ${({ theme }) => theme.background.primary};
 `;
 

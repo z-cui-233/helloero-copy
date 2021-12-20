@@ -5,10 +5,15 @@ import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { globalConfig } from 'src/globalConfig';
 
 const Landing: React.FC = () => {
   const router = useRouter();
   const { locale, lang } = useLocale();
+
+  const encodedLibraryUrl = encodeURIComponent(
+    `${globalConfig.HELLOERO}/${locale}/my-library`
+  );
 
   return (
     <Container>
@@ -32,7 +37,9 @@ const Landing: React.FC = () => {
             <ButtonContainer>
               <ButtonStandard
                 onClick={() => {
-                  router.push(`/${locale}/login`);
+                  router.push(
+                    `${globalConfig.ACCOUNT}/${locale}/login?back=${encodedLibraryUrl}`
+                  );
                 }}
                 label={lang.helloero.top.button}
               />

@@ -4,6 +4,7 @@ import withLayout from '@/shared/components/Layout';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import Landing from './Landing';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { globalConfig } from 'src/globalConfig';
 
 const Top: React.FC = () => {
   const { locale } = useLocale();
@@ -28,4 +29,4 @@ const Top: React.FC = () => {
   return isInitialized ? <Landing /> : null;
 };
 
-export default withLayout(Top);
+export default withLayout(Top, globalConfig);

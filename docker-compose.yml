@@ -16,6 +16,7 @@ services:
       - ./packages/types:/app/packages/types
       - /app/node_modules
       - /app/packages/account/node_modules
+      - /app/packages/shared/node_modules
       - /app/packages/account/.next
     networks:
       - h2umono
@@ -34,6 +35,7 @@ services:
       - ./packages/types:/app/packages/types
       - /app/node_modules
       - /app/packages/helloero/node_modules
+      - /app/packages/shared/node_modules
       - /app/packages/helloero/.next
     networks:
       - h2umono
@@ -52,6 +54,7 @@ services:
       - ./packages/types:/app/packages/types
       - /app/node_modules
       - /app/packages/help/node_modules
+      - /app/packages/shared/node_modules
       - /app/packages/help/.next
     networks:
       - h2umono

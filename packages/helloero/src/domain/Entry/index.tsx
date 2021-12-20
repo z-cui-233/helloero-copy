@@ -5,6 +5,7 @@ import InputForm from './InputForm';
 import ConfirmForm from './ConfirmForm';
 import NoticeComplete from './NoticeComplete';
 import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
+import { globalConfig } from 'src/globalConfig';
 
 const Entry: React.FC = () => {
   const store = useEntryWabiken();
@@ -24,4 +25,4 @@ const Entry: React.FC = () => {
   );
 };
 
-export default withLayout(withAmplifyAuth(Entry));
+export default withLayout(withAmplifyAuth(Entry, globalConfig), globalConfig);
