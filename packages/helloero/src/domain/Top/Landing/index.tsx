@@ -4,13 +4,11 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const Landing: React.FC = () => {
   const router = useRouter();
-
-  const handleClickLogin = (): void => {
-    router.push('/login');
-  };
+  const { locale, lang } = useLocale();
 
   return (
     <Container>
@@ -34,9 +32,9 @@ const Landing: React.FC = () => {
             <ButtonContainer>
               <ButtonStandard
                 onClick={() => {
-                  handleClickLogin();
+                  router.push(`/${locale}/login`);
                 }}
-                label={'ログイン/アカウント登録'}
+                label={lang.helloero.top.button}
               />
             </ButtonContainer>
           </div>

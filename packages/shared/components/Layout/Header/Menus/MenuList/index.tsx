@@ -5,28 +5,30 @@ import typo from '../../../../../styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
+import { useLocale } from '../../../../../context/LocaleContext';
 
 const MenuList: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+  const { locale, lang } = useLocale();
 
   return (
     <Container>
       <React.Fragment>
-        <Title>設定</Title>
+        <Title>{lang.helloero.menus.settings}</Title>
         <List>
           <li>
             {isLoadedUserInfo && !userInfo.isLoggedIn && (
-              <Link href="/login" passHref>
+              <Link href={`/${locale}/login`} passHref>
                 <StyledLink>
-                  ログイン
+                  {lang.helloero.menus.login}
                   <StyledArrowLogo />
                 </StyledLink>
               </Link>
             )}
             {isLoadedUserInfo && userInfo.isLoggedIn && (
-              <Link href="/logout" passHref>
+              <Link href={`/${locale}/logout`} passHref>
                 <StyledLink>
-                  ログアウト
+                  {lang.helloero.menus.logout}
                   <StyledArrowLogo />
                 </StyledLink>
               </Link>
@@ -34,7 +36,7 @@ const MenuList: React.FC = () => {
           </li>
         </List>
       </React.Fragment>
-      <Title>ヘルプ</Title>
+      <Title>{lang.helloero.menus.help}</Title>
       <List>
         <li>
           <StyledLink
@@ -42,7 +44,7 @@ const MenuList: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            利用規約
+            {lang.helloero.menus.terms}
             <StyledArrowLogo />
           </StyledLink>
         </li>
@@ -52,7 +54,7 @@ const MenuList: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            お問い合わせ
+            {lang.helloero.menus.support}
             <StyledArrowLogo />
           </StyledLink>
         </li>

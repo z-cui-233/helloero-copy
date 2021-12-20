@@ -6,11 +6,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
-      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
-      - .npmrc:/app/.npmrc
+      - ~/.npmrc:/app/.npmrc
       - ./packages/account:/app/packages/account
       - ./packages/shared:/app/packages/shared
       - ./packages/site_config:/app/packages/site_config
@@ -24,11 +23,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
-      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
-      - .npmrc:/app/.npmrc
+      - ~/.npmrc:/app/.npmrc
       - ./packages/helloero:/app/packages/helloero
       - ./packages/shared:/app/packages/shared
       - ./packages/site_config:/app/packages/site_config
@@ -42,11 +40,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
-      - NPM_PULL_TOKEN=$NPM_PULL_TOKEN
     volumes:
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
-      - .npmrc:/app/.npmrc
+      - ~/.npmrc:/app/.npmrc
       - ./packages/help:/app/packages/help
       - ./packages/shared:/app/packages/shared
       - ./packages/site_config:/app/packages/site_config
