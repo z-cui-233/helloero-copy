@@ -7,8 +7,10 @@ import styled from 'styled-components';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const Logout: React.FC = () => {
+  const { locale } = useLocale();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
@@ -20,12 +22,12 @@ const Logout: React.FC = () => {
 
     // なぜかログアウト画面に直リンしてくる不思議さん
     if (!userInfo.isLoggedIn) {
-      location.replace('/');
+      location.replace(`/${locale}`);
       return;
     }
 
     setIsInitialized(true);
-  }, [isLoadedUserInfo, userInfo.isLoggedIn]);
+  }, [isLoadedUserInfo, locale, userInfo.isLoggedIn]);
 
   const handleClickLogout = async (): Promise<void> => {
     if (isLoading) {
@@ -43,7 +45,7 @@ const Logout: React.FC = () => {
       console.log(error);
     } finally {
       setIsLoading(true);
-      location.replace('/');
+      location.replace(`/${locale}`);
     }
   };
 
@@ -60,7 +62,7 @@ const Logout: React.FC = () => {
               }}
               label={'ログアウト'}
             />
-            <Link href="/my-library" passHref>
+            <Link href={`/${locale}/my-library`} passHref>
               <StyledLink>キャンセル</StyledLink>
             </Link>
           </ButtonSection>

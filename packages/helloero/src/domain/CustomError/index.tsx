@@ -1,28 +1,24 @@
 import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
 import withLayout from '@/shared/components/Layout';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {
   statusCode: number;
 }
 
 const CustomError: React.FC<Props> = ({ statusCode }) => {
+  const { locale, lang } = useLocale();
+
   const title =
     statusCode === 404
-      ? 'お探しのページが見つかりません'
-      : '予期せぬエラーが発生しました';
+      ? lang.error.notFound.title
+      : lang.error.unexpected.title;
 
   const texts =
     statusCode === 404
-      ? [
-          '入力したアドレスが間違っているか、ページが移動した可能性があります。',
-          `（${statusCode}）`,
-        ]
-      : [
-          'サーバへのアクセスが混み合っているか、メンテナンス中の可能性があります。',
-          'しばらく時間をおいてから、もう一度アクセスしてください。',
-          `（${statusCode}）`,
-        ];
+      ? [lang.error.notFound.text, `（${statusCode}）`]
+      : [lang.error.unexpected.text, `（${statusCode}）`];
 
   return (
     <NoticePage
@@ -30,8 +26,8 @@ const CustomError: React.FC<Props> = ({ statusCode }) => {
       texts={texts}
       links={[
         {
-          href: '/',
-          label: 'ホーム',
+          href: `/${locale}`,
+          label: lang.error.notFound.home,
         },
       ]}
     />

@@ -8,15 +8,18 @@ import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const validationSchema = Yup.object().shape({
   wabiken: Yup.string()
-    .required('シリアルコードは入力必須です。')
-    .matches(/^[0-9a-zA-Z]/, 'シリアルコードは半角英数字で入力してください。')
-    .length(16, 'シリアルコードは16文字で入力してください。'),
+    .required('入力必須です。')
+    .matches(/^[0-9a-zA-Z]/, '半角英数字で入力してください。')
+    .length(16, '16文字で入力してください。'),
 });
 
 const InputForm: React.FC<UseEntryWabiken> = (props) => {
+  const { lang } = useLocale();
+
   const formik = useFormik({
     initialValues: props.entryWabikenState.formValues,
     validationSchema,
@@ -30,11 +33,11 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.entryWabikenState.errorMessage} />
-      <Title>購入した動画の登録</Title>
-      <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
+      <Title>{lang.helloero.entry.input.title}</Title>
+      <Text>{lang.helloero.entry.input.text}</Text>
       <FieldSection>
         <TextField
-          label="シリアルコード"
+          label={lang.helloero.entry.input.serial}
           fieldOptions={{
             type: 'text',
             name: 'wabiken',
@@ -55,7 +58,7 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={'シリアルコードを確認'}
+          label={lang.helloero.entry.input.button}
         />
       </ButtonSection>
     </MainContainer>
