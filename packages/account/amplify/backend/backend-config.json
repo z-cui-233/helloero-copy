@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "h2umonopackagesaccou": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

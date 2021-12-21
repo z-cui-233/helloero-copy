@@ -1,0 +1,45 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-account-develop-82901-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-account-develop-82901-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-account-develop-82901-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-account-develop-82901-deployment",
+      "UnauthRoleName": "amplify-account-develop-82901-unauthRole",
+      "StackName": "amplify-account-develop-82901",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-account-develop-82901/8ddce2b0-5fdc-11ec-ac7f-06f023bdb16d",
+      "AmplifyAppId": "d2n1qbnmkdgxvt"
+    }
+  },
+  "auth": {
+    "h2umonopackagesaccou": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "ap-northeast-1_Fa8RYnzZ1",
+        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd-dev",
+        "AppClientID": "1cfqtbluolk14ijbsq2osqbspp",
+        "AppClientIDWeb": "1cfqtbluolk14ijbsq2osqbspp",
+        "IdentityPoolId": "ap-northeast-1:839e24ad-2969-4320-b01a-55049f3972b0",
+        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__dev"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": ["EMAIL"],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [],
+        "verificationMechanisms": ["EMAIL"]
+      },
+      "lastPushTimeStamp": "2021-12-21T08:08:16.315Z"
+    }
+  }
+}

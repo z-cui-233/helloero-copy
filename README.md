@@ -6,33 +6,24 @@ helloero, account, help sites for h2u
 
 ### STEP1: add config file
 
-`{each package}/src/aws-exports.js`
+## 1.1 helloero
 
-```
-const awsmobile = {
-    "aws_project_region": "ap-northeast-1",
-    "aws_cognito_identity_pool_id": "ap-northeast-1:839e24ad-2969-4320-b01a-55049f3972b0",
-    "aws_cognito_region": "ap-northeast-1",
-    "aws_user_pools_id": "ap-northeast-1_Fa8RYnzZ1",
-    "aws_user_pools_web_client_id": "1cfqtbluolk14ijbsq2osqbspp",
-    "oauth": {},
-    "aws_cognito_login_mechanisms": [
-        "EMAIL"
-    ],
-    "aws_cognito_signup_attributes": [
-        "EMAIL"
-    ],
-    "aws_cognito_mfa_configuration": "OFF",
-    "aws_cognito_mfa_types": [
-        "SMS"
-    ],
-    "aws_cognito_password_protection_settings": {
-        "passwordPolicyMinLength": 8,
-        "passwordPolicyCharacters": []
-    }
-};
+1. Go to `/packages/helloero
+2. Run `amplify pull --appId d2lpn6hawe153k --envName dev` (will be redirected to browser for login-credential input)
+3. Verify auto-generation of `/src/aws-export.js`
 
-export default awsmobile;
+## 1.2 account
+
+1. Go to `/packages/account
+2. Run `amplify pull --appId d2n1qbnmkdgxvt --envName develop` (will be redirected to browser for login-credential input)
+3. Verify auto-generation of `/src/aws-export.js`
+
+## 1.1 help
+
+1. Go to `/packages/help
+2. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
+3. Verify auto-generation of `/src/aws-export.js`
+
 ```
 
 ### STEP2: add ENV
@@ -42,9 +33,11 @@ add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 ### STEP3: Add hosts
 
 ```
-127.0.0.1  account.local.h2u.jp
-127.0.0.1  helloero.local.h2u.jp
-127.0.0.1  help.local.h2u.jp
+
+127.0.0.1 account.local.h2u.jp
+127.0.0.1 helloero.local.h2u.jp
+127.0.0.1 help.local.h2u.jp
+
 ```
 
 #### Clear DNS cache
@@ -52,7 +45,9 @@ add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 if you can not access local url, you should clear your dns cache.
 
 ```
+
 sudo dscacheutil -flushcache
+
 ```
 
 ## Docker Local Development Start
@@ -60,9 +55,11 @@ sudo dscacheutil -flushcache
 ### Start
 
 ```
+
 npm install
 docker compose down
 docker compose up --build
+
 ```
 
 ## Setting amplify backend
@@ -84,6 +81,7 @@ you can get wabiken for IT-env by this command.
 https://wiki.unext-info.jp/pages/viewpage.action?pageId=110732068
 
 ```
+
 curl -X POST -H "Content-Type: application/json" \
     -d '{
     "market": "amazon",
@@ -100,12 +98,14 @@ curl -X POST -H "Content-Type: application/json" \
     "lock_required": true,
     "playback_remain": 1000
 }' \
-  https://wabit-api.awsdev.unext.dev/v2/wabiken
+ <https://wabit-api.awsdev.unext.dev/v2/wabiken>
+
 ```
 
 debug codes
 
 ```
+
 AID0207139
 AID0207297
 AID0207298
@@ -116,4 +116,7 @@ AID0207896
 AID0207897
 AID0207898
 AID0208119
+
+```
+
 ```
