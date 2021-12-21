@@ -6,7 +6,7 @@ import LayoutH2u from '@/shared/components/LayoutH2u';
 const Top: React.FC = () => {
   return (
     <LayoutH2u options={globalConfig}>
-      <Container>account.h2u</Container>
+      <Container>This is account.h2u</Container>
     </LayoutH2u>
   );
 };

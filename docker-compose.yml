@@ -5,17 +5,14 @@ services:
     build:
       context: .
       dockerfile: env-local/account-app/Dockerfile
-      args:
-        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./packages:/app/packages
+      - .:/app
+      - ~/.npmrc:/app/.npmrc
       - /app/node_modules
       - /app/packages/account/node_modules
-      - /app/packages/helloero/node_modules
-      - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/account/.next
     networks:
@@ -24,17 +21,14 @@ services:
     build:
       context: .
       dockerfile: env-local/helloero-app/Dockerfile
-      args:
-        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./packages:/app/packages
+      - .:/app
+      - ~/.npmrc:/app/.npmrc
       - /app/node_modules
-      - /app/packages/account/node_modules
       - /app/packages/helloero/node_modules
-      - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/helloero/.next
     networks:
@@ -43,16 +37,13 @@ services:
     build:
       context: .
       dockerfile: env-local/help-app/Dockerfile
-      args:
-        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./packages:/app/packages
+      - .:/app
+      - ~/.npmrc:/app/.npmrc
       - /app/node_modules
-      - /app/packages/account/node_modules
-      - /app/packages/helloero/node_modules
       - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/help/.next
