@@ -13,7 +13,7 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm install
         build:
           commands:
             - cd packages/account
@@ -38,7 +38,7 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm install
         build:
           commands:
             - cd packages/helloero
@@ -63,7 +63,7 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm install
         build:
           commands:
             - cd packages/help
