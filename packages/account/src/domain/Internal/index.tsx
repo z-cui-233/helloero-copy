@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import { globalConfig } from 'src/globalConfig';
-import LayoutHelloero from '@/shared/components/LayoutHelloero';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Internal: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return (
-    <LayoutHelloero options={globalConfig}>
+    <LayoutH2u options={globalConfig}>
       <Container>
         <FieldSection>
           <Title>LoginStatus</Title>
@@ -43,7 +43,7 @@ const Internal: React.FC = () => {
           }}
         />
       </Container>
-    </LayoutHelloero>
+    </LayoutH2u>
   );
 };
 

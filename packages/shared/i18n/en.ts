@@ -26,6 +26,7 @@ const lang: LocaleData = {
       settings: 'Settings',
       login: 'Log in / Sign in',
       logout: 'Log out',
+      account: 'Account',
       help: 'Help',
       terms: 'Privacy',
       support: 'Support',

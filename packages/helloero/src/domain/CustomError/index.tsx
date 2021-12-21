@@ -1,8 +1,8 @@
 import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
-import withLayout from '@/shared/components/Layout';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { globalConfig } from 'src/globalConfig';
+import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 interface Props {
   statusCode: number;
@@ -22,17 +22,19 @@ const CustomError: React.FC<Props> = ({ statusCode }) => {
       : [lang.error.unexpected.text, `（${statusCode}）`];
 
   return (
-    <NoticePage
-      title={title}
-      texts={texts}
-      links={[
-        {
-          href: `/${locale}`,
-          label: lang.error.notFound.home,
-        },
-      ]}
-    />
+    <LayoutHelloero options={globalConfig}>
+      <NoticePage
+        title={title}
+        texts={texts}
+        links={[
+          {
+            href: `/${locale}`,
+            label: lang.error.notFound.home,
+          },
+        ]}
+      />
+    </LayoutHelloero>
   );
 };
 
-export default withLayout(CustomError, globalConfig);
+export default CustomError;
