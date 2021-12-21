@@ -2,57 +2,57 @@ version: '3'
 
 services:
   account-app:
-    build: env-local/account-app
+    build:
+      context: .
+      dockerfile: env-local/account-app/Dockerfile
+      args:
+        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ~/.npmrc:/app/.npmrc
-      - ./packages/account:/app/packages/account
-      - ./packages/shared:/app/packages/shared
-      - ./packages/site_config:/app/packages/site_config
-      - ./packages/types:/app/packages/types
+      - ./packages:/app/packages
       - /app/node_modules
       - /app/packages/account/node_modules
+      - /app/packages/helloero/node_modules
+      - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/account/.next
     networks:
       - h2umono
   helloero-app:
-    build: env-local/helloero-app
+    build:
+      context: .
+      dockerfile: env-local/helloero-app/Dockerfile
+      args:
+        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ~/.npmrc:/app/.npmrc
-      - ./packages/helloero:/app/packages/helloero
-      - ./packages/shared:/app/packages/shared
-      - ./packages/site_config:/app/packages/site_config
-      - ./packages/types:/app/packages/types
+      - ./packages:/app/packages
       - /app/node_modules
+      - /app/packages/account/node_modules
       - /app/packages/helloero/node_modules
+      - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/helloero/.next
     networks:
       - h2umono
   help-app:
-    build: env-local/help-app
+    build:
+      context: .
+      dockerfile: env-local/help-app/Dockerfile
+      args:
+        - ARG_NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
     volumes:
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ~/.npmrc:/app/.npmrc
-      - ./packages/help:/app/packages/help
-      - ./packages/shared:/app/packages/shared
-      - ./packages/site_config:/app/packages/site_config
-      - ./packages/types:/app/packages/types
+      - ./packages:/app/packages
       - /app/node_modules
+      - /app/packages/account/node_modules
+      - /app/packages/helloero/node_modules
       - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
       - /app/packages/help/.next
