@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import withLayout from '@/shared/components/Layout';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import React from 'react';
 import Landing from './Landing';
-import { useLocale } from '@/shared/context/LocaleContext';
+import LayoutHelloero from '@/shared/components/LayoutHelloero';
 import { globalConfig } from 'src/globalConfig';
+import useTop from './useTop';
 
 const Top: React.FC = () => {
-  const { locale } = useLocale();
+  const { isInitialized } = useTop();
 
-  const router = useRouter();
-  const [isInitialized, setIsInitialized] = useState<boolean>(false);
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-
-  useEffect(() => {
-    if (!isLoadedUserInfo) {
-      return;
-    }
-
-    if (userInfo.isLoggedIn) {
-      router.replace(`/${locale}/my-library`);
-      return;
-    }
-
-    setIsInitialized(true);
-  }, [isLoadedUserInfo, locale, router, userInfo.isLoggedIn]);
-
-  return isInitialized ? <Landing /> : null;
+  return (
+    <LayoutHelloero options={globalConfig}>
+      {isInitialized ? <Landing /> : null}
+    </LayoutHelloero>
+  );
 };
 
-export default withLayout(Top, globalConfig);
+export default Top;

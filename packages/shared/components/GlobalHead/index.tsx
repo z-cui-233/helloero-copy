@@ -18,7 +18,7 @@ const GlobalHead: React.FC = () => {
         rel="apple-touch-icon"
         href="/images/apple-touch-icon.png?t=20211101"
       />
-      <title>HELLO ERO powered by H2U</title>
+      <title>HELLOERO powered by H2U</title>
     </Head>
   );
 };

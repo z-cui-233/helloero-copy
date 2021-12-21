@@ -1,17 +1,19 @@
 import React from 'react';
-import withLayout from '@/shared/components/Layout';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
 import PurchasedList from './PurchasedList';
 import WabikenMenu from './WabikenMenu';
 import { globalConfig } from 'src/globalConfig';
+import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 const MyLibrary: React.FC = () => {
   return (
-    <Container>
-      <WabikenMenu />
-      <PurchasedList />
-    </Container>
+    <LayoutHelloero options={globalConfig}>
+      <Container>
+        <WabikenMenu />
+        <PurchasedList />
+      </Container>
+    </LayoutHelloero>
   );
 };
 
@@ -21,7 +23,4 @@ const Container = styled.div`
   width: calc(100% - 2rem);
 `;
 
-export default withLayout(
-  withAmplifyAuth(MyLibrary, globalConfig),
-  globalConfig
-);
+export default withAmplifyAuth(MyLibrary, globalConfig);

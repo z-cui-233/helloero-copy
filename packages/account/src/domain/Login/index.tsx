@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import withLayout from '@/shared/components/Layout';
 import {
   AmplifyAuthContainer,
   AmplifyAuthenticator,
@@ -8,26 +7,31 @@ import {
 } from '@aws-amplify/ui-react';
 import useLogin from './useLogin';
 import { globalConfig } from 'src/globalConfig';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Login: React.FC = () => {
   const { isInitialized } = useLogin();
 
-  return isInitialized ? (
-    <Container>
-      <AmplifyAuthContainer>
-        <AmplifyAuthenticator>
-          <AmplifySignUp
-            slot="sign-up"
-            formFields={[
-              { type: 'username' },
-              { type: 'password' },
-              { type: 'email' },
-            ]}
-          />
-        </AmplifyAuthenticator>
-      </AmplifyAuthContainer>
-    </Container>
-  ) : null;
+  return (
+    <LayoutH2u options={globalConfig}>
+      {isInitialized ? (
+        <Container>
+          <AmplifyAuthContainer>
+            <AmplifyAuthenticator>
+              <AmplifySignUp
+                slot="sign-up"
+                formFields={[
+                  { type: 'username' },
+                  { type: 'password' },
+                  { type: 'email' },
+                ]}
+              />
+            </AmplifyAuthenticator>
+          </AmplifyAuthContainer>
+        </Container>
+      ) : null}
+    </LayoutH2u>
+  );
 };
 
 const Container = styled.div`
@@ -38,4 +42,4 @@ const Container = styled.div`
   position: relative;
 `;
 
-export default withLayout(Login, globalConfig);
+export default Login;

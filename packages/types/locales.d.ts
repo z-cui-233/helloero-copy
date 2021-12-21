@@ -24,6 +24,7 @@ export interface LocaleData {
       settings: string;
       login: string;
       logout: string;
+      account: string;
       help: string;
       terms: string;
       support: string;
