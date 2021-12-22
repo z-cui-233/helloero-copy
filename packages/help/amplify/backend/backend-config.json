@@ -1,20 +1,11 @@
 {
   "auth": {
-    "helloerof377b7dd": {
+    "h2umonopackageshelp": {
       "service": "Cognito",
+      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "loginMechanisms": ["EMAIL"],
-        "signupAttributes": ["EMAIL"],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": ["SMS"]
-      }
+      "customAuth": false
     }
   }
 }
