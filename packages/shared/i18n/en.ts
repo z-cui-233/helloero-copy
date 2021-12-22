@@ -38,6 +38,20 @@ const lang: LocaleData = {
     },
   },
   account: {
+    meta: {
+      default: {
+        title: 'H2U Account',
+        description: 'H2U アカウントの登録、ログイン、各種設定を行えます。',
+      },
+      login: {
+        title: 'LogIn - H2U Account',
+        description: '',
+      },
+      logout: {
+        title: 'Logout - H2UAccount',
+        description: '',
+      },
+    },
     menus: {
       login: 'SignIn',
     },
@@ -49,6 +63,17 @@ const lang: LocaleData = {
     },
   },
   helloero: {
+    meta: {
+      default: {
+        title: 'HELLOERO powered by H2U',
+        description:
+          'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。',
+      },
+      entry: {
+        title: 'コード入力 - HELLOERO powered by H2U',
+        description: '',
+      },
+    },
     menus: {
       settings: 'Settings',
       login: 'SignIn',
@@ -95,6 +120,15 @@ const lang: LocaleData = {
         title: '動画を登録しました',
         text: '引き続き、HELLOEROをお楽しみ下さい。有効期限がある場合、作品詳細でも確認できます。',
         home: 'HOME',
+      },
+    },
+  },
+  help: {
+    meta: {
+      default: {
+        title: 'H2U Help Center',
+        description:
+          'H2Uのヘルプセンターです。ヘルプページをお探しの方はこちらをご覧ください。',
       },
     },
   },

@@ -34,6 +34,20 @@ export interface LocaleData {
     };
   };
   account: {
+    meta: {
+      default: {
+        title: string;
+        description: string;
+      };
+      login: {
+        title: string;
+        description: string;
+      };
+      logout: {
+        title: string;
+        description: string;
+      };
+    };
     menus: {
       login: string;
     };
@@ -45,6 +59,16 @@ export interface LocaleData {
     };
   };
   helloero: {
+    meta: {
+      default: {
+        title: string;
+        description: string;
+      };
+      entry: {
+        title: string;
+        description: string;
+      };
+    };
     menus: {
       settings: string;
       login: string;
@@ -90,6 +114,14 @@ export interface LocaleData {
         title: string;
         text: string;
         home: string;
+      };
+    };
+  };
+  help: {
+    meta: {
+      default: {
+        title: string;
+        description: string;
       };
     };
   };
