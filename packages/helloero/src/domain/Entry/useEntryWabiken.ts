@@ -16,12 +16,9 @@ import {
 } from '../../graphql/mutations';
 import { getWabikenMeta } from '../../graphql/queries';
 import { API_VERSION } from '@/localShared/constants';
-import {
-  ErrorCodeActivateWabiken,
-  ErrorCodeGetWabikenMeta,
-  errorMessages,
-} from '@/localShared/constants/errorMessages';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import { useLocale } from '@/shared/context/LocaleContext';
+import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -68,6 +65,7 @@ const isCreateUserWabikenMetaInput = (
 
 const useEntryWabiken = (): UseEntryWabiken => {
   const router = useRouter();
+  const { lang } = useLocale();
 
   const [entryWabikenState, setEntryWabikenState] =
     useState<UseEntryWabiken['entryWabikenState']>(initialState);
@@ -102,10 +100,11 @@ const useEntryWabiken = (): UseEntryWabiken => {
       });
 
       if (apiData.errors) {
-        const errorMessage =
-          errorMessages.getWabikenMeta[
-            apiData.errors?.[0]?.errorInfo?.code as ErrorCodeGetWabikenMeta
-          ] ?? errorMessages.default;
+        const errorMessage = getErrorMessage(
+          lang,
+          'getWabikenMeta',
+          apiData.errors?.[0]?.errorInfo?.code
+        );
 
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
@@ -124,7 +123,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
         getWabikenMetaQuery: apiData.data ?? null,
       }));
     },
-    [getWabikenMetaQueryFetcher, getWabikenMetaQueryLoading]
+    [getWabikenMetaQueryFetcher, getWabikenMetaQueryLoading, lang]
   );
 
   const consumeWabiken: UseEntryWabiken['consumeWabiken'] =
@@ -142,7 +141,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       ) {
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
-          errorMessage: errorMessages.default,
+          errorMessage: lang.messages.default,
         }));
         return;
       }
@@ -156,11 +155,11 @@ const useEntryWabiken = (): UseEntryWabiken => {
       );
 
       if (activateWabikenApiData.errors) {
-        const errorMessage =
-          errorMessages.activateWabiken[
-            activateWabikenApiData.errors?.[0]?.errorInfo
-              ?.code as ErrorCodeActivateWabiken
-          ] ?? errorMessages.default;
+        const errorMessage = getErrorMessage(
+          lang,
+          'activateWabiken',
+          activateWabikenApiData.errors?.[0]?.errorInfo?.code
+        );
 
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
@@ -194,7 +193,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       if (createUserWabikenMetaApiData.errors) {
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
-          errorMessage: errorMessages.default,
+          errorMessage: lang.messages.default,
         }));
         return;
       }
@@ -210,6 +209,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       createUserWabikenMetaLoading,
       entryWabikenState.formValues.wabiken,
       entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
+      lang,
     ]);
 
   useEffect(() => {

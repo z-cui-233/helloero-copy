@@ -10,11 +10,9 @@ import {
 import { getPlayInfo } from '../../graphql/queries';
 import { DEVICE_CODE } from '@/localShared/constants';
 import { cookieParams } from '@/shared/constants/cookies';
-import {
-  ErrorCodeGetPlayInfo,
-  errorMessages,
-} from '@/localShared/constants/errorMessages';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import { useLocale } from '@/shared/context/LocaleContext';
+import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -51,6 +49,7 @@ const initialState: UsePlayer['playerState'] = {
 
 const usePlayer = (): UsePlayer => {
   const router = useRouter();
+  const { lang } = useLocale();
 
   const [playerState, setPlayerState] =
     useState<UsePlayer['playerState']>(initialState);
@@ -153,11 +152,8 @@ const usePlayer = (): UsePlayer => {
       });
 
       if (apiData.errors) {
-        const errorCode = apiData.errors?.[0]?.errorInfo
-          ?.code as ErrorCodeGetPlayInfo;
-
-        const errorMessage =
-          errorMessages.getPlayInfo[errorCode] ?? errorMessages.default;
+        const errorCode = apiData.errors?.[0]?.errorInfo?.code;
+        const errorMessage = getErrorMessage(lang, 'getPlayInfo', errorCode);
 
         setPlayerState((playerState) => ({
           ...playerState,
@@ -186,7 +182,7 @@ const usePlayer = (): UsePlayer => {
         playerProps,
       }));
     })();
-  }, [creatPlayerPropsFromPlayInfo, fetcher, router.query.wabiken]);
+  }, [creatPlayerPropsFromPlayInfo, fetcher, lang, router.query.wabiken]);
 
   return {
     playerState,
