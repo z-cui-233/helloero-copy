@@ -8,9 +8,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     volumes:
       - .:/app
-      - ~/.npmrc:/app/.npmrc
+      - ./.npmrc:/app/.npmrc
       - /app/node_modules
       - /app/packages/account/node_modules
       - /app/packages/shared/node_modules
@@ -24,9 +25,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     volumes:
       - .:/app
-      - ~/.npmrc:/app/.npmrc
+      - ./.npmrc:/app/.npmrc
       - /app/node_modules
       - /app/packages/helloero/node_modules
       - /app/packages/shared/node_modules
@@ -40,9 +42,10 @@ services:
     environment:
       - APP_ENV=local
       - TZ=Asia/Tokyo
+      - NPM_PULL_TOKEN=${NPM_PULL_TOKEN}
     volumes:
       - .:/app
-      - ~/.npmrc:/app/.npmrc
+      - ./.npmrc:/app/.npmrc
       - /app/node_modules
       - /app/packages/help/node_modules
       - /app/packages/shared/node_modules
