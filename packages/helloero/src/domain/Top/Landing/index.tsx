@@ -21,10 +21,12 @@ const Landing: React.FC = () => {
       <Grid>
         <div>
           <Artwork>
-            <Image
-              src={`/images/top/cover${Math.floor(Math.random() * 3)}.jpg`}
-              alt="HELLOERO(ハローエロ)"
-            />
+            <Image>
+              <img
+                src={`/images/top/cover${Math.floor(Math.random() * 3)}.jpg`}
+                alt="HELLOERO(ハローエロ)"
+              />
+            </Image>
           </Artwork>
         </div>
         <LeadTexts>
@@ -83,11 +85,17 @@ const Artwork = styled.div`
   }
 `;
 
-const Image = styled.img`
+const Image = styled.div`
   position: relative;
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
   object-fit: contain;
+  background-color: ${({ theme }) => theme.keyColor.color3};
+
+  & > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const LeadTexts = styled.div`

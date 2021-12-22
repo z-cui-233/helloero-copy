@@ -80,6 +80,7 @@ const lang: LocaleData = {
       logout: 'ログアウト',
       account: 'アカウント設定',
       help: 'ヘルプ',
+      helpcenter: 'ヘルプセンター',
       terms: '利用規約',
       support: 'お問い合わせ',
     },

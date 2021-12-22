@@ -56,6 +56,12 @@ const MenuList: React.FC<Props> = ({ options }) => {
       <Title>{lang.helloero.menus.help}</Title>
       <List>
         <li>
+          <StyledLink href={`${options.HELP}/${locale}`}>
+            {lang.helloero.menus.helpcenter}
+            <StyledArrowLogo />
+          </StyledLink>
+        </li>
+        <li>
           <StyledLink
             href="https://video.unext.jp"
             target="_blank"
