@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import { errorMessages } from '@/localShared/constants/errorMessages';
 import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -12,14 +11,14 @@ interface Props {
 }
 
 const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
-  const { locale } = useLocale();
+  const { locale, lang } = useLocale();
 
   return (
     <Container>
       <BodyContent>
         <Title>{title ? title : '再生できません'}</Title>
         <Text>
-          {text ? text : errorMessages.default}
+          {text ? text : lang.messages.default}
           {errorCode && <div>({errorCode})</div>}
         </Text>
         <LinkContainer>
