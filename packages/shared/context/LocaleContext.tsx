@@ -5,7 +5,7 @@ import langEn from '../i18n/en';
 import { LocaleData } from 'u-next/locales';
 
 const LOCALES = ['ja', 'en'] as const;
-type localeType = typeof LOCALES[number];
+export type localeType = typeof LOCALES[number];
 
 interface ContextProps {
   locale: localeType;

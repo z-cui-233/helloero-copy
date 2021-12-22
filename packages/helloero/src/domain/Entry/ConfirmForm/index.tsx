@@ -1,31 +1,16 @@
 import React from 'react';
-import dateFormat from 'dateformat';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import typo from '@/shared/styles/typo';
-import { createTitleThumbnailUrl } from '@/shared/utils';
+import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-const createExpireDateFromValidityPeriod = (
-  validityPeriod: number | undefined
-): string => {
-  // 0sec = EST. we should not show expireDate
-  if (!validityPeriod || validityPeriod === 0) {
-    return '無期限';
-  }
-
-  const date = new Date();
-  date.setSeconds(validityPeriod);
-
-  return `${dateFormat(date, 'yyyy年m月d日 HH:MM')}まで視聴可能`;
-};
-
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
-  const { lang } = useLocale();
+  const { locale, lang } = useLocale();
 
   const titleName =
     props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
@@ -47,7 +32,7 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
         titleName={titleName}
-        displayExpireDate={createExpireDateFromValidityPeriod(validityPeriod)}
+        displayExpireDate={createExpireDate(locale, validityPeriod)}
       />
       <ButtonSection>
         <ButtonStandard
