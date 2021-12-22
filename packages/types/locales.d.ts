@@ -34,6 +34,9 @@ export interface LocaleData {
     };
   };
   account: {
+    menus: {
+      login: string;
+    };
     logout: {
       title: string;
       text: string;

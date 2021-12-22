@@ -15,6 +15,7 @@ interface Props {
 const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { locale, lang } = useLocale();
+  const backUrl = encodeURIComponent(`${options.HELLOERO}/${locale}`);
 
   return (
     <Container>
@@ -23,7 +24,10 @@ const MenuList: React.FC<Props> = ({ options }) => {
         <List>
           <li>
             {isLoadedUserInfo && !userInfo.isLoggedIn && (
-              <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
+              <Link
+                href={`${options.ACCOUNT}/${locale}/login?back=${backUrl}`}
+                passHref
+              >
                 <StyledLink>
                   {lang.helloero.menus.login}
                   <StyledArrowLogo />
