@@ -24,8 +24,6 @@ helloero, account, help sites for h2u
 2. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
 3. Verify auto-generation of `/src/aws-export.js`
 
-```
-
 ### STEP2: add ENV
 
 add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
@@ -33,11 +31,9 @@ add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 ### STEP3: Add hosts
 
 ```
-
 127.0.0.1 account.local.h2u.jp
 127.0.0.1 helloero.local.h2u.jp
 127.0.0.1 help.local.h2u.jp
-
 ```
 
 #### Clear DNS cache
@@ -45,9 +41,7 @@ add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 if you can not access local url, you should clear your dns cache.
 
 ```
-
 sudo dscacheutil -flushcache
-
 ```
 
 ## Docker Local Development Start
@@ -55,11 +49,9 @@ sudo dscacheutil -flushcache
 ### Start
 
 ```
-
 npm install
 docker compose down
 docker compose up --build
-
 ```
 
 ## Setting amplify backend
@@ -81,7 +73,6 @@ you can get wabiken for IT-env by this command.
 https://wiki.unext-info.jp/pages/viewpage.action?pageId=110732068
 
 ```
-
 curl -X POST -H "Content-Type: application/json" \
     -d '{
     "market": "amazon",
@@ -99,13 +90,11 @@ curl -X POST -H "Content-Type: application/json" \
     "playback_remain": 1000
 }' \
  <https://wabit-api.awsdev.unext.dev/v2/wabiken>
-
 ```
 
 debug codes
 
 ```
-
 AID0207139
 AID0207297
 AID0207298
@@ -116,7 +105,4 @@ AID0207896
 AID0207897
 AID0207898
 AID0208119
-
-```
-
 ```
