@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
-import dateFormat from 'dateformat';
 import React from 'react';
 import { UserWabikenMeta } from '../../../../API';
 import PortalModal from '@/shared/components/PortalModal';
 import device from '@/shared/styles/device';
-import { createTitleThumbnailUrl } from '@/shared/utils';
+import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {
   userWabikenMeta: UserWabikenMeta | null;
@@ -16,24 +16,12 @@ interface Props {
   onClickClose: UsePurchasedList['closeTitleDetail'];
 }
 
-const createExpireDateFromNotValidAfter = (
-  validityPeriod: number,
-  notValidAfter: number
-): string => {
-  if (validityPeriod === 0) {
-    return '無期限';
-  }
-
-  const date = new Date(0);
-  date.setSeconds(notValidAfter);
-  return `${dateFormat(date, 'yyyy年m月d日 HH:MM')}まで視聴可能`;
-};
-
 const TitleDetail: React.FC<Props> = ({
   userWabikenMeta,
   isShownDetail,
   onClickClose,
 }) => {
+  const { locale } = useLocale();
   const router = useRouter();
 
   return isShownDetail && userWabikenMeta ? (
@@ -52,7 +40,8 @@ const TitleDetail: React.FC<Props> = ({
           <MetaContainer>
             <MetaInfo
               titleName={userWabikenMeta.content.displayName}
-              displayExpireDate={createExpireDateFromNotValidAfter(
+              displayExpireDate={createExpireDate(
+                locale,
                 userWabikenMeta.validityPeriod,
                 userWabikenMeta.notValidAfter
               )}
