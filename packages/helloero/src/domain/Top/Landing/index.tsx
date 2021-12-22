@@ -11,9 +11,7 @@ const Landing: React.FC = () => {
   const router = useRouter();
   const { locale, lang } = useLocale();
 
-  const encodedLibraryUrl = encodeURIComponent(
-    `${globalConfig.HELLOERO}/${locale}/my-library`
-  );
+  const backUrl = encodeURIComponent(`${globalConfig.HELLOERO}/${locale}`);
 
   return (
     <Container>
@@ -38,7 +36,7 @@ const Landing: React.FC = () => {
               <ButtonStandard
                 onClick={() => {
                   router.push(
-                    `${globalConfig.ACCOUNT}/${locale}/login?back=${encodedLibraryUrl}`
+                    `${globalConfig.ACCOUNT}/${locale}/login?back=${backUrl}`
                   );
                 }}
                 label={lang.helloero.top.button}

@@ -38,6 +38,9 @@ const lang: LocaleData = {
     },
   },
   account: {
+    menus: {
+      login: 'ログイン/登録',
+    },
     logout: {
       title: 'H2Uからログアウトしますか？',
       text: '再度ログインするには、ログインIDとパスワードが必要です。',

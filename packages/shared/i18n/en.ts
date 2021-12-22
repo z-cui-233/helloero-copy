@@ -38,6 +38,9 @@ const lang: LocaleData = {
     },
   },
   account: {
+    menus: {
+      login: 'SignIn',
+    },
     logout: {
       title: 'H2Uからログアウトしますか？',
       text: '再度ログインするには、ログインIDとパスワードが必要です。',
@@ -48,8 +51,8 @@ const lang: LocaleData = {
   helloero: {
     menus: {
       settings: 'Settings',
-      login: 'Log in / Sign in',
-      logout: 'Log out',
+      login: 'SignIn',
+      logout: 'Logout',
       account: 'Account',
       help: 'Help',
       terms: 'Privacy',
@@ -59,7 +62,7 @@ const lang: LocaleData = {
       lead: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
       description:
         'ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。',
-      button: 'Log in / Sign in',
+      button: 'SignIn / SignUp',
     },
     myLibrary: {
       wabiken: {
