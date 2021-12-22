@@ -11,7 +11,10 @@ const Landing: React.FC = () => {
   const router = useRouter();
   const { locale, lang } = useLocale();
 
-  const backUrl = encodeURIComponent(`${globalConfig.HELLOERO}/${locale}`);
+  const handleClickSingIn = (): void => {
+    const backUrl = encodeURIComponent(`${globalConfig.HELLOERO}/${locale}`);
+    router.push(`${globalConfig.ACCOUNT}/${locale}/login?back=${backUrl}`);
+  };
 
   return (
     <Container>
@@ -26,18 +29,12 @@ const Landing: React.FC = () => {
         </div>
         <LeadTexts>
           <div>
-            <Title>
-              シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
-            </Title>
-            <Text>
-              ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
-            </Text>
+            <Title>{lang.helloero.top.lead}</Title>
+            <Text>{lang.helloero.top.description}</Text>
             <ButtonContainer>
               <ButtonStandard
                 onClick={() => {
-                  router.push(
-                    `${globalConfig.ACCOUNT}/${locale}/login?back=${backUrl}`
-                  );
+                  handleClickSingIn();
                 }}
                 label={lang.helloero.top.button}
               />

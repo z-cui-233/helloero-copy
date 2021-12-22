@@ -4,6 +4,7 @@ import React from 'react';
 const GlobalHead: React.FC = () => {
   return (
     <Head>
+      <title key="title">H2U</title>
       <meta
         name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0"
@@ -18,7 +19,6 @@ const GlobalHead: React.FC = () => {
         rel="apple-touch-icon"
         href="/images/apple-touch-icon.png?t=20211101"
       />
-      <title>HELLOERO powered by H2U</title>
     </Head>
   );
 };
