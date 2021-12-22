@@ -13,7 +13,19 @@
     },
     "categories": {
       "auth": {
-        "helloerof377b7dd": {}
+        "h2umonopackagesaccou": {
+          "userPoolId": "ap-northeast-1_Fa8RYnzZ1",
+          "userPoolName": "helloerof377b7dd_userpool_f377b7dd-dev",
+          "webClientId": "1cfqtbluolk14ijbsq2osqbspp",
+          "nativeClientId": "1cfqtbluolk14ijbsq2osqbspp",
+          "identityPoolId": "ap-northeast-1:839e24ad-2969-4320-b01a-55049f3972b0",
+          "identityPoolName": "helloerof377b7dd_identitypool_f377b7dd__dev",
+          "allowUnauthenticatedIdentities": false,
+          "authRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-dev-175146-authRole",
+          "authRoleName": "amplify-helloero-dev-175146-authRole",
+          "unauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-dev-175146-unauthRole",
+          "unauthRoleName": "amplify-helloero-dev-175146-unauthRole"
+        }
       }
     }
   }
