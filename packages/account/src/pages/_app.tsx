@@ -4,7 +4,7 @@ import Amplify, { I18n } from 'aws-amplify';
 import '../styles/globals.css';
 import config from '../aws-exports';
 import { globalConfig } from 'src/globalConfig';
-import { vocabularies } from '@/shared/assets/i18n/amplify/vocabularies';
+import { vocabularies } from '@/shared/i18n/amplify/vocabularies';
 import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import theme from '@/shared/styles/theme';

@@ -54,6 +54,10 @@ const lang: LocaleData = {
     },
     menus: {
       login: 'ログイン/登録',
+      helloero: 'HELLOERO',
+      account: 'アカウント設定',
+      help: 'ヘルプ',
+      logout: 'ログアウト',
     },
     logout: {
       title: 'H2Uからログアウトしますか？',
@@ -76,7 +80,7 @@ const lang: LocaleData = {
     },
     menus: {
       settings: '設定',
-      login: 'ログイン/アカウント登録',
+      login: 'ログイン/登録',
       logout: 'ログアウト',
       account: 'アカウント設定',
       help: 'ヘルプ',

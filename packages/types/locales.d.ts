@@ -50,6 +50,10 @@ export interface LocaleData {
     };
     menus: {
       login: string;
+      helloero: string;
+      account: string;
+      help: string;
+      logout: string;
     };
     logout: {
       title: string;

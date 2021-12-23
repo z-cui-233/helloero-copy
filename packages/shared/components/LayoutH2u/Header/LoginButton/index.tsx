@@ -14,20 +14,20 @@ const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { locale, lang } = useLocale();
 
-  return isLoadedUserInfo && userInfo.isLoggedIn ? null : (
+  return isLoadedUserInfo && !userInfo.isLoggedIn ? (
     <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
       <Container>
         <div>{lang.account.menus.login}</div>
       </Container>
     </Link>
-  );
+  ) : null;
 };
 
 const Container = styled.a`
   ${typo.Body}
   position: absolute;
   top: 0;
-  right: 0.5rem;
+  right: 3.5rem;
   bottom: 0;
   height: 2.5rem;
   z-index: 1000;

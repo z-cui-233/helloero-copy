@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
+import HamburgerButton from './HamburgerButton';
 import LoginButton from './LoginButton';
+import Menus from './Menus';
 import SiteLogo from './SiteLogo';
 
 interface Props {
@@ -9,11 +11,22 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ options }) => {
+  const [isDisplayedMenu, setIsDisplayedMenu] = useState<boolean>(false);
+
+  const handleClickHamburger = (): void => {
+    setIsDisplayedMenu(!isDisplayedMenu);
+  };
+
   return (
     <Container>
       <HeaderContents>
         <SiteLogo />
         <LoginButton options={options} />
+        <HamburgerButton
+          isDisplayedMenu={isDisplayedMenu}
+          onClick={handleClickHamburger}
+        />
+        <Menus isDisplayedMenu={isDisplayedMenu} options={options} />
       </HeaderContents>
     </Container>
   );

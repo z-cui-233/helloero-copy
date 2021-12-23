@@ -10,7 +10,7 @@ import GlobalScripts from '@/shared/components/GlobalScripts';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import Amplify, { I18n } from 'aws-amplify';
 import config from '../aws-exports';
-import { vocabularies } from '@/shared/assets/i18n/amplify/vocabularies';
+import { vocabularies } from '@/shared/i18n/amplify/vocabularies';
 import '@/localShared/assets/css/amplify.css';
 import { cookieParams } from '@/shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
