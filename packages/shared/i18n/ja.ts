@@ -51,6 +51,10 @@ const lang: LocaleData = {
         title: 'ログアウト - H2U アカウント',
         description: '',
       },
+      updateEmail: {
+        title: 'メールアドレスの変更 - H2U アカウント',
+        description: '',
+      },
     },
     menus: {
       login: 'ログイン/登録',
@@ -64,6 +68,25 @@ const lang: LocaleData = {
       text: '再度ログインするには、ログインIDとパスワードが必要です。',
       button: 'ログアウト',
       cancel: 'キャンセル',
+    },
+    updateEmail: {
+      email: {
+        title: 'メールアドレスの変更',
+        text: 'ご希望のメールアドレスを入力して、本人確認コードを送信してください。',
+        email: '新しいメールアドレス',
+        button: '本人確認コードを送信',
+      },
+      verification: {
+        title: 'メールアドレスの変更',
+        text: 'メールアドレスに送信した本人確認コードを入力してください。',
+        code: '本人確認コード',
+        button: '本人確認コードを認証',
+      },
+      complete: {
+        title: '変更が完了しました',
+        text: 'メールアドレスの変更が完了しました。',
+        home: 'ホーム',
+      },
     },
   },
   helloero: {

@@ -47,6 +47,10 @@ export interface LocaleData {
         title: string;
         description: string;
       };
+      updateEmail: {
+        title: string;
+        description: string;
+      };
     };
     menus: {
       login: string;
@@ -60,6 +64,25 @@ export interface LocaleData {
       text: string;
       button: string;
       cancel: string;
+    };
+    updateEmail: {
+      email: {
+        title: string;
+        text: string;
+        email: string;
+        button: string;
+      };
+      verification: {
+        title: string;
+        text: string;
+        code: string;
+        button: string;
+      };
+      complete: {
+        title: string;
+        text: string;
+        home: string;
+      };
     };
   };
   helloero: {
