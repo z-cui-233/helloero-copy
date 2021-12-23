@@ -19,7 +19,7 @@ export const createTitleThumbnailUrl = (
 export const getErrorMessage = (
   lang: LocaleData,
   key: keyof typeof lang.messages,
-  code: number | undefined
+  code: number | string | undefined
 ): string => {
   const messageList = lang.messages[key];
   return messageList[code as keyof typeof messageList] ?? lang.messages.default;

@@ -21,3 +21,11 @@ export interface GraphQLResultEx<T = object> extends GraphQLResult {
     [key: string]: any;
   };
 }
+
+export interface CodeDeliveryDetails {
+  CodeDeliveryDetails: {
+    AttributeName: string;
+    DeliveryMedium: string;
+    Destination: string;
+  };
+}
