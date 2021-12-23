@@ -20,7 +20,7 @@ const StyledLogo = styled(Logo)`
   &&& {
     position: absolute;
     top: 0;
-    left: 0.5rem;
+    left: 1rem;
     bottom: 0;
     margin: auto;
     height: 2.5rem;
