@@ -2,49 +2,49 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { UseUpdateEmail } from '../useUpdateEmail';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import TextField from '@/shared/components/parts/TextField';
-import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { UseEntryWabiken } from '../useEntryWabiken';
+import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const validationSchema = Yup.object().shape({
-  wabiken: Yup.string()
+  email: Yup.string()
     .required('入力必須です。')
-    .matches(/^[0-9a-zA-Z]/, '半角英数字で入力してください。')
-    .length(16, '16文字で入力してください。'),
+    .email('形式が正しくありません。'),
 });
 
-const InputForm: React.FC<UseEntryWabiken> = (props) => {
+const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
   const { lang } = useLocale();
-
   const formik = useFormik({
-    initialValues: props.entryWabikenState.formValues,
+    initialValues: {
+      email: props.updateEmailState.formValues.email,
+    },
     validationSchema,
-    onSubmit: props.confirmWabiken,
+    onSubmit: props.confirmEmail,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.entryWabikenState.errorMessage} />
-      <Title>{lang.helloero.entry.input.title}</Title>
-      <Text>{lang.helloero.entry.input.text}</Text>
+      <FormErrorMessage message={props.updateEmailState.errorMessage} />
+      <Title>{lang.account.updateEmail.email.title}</Title>
+      <Text>{lang.account.updateEmail.email.text}</Text>
       <FieldSection>
         <TextField
-          label={lang.helloero.entry.input.serial}
+          label={lang.account.updateEmail.email.email}
           fieldOptions={{
             type: 'text',
-            name: 'wabiken',
+            name: 'email',
             onChange: formik.handleChange,
             onBlur: formik.handleBlur,
-            value: formik.values.wabiken,
-            isError: !!formik.touched.wabiken && !!formik.errors.wabiken,
+            value: formik.values.email,
+            isError: !!formik.touched.email && !!formik.errors.email,
           }}
           validateMessage={
-            formik.touched.wabiken && formik.errors.wabiken
-              ? (formik.errors.wabiken as string)
+            formik.touched.email && formik.errors.email
+              ? (formik.errors.email as string)
               : ''
           }
         />
@@ -54,7 +54,7 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.helloero.entry.input.button}
+          label={lang.account.updateEmail.email.button}
         />
       </ButtonSection>
     </MainContainer>
@@ -78,4 +78,4 @@ const ButtonSection = styled.div`
   text-align: center;
 `;
 
-export default InputForm;
+export default InputEmailForm;
