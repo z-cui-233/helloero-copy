@@ -68,13 +68,15 @@ const usePlayer = (): UsePlayer => {
           return {
             displayName: 'this is displayName',
             playables: endpointData.playables.reduce((result, current) => {
+              let appendValue = {};
+
               if (
                 current.type === 'dash' ||
                 current.type === 'hls-cmaf' ||
                 current.type === 'hls-fp' ||
                 current.type === 'hls-s-aes'
               ) {
-                return {
+                appendValue = {
                   [current.type]: current.cdns.map((cdnData) => {
                     return {
                       id: cdnData.cdnId,
@@ -94,7 +96,11 @@ const usePlayer = (): UsePlayer => {
                   }),
                 };
               }
-              return result;
+
+              return {
+                ...result,
+                ...appendValue,
+              };
             }, {}),
             sceneSearchLists:
               endpointData.sceneSearchList

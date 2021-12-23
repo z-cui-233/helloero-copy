@@ -10,6 +10,10 @@ const GlobalScripts: React.FC = () => {
 
   useEffect(() => {
     const handleRouteChange = (): void => {
+      if (!(window as CustomWindow).gtag) {
+        return;
+      }
+
       const gtagParams: GTagConfig = {
         page_title: window.document.title,
         page_location: window.location.href,
