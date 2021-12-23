@@ -69,7 +69,7 @@ const List = styled.div`
 `;
 
 const DummyCard = styled.div`
-  background-color: ${({ theme }) => theme.background.tertiary};
+  background-color: ${({ theme }) => theme.keyColor.color3};
   aspect-ratio: 5 / 7;
   width: 100%;
 `;

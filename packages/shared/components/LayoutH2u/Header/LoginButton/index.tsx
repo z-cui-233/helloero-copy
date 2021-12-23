@@ -1,16 +1,21 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
+import { Config } from 'u-next/config';
 import { useLocale } from '../../../../context/LocaleContext';
 import { useLoginStateContext } from '../../../../context/LoginStateContext';
 import typo from '../../../../styles/typo';
 
-const LoginButton: React.FC = () => {
+interface Props {
+  options: Config;
+}
+
+const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { locale, lang } = useLocale();
 
   return isLoadedUserInfo && userInfo.isLoggedIn ? null : (
-    <Link href={`/${locale}/login`} passHref>
+    <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
       <Container>
         <div>{lang.account.menus.login}</div>
       </Container>
@@ -24,7 +29,7 @@ const Container = styled.a`
   top: 0;
   right: 0.5rem;
   bottom: 0;
-  height: 3rem;
+  height: 2.5rem;
   z-index: 1000;
   margin: auto 0;
   background-color: ${({ theme }) => theme.background.primaryInverted};

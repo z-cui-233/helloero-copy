@@ -75,6 +75,7 @@ export interface LocaleData {
       logout: string;
       account: string;
       help: string;
+      helpcenter: string;
       terms: string;
       support: string;
     };

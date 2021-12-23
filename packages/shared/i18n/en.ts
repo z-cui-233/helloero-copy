@@ -80,6 +80,7 @@ const lang: LocaleData = {
       logout: 'Logout',
       account: 'Account',
       help: 'Help',
+      helpcenter: 'Help Center',
       terms: 'Privacy',
       support: 'Support',
     },
@@ -100,7 +101,7 @@ const lang: LocaleData = {
       },
       purchased: {
         title: '購入済み',
-        detail: 'MORE',
+        detail: 'DETAIL',
         watch: 'PLAY',
       },
     },
