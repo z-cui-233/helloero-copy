@@ -55,7 +55,7 @@ const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
   );
 };
 
-const Container = styled.div<{ isDisplayedMenu: boolean }>`
+const Container = styled.nav<{ isDisplayedMenu: boolean }>`
   position: fixed;
   top: 0.5rem;
   right: 0.5rem;
@@ -77,19 +77,28 @@ const Container = styled.div<{ isDisplayedMenu: boolean }>`
   }
 `;
 
-const MenuList = styled.div`
-  margin: 4.5rem 0 0;
-  padding: 0 1.5rem 3rem;
+const MenuList = styled.ul`
+  margin: 5rem 0 0;
+  padding: 0;
 `;
 
-const MenuItem = styled.div`
-  margin: 0.5rem 0 0;
+const MenuItem = styled.li`
+  border-top: 1px solid ${({ theme }) => theme.background.tertiary};
 `;
 
 const StyledLink = styled.a`
   ${typo.Standard};
   color: ${({ theme }) => theme.foreground.primary};
   font-weight: bold;
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.1s ease-out;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.background.secondary};
+    text-decoration: none;
+  }
 `;
 
 export default Menus;
