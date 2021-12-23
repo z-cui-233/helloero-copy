@@ -78,12 +78,19 @@ const Container = styled.nav<{ isDisplayedMenu: boolean }>`
 `;
 
 const MenuList = styled.ul`
-  margin: 5rem 0 0;
-  padding: 0;
+  margin: 4.5rem 0 0;
+  border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+  padding: 0 1rem 1rem;
+
+  @media ${device.mobile} {
+    margin: 5rem 0 0;
+  }
 `;
 
 const MenuItem = styled.li`
-  border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+  &:not(:first-child) {
+    border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+  }
 `;
 
 const StyledLink = styled.a`
