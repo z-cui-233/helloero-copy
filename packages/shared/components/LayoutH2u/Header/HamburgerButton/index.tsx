@@ -27,6 +27,8 @@ const Container = styled.div`
   overflow: hidden;
   margin: auto 0;
   cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const TopLine = styled.div<{ isDisplayedMenu: boolean }>`

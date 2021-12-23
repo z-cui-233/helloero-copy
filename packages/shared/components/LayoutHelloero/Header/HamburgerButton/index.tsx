@@ -17,6 +17,8 @@ const HamburgerButton: React.FC<Props> = ({ isDisplayedMenu, onClick }) => {
 };
 
 const Container = styled.div<{ isDisplayedMenu: boolean }>`
+  background-color: ${({ theme, isDisplayedMenu }) =>
+    isDisplayedMenu ? theme.keyColor.color3 : theme.background.primaryInverted};
   position: absolute;
   top: 0;
   right: 0;
@@ -24,11 +26,9 @@ const Container = styled.div<{ isDisplayedMenu: boolean }>`
   width: 4rem;
   height: 4rem;
   z-index: 1000;
-
-  background-color: ${({ theme, isDisplayedMenu }) =>
-    isDisplayedMenu ? theme.keyColor.color3 : theme.background.primaryInverted};
   cursor: pointer;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
   transition: background-color 0.3s ease;
 
   &:hover {
