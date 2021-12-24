@@ -32,6 +32,10 @@ export interface LocaleData {
       403002: string; // wabikenは他人にロックされてる
       404000: string; // 存在しないwabiken
     };
+    authForgotPasswordSubmit: {
+      CodeMismatchException: string; // 本人確認コードが間違い
+      InvalidParameterException: string; // パスワード形式がNG
+    };
   };
   account: {
     meta: {
@@ -48,6 +52,10 @@ export interface LocaleData {
         description: string;
       };
       updateEmail: {
+        title: string;
+        description: string;
+      };
+      resetPassword: {
         title: string;
         description: string;
       };
@@ -76,6 +84,25 @@ export interface LocaleData {
         title: string;
         text: string;
         code: string;
+        button: string;
+      };
+      complete: {
+        title: string;
+        text: string;
+        home: string;
+      };
+    };
+    resetPassword: {
+      send: {
+        title: string;
+        text: string;
+        button: string;
+      };
+      input: {
+        title: string;
+        text: string;
+        verificationCode: string;
+        newPassword: string;
         button: string;
       };
       complete: {

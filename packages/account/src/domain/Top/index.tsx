@@ -16,6 +16,11 @@ const Top: React.FC = () => {
             <a>メールアドレスの変更</a>
           </Link>
         </div>
+        <div>
+          <Link href={`/${locale}/reset-password`} passHref>
+            <a>パスワードの変更</a>
+          </Link>
+        </div>
       </MainContainer>
     </LayoutH2u>
   );

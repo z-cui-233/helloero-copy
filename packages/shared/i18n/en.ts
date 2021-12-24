@@ -36,6 +36,11 @@ const lang: LocaleData = {
       404000:
         '入力したアドレスが間違っているか、ページが移動した可能性があります。', // 存在しないwabiken
     },
+    authForgotPasswordSubmit: {
+      CodeMismatchException: '本人確認コードが間違っています。', // 本人確認コードが間違い
+      InvalidParameterException:
+        'パスワードに利用できない文字があるか、形式が間違っています。', // パスワード形式がNG
+    },
   },
   account: {
     meta: {
@@ -48,11 +53,15 @@ const lang: LocaleData = {
         description: '',
       },
       logout: {
-        title: 'Logout - H2UAccount',
+        title: 'Logout - H2U Account',
         description: '',
       },
       updateEmail: {
-        title: 'Update Email - H2U アカウント',
+        title: 'Update Email - H2U Account',
+        description: '',
+      },
+      resetPassword: {
+        title: 'Change Password - H2U Account',
         description: '',
       },
     },
@@ -85,6 +94,25 @@ const lang: LocaleData = {
       complete: {
         title: '変更が完了しました',
         text: 'メールアドレスの変更が完了しました。',
+        home: 'HOME',
+      },
+    },
+    resetPassword: {
+      send: {
+        title: 'Reset Password',
+        text: 'パスワードを変更するには、本人確認が必要です。下記のメールアドレスに本人確認メールを送信してください。',
+        button: 'このアドレスに送信',
+      },
+      input: {
+        title: 'Reset Password',
+        text: '下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。',
+        verificationCode: '本人確認コード',
+        newPassword: '新しいパスワード',
+        button: 'パスワードを変更',
+      },
+      complete: {
+        title: '変更が完了しました',
+        text: 'パスワードの変更が完了しました。',
         home: 'HOME',
       },
     },
