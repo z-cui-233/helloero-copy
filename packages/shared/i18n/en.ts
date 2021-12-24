@@ -36,10 +36,89 @@ const lang: LocaleData = {
       404000:
         '入力したアドレスが間違っているか、ページが移動した可能性があります。', // 存在しないwabiken
     },
-    authForgotPasswordSubmit: {
-      CodeMismatchException: '本人確認コードが間違っています。', // 本人確認コードが間違い
+    authSignUp: {
+      UsernameExistsException: 'このログインIDは利用できません。',
+      // ユーザープール内に既に同じ username が存在する場合に起こる。
+      InvalidPasswordException: 'パスワードの形式・文字数が間違っています。',
+      // ユーザープールのポリシーで設定したパスワードの強度を満たさない場合に起こる。
+      InvalidParameterException: '入力内容をお確かめください。',
+      // 必要な属性が足りない場合や、入力された各項目が Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+      // password が6文字未満の場合はバリデーションエラーでこちらのエラーコードが返ってくる。
+    },
+    authConfirmSignUp: {
+      CodeMismatchException: '本人確認コードが間違っています。',
+      // 無効なコードが入力された場合に起こる。
+      LimitExceededException:
+        '一定回数間違えたため、登録できません。しばらく時間をおいてから、再度お試しください。',
+      // コードを間違え続けた場合に起こる。
+      ExpiredCodeException:
+        '本人確認コードの期限が切れました。もう一度最初からやり直してください。',
+      // コードが期限切れ（24時間をオーバー）した場合に起こる。
+      // 注) username が存在しない・無効化されている場合にも起こる。
+      NotAuthorizedException:
+        '既に登録済みです。ログイン画面からログインしてください。',
+      // 既にステータスが CONFIRMED になっている場合に起こる。
+      CodeDeliveryFailureException:
+        '予期せぬエラーが発生しました。もう一度お試しください。',
+      // 検証コードの送信に失敗した場合に起こる。
+    },
+    authResendSignUp: {
+      CodeDeliveryFailureException:
+        '予期せぬエラーが発生しました。もう一度お試しください。',
+      // 検証コードの送信に失敗した場合に起こる。
+    },
+    authSignIn: {
+      UserNotConfirmedException: 'このアカウントはまだ登録が完了していません。',
+      // ユーザのステータスが UNCONFIRMED の場合に起こる。
+      // SignUp用のコードを再送し、ステータスを CONFIRMED にする必要がある。
+      // 検証コードの再送は １．３節の ResendConfirmationCode() を参照。
+      PasswordResetRequiredException:
+        'このアカウントはパスワードリセットされています。パスワードを再設定してください。',
+      // Cognito コンソールでパスワードをリセット（ユーザープールにユーザをインポートする場合も含む）した場合に起こる。
+      // パスワードをリセットする必要がある。
+      // パスワードのリセットは 3.1節の SendForgotPasswordCode() 参照。
+      NotAuthorizedException: 'ログインID、パスワードが正しいかご確認下さい。',
+      // 誤ったパスワードを入力した場合に起こる。
+      // 注) パスワードを間違え続けた場合にも起こり、 error.message が 'Password attempts exceeded' になる。
+      // （エラーコードとして LimitExceededException が返ってくると思ったらそうではなかった）
+      UserNotFoundException: 'ログインID、パスワードが正しいかご確認下さい。',
+      // PASSWORD_VERIFIER は通るものの username が Cognito ユーザープールに存在しない場合に起こる。
       InvalidParameterException:
-        'パスワードに利用できない文字があるか、形式が間違っています。', // パスワード形式がNG
+        'ログインID、パスワードが正しいかご確認下さい。',
+      // 入力された username や password が Cognito 側で正しくパースできないとき（バリデーションエラー）に起こる。
+      // 注) 2019/04/24 現在、Cognito コンソールでパスワードをリセットした場合は 'PasswordResetRequiredException' ではなくこのエラーコードが返される。
+    },
+    authForgotPassword: {
+      UserNotFoundException: 'ログインIDが正しいかご確認下さい。', // そんなログインIDは、いない
+      LimitExceededException:
+        '一定回数間違えたため、変更できません。しばらく時間をおいてから、再度お試しください。', // コード間違いの回数オーバー
+    },
+    authForgotPasswordSubmit: {
+      CodeMismatchException: '本人確認コードが間違っています。', // 無効なコードが入力された場合に起こる。
+      LimitExceededException:
+        '一定回数間違えたため、変更できません。しばらく時間をおいてから、再度お試しください。', // コードを間違え続けた場合に起こる。
+      ExpiredCodeException:
+        '本人確認コードの期限が切れました。もう一度最初からやり直してください。', // コードが期限切れ（1時間をオーバー）した場合に起こる。
+      InvalidPasswordException: 'パスワードの形式・文字数が間違っています。', // ユーザープールのポリシーで設定したパスワードの強度を満たさない場合に起こる。
+      InvalidParameterException:
+        'パスワードに利用できない文字があるか、形式が間違っています。', // password が6文字未満など Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+    },
+    authUpdateUserAttributes: {
+      InvalidParameterException:
+        '予期せぬエラーが発生しました。もう一度お試しください。', // phone_number が E.164 number convention でないなど各属性が Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+      CodeDeliveryFailureException:
+        '予期せぬエラーが発生しました。もう一度お試しください。', // 検証コードの送信に失敗した場合に起こる。
+    },
+    authVerifyCurrentUserAttributeSubmit: {
+      CodeMismatchException: '本人確認コードが間違っています。', // 無効なコードが入力された場合に起こる。
+      LimitExceededException:
+        '一定回数間違えたため、変更できません。しばらく時間をおいてから、再度お試しください。', // コードを間違え続けた場合に起こる。
+      ExpiredCodeException:
+        '本人確認コードの期限が切れました。もう一度最初からやり直してください。', // コードが期限切れ（24時間をオーバー）した場合に起こる。
+      NotAuthorizedException:
+        '予期せぬエラーが発生しました。もう一度お試しください。', // ユーザーが無効化された場合に起こる。
+      UserNotFoundException:
+        '予期せぬエラーが発生しました。もう一度お試しください。', // ユーザーがユーザープールに存在しない場合に起こる。
     },
   },
   account: {
@@ -85,6 +164,47 @@ const lang: LocaleData = {
         login: 'Login',
       },
     },
+    login: {
+      title: 'H2Uにログイン',
+      loginId: 'Login ID',
+      password: 'Password',
+      button: 'LOGIN',
+      signUp: 'H2Uアカウントを作成',
+      resetPassword: 'パスワードを忘れた方',
+    },
+    loginPasswordResetRequired: {
+      title: 'ログインができません。',
+      text: 'このアカウントはパスワードリセットされています。パスワードを再設定してください。',
+      button: 'パスワードの変更',
+    },
+    loginNotConfirmed: {
+      title: 'ログインができません。',
+      text: 'このアカウントはメールアドレスの確認が完了していません。メールアドレスの確認をしてください。',
+      button: 'メールアドレスの確認',
+    },
+
+    signUpStep1: {
+      title: 'H2Uアカウントの登録',
+      text: '',
+      loginId: 'ログインID',
+      password: 'パスワード',
+      showPassword: 'パスワードを表示する',
+      email: 'メールアドレス',
+      button: '次へ',
+    },
+    signUpStep2: {
+      title: 'H2Uアカウントの登録',
+      text: '',
+      code: '本人確認コード',
+      terms: '利用規約',
+      button: '規約に同意して登録',
+    },
+    signUpStep3: {
+      title: 'H2Uアカウントの登録が完了しました',
+      text: 'string',
+      button: 'ホーム',
+    },
+
     logout: {
       title: 'H2Uからログアウトしますか？',
       text: '再度ログインするには、ログインIDとパスワードが必要です。',
@@ -113,7 +233,8 @@ const lang: LocaleData = {
     resetPassword: {
       send: {
         title: 'Reset Password',
-        text: 'パスワードを変更するには、本人確認が必要です。下記のメールアドレスに本人確認メールを送信してください。',
+        text: 'パスワードを変更するには、本人確認が必要です。',
+        userName: 'ログインID',
         button: 'このアドレスに送信',
       },
       input: {

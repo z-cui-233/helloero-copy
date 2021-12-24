@@ -5,32 +5,32 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { globalConfig } from 'src/globalConfig';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
-import useLogout from './useLogout';
+import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Logout: React.FC = () => {
-  const { invokeLogOut, isLoading } = useLogout();
+  const { logoutChallengeState, invokeLogOut } = useLogoutChallenge();
   const { locale, lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <MainContainer>
-        <Title>{lang.account.logout.title}</Title>
-        <Text>{lang.account.logout.text}</Text>
-        <ButtonSection>
-          <ButtonStandard
-            onClick={() => {
-              invokeLogOut();
-            }}
-            label={lang.account.logout.button}
-            disabled={isLoading}
-          />
-          <Link href={`/${locale}`} passHref>
-            <StyledLink>{lang.account.logout.cancel}</StyledLink>
-          </Link>
-        </ButtonSection>
-      </MainContainer>
+      {logoutChallengeState.pageStatus === PAGE_STATUS.CONFIRM ? (
+        <MainContainer>
+          <Title>{lang.account.logout.title}</Title>
+          <Text>{lang.account.logout.text}</Text>
+          <ButtonSection>
+            <ButtonStandard
+              onClick={() => {
+                invokeLogOut();
+              }}
+              label={lang.account.logout.button}
+            />
+            <Link href={`/${locale}`} passHref>
+              <StyledLink>{lang.account.logout.cancel}</StyledLink>
+            </Link>
+          </ButtonSection>
+        </MainContainer>
+      ) : null}
     </LayoutH2u>
   );
 };
@@ -56,4 +56,4 @@ const StyledLink = styled.a`
   margin: 1.5rem auto 0;
 `;
 
-export default withAmplifyAuth(Logout, globalConfig);
+export default Logout;

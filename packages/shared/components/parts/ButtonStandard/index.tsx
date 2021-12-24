@@ -5,10 +5,11 @@ import AddIcon from '../../../assets/icon/add.svg';
 import PlayIcon from '../../../assets/icon/play_arrow.svg';
 
 interface Props {
-  onClick: (e: unknown) => unknown;
+  onClick?: (e: unknown) => unknown;
   label: string;
   iconType?: ButtonIcons;
   disabled?: boolean;
+  type?: 'button' | 'submit';
 }
 
 export const BUTTON_ICONS = {
@@ -35,6 +36,7 @@ const ButtonStandard: React.FC<Props> = ({
   label,
   iconType,
   disabled,
+  type = 'button',
 }) => {
   const hasIcon = !!iconType;
 
@@ -42,7 +44,7 @@ const ButtonStandard: React.FC<Props> = ({
     <div>
       <Button
         onClick={onClick}
-        type="button"
+        type={type}
         hasIcon={hasIcon}
         disabled={disabled}
       >

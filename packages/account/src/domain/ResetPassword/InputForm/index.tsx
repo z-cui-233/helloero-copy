@@ -9,6 +9,7 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import { UseResetPassword } from '../useResetPassword';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 
 const validationSchema = Yup.object().shape({
   verificationCode: Yup.string().required('入力必須です。'),
@@ -34,53 +35,48 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
           {props.resetPasswordState.destination}
         </DestinationMail>
       </Text>
-      <FieldSection>
-        <TextField
-          label={lang.account.resetPassword.input.verificationCode}
-          fieldOptions={{
-            type: 'text',
-            name: 'verificationCode',
-            onChange: formik.handleChange,
-            onBlur: formik.handleBlur,
-            value: formik.values.verificationCode,
-            isError:
-              !!formik.touched.verificationCode &&
-              !!formik.errors.verificationCode,
-          }}
-          validateMessage={
-            formik.touched.verificationCode && formik.errors.verificationCode
-              ? (formik.errors.verificationCode as string)
-              : ''
-          }
-        />
-      </FieldSection>
-      <FieldSection>
-        <TextField
-          label={lang.account.resetPassword.input.newPassword}
-          fieldOptions={{
-            type: 'text',
-            name: 'newPassword',
-            onChange: formik.handleChange,
-            onBlur: formik.handleBlur,
-            value: formik.values.newPassword,
-            isError:
-              !!formik.touched.newPassword && !!formik.errors.newPassword,
-          }}
-          validateMessage={
-            formik.touched.newPassword && formik.errors.newPassword
-              ? (formik.errors.newPassword as string)
-              : ''
-          }
-        />
-      </FieldSection>
-      <ButtonSection>
-        <ButtonStandard
-          onClick={() => {
-            formik.handleSubmit();
-          }}
-          label={lang.account.resetPassword.input.button}
-        />
-      </ButtonSection>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          formik.handleSubmit();
+        }}
+      >
+        <Section>
+          <FieldSection>
+            <TextField
+              label={lang.account.resetPassword.input.verificationCode}
+              fieldOptions={getFormikFieldOptions(
+                formik,
+                'verificationCode',
+                'tel'
+              )}
+              validateMessage={getFormikErrorMessage(
+                formik,
+                'verificationCode'
+              )}
+            />
+          </FieldSection>
+          <FieldSection>
+            <TextField
+              label={lang.account.resetPassword.input.newPassword}
+              fieldOptions={{
+                ...getFormikFieldOptions(formik, 'newPassword', 'password'),
+                autoComplete: 'new-password',
+              }}
+              validateMessage={getFormikErrorMessage(formik, 'password')}
+            />
+          </FieldSection>
+        </Section>
+        <ButtonSection>
+          <ButtonStandard
+            onClick={() => {
+              return;
+            }}
+            type="submit"
+            label={lang.account.resetPassword.input.button}
+          />
+        </ButtonSection>
+      </form>
     </MainContainer>
   );
 };
@@ -99,8 +95,12 @@ const DestinationMail = styled.div`
   margin: 1rem 0 0;
 `;
 
-const FieldSection = styled.div`
+const Section = styled.div`
   margin: 2rem 0 0;
+`;
+
+const FieldSection = styled.div`
+  margin: 1rem 0 0;
 `;
 
 const ButtonSection = styled.div`

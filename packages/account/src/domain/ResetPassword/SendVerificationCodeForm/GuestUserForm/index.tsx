@@ -1,45 +1,42 @@
-import React from 'react';
-import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { UseUpdateEmail } from '../useUpdateEmail';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
+import { useLocale } from '@/shared/context/LocaleContext';
+import typo from '@/shared/styles/typo';
+import React from 'react';
+import styled from 'styled-components';
+import { UseResetPassword } from '../../useResetPassword';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import typo from '@/shared/styles/typo';
-import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 
 const validationSchema = Yup.object().shape({
-  verificationCode: Yup.string().required('入力必須です。'),
+  userName: Yup.string().required('入力必須です。'),
 });
 
-const InputVerificationCodeForm: React.FC<UseUpdateEmail> = (props) => {
+const GuestUserForm: React.FC<UseResetPassword> = (props) => {
   const { lang } = useLocale();
+
   const formik = useFormik({
     initialValues: {
-      verificationCode: props.updateEmailState.formValues.verificationCode,
+      userName: props.resetPasswordState.formValues.userName,
     },
     validationSchema,
-    onSubmit: props.verifyCode,
+    onSubmit: props.sendVerificationCode,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.updateEmailState.errorMessage} />
-      <Title>{lang.account.updateEmail.verification.title}</Title>
-      <Text>{lang.account.updateEmail.verification.text}</Text>
+      <FormErrorMessage message={props.resetPasswordState.errorMessage} />
+      <Title>{lang.account.resetPassword.send.title}</Title>
+      <Text>{lang.account.resetPassword.send.text}</Text>
       <Section>
         <FieldSection>
           <TextField
-            label={lang.account.updateEmail.verification.code}
-            fieldOptions={getFormikFieldOptions(
-              formik,
-              'verificationCode',
-              'tel'
-            )}
-            validateMessage={getFormikErrorMessage(formik, 'verificationCode')}
+            label={lang.account.resetPassword.send.userName}
+            fieldOptions={getFormikFieldOptions(formik, 'userName')}
+            validateMessage={getFormikErrorMessage(formik, 'userName')}
           />
         </FieldSection>
       </Section>
@@ -48,7 +45,7 @@ const InputVerificationCodeForm: React.FC<UseUpdateEmail> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.updateEmail.verification.button}
+          label={lang.account.resetPassword.send.button}
         />
       </ButtonSection>
     </MainContainer>
@@ -76,4 +73,4 @@ const ButtonSection = styled.div`
   text-align: center;
 `;
 
-export default InputVerificationCodeForm;
+export default GuestUserForm;

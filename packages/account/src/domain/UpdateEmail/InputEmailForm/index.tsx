@@ -9,6 +9,7 @@ import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -31,24 +32,15 @@ const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
       <FormErrorMessage message={props.updateEmailState.errorMessage} />
       <Title>{lang.account.updateEmail.email.title}</Title>
       <Text>{lang.account.updateEmail.email.text}</Text>
-      <FieldSection>
-        <TextField
-          label={lang.account.updateEmail.email.email}
-          fieldOptions={{
-            type: 'text',
-            name: 'email',
-            onChange: formik.handleChange,
-            onBlur: formik.handleBlur,
-            value: formik.values.email,
-            isError: !!formik.touched.email && !!formik.errors.email,
-          }}
-          validateMessage={
-            formik.touched.email && formik.errors.email
-              ? (formik.errors.email as string)
-              : ''
-          }
-        />
-      </FieldSection>
+      <Section>
+        <FieldSection>
+          <TextField
+            label={lang.account.updateEmail.email.email}
+            fieldOptions={getFormikFieldOptions(formik, 'email')}
+            validateMessage={getFormikErrorMessage(formik, 'email')}
+          />
+        </FieldSection>
+      </Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -69,8 +61,12 @@ const Text = styled.div`
   margin: 1rem 0 0;
 `;
 
-const FieldSection = styled.div`
+const Section = styled.div`
   margin: 2rem 0 0;
+`;
+
+const FieldSection = styled.div`
+  margin: 1rem 0 0;
 `;
 
 const ButtonSection = styled.div`

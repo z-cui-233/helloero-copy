@@ -1,4 +1,5 @@
 import { useLocale } from '@/shared/context/LocaleContext';
+import { getErrorMessage } from '@/shared/utils';
 import { Auth } from 'aws-amplify';
 import { useCallback, useState } from 'react';
 
@@ -38,44 +39,72 @@ const useUpdateEmail = (): UseUpdateEmail => {
 
   const confirmEmail: UseUpdateEmail['confirmEmail'] = useCallback(
     async (values) => {
-      const user = await Auth.currentAuthenticatedUser();
-      const response = await Auth.updateUserAttributes(user, {
-        email: values.email,
-      });
-
-      const isError = response !== 'SUCCESS';
-      setUpdateEmailState((updateEmailState) => ({
-        ...updateEmailState,
-        pageStatus: isError
-          ? PAGE_STATUS.INPUT_EMAIL
-          : PAGE_STATUS.INPUT_VERIFICATION_CODE,
-        errorMessage: isError ? lang.messages.default : '',
-        formValues: {
-          ...updateEmailState.formValues,
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        await Auth.updateUserAttributes(user, {
           email: values.email,
-        },
-      }));
+        });
+
+        setUpdateEmailState((updateEmailState) => ({
+          ...updateEmailState,
+          pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
+          errorMessage: '',
+          formValues: {
+            ...updateEmailState.formValues,
+            email: values.email,
+          },
+        }));
+      } catch (error: unknown) {
+        const errorCode = error instanceof Error ? error.name : undefined;
+        const errorMessage = getErrorMessage(
+          lang,
+          'authUpdateUserAttributes',
+          errorCode
+        );
+
+        setUpdateEmailState((updateEmailState) => ({
+          ...updateEmailState,
+          pageStatus: PAGE_STATUS.INPUT_EMAIL,
+          errorMessage,
+          formValues: {
+            ...updateEmailState.formValues,
+            email: values.email,
+          },
+        }));
+      }
     },
-    [lang.messages.default]
+    [lang]
   );
 
   const verifyCode: UseUpdateEmail['verifyCode'] = useCallback(
     async (values) => {
-      const response = await Auth.verifyCurrentUserAttributeSubmit(
-        'email',
-        values.verificationCode
-      );
+      try {
+        await Auth.verifyCurrentUserAttributeSubmit(
+          'email',
+          values.verificationCode
+        );
 
-      const isError = response !== 'SUCCESS';
-      setUpdateEmailState((updateEmailState) => ({
-        ...updateEmailState,
-        pageStatus: isError
-          ? PAGE_STATUS.INPUT_VERIFICATION_CODE
-          : PAGE_STATUS.COMPLETE,
-        errorMessage: isError ? lang.messages.default : '',
-      }));
+        setUpdateEmailState((updateEmailState) => ({
+          ...updateEmailState,
+          pageStatus: PAGE_STATUS.COMPLETE,
+          errorMessage: '',
+        }));
+      } catch (error: unknown) {
+        const errorCode = error instanceof Error ? error.name : undefined;
+        const errorMessage = getErrorMessage(
+          lang,
+          'authVerifyCurrentUserAttributeSubmit',
+          errorCode
+        );
+
+        setUpdateEmailState((updateEmailState) => ({
+          ...updateEmailState,
+          pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
+          errorMessage,
+        }));
+      }
     },
-    [lang.messages.default]
+    [lang]
   );
 
   return {
