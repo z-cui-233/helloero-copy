@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang="ja">
+      <Html>
         <Head />
         <body>
           <Main />
