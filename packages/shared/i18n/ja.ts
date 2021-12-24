@@ -69,8 +69,21 @@ const lang: LocaleData = {
       login: 'ログイン/登録',
       helloero: 'HELLOERO',
       account: 'アカウント設定',
-      help: 'ヘルプ',
+      help: 'ヘルプセンター',
       logout: 'ログアウト',
+    },
+    top: {
+      service: {
+        title: 'サービス',
+        helloero: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
+      },
+      menus: {
+        title: 'アカウント設定',
+        updateEmail: 'メールアドレスの変更',
+        resetPassword: 'パスワードの変更',
+        help: 'ヘルプセンター',
+        login: 'ログイン',
+      },
     },
     logout: {
       title: 'H2Uからログアウトしますか？',

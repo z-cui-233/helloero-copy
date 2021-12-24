@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ options }) => {
   return (
     <Container>
       <HeaderContents>
-        <SiteLogo />
+        <SiteLogo options={options} />
         <LoginButton options={options} />
         <HamburgerButton
           isDisplayedMenu={isDisplayedMenu}

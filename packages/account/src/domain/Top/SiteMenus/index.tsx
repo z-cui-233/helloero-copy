@@ -5,47 +5,64 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
+import { globalConfig } from 'src/globalConfig';
 
 const SiteMenus: React.FC = () => {
-  const { locale } = useLocale();
+  const { locale, lang } = useLocale();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return (
     <Container>
-      <Title>アカウント設定</Title>
+      <Title>{lang.account.top.menus.title}</Title>
       {!isLoadedUserInfo && <div />}
-      {isLoadedUserInfo && userInfo.isLoggedIn && (
-        <List>
+      <List>
+        {isLoadedUserInfo && userInfo.isLoggedIn && (
+          <React.Fragment>
+            <div>
+              <Link href={`/${locale}/update-email`} passHref>
+                <StyledLink>
+                  {lang.account.top.menus.updateEmail}
+                  <Arrow>
+                    <ArrowLogo />
+                  </Arrow>
+                </StyledLink>
+              </Link>
+            </div>
+            <div>
+              <Link href={`/${locale}/reset-password`} passHref>
+                <StyledLink>
+                  {lang.account.top.menus.resetPassword}
+                  <Arrow>
+                    <ArrowLogo />
+                  </Arrow>
+                </StyledLink>
+              </Link>
+            </div>
+          </React.Fragment>
+        )}
+        {isLoadedUserInfo && !userInfo.isLoggedIn && (
           <div>
-            <Link href={`/${locale}/update-email`} passHref>
+            <Link href={`/${locale}/login`} passHref>
               <StyledLink>
-                メールアドレスの変更
+                {lang.account.top.menus.login}
                 <Arrow>
                   <ArrowLogo />
                 </Arrow>
               </StyledLink>
             </Link>
           </div>
-          <div>
-            <Link href={`/${locale}/reset-password`} passHref>
-              <StyledLink>
-                パスワードの変更
-                <Arrow>
-                  <ArrowLogo />
-                </Arrow>
-              </StyledLink>
-            </Link>
-          </div>
-        </List>
-      )}
-      {isLoadedUserInfo && !userInfo.isLoggedIn && (
-        <List>
-          <div>すべてのメニューを利用するにはログインが必要です</div>
-          <Link href={`/${locale}/login`} passHref>
-            <a>ログイン</a>
+        )}
+        <div>
+          <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+            <StyledLink>
+              {lang.account.top.menus.help}
+              <Arrow>
+                <ArrowLogo />
+              </Arrow>
+            </StyledLink>
           </Link>
-        </List>
-      )}
+        </div>
+      </List>
     </Container>
   );
 };
@@ -53,15 +70,15 @@ const SiteMenus: React.FC = () => {
 const Container = styled.div`
   margin: 3rem 0 0;
   border: 1px solid ${({ theme }) => theme.background.tertiary};
-  padding: 1.5rem 0 0 1.5rem;
 `;
 
 const Title = styled.div`
   ${typo.Heading3};
+  margin: 1.5rem 1.5rem 0;
 `;
 
 const List = styled.div`
-  margin: 1.5rem 0 0;
+  margin: 1.5rem 0 0 1.5rem;
 `;
 
 const StyledLink = styled.a`

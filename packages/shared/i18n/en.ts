@@ -66,11 +66,24 @@ const lang: LocaleData = {
       },
     },
     menus: {
-      login: 'SignIn',
+      login: 'Login',
       helloero: 'HELLOERO',
       account: 'Account',
-      help: 'Help Center',
+      help: 'Help',
       logout: 'Logout',
+    },
+    top: {
+      service: {
+        title: 'Services',
+        helloero: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
+      },
+      menus: {
+        title: 'Account',
+        updateEmail: 'メールアドレスの変更',
+        resetPassword: 'パスワードの変更',
+        help: 'Help Center',
+        login: 'Login',
+      },
     },
     logout: {
       title: 'H2Uからログアウトしますか？',
@@ -131,7 +144,7 @@ const lang: LocaleData = {
     },
     menus: {
       settings: 'Settings',
-      login: 'SignIn',
+      login: 'Login',
       logout: 'Logout',
       account: 'Account',
       help: 'Help',
@@ -143,7 +156,7 @@ const lang: LocaleData = {
       lead: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
       description:
         'ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。',
-      button: 'SignIn / SignUp',
+      button: 'Login / SignUp',
     },
     myLibrary: {
       wabiken: {
