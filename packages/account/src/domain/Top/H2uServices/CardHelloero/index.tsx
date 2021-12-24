@@ -3,15 +3,18 @@ import { globalConfig } from 'src/globalConfig';
 import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
 import Logo from '@/shared/assets/logo/helloeroBlack.svg';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const CardHelloero: React.FC = () => {
+  const { lang } = useLocale();
+
   return (
     <Container>
       <StyledLink href={globalConfig.HELLOERO}>
         <LogoBox>
           <Logo />
         </LogoBox>
-        <Text>シンプルに、カジュアルに。アダルトコンテンツを楽しもう。</Text>
+        <Text>{lang.account.top.service.helloero}</Text>
       </StyledLink>
     </Container>
   );

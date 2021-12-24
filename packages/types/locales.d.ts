@@ -67,6 +67,19 @@ export interface LocaleData {
       help: string;
       logout: string;
     };
+    top: {
+      service: {
+        title: string;
+        helloero: string;
+      };
+      menus: {
+        title: string;
+        updateEmail: string;
+        resetPassword: string;
+        help: string;
+        login: string;
+      };
+    };
     logout: {
       title: string;
       text: string;

@@ -3,12 +3,17 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Logo from '../../../../assets/logo/h2uRed.svg';
 import { useLocale } from '../../../../context/LocaleContext';
+import { Config } from 'u-next/config';
 
-const SiteLogo: React.FC = () => {
+interface Props {
+  options: Config;
+}
+
+const SiteLogo: React.FC<Props> = ({ options }) => {
   const { locale } = useLocale();
 
   return (
-    <Link href={`/${locale}`} passHref>
+    <Link href={`${options.ACCOUNT}/${locale}`} passHref>
       <a>
         <StyledLogo />
       </a>
