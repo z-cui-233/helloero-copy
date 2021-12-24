@@ -1,29 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import Link from 'next/link';
-import { useLocale } from '@/shared/context/LocaleContext';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import H2uServices from './H2uServices';
+import SiteMenus from './SiteMenus';
 
 const Top: React.FC = () => {
-  const { locale } = useLocale();
   return (
     <LayoutH2u options={globalConfig}>
-      <MainContainer>
-        <div>
-          <Link href={`/${locale}/update-email`} passHref>
-            <a>メールアドレスの変更</a>
-          </Link>
-        </div>
-        <div>
-          <Link href={`/${locale}/reset-password`} passHref>
-            <a>パスワードの変更</a>
-          </Link>
-        </div>
-      </MainContainer>
+      <Container>
+        <H2uServices />
+        <SiteMenus />
+      </Container>
     </LayoutH2u>
   );
 };
 
-export default withAmplifyAuth(Top, globalConfig);
+const Container = styled.div`
+  max-width: 800px;
+  margin: 4rem auto 0;
+  width: calc(100% - 2rem);
+`;
+
+export default Top;
