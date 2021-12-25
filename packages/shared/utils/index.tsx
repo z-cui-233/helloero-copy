@@ -1,4 +1,5 @@
 import dateFormat from 'dateformat';
+import { FormikProps } from 'formik';
 import { LocaleData } from 'u-next/locales';
 import { localeType } from '../context/LocaleContext';
 
@@ -22,7 +23,10 @@ export const getErrorMessage = (
   code: number | string | undefined
 ): string => {
   const messageList = lang.messages[key];
-  return messageList[code as keyof typeof messageList] ?? lang.messages.default;
+  const errorMessage =
+    messageList[code as keyof typeof messageList] ?? lang.messages.default;
+
+  return errorMessage;
 };
 
 export const createExpireDate = (
@@ -41,4 +45,28 @@ export const createExpireDate = (
   return local === 'ja'
     ? `${dateFormat(referenceDate, 'yyyy年m月d日 HH:MM')}まで視聴可能`
     : `Watch until ${dateFormat(referenceDate, 'mmm dd, yyyy HH:MM')} JST`;
+};
+
+export const getFormikFieldOptions = (
+  formik: FormikProps<any>,
+  name: string,
+  type = 'text'
+): any => {
+  return {
+    type,
+    name,
+    onChange: formik.handleChange,
+    onBlur: formik.handleBlur,
+    value: formik.values[name],
+    isError: !!formik.touched[name] && !!formik.errors[name],
+  };
+};
+
+export const getFormikErrorMessage = (
+  formik: FormikProps<any>,
+  name: string
+): string => {
+  return formik.touched[name] && formik.errors[name]
+    ? (formik.errors[name] as string)
+    : '';
 };

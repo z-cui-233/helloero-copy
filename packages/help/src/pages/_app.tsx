@@ -1,10 +1,9 @@
 import React from 'react';
 import type { AppContext, AppInitialProps, AppProps } from 'next/app';
-import Amplify, { I18n } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import '../styles/globals.css';
 import config from '../aws-exports';
 import { globalConfig } from 'src/globalConfig';
-import { vocabularies } from '@/shared/i18n/amplify/vocabularies';
 import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import theme from '@/shared/styles/theme';
@@ -27,8 +26,6 @@ Amplify.configure({
     },
   },
 });
-I18n.putVocabularies(vocabularies);
-I18n.setLanguage('ja');
 
 const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (

@@ -9,6 +9,7 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { useLocale } from '@/shared/context/LocaleContext';
+import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 
 const validationSchema = Yup.object().shape({
   wabiken: Yup.string()
@@ -31,24 +32,15 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
       <FormErrorMessage message={props.entryWabikenState.errorMessage} />
       <Title>{lang.helloero.entry.input.title}</Title>
       <Text>{lang.helloero.entry.input.text}</Text>
-      <FieldSection>
-        <TextField
-          label={lang.helloero.entry.input.serial}
-          fieldOptions={{
-            type: 'text',
-            name: 'wabiken',
-            onChange: formik.handleChange,
-            onBlur: formik.handleBlur,
-            value: formik.values.wabiken,
-            isError: !!formik.touched.wabiken && !!formik.errors.wabiken,
-          }}
-          validateMessage={
-            formik.touched.wabiken && formik.errors.wabiken
-              ? (formik.errors.wabiken as string)
-              : ''
-          }
-        />
-      </FieldSection>
+      <Section>
+        <FieldSection>
+          <TextField
+            label={lang.helloero.entry.input.serial}
+            fieldOptions={getFormikFieldOptions(formik, 'wabiken')}
+            validateMessage={getFormikErrorMessage(formik, 'wabiken')}
+          />
+        </FieldSection>
+      </Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -69,8 +61,12 @@ const Text = styled.div`
   margin: 1rem 0 0;
 `;
 
-const FieldSection = styled.div`
+const Section = styled.div`
   margin: 2rem 0 0;
+`;
+
+const FieldSection = styled.div`
+  margin: 1rem 0 0;
 `;
 
 const ButtonSection = styled.div`

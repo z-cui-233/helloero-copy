@@ -2,12 +2,13 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { getErrorMessage } from '@/shared/utils';
 import { Auth } from 'aws-amplify';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CodeDeliveryDetails } from 'u-next/amplify';
 
 export const PAGE_STATUS = {
-  SEND: 'SEND',
-  INPUT: 'INPUT',
+  INIT: 'INIT',
+  SEND_MAIL: 'SEND_MAIL',
+  INPUT_PASSWORD: 'INPUT_PASSWORD',
   COMPLETE: 'COMPLETE',
 } as const;
 type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
@@ -16,23 +17,28 @@ export interface UseResetPassword {
   resetPasswordState: {
     pageStatus: PageStatus;
     errorMessage: string;
+    isLogin: boolean;
     destination: string;
     formValues: {
+      userName: string;
       verificationCode: string;
       newPassword: string;
     };
   };
-  sendVerificationCode: () => Promise<void>;
-  verifyCodeAndUpdatePassword: (
-    values: UseResetPassword['resetPasswordState']['formValues']
-  ) => Promise<void>;
+  sendVerificationCode: (values: { userName: string }) => Promise<void>;
+  verifyCodeAndUpdatePassword: (values: {
+    verificationCode: string;
+    newPassword: string;
+  }) => Promise<void>;
 }
 
 const initialState: UseResetPassword['resetPasswordState'] = {
-  pageStatus: PAGE_STATUS.SEND,
+  pageStatus: PAGE_STATUS.INIT,
   errorMessage: '',
   destination: '',
+  isLogin: false,
   formValues: {
+    userName: '',
     verificationCode: '',
     newPassword: '',
   },
@@ -40,53 +46,105 @@ const initialState: UseResetPassword['resetPasswordState'] = {
 
 const useResetPassword = () => {
   const { lang } = useLocale();
-  const { userInfo } = useLoginStateContext();
+  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [resetPasswordState, setResetPasswordState] =
     useState<UseResetPassword['resetPasswordState']>(initialState);
 
   const sendVerificationCode: UseResetPassword['sendVerificationCode'] =
-    useCallback(async () => {
-      const response: CodeDeliveryDetails | null = await Auth.forgotPassword(
-        userInfo.userInfo?.username as string
-      ).catch(() => {
-        return null;
-      });
+    useCallback(
+      async (values) => {
+        try {
+          const response: CodeDeliveryDetails = await Auth.forgotPassword(
+            values.userName
+          );
+          setResetPasswordState((resetPasswordState) => ({
+            ...resetPasswordState,
+            pageStatus: PAGE_STATUS.INPUT_PASSWORD,
+            errorMessage: '',
+            destination: response?.CodeDeliveryDetails?.Destination ?? '',
+            formValues: {
+              ...resetPasswordState.formValues,
+              userName: values.userName,
+            },
+          }));
+        } catch (error: unknown) {
+          const errorCode = error instanceof Error ? error.name : undefined;
+          const errorMessage = getErrorMessage(
+            lang,
+            'authForgotPassword',
+            errorCode
+          );
 
-      const isError = !response;
-
-      setResetPasswordState((resetPasswordState) => ({
-        ...resetPasswordState,
-        pageStatus: isError ? PAGE_STATUS.SEND : PAGE_STATUS.INPUT,
-        errorMessage: isError ? lang.messages.default : '',
-        destination: response?.CodeDeliveryDetails?.Destination ?? '',
-      }));
-    }, [lang.messages.default, userInfo.userInfo?.username]);
+          setResetPasswordState((resetPasswordState) => ({
+            ...resetPasswordState,
+            errorMessage,
+            formValues: {
+              ...resetPasswordState.formValues,
+              userName: values.userName,
+            },
+          }));
+        }
+      },
+      [lang]
+    );
 
   const verifyCodeAndUpdatePassword: UseResetPassword['verifyCodeAndUpdatePassword'] =
     useCallback(
       async (values) => {
-        const response = await Auth.forgotPasswordSubmit(
-          userInfo.userInfo?.username as string,
-          values.verificationCode,
-          values.newPassword
-        ).catch((error: Error) => {
-          return error.name;
-        });
+        try {
+          await Auth.forgotPasswordSubmit(
+            resetPasswordState.formValues.userName,
+            values.verificationCode,
+            values.newPassword
+          );
 
-        const isError = response !== 'SUCCESS';
-        const errorMessage = isError
-          ? getErrorMessage(lang, 'authForgotPasswordSubmit', response)
-          : '';
+          setResetPasswordState((resetPasswordState) => ({
+            ...resetPasswordState,
+            pageStatus: PAGE_STATUS.COMPLETE,
+            errorMessage: '',
+            formValues: {
+              ...resetPasswordState.formValues,
+              ...values,
+            },
+          }));
+        } catch (error: unknown) {
+          const errorCode = error instanceof Error ? error.name : undefined;
+          const errorMessage = getErrorMessage(
+            lang,
+            'authForgotPasswordSubmit',
+            errorCode
+          );
 
-        setResetPasswordState((resetPasswordState) => ({
-          ...resetPasswordState,
-          pageStatus: isError ? PAGE_STATUS.INPUT : PAGE_STATUS.COMPLETE,
-          errorMessage: errorMessage,
-          formValues: values,
-        }));
+          setResetPasswordState((resetPasswordState) => ({
+            ...resetPasswordState,
+            pageStatus: PAGE_STATUS.INPUT_PASSWORD,
+            errorMessage,
+            formValues: {
+              ...resetPasswordState.formValues,
+              ...values,
+            },
+          }));
+        }
       },
-      [lang, userInfo.userInfo?.username]
+      [lang, resetPasswordState.formValues.userName]
     );
+
+  useEffect(() => {
+    if (!isLoadedUserInfo) {
+      return;
+    }
+
+    if (resetPasswordState.pageStatus !== PAGE_STATUS.INIT) {
+      return;
+    }
+
+    // STEP1にログイン判定が必要なので、Load終わるまで待機
+    setResetPasswordState((resetPasswordState) => ({
+      ...resetPasswordState,
+      pageStatus: PAGE_STATUS.SEND_MAIL,
+      isLogin: userInfo.isLoggedIn,
+    }));
+  }, [isLoadedUserInfo, resetPasswordState.pageStatus, userInfo.isLoggedIn]);
 
   return {
     resetPasswordState,

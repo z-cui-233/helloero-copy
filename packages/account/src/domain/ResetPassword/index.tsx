@@ -11,10 +11,10 @@ const ResetPassword: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.SEND && (
+      {store.resetPasswordState.pageStatus === PAGE_STATUS.SEND_MAIL && (
         <SendVerificationCodeForm {...store} />
       )}
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.INPUT && (
+      {store.resetPasswordState.pageStatus === PAGE_STATUS.INPUT_PASSWORD && (
         <InputForm {...store} />
       )}
       {store.resetPasswordState.pageStatus === PAGE_STATUS.COMPLETE && (

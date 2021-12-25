@@ -8,9 +8,8 @@ import GlobalHead from '@/shared/components/GlobalHead';
 import theme from '@/shared/styles/theme';
 import GlobalScripts from '@/shared/components/GlobalScripts';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
-import Amplify, { I18n } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import config from '../aws-exports';
-import { vocabularies } from '@/shared/i18n/amplify/vocabularies';
 import '@/localShared/assets/css/amplify.css';
 import { cookieParams } from '@/shared/constants/cookies';
 import { IntlProvider } from 'react-intl';
@@ -31,8 +30,6 @@ Amplify.configure({
     },
   },
 });
-I18n.putVocabularies(vocabularies);
-I18n.setLanguage('ja');
 
 const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (

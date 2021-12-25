@@ -23,7 +23,7 @@ const FormErrorMessage: React.FC<Props> = ({ message }) => {
 };
 
 const Container = styled.div`
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   margin: 0 0 3rem 0;
   position: relative;
 
@@ -42,7 +42,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.div`
-  ${typo.Standard};
+  ${typo.Body};
   position: relative;
   color: ${({ theme }) => theme.keyColor.color5};
   line-height: 1.4;

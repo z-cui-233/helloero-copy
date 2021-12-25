@@ -32,9 +32,72 @@ export interface LocaleData {
       403002: string; // wabikenは他人にロックされてる
       404000: string; // 存在しないwabiken
     };
+    authSignUp: {
+      UsernameExistsException: string;
+      // ユーザープール内に既に同じ username が存在する場合に起こる。
+      InvalidPasswordException: string;
+      // ユーザープールのポリシーで設定したパスワードの強度を満たさない場合に起こる。
+      InvalidParameterException: string;
+      // 必要な属性が足りない場合や、入力された各項目が Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+      // password が6文字未満の場合はバリデーションエラーでこちらのエラーコードが返ってくる。
+    };
+    authConfirmSignUp: {
+      CodeMismatchException: string;
+      // 無効なコードが入力された場合に起こる。
+      LimitExceededException: string;
+      // コードを間違え続けた場合に起こる。
+      ExpiredCodeException: string;
+      // コードが期限切れ（24時間をオーバー）した場合に起こる。
+      // 注) username が存在しない・無効化されている場合にも起こる。
+      NotAuthorizedException: string;
+      // 既にステータスが CONFIRMED になっている場合に起こる。
+      CodeDeliveryFailureException: string;
+      // 検証コードの送信に失敗した場合に起こる。
+    };
+    authResendSignUp: {
+      CodeDeliveryFailureException: string;
+      // 検証コードの送信に失敗した場合に起こる。
+    };
+    authSignIn: {
+      UserNotConfirmedException: string;
+      // ユーザのステータスが UNCONFIRMED の場合に起こる。
+      // SignUp用のコードを再送し、ステータスを CONFIRMED にする必要がある。
+      // 検証コードの再送は １．３節の ResendConfirmationCode() を参照。
+      PasswordResetRequiredException: string;
+      // Cognito コンソールでパスワードをリセット（ユーザープールにユーザをインポートする場合も含む）した場合に起こる。
+      // パスワードをリセットする必要がある。
+      // パスワードのリセットは 3.1節の SendForgotPasswordCode() 参照。
+      NotAuthorizedException: string;
+      // 誤ったパスワードを入力した場合に起こる。
+      // 注) パスワードを間違え続けた場合にも起こり、 error.message が 'Password attempts exceeded' になる。
+      // （エラーコードとして LimitExceededException が返ってくると思ったらそうではなかった）
+      UserNotFoundException: string;
+      // PASSWORD_VERIFIER は通るものの username が Cognito ユーザープールに存在しない場合に起こる。
+      InvalidParameterException: string;
+      // 入力された username や password が Cognito 側で正しくパースできないとき（バリデーションエラー）に起こる。
+      // 注) 2019/04/24 現在、Cognito コンソールでパスワードをリセットした場合は 'PasswordResetRequiredException' ではなくこのエラーコードが返される。
+    };
+    authForgotPassword: {
+      UserNotFoundException: string; // そんなログインIDは、いない
+      LimitExceededException: string; // コード間違いの回数オーバー
+    };
     authForgotPasswordSubmit: {
-      CodeMismatchException: string; // 本人確認コードが間違い
-      InvalidParameterException: string; // パスワード形式がNG
+      CodeMismatchException: string; // 無効なコードが入力された場合に起こる。
+      LimitExceededException: string; // コードを間違え続けた場合に起こる。
+      ExpiredCodeException: string; // コードが期限切れ（1時間をオーバー）した場合に起こる。
+      InvalidPasswordException: string; // ユーザープールのポリシーで設定したパスワードの強度を満たさない場合に起こる。
+      InvalidParameterException: string; // password が6文字未満など Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+    };
+    authUpdateUserAttributes: {
+      InvalidParameterException: string; // phone_number が E.164 number convention でないなど各属性が Cognito 側で正しくパースできない場合（バリデーションエラー）に起こる。
+      CodeDeliveryFailureException: string; // 検証コードの送信に失敗した場合に起こる。
+    };
+    authVerifyCurrentUserAttributeSubmit: {
+      CodeMismatchException: string; // 無効なコードが入力された場合に起こる。
+      LimitExceededException: string; // コードを間違え続けた場合に起こる。
+      ExpiredCodeException: string; // コードが期限切れ（24時間をオーバー）した場合に起こる。
+      NotAuthorizedException: string; // ユーザーが無効化された場合に起こる。
+      UserNotFoundException: string; // ユーザーがユーザープールに存在しない場合に起こる。
     };
   };
   account: {
@@ -80,6 +143,45 @@ export interface LocaleData {
         login: string;
       };
     };
+    login: {
+      title: string;
+      loginId: string;
+      password: string;
+      button: string;
+      signUp: string;
+      resetPassword: string;
+    };
+    loginPasswordResetRequired: {
+      title: string;
+      text: string;
+      button: string;
+    };
+    loginNotConfirmed: {
+      title: string;
+      text: string;
+      button: string;
+    };
+    signUpStep1: {
+      title: string;
+      text: string;
+      loginId: string;
+      password: string;
+      showPassword: string;
+      email: string;
+      button: string;
+    };
+    signUpStep2: {
+      title: string;
+      text: string;
+      code: string;
+      terms: string;
+      button: string;
+    };
+    signUpStep3: {
+      title: string;
+      text: string;
+      button: string;
+    };
     logout: {
       title: string;
       text: string;
@@ -109,6 +211,7 @@ export interface LocaleData {
       send: {
         title: string;
         text: string;
+        userName: string;
         button: string;
       };
       input: {
