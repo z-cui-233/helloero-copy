@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import SortIcon from '@/shared/assets/icon/sort.svg';
 import {
   DisplayOrder,
   DISPLAY_ORDER,
   UsePurchasedList,
 } from '../../usePurchasedList';
+import SortIcon from '@/shared/assets/icon/sort.svg';
 import device from '@/shared/styles/device';
 
 const SortBox: React.FC<UsePurchasedList> = ({ updateDisplayOrder }) => {

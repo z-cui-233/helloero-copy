@@ -1,7 +1,7 @@
 import React from 'react';
+import { globalConfig } from 'src/globalConfig';
 import NoticePage from '@/shared/components/NoticePage';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { globalConfig } from 'src/globalConfig';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 interface Props {

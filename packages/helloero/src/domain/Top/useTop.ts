@@ -1,7 +1,7 @@
-import { useLocale } from '@/shared/context/LocaleContext';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useLocale } from '@/shared/context/LocaleContext';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 interface UseTop {
   isInitialized: boolean;

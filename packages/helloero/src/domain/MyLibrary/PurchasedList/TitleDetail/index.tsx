@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { UserWabikenMeta } from '../../../../API';
-import PortalModal from '@/shared/components/PortalModal';
-import device from '@/shared/styles/device';
-import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import styled from 'styled-components';
+import { UserWabikenMeta } from '../../../../API';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
+import PortalModal from '@/shared/components/PortalModal';
+import device from '@/shared/styles/device';
+import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {

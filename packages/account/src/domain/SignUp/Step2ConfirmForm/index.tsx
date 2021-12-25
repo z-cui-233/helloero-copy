@@ -1,10 +1,10 @@
-import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import MainContainer from '@/shared/components/parts/MainContainer';
 import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseSignUp } from '../useSignUp';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';

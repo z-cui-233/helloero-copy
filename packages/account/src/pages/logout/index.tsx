@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
-import Logout from '@/domain/Logout';
 import { globalConfig } from 'src/globalConfig';
+import Logout from '@/domain/Logout';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 

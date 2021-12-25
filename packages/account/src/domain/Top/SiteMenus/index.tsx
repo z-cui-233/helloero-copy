@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
-import { globalConfig } from 'src/globalConfig';
 
 const SiteMenus: React.FC = () => {
   const { locale, lang } = useLocale();

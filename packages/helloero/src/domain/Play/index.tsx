@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import { Player as BabyStar } from '@u-next/videoplayer-react';
+import { globalConfig } from 'src/globalConfig';
 import NoticeMessage from './NoticeMessage';
 import usePlayer, { PAGE_STATUS } from './usePlayer';
-import { globalConfig } from 'src/globalConfig';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 
 const Play: React.FC = () => {
   const store = usePlayer();

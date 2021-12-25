@@ -1,9 +1,9 @@
-import { useLocale } from '@/shared/context/LocaleContext';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { getErrorMessage } from '@/shared/utils';
 import { Auth } from 'aws-amplify';
 import { useCallback, useEffect, useState } from 'react';
 import { CodeDeliveryDetails } from 'u-next/amplify';
+import { useLocale } from '@/shared/context/LocaleContext';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

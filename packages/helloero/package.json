@@ -1,12 +1,13 @@
 {
   "name": "helloero",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src"
+    "lint": "next lint --dir src",
+    "lint:fix": "next lint --dir src --fix"
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.6",
@@ -43,9 +44,10 @@
     "@types/yup": "^0.29.13",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "babel-plugin-styled-components": "^2.0.2",
-    "eslint": "^8.4.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.5",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
     "typescript": "^4.5.4"
   }
 }

@@ -1,11 +1,10 @@
 import React from 'react';
-import type { AppContext, AppInitialProps, AppProps } from 'next/app';
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Amplify from 'aws-amplify';
 import '../styles/globals.css';
-import config from '../aws-exports';
-import { globalConfig } from 'src/globalConfig';
-import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
+import config from '../aws-exports';
 import theme from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import GlobalHead from '@/shared/components/GlobalHead';

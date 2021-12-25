@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import React from 'react';
+import { globalConfig } from 'src/globalConfig';
 import Top from '@/domain/Top';
 import MetaTags from '@/shared/components/MetaTags';
-import { globalConfig } from 'src/globalConfig';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const Page: NextPage = () => {

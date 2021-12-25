@@ -1,6 +1,6 @@
-import LayoutH2u from '@/shared/components/LayoutH2u';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const ResendSignUp: React.FC = () => {
   return (

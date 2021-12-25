@@ -1,12 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+import { UseEntryWabiken } from '../useEntryWabiken';
+import TitleInfo from './TitleInfo';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import typo from '@/shared/styles/typo';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
-import styled from 'styled-components';
-import { UseEntryWabiken } from '../useEntryWabiken';
-import TitleInfo from './TitleInfo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {

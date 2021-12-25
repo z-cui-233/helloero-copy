@@ -1,10 +1,10 @@
 import React from 'react';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
+import { globalConfig } from 'src/globalConfig';
 import InputForm from './InputForm';
 import ConfirmForm from './ConfirmForm';
 import NoticeComplete from './NoticeComplete';
 import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
-import { globalConfig } from 'src/globalConfig';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 const Entry: React.FC = () => {

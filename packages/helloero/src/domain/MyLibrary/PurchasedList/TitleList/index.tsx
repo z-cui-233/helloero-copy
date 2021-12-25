@@ -1,9 +1,9 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import device from '@/shared/styles/device';
 import styled from 'styled-components';
 import { UsePurchasedList } from '../usePurchasedList';
 import TitleCard from './TitleCard';
+import device from '@/shared/styles/device';
 
 interface Props {
   purchasedListState: UsePurchasedList['purchasedListState'];

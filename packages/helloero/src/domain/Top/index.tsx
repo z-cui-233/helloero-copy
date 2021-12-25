@@ -1,8 +1,8 @@
 import React from 'react';
-import Landing from './Landing';
-import LayoutHelloero from '@/shared/components/LayoutHelloero';
 import { globalConfig } from 'src/globalConfig';
+import Landing from './Landing';
 import useTop from './useTop';
+import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 const Top: React.FC = () => {
   const { isInitialized } = useTop();

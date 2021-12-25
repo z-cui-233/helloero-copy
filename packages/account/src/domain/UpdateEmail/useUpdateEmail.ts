@@ -1,7 +1,7 @@
-import { useLocale } from '@/shared/context/LocaleContext';
-import { getErrorMessage } from '@/shared/utils';
 import { Auth } from 'aws-amplify';
 import { useCallback, useState } from 'react';
+import { useLocale } from '@/shared/context/LocaleContext';
+import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
   INPUT_EMAIL: 'INPUT_EMAIL',

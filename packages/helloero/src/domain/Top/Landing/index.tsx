@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
-import styled from 'styled-components';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { globalConfig } from 'src/globalConfig';
 
 const Landing: React.FC = () => {
   const router = useRouter();
@@ -21,12 +21,12 @@ const Landing: React.FC = () => {
       <Grid>
         <div>
           <Artwork>
-            <Image>
+            <ImageBox>
               <img
                 src={`/images/top/cover${Math.floor(Math.random() * 3)}.jpg`}
                 alt="HELLOERO(ハローエロ)"
               />
-            </Image>
+            </ImageBox>
           </Artwork>
         </div>
         <LeadTexts>
@@ -85,7 +85,7 @@ const Artwork = styled.div`
   }
 `;
 
-const Image = styled.div`
+const ImageBox = styled.div`
   position: relative;
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
