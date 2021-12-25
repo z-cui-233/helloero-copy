@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
+import { LocaleData } from 'u-next/locales';
 import langJa from '../i18n/ja';
 import langEn from '../i18n/en';
-import { LocaleData } from 'u-next/locales';
 
 const LOCALES = ['ja', 'en'] as const;
 export type localeType = typeof LOCALES[number];

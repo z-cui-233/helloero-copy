@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useLoginStateContext } from '../context/LoginStateContext';
 import { useRouter } from 'next/router';
-import { useLocale } from '../context/LocaleContext';
 import { Config } from 'u-next/config';
+import { useLoginStateContext } from '../context/LoginStateContext';
+import { useLocale } from '../context/LocaleContext';
 
 const withAmplifyAuth = <P extends Record<string, unknown>>(
   WrappedComponent: React.FC<P>,

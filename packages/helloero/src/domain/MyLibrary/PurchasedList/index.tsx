@@ -1,10 +1,10 @@
 import React from 'react';
-import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
 import ListController from './ListController';
 import TitleDetail from './TitleDetail';
 import TitleList from './TitleList';
 import usePurchasedList from './usePurchasedList';
+import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const PurchasedList: React.FC = () => {

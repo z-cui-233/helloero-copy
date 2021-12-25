@@ -1,11 +1,11 @@
-import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import MainContainer from '@/shared/components/parts/MainContainer';
-import typo from '@/shared/styles/typo';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseSignUp } from '../useSignUp';
+import typo from '@/shared/styles/typo';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { useLocale } from '@/shared/context/LocaleContext';

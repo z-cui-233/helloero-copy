@@ -1,9 +1,9 @@
 import React from 'react';
-import device from '../../../../styles/device';
 import styled from 'styled-components';
+import { Config } from 'u-next/config';
+import device from '../../../../styles/device';
 import LogoMark from './LogoMark';
 import MenuList from './MenuList';
-import { Config } from 'u-next/config';
 
 interface Props {
   isDisplayedMenu: boolean;

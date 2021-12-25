@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
+import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
+import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { globalConfig } from 'src/globalConfig';
-import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Logout: React.FC = () => {

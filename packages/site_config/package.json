@@ -5,6 +5,7 @@
   "devDependencies": {},
   "scripts": {
     "build": "echo 'no build'",
-    "lint": "echo 'no lint'"
+    "lint": "echo 'no lint'",
+    "lint:fix": "echo 'no lint:fix'"
   }
 }

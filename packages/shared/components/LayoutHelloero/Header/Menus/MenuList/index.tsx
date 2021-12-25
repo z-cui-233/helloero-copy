@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Config } from 'u-next/config';
 import typo from '../../../../../styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
 import { useLocale } from '../../../../../context/LocaleContext';
-import { Config } from 'u-next/config';
 
 interface Props {
   options: Config;

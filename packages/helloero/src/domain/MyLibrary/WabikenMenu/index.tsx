@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from '@/shared/styles/typo';
 import Link from 'next/link';
+import typo from '@/shared/styles/typo';
 import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
 import { useLocale } from '@/shared/context/LocaleContext';
 

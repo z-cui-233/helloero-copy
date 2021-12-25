@@ -1,9 +1,9 @@
 import Script from 'next/script';
 import React from 'react';
 import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
-import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Internal: React.FC = () => {

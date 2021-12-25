@@ -1,12 +1,12 @@
+import React from 'react';
+import styled from 'styled-components';
+import { UseResetPassword } from '../../useResetPassword';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
-import React from 'react';
-import styled from 'styled-components';
-import { UseResetPassword } from '../../useResetPassword';
 
 const LoggedInUserForm: React.FC<UseResetPassword> = (props) => {
   const { lang } = useLocale();

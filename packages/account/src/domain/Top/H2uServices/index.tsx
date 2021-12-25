@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from '@/shared/styles/typo';
 import CardHelloero from './CardHelloero';
+import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const H2uServices: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
 import device from '@/shared/styles/device';
-import styled from 'styled-components';
 
 interface Props {
   src: string;

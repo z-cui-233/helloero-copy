@@ -1,15 +1,15 @@
-import MainContainer from '@/shared/components/parts/MainContainer';
 import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Link from 'next/link';
 import { UseLoginChallenge } from '../useLoginChallenge';
+import MainContainer from '@/shared/components/parts/MainContainer';
 import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import { useLocale } from '@/shared/context/LocaleContext';
-import Link from 'next/link';
 import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
 
 const validationSchema = Yup.object().shape({

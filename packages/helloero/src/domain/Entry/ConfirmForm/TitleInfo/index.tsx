@@ -1,8 +1,8 @@
 import React from 'react';
-import device from '@/shared/styles/device';
-import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
+import device from '@/shared/styles/device';
+import typo from '@/shared/styles/typo';
 
 interface Props {
   thumbnail: string;

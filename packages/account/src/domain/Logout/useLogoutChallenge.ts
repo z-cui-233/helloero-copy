@@ -1,5 +1,3 @@
-import { useLocale } from '@/shared/context/LocaleContext';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import {
   AuthState,
   AUTH_STATE_CHANGE_EVENT,
@@ -7,6 +5,8 @@ import {
 } from '@aws-amplify/ui-components';
 import { Auth, Hub } from 'aws-amplify';
 import { useCallback, useEffect, useState } from 'react';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

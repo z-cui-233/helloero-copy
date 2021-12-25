@@ -1,6 +1,6 @@
 import React from 'react';
-import typo from '../../../styles/typo';
 import styled from 'styled-components';
+import typo from '../../../styles/typo';
 
 interface Props {
   message: string;

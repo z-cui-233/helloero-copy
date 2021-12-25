@@ -1,9 +1,9 @@
 import React from 'react';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
 import PurchasedList from './PurchasedList';
 import WabikenMenu from './WabikenMenu';
-import { globalConfig } from 'src/globalConfig';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 const MyLibrary: React.FC = () => {

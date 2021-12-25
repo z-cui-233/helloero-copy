@@ -1,6 +1,3 @@
-import { useLocale } from '@/shared/context/LocaleContext';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { getErrorMessage } from '@/shared/utils';
 import {
   AuthState,
   AUTH_STATE_CHANGE_EVENT,
@@ -10,6 +7,9 @@ import { Auth, Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { globalConfig } from 'src/globalConfig';
+import { getErrorMessage } from '@/shared/utils';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

@@ -1,6 +1,6 @@
 import React from 'react';
-import { globalConfig } from 'src/globalConfig';
 import styled from 'styled-components';
+import { globalConfig } from 'src/globalConfig';
 import typo from '@/shared/styles/typo';
 import Logo from '@/shared/assets/logo/helloeroBlack.svg';
 import { useLocale } from '@/shared/context/LocaleContext';

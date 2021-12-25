@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { UsePurchasedList } from '../../usePurchasedList';
 import ViewListIcon from '@/shared/assets/icon/view_list.svg';
 import ViewModuleIcon from '@/shared/assets/icon/view_module.svg';
-import { UsePurchasedList } from '../../usePurchasedList';
 
 const OptionBox: React.FC<UsePurchasedList> = ({
   purchasedListState,

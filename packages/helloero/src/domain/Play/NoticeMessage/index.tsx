@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import typo from '@/shared/styles/typo';
 import styled from 'styled-components';
+import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {

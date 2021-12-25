@@ -48,9 +48,11 @@ export const createExpireDate = (
 };
 
 export const getFormikFieldOptions = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formik: FormikProps<any>,
   name: string,
   type = 'text'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any => {
   return {
     type,
@@ -63,6 +65,7 @@ export const getFormikFieldOptions = (
 };
 
 export const getFormikErrorMessage = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formik: FormikProps<any>,
   name: string
 ): string => {
