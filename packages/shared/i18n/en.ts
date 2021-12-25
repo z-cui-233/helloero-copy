@@ -66,6 +66,11 @@ const lang: LocaleData = {
       CodeDeliveryFailureException:
         '予期せぬエラーが発生しました。もう一度お試しください。',
       // 検証コードの送信に失敗した場合に起こる。
+      InvalidParameterException:
+        'ログイン画面からログインして利用してください。',
+      // 既にステータスが CONFIRMED になっている場合に起こる。
+      UserNotFoundException: 'ログインIDが正しいかご確認下さい。',
+      // username が存在しない・無効化されている場合に起こる。
     },
     authSignIn: {
       UserNotConfirmedException: 'このアカウントはまだ登録が完了していません。',
@@ -131,6 +136,14 @@ const lang: LocaleData = {
         title: 'LogIn - H2U Account',
         description: '',
       },
+      signUp: {
+        title: 'SignUp - H2U Account',
+        description: '',
+      },
+      resendSignUp: {
+        title: 'SignUp - H2U Account',
+        description: '',
+      },
       logout: {
         title: 'Logout - H2U Account',
         description: '',
@@ -178,8 +191,8 @@ const lang: LocaleData = {
       button: 'パスワードの変更',
     },
     loginNotConfirmed: {
-      title: 'ログインができません。',
-      text: 'このアカウントはメールアドレスの確認が完了していません。メールアドレスの確認をしてください。',
+      title: 'H2Uアカウントの登録が完了していません。',
+      text: 'メールアドレスの確認をしてアカウント登録を完了してください。',
       button: 'メールアドレスの確認',
     },
 
@@ -201,7 +214,25 @@ const lang: LocaleData = {
     },
     signUpStep3: {
       title: 'H2Uアカウントの登録が完了しました',
-      text: 'string',
+      text: '',
+      button: 'ホーム',
+    },
+
+    resendSignUpStep1: {
+      title: 'H2Uアカウントの登録',
+      text: 'ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。',
+      loginId: 'ログインID',
+      button: '本人確認コードを送信',
+    },
+    resendSignUpStep2: {
+      title: 'H2Uアカウントの登録',
+      text: 'メールアドレスに送信した本人確認コードを入力してください。',
+      code: '本人確認コード',
+      button: '本人確認コードを認証',
+    },
+    resendSignUpStep3: {
+      title: 'H2Uアカウントの登録が完了しました',
+      text: '',
       button: 'ホーム',
     },
 
