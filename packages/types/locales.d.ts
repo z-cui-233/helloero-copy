@@ -57,6 +57,10 @@ export interface LocaleData {
     authResendSignUp: {
       CodeDeliveryFailureException: string;
       // 検証コードの送信に失敗した場合に起こる。
+      InvalidParameterException: string;
+      // 既にステータスが CONFIRMED になっている場合に起こる。
+      UserNotFoundException: string;
+      // username が存在しない・無効化されている場合に起こる。
     };
     authSignIn: {
       UserNotConfirmedException: string;
@@ -107,6 +111,14 @@ export interface LocaleData {
         description: string;
       };
       login: {
+        title: string;
+        description: string;
+      };
+      signUp: {
+        title: string;
+        description: string;
+      };
+      resendSignUp: {
         title: string;
         description: string;
       };
@@ -178,6 +190,23 @@ export interface LocaleData {
       button: string;
     };
     signUpStep3: {
+      title: string;
+      text: string;
+      button: string;
+    };
+    resendSignUpStep1: {
+      title: string;
+      text: string;
+      loginId: string;
+      button: string;
+    };
+    resendSignUpStep2: {
+      title: string;
+      text: string;
+      code: string;
+      button: string;
+    };
+    resendSignUpStep3: {
       title: string;
       text: string;
       button: string;

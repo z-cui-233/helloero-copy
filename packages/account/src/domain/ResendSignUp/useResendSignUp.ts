@@ -13,7 +13,7 @@ export const PAGE_STATUS = {
 } as const;
 type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-interface UseResendSignUp {
+export interface UseResendSignUp {
   resendSignUpState: {
     pageStatus: PageStatus;
     errorMessage: string;

@@ -14,7 +14,6 @@ const SiteMenus: React.FC = () => {
   return (
     <Container>
       <Title>{lang.account.top.menus.title}</Title>
-      {!isLoadedUserInfo && <div />}
       <List>
         {isLoadedUserInfo && userInfo.isLoggedIn && (
           <React.Fragment>
@@ -52,16 +51,18 @@ const SiteMenus: React.FC = () => {
             </Link>
           </div>
         )}
-        <div>
-          <Link href={`${globalConfig.HELP}/${locale}`} passHref>
-            <StyledLink>
-              {lang.account.top.menus.help}
-              <Arrow>
-                <ArrowLogo />
-              </Arrow>
-            </StyledLink>
-          </Link>
-        </div>
+        {isLoadedUserInfo && (
+          <div>
+            <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+              <StyledLink>
+                {lang.account.top.menus.help}
+                <Arrow>
+                  <ArrowLogo />
+                </Arrow>
+              </StyledLink>
+            </Link>
+          </div>
+        )}
       </List>
     </Container>
   );
