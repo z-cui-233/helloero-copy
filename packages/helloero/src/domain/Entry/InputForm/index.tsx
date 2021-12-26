@@ -10,20 +10,16 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  wabiken: Yup.string()
-    .required('入力必須です。')
-    .matches(/^[0-9a-zA-Z]/, '半角英数字で入力してください。')
-    .length(16, '16文字で入力してください。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const InputForm: React.FC<UseEntryWabiken> = (props) => {
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
 
   const formik = useFormik({
     initialValues: props.entryWabikenState.formValues,
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      wabiken: formValidations.wabiken(locale),
+    }),
     onSubmit: props.confirmWabiken,
   });
 

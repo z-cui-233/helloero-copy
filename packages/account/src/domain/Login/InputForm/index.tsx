@@ -11,18 +11,17 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  loginId: Yup.string().required('入力必須です。'),
-  password: Yup.string().required('入力必須です。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const InputForm: React.FC<UseLoginChallenge> = (props) => {
   const { locale, lang } = useLocale();
 
   const formik = useFormik({
     initialValues: props.loginChallengeState.formValues,
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      loginId: formValidations.loginId(locale),
+      password: formValidations.password(locale),
+    }),
     onSubmit: props.challengeLogin,
   });
 

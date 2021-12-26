@@ -1,7 +1,6 @@
 import dateFormat from 'dateformat';
 import { FormikProps } from 'formik';
-import { LocaleData } from 'u-next/locales';
-import { localeType } from '../context/LocaleContext';
+import { LocaleData, LocaleType } from 'u-next/locales';
 
 export const createTitleThumbnailUrl = (
   url: string | undefined | null
@@ -30,7 +29,7 @@ export const getErrorMessage = (
 };
 
 export const createExpireDate = (
-  local: localeType,
+  local: LocaleType,
   validityPeriod: number | undefined,
   notValidAfter?: number
 ): string => {

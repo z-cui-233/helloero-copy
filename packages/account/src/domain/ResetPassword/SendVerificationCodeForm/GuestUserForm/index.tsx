@@ -10,19 +10,18 @@ import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  userName: Yup.string().required('入力必須です。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const GuestUserForm: React.FC<UseResetPassword> = (props) => {
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
 
   const formik = useFormik({
     initialValues: {
       userName: props.resetPasswordState.formValues.userName,
     },
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      userName: formValidations.loginId(locale),
+    }),
     onSubmit: props.sendVerificationCode,
   });
 
