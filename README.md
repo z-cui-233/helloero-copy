@@ -78,7 +78,7 @@ curl -X POST -H "Content-Type: application/json" \
     "market": "amazon",
     "content": {
         "key": {
-            "id": "AID0207897",
+            "id": "AID0207894",
             "type": "vod",
             "provider_id": "amazonppv"
         }

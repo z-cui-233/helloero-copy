@@ -10,8 +10,7 @@ const WabikenMenu: React.FC = () => {
 
   return (
     <Container>
-      <Title>{lang.helloero.myLibrary.wabiken.title}</Title>
-      <Contents>
+      <div>
         <Link href={`/${locale}/entry`} passHref>
           <StyledLink>
             <div>
@@ -20,6 +19,8 @@ const WabikenMenu: React.FC = () => {
             </div>
           </StyledLink>
         </Link>
+      </div>
+      <div>
         <StyledLink
           href="https://www.amazon.co.jp/%E3%82%A2%E3%83%80%E3%83%AB%E3%83%88-DVD/b/ref=amb_link_ZkQehEtaPFKe33Nuo8yX0w_32?ie=UTF8&node=896246&redirect=true&rw_useCurrentProtocol=1"
           target="_blank"
@@ -30,23 +31,13 @@ const WabikenMenu: React.FC = () => {
             <ArrowLogo />
           </div>
         </StyledLink>
-      </Contents>
+      </div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin: 4rem auto 0;
-`;
-
-const Title = styled.div`
-  ${typo.Heading3};
-`;
-
-const Contents = styled.div`
   margin: 1rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
 `;
 
 const StyledLink = styled.a`
@@ -54,11 +45,10 @@ const StyledLink = styled.a`
   color: ${({ theme }) => theme.foreground.primary};
   font-weight: bold;
   display: inline-block;
-  padding: 0.5rem 1rem 0.5rem 0;
+  padding: 0.5rem 1.5rem 0.5rem 0;
   line-height: 1;
   position: relative;
   transition: color 0.3s ease;
-  margin: 0 2rem 0 0;
 
   & svg {
     position: absolute;
