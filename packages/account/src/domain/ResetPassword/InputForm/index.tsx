@@ -31,9 +31,6 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
       <Title>{lang.account.resetPassword.input.title}</Title>
       <Text>
         <div>{lang.account.resetPassword.input.text}</div>
-        <DestinationMail>
-          {props.resetPasswordState.destination}
-        </DestinationMail>
       </Text>
       <form
         onSubmit={(e) => {
@@ -42,6 +39,11 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
         }}
       >
         <Section>
+          <FieldSection>
+            <DestinationMail>
+              {props.resetPasswordState.destination}
+            </DestinationMail>
+          </FieldSection>
           <FieldSection>
             <TextField
               label={formLabels.verificationCode.label[locale]}

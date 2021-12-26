@@ -12,11 +12,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'メイリオ', Meiryo, "Helvetica Neue", Helvetica, Arial, Sans-Serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.7;
     min-width: 320px;
     width: 100%;
     height: 100%;
+
+    @media screen and (max-width:768px) {
+      font-size: 16px;
+    }
   }
 
   body {

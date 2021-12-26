@@ -13,31 +13,34 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 
-const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
+const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.resendSignUpState.step2FormValues,
+    initialValues: props.resendSignUpState.step3FormValues,
     validationSchema: Yup.object().shape({
-      verificationCode: formValidations.verificationCode(locale),
+      password: formValidations.password(locale),
     }),
-    onSubmit: props.verifyCode,
+    onSubmit: props.invokeLogin,
   });
 
   return (
     <MainContainer>
       <FormErrorMessage message={props.resendSignUpState.errorMessage} />
-      <Title>{lang.account.resendSignUpStep2.title}</Title>
-      <Text>{lang.account.resendSignUpStep2.text}</Text>
+      <Title>{lang.account.resendSignUpStep3.title}</Title>
+      <Text>{lang.account.resendSignUpStep3.text}</Text>
       <Section>
         <FieldSection>
+          <LoginId>{props.resendSignUpState.step1FormValues.loginId}</LoginId>
+        </FieldSection>
+        <FieldSection>
           <TextField
-            label={formLabels.verificationCode.label[locale]}
+            label={formLabels.password.label[locale]}
             fieldOptions={{
-              ...getFormikFieldOptions(formik, 'verificationCode', 'tel'),
-              placeholder: formLabels.verificationCode.placeholder[locale],
+              ...getFormikFieldOptions(formik, 'password', 'password'),
+              placeholder: formLabels.password.placeholder[locale],
             }}
-            validateMessage={getFormikErrorMessage(formik, 'verificationCode')}
+            validateMessage={getFormikErrorMessage(formik, 'password')}
           />
         </FieldSection>
       </Section>
@@ -46,7 +49,7 @@ const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.resendSignUpStep2.button}
+          label={lang.account.resendSignUpStep3.button}
         />
       </ButtonSection>
     </MainContainer>
@@ -69,9 +72,15 @@ const FieldSection = styled.div`
   margin: 1rem 0 0;
 `;
 
+const LoginId = styled.div`
+  ${typo.Standard};
+  font-weight: bold;
+  margin: 1rem 0 0;
+`;
+
 const ButtonSection = styled.div`
   margin: 3rem auto 0;
   text-align: center;
 `;
 
-export default Step2ConfirmForm;
+export default Step3ReLoginForm;

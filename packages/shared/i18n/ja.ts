@@ -223,6 +223,11 @@ const lang: LocaleData = {
       button: '本人確認コードを認証',
     },
     resendSignUpStep3: {
+      title: 'H2Uアカウント登録の再開',
+      text: 'パスワードを入力して、ログインしてください',
+      button: 'ログイン',
+    },
+    resendSignUpStep4: {
       title: 'H2Uアカウントの登録が完了しました',
       text: '',
       button: 'ホーム',
