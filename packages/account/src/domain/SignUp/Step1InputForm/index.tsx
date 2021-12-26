@@ -10,22 +10,19 @@ import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  loginId: Yup.string().required('入力必須です。'),
-  password: Yup.string().required('入力必須です。'),
-  email: Yup.string()
-    .required('入力必須です。')
-    .email('形式が正しくありません。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const Step1InputForm: React.FC<UseSignUp> = (props) => {
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
   const [isMasked, setIsMasked] = useState<boolean>(true);
 
   const formik = useFormik({
     initialValues: props.signupState.step1FormValues,
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      loginId: formValidations.loginId(locale),
+      password: formValidations.password(locale),
+      email: formValidations.email(locale),
+    }),
     onSubmit: props.challengeSignUp,
   });
 

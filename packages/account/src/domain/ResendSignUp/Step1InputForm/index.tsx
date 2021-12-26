@@ -10,17 +10,16 @@ import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  loginId: Yup.string().required('入力必須です。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const Step1InputForm: React.FC<UseResendSignUp> = (props) => {
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
 
   const formik = useFormik({
     initialValues: props.resendSignUpState.step1FormValues,
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      loginId: formValidations.loginId(locale),
+    }),
     onSubmit: props.resendCode,
   });
 

@@ -10,18 +10,18 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
-
-const validationSchema = Yup.object().shape({
-  verificationCode: Yup.string().required('入力必須です。'),
-});
+import formValidations from '@/shared/utils/formValidations';
 
 const InputVerificationCodeForm: React.FC<UseUpdateEmail> = (props) => {
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
+
   const formik = useFormik({
     initialValues: {
       verificationCode: props.updateEmailState.formValues.verificationCode,
     },
-    validationSchema,
+    validationSchema: Yup.object().shape({
+      verificationCode: formValidations.verificationCode(locale),
+    }),
     onSubmit: props.verifyCode,
   });
 

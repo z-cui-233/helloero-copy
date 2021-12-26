@@ -1,3 +1,5 @@
+export type LocaleType = 'ja' | 'en';
+
 export interface LocaleData {
   error: {
     notFound: {
