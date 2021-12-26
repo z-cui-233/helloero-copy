@@ -1,7 +1,6 @@
 import React from 'react';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Amplify from 'aws-amplify';
-import '../styles/globals.css';
 import { ThemeProvider } from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import config from '../aws-exports';
