@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { UserWabikenMeta } from '../../../../API';
+import { UserWabikenMeta } from '../../../API';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';

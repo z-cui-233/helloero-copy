@@ -3,9 +3,8 @@ import {
   ListUserWabikenMetasQuery,
   ListUserWabikenMetasQueryVariables,
   UserWabikenMeta,
-} from '../../../API';
-import { listUserWabikenMetas } from '../../../graphql/queries';
-import { LIST_PAGE_SIZE } from '@/localShared/constants';
+} from '../../API';
+import { listUserWabikenMetas } from '../../graphql/queries';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {
@@ -20,7 +19,6 @@ export interface UsePurchasedList {
     isInitialized: boolean;
     query: string;
     displayOrder: DisplayOrder;
-    isCardStyle: boolean;
     isShownDetail: boolean;
     currentUserWabikenMeta: UserWabikenMeta | null;
     userWabikenMetas: UserWabikenMeta[] | [];
@@ -28,7 +26,6 @@ export interface UsePurchasedList {
   };
   updateSearchQuery: (newValue: string) => void;
   updateDisplayOrder: (newValue: DisplayOrder) => void;
-  toggleListStyle: () => void;
   openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
   closeTitleDetail: () => void;
   fetchListData: (nextToken?: string) => Promise<void>;
@@ -38,7 +35,6 @@ const initialState: UsePurchasedList['purchasedListState'] = {
   isInitialized: false,
   query: '',
   displayOrder: DISPLAY_ORDER.ADD,
-  isCardStyle: false,
   isShownDetail: false,
   currentUserWabikenMeta: null,
   userWabikenMetas: [],
@@ -72,14 +68,6 @@ const usePurchasedList = (): UsePurchasedList => {
       }));
     }, []);
 
-  const toggleListStyle: UsePurchasedList['toggleListStyle'] =
-    useCallback(() => {
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
-        isCardStyle: !purchasedListState.isCardStyle,
-      }));
-    }, []);
-
   const openTitleDetail: UsePurchasedList['openTitleDetail'] = useCallback(
     (data) => {
       setPurchasedListState((purchasedListState) => ({
@@ -108,7 +96,6 @@ const usePurchasedList = (): UsePurchasedList => {
             gt: Math.round(new Date().getTime() / 1000),
           },
         },
-        limit: LIST_PAGE_SIZE,
         nextToken: nextToken ?? null,
       });
 
@@ -137,7 +124,6 @@ const usePurchasedList = (): UsePurchasedList => {
     purchasedListState,
     updateSearchQuery,
     updateDisplayOrder,
-    toggleListStyle,
     openTitleDetail,
     closeTitleDetail,
     fetchListData,

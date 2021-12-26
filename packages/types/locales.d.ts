@@ -279,7 +279,6 @@ export interface LocaleData {
     };
     myLibrary: {
       wabiken: {
-        title: string;
         entry: string;
         store: string;
       };

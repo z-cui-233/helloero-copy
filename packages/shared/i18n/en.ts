@@ -304,27 +304,26 @@ const lang: LocaleData = {
     },
     myLibrary: {
       wabiken: {
-        title: '購入した動画の登録',
-        entry: 'シリアルコードの登録',
-        store: 'Store',
+        entry: '購入したシリアルコードの登録',
+        store: 'ストアに行く',
       },
       filter: {
         search: 'Search Title Name',
       },
       purchased: {
-        title: '購入済み',
+        title: '購入済み作品',
         detail: 'DETAIL',
         watch: 'PLAY',
       },
     },
     entry: {
       input: {
-        title: '購入した動画の登録',
+        title: 'シリアルコードの登録',
         text: '購入時に受け取った、シリアルコードを入力してください。',
         button: 'VERIFY',
       },
       confirm: {
-        title: '購入した動画の登録',
+        title: 'シリアルコードの登録',
         text: '内容を確認の上、登録をして下さい。',
         button: 'SUBMIT',
       },
