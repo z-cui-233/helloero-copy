@@ -78,7 +78,7 @@ curl -X POST -H "Content-Type: application/json" \
     "market": "amazon",
     "content": {
         "key": {
-            "id": "AID0207139",
+            "id": "AID0207897",
             "type": "vod",
             "provider_id": "amazonppv"
         }
@@ -89,7 +89,7 @@ curl -X POST -H "Content-Type: application/json" \
     "lock_required": true,
     "playback_remain": 1000
 }' \
- <https://wabit-api.awsdev.unext.dev/v2/wabiken>
+ https://wabit-api.awsdev.unext.dev/v2/wabiken
 ```
 
 debug codes

@@ -11,6 +11,7 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
+import formLabels from '@/shared/utils/formLabels';
 
 const InputForm: React.FC<UseEntryWabiken> = (props) => {
   const { lang, locale } = useLocale();
@@ -31,8 +32,11 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
       <Section>
         <FieldSection>
           <TextField
-            label={lang.helloero.entry.input.serial}
-            fieldOptions={getFormikFieldOptions(formik, 'wabiken')}
+            label={formLabels.wabiken.label[locale]}
+            fieldOptions={{
+              ...getFormikFieldOptions(formik, 'wabiken'),
+              placeholder: formLabels.wabiken.placeholder[locale],
+            }}
             validateMessage={getFormikErrorMessage(formik, 'wabiken')}
           />
         </FieldSection>

@@ -159,8 +159,6 @@ export interface LocaleData {
     };
     login: {
       title: string;
-      loginId: string;
-      password: string;
       button: string;
       signUp: string;
       resetPassword: string;
@@ -178,16 +176,12 @@ export interface LocaleData {
     signUpStep1: {
       title: string;
       text: string;
-      loginId: string;
-      password: string;
       showPassword: string;
-      email: string;
       button: string;
     };
     signUpStep2: {
       title: string;
       text: string;
-      code: string;
       terms: string;
       button: string;
     };
@@ -199,13 +193,11 @@ export interface LocaleData {
     resendSignUpStep1: {
       title: string;
       text: string;
-      loginId: string;
       button: string;
     };
     resendSignUpStep2: {
       title: string;
       text: string;
-      code: string;
       button: string;
     };
     resendSignUpStep3: {
@@ -223,13 +215,11 @@ export interface LocaleData {
       email: {
         title: string;
         text: string;
-        email: string;
         button: string;
       };
       verification: {
         title: string;
         text: string;
-        code: string;
         button: string;
       };
       complete: {
@@ -242,14 +232,11 @@ export interface LocaleData {
       send: {
         title: string;
         text: string;
-        userName: string;
         button: string;
       };
       input: {
         title: string;
         text: string;
-        verificationCode: string;
-        newPassword: string;
         button: string;
       };
       complete: {
@@ -304,7 +291,6 @@ export interface LocaleData {
       input: {
         title: string;
         text: string;
-        serial: string;
         button: string;
       };
       confirm: {

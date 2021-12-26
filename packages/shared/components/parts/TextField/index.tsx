@@ -62,6 +62,7 @@ const Input = styled.input<CustomInputProps>`
   padding: 1rem 0.5rem 0;
   height: 3.5rem;
   width: 100%;
+  outline: none;
 
   &:focus + ${Label} {
     ${typo.Note};
@@ -76,6 +77,7 @@ const Input = styled.input<CustomInputProps>`
   }
 
   &::placeholder {
+    ${typo.Body};
     transition: opacity 0.3s ease-out;
     opacity: 0;
   }

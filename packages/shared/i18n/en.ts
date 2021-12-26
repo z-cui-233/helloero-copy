@@ -179,8 +179,6 @@ const lang: LocaleData = {
     },
     login: {
       title: 'H2Uにログイン',
-      loginId: 'Login ID',
-      password: 'Password',
       button: 'LOGIN',
       signUp: 'H2Uアカウントを作成',
       resetPassword: 'パスワードを忘れた方',
@@ -199,16 +197,12 @@ const lang: LocaleData = {
     signUpStep1: {
       title: 'H2Uアカウントの登録',
       text: '',
-      loginId: 'ログインID',
-      password: 'パスワード',
       showPassword: 'パスワードを表示する',
-      email: 'メールアドレス',
       button: '次へ',
     },
     signUpStep2: {
       title: 'H2Uアカウントの登録',
       text: '',
-      code: '本人確認コード',
       terms: '利用規約',
       button: '規約に同意して登録',
     },
@@ -221,13 +215,11 @@ const lang: LocaleData = {
     resendSignUpStep1: {
       title: 'H2Uアカウントの登録',
       text: 'ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。',
-      loginId: 'ログインID',
       button: '本人確認コードを送信',
     },
     resendSignUpStep2: {
       title: 'H2Uアカウントの登録',
       text: 'メールアドレスに送信した本人確認コードを入力してください。',
-      code: '本人確認コード',
       button: '本人確認コードを認証',
     },
     resendSignUpStep3: {
@@ -246,13 +238,11 @@ const lang: LocaleData = {
       email: {
         title: 'メールアドレスの変更',
         text: 'ご希望のメールアドレスを入力して、本人確認コードを送信してください。',
-        email: '新しいメールアドレス',
         button: '本人確認コードを送信',
       },
       verification: {
         title: 'メールアドレスの変更',
         text: 'メールアドレスに送信した本人確認コードを入力してください。',
-        code: '本人確認コード',
         button: '本人確認コードを認証',
       },
       complete: {
@@ -265,14 +255,11 @@ const lang: LocaleData = {
       send: {
         title: 'Reset Password',
         text: 'パスワードを変更するには、本人確認が必要です。',
-        userName: 'ログインID',
         button: 'このアドレスに送信',
       },
       input: {
         title: 'Reset Password',
         text: '下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。',
-        verificationCode: '本人確認コード',
-        newPassword: '新しいパスワード',
         button: 'パスワードを変更',
       },
       complete: {
@@ -329,7 +316,6 @@ const lang: LocaleData = {
       input: {
         title: '購入した動画の登録',
         text: '購入時に受け取った、シリアルコードを入力してください。',
-        serial: 'Serial Code',
         button: 'VERIFY',
       },
       confirm: {

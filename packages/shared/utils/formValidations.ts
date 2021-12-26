@@ -5,6 +5,7 @@ type ValidationMessages = {
   [key in
     | 'required'
     | 'email'
+    | 'min6'
     | 'min8'
     | 'length16'
     | 'alphanumerical'
@@ -21,6 +22,10 @@ const validationMessages: ValidationMessages = {
   email: {
     ja: 'メールアドレスを入力してください',
     en: 'メールアドレスを入力してください',
+  },
+  min6: {
+    ja: '6文字以上で入力してください',
+    en: '6文字以上で入力してください',
   },
   min8: {
     ja: '8文字以上で入力してください',
@@ -49,7 +54,8 @@ const formValidations = {
   loginId: (locale: LocaleType) =>
     Yup.string()
       .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]/, validationMessages['alphanumerical'][locale]),
+      .matches(/^[0-9a-zA-Z]/, validationMessages['alphanumerical'][locale])
+      .min(6, validationMessages['min6'][locale]),
 
   password: (locale: LocaleType) =>
     Yup.string()
