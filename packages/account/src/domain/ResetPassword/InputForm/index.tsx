@@ -11,6 +11,7 @@ import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
+import formLabels from '@/shared/utils/formLabels';
 
 const InputForm: React.FC<UseResetPassword> = (props) => {
   const { lang, locale } = useLocale();
@@ -43,12 +44,11 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
         <Section>
           <FieldSection>
             <TextField
-              label={lang.account.resetPassword.input.verificationCode}
-              fieldOptions={getFormikFieldOptions(
-                formik,
-                'verificationCode',
-                'tel'
-              )}
+              label={formLabels.verificationCode.label[locale]}
+              fieldOptions={{
+                ...getFormikFieldOptions(formik, 'verificationCode', 'tel'),
+                placeholder: formLabels.verificationCode.placeholder[locale],
+              }}
               validateMessage={getFormikErrorMessage(
                 formik,
                 'verificationCode'
@@ -57,10 +57,11 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
           </FieldSection>
           <FieldSection>
             <TextField
-              label={lang.account.resetPassword.input.newPassword}
+              label={formLabels.newPassword.label[locale]}
               fieldOptions={{
                 ...getFormikFieldOptions(formik, 'newPassword', 'password'),
                 autoComplete: 'new-password',
+                placeholder: formLabels.newPassword.placeholder[locale],
               }}
               validateMessage={getFormikErrorMessage(formik, 'password')}
             />

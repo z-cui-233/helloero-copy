@@ -11,6 +11,7 @@ import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
+import formLabels from '@/shared/utils/formLabels';
 
 const GuestUserForm: React.FC<UseResetPassword> = (props) => {
   const { lang, locale } = useLocale();
@@ -33,8 +34,11 @@ const GuestUserForm: React.FC<UseResetPassword> = (props) => {
       <Section>
         <FieldSection>
           <TextField
-            label={lang.account.resetPassword.send.userName}
-            fieldOptions={getFormikFieldOptions(formik, 'userName')}
+            label={formLabels.loginId.label[locale]}
+            fieldOptions={{
+              ...getFormikFieldOptions(formik, 'userName'),
+              placeholder: formLabels.loginId.placeholder[locale],
+            }}
             validateMessage={getFormikErrorMessage(formik, 'userName')}
           />
         </FieldSection>

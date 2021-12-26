@@ -11,6 +11,7 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
+import formLabels from '@/shared/utils/formLabels';
 
 const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
   const { lang, locale } = useLocale();
@@ -31,8 +32,11 @@ const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
       <Section>
         <FieldSection>
           <TextField
-            label={lang.account.resendSignUpStep2.code}
-            fieldOptions={getFormikFieldOptions(formik, 'code', 'tel')}
+            label={formLabels.verificationCode.label[locale]}
+            fieldOptions={{
+              ...getFormikFieldOptions(formik, 'code', 'tel'),
+              placeholder: formLabels.verificationCode.placeholder[locale],
+            }}
             validateMessage={getFormikErrorMessage(formik, 'code')}
           />
         </FieldSection>

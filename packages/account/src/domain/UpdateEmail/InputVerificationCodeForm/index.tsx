@@ -11,6 +11,7 @@ import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
+import formLabels from '@/shared/utils/formLabels';
 
 const InputVerificationCodeForm: React.FC<UseUpdateEmail> = (props) => {
   const { lang, locale } = useLocale();
@@ -33,12 +34,11 @@ const InputVerificationCodeForm: React.FC<UseUpdateEmail> = (props) => {
       <Section>
         <FieldSection>
           <TextField
-            label={lang.account.updateEmail.verification.code}
-            fieldOptions={getFormikFieldOptions(
-              formik,
-              'verificationCode',
-              'tel'
-            )}
+            label={formLabels.verificationCode.label[locale]}
+            fieldOptions={{
+              ...getFormikFieldOptions(formik, 'verificationCode', 'tel'),
+              placeholder: formLabels.verificationCode.placeholder[locale],
+            }}
             validateMessage={getFormikErrorMessage(formik, 'verificationCode')}
           />
         </FieldSection>
