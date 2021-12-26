@@ -12,7 +12,6 @@ import GlobalHead from '@/shared/components/GlobalHead';
 import theme from '@/shared/styles/theme';
 import GlobalScripts from '@/shared/components/GlobalScripts';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
-import '@/localShared/assets/css/amplify.css';
 import { cookieParams } from '@/shared/constants/cookies';
 import { i18n_messages } from '@/localShared/constants/babystar';
 import { LocaleProvider } from '@/shared/context/LocaleContext';
