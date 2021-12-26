@@ -213,16 +213,21 @@ const lang: LocaleData = {
     },
 
     resendSignUpStep1: {
-      title: 'H2Uアカウントの登録',
+      title: 'H2Uアカウント登録の再開',
       text: 'ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。',
       button: '本人確認コードを送信',
     },
     resendSignUpStep2: {
-      title: 'H2Uアカウントの登録',
+      title: 'H2Uアカウント登録の再開',
       text: 'メールアドレスに送信した本人確認コードを入力してください。',
       button: '本人確認コードを認証',
     },
     resendSignUpStep3: {
+      title: 'H2Uアカウント登録の再開',
+      text: 'パスワードを入力して、ログインしてください',
+      button: 'ログイン',
+    },
+    resendSignUpStep4: {
       title: 'H2Uアカウントの登録が完了しました',
       text: '',
       button: 'ホーム',

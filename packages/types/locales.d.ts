@@ -205,6 +205,11 @@ export interface LocaleData {
       text: string;
       button: string;
     };
+    resendSignUpStep4: {
+      title: string;
+      text: string;
+      button: string;
+    };
     logout: {
       title: string;
       text: string;
