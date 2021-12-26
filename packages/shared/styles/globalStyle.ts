@@ -67,6 +67,7 @@ export default createGlobalStyle`
   a {
     cursor: pointer;
     text-decoration: none;
+    color: ${({ theme }) => theme.foreground.primary};
 
     &:hover {
     text-decoration: underline;
