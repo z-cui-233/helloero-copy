@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
 import { useLocale } from '../../../../context/LocaleContext';
-import { useLoginStateContext } from '../../../../context/LoginStateContext';
 import device from '../../../../styles/device';
 import typo from '../../../../styles/typo';
 
@@ -14,42 +13,25 @@ interface Props {
 
 const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
   const { lang, locale } = useLocale();
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return (
     <Container isDisplayedMenu={isDisplayedMenu}>
       <MenuList>
-        {isLoadedUserInfo && !userInfo.isLoggedIn && (
-          <MenuItem>
-            <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
-              <StyledLink>{lang.account.menus.login}</StyledLink>
-            </Link>
-          </MenuItem>
-        )}
         <MenuItem>
           <Link href={`${options.HELLOERO}/${locale}`} passHref>
             <StyledLink>{lang.account.menus.helloero}</StyledLink>
           </Link>
         </MenuItem>
-        {isLoadedUserInfo && userInfo.isLoggedIn && (
-          <MenuItem>
-            <Link href={`${options.ACCOUNT}/${locale}`} passHref>
-              <StyledLink>{lang.account.menus.account}</StyledLink>
-            </Link>
-          </MenuItem>
-        )}
+        <MenuItem>
+          <Link href={`${options.ACCOUNT}/${locale}`} passHref>
+            <StyledLink>{lang.account.menus.account}</StyledLink>
+          </Link>
+        </MenuItem>
         <MenuItem>
           <Link href={`${options.HELP}/${locale}`} passHref>
             <StyledLink>{lang.account.menus.help}</StyledLink>
           </Link>
         </MenuItem>
-        {isLoadedUserInfo && userInfo.isLoggedIn && (
-          <MenuItem>
-            <Link href={`${options.ACCOUNT}/${locale}/logout`} passHref>
-              <StyledLink>{lang.account.menus.logout}</StyledLink>
-            </Link>
-          </MenuItem>
-        )}
       </MenuList>
     </Container>
   );

@@ -129,40 +129,39 @@ const lang: LocaleData = {
   account: {
     meta: {
       default: {
-        title: 'H2U アカウント',
-        description: 'H2U アカウントの登録、ログイン、各種設定を行えます。',
+        title: 'H2Uアカウント',
+        description: 'H2Uアカウントの登録、ログイン、各種設定を行えます。',
       },
       login: {
-        title: 'ログイン - H2U アカウント',
+        title: 'ログイン - H2Uアカウント',
         description: '',
       },
       signUp: {
-        title: 'アカウント登録 - H2U アカウント',
+        title: 'アカウント登録 - H2Uアカウント',
         description: '',
       },
       resendSignUp: {
-        title: 'アカウント登録 - H2U アカウント',
+        title: 'アカウント登録 - H2Uアカウント',
         description: '',
       },
       logout: {
-        title: 'ログアウト - H2U アカウント',
+        title: 'ログアウト - H2Uアカウント',
         description: '',
       },
       updateEmail: {
-        title: 'メールアドレスの変更 - H2U アカウント',
+        title: 'メールアドレスの変更 - H2Uアカウント',
         description: '',
       },
       resetPassword: {
-        title: 'パスワードの変更 - H2U アカウント',
+        title: 'パスワードの変更 - H2Uアカウント',
         description: '',
       },
     },
     menus: {
       login: 'ログイン',
       helloero: 'HELLOERO',
-      account: 'アカウント設定',
-      help: 'ヘルプセンター',
-      logout: 'ログアウト',
+      account: 'アカウント',
+      help: 'ヘルプ',
     },
     top: {
       service: {
@@ -170,11 +169,12 @@ const lang: LocaleData = {
         helloero: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
       },
       menus: {
-        title: 'アカウント設定',
+        title: 'アカウント',
+        login: 'ログイン',
         updateEmail: 'メールアドレスの変更',
         resetPassword: 'パスワードの変更',
-        help: 'ヘルプセンター',
-        login: 'ログイン',
+        logout: 'ログアウト',
+        help: 'ヘルプ',
       },
     },
     login: {

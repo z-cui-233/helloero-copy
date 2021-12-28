@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { destroyCookie, parseCookies } from 'nookies';
+import { globalConfig } from 'src/globalConfig';
 import {
   ActivateWabikenMutation,
   ActivateWabikenMutationVariables,
@@ -19,6 +21,7 @@ import { API_VERSION } from '@/localShared/constants';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getErrorMessage } from '@/shared/utils';
+import { cookieParams } from '@/shared/constants/cookies';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -198,6 +201,11 @@ const useEntryWabiken = (): UseEntryWabiken => {
         return;
       }
 
+      destroyCookie(null, cookieParams.wabiken.name, {
+        domain: globalConfig.COOKIE_DOMAIN,
+        path: cookieParams.wabiken.path,
+      });
+
       setEntryWabikenState((entryWabikenState) => ({
         ...entryWabikenState,
         pageStatus: PAGE_STATUS.COMPLETE,
@@ -213,8 +221,9 @@ const useEntryWabiken = (): UseEntryWabiken => {
     ]);
 
   useEffect(() => {
-    const wabiken = router.query.wabiken
-      ? (router.query.wabiken as string)
+    const cookies = parseCookies();
+    const wabiken = cookies[cookieParams.wabiken.name]
+      ? (cookies[cookieParams.wabiken.name] as string)
       : '';
 
     setEntryWabikenState((entryWabikenState) => ({

@@ -9,9 +9,9 @@ import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
   const { lang, locale } = useLocale();
@@ -36,10 +36,10 @@ const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
           <TextField
             label={formLabels.email.label[locale]}
             fieldOptions={{
-              ...getFormikFieldOptions(formik, 'email'),
+              ...formikHelper.fieldOptions(formik, 'email'),
               placeholder: formLabels.email.placeholder[locale],
             }}
-            validateMessage={getFormikErrorMessage(formik, 'email')}
+            validateMessage={formikHelper.errorMessage(formik, 'email')}
           />
         </FieldSection>
       </Section>

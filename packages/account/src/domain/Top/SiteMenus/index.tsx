@@ -11,11 +11,37 @@ const SiteMenus: React.FC = () => {
   const { locale, lang } = useLocale();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
-  return (
+  return isLoadedUserInfo ? (
     <Container>
       <Title>{lang.account.top.menus.title}</Title>
       <List>
-        {isLoadedUserInfo && userInfo.isLoggedIn && (
+        {!userInfo.isLoggedIn && (
+          <React.Fragment>
+            <div>
+              <Link href={`/${locale}/login`} passHref>
+                <StyledLink>
+                  {lang.account.top.menus.login}
+                  <Arrow>
+                    <ArrowLogo />
+                  </Arrow>
+                </StyledLink>
+              </Link>
+            </div>
+            <div>
+              <div>
+                <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+                  <StyledLink>
+                    {lang.account.top.menus.help}
+                    <Arrow>
+                      <ArrowLogo />
+                    </Arrow>
+                  </StyledLink>
+                </Link>
+              </div>
+            </div>
+          </React.Fragment>
+        )}
+        {userInfo.isLoggedIn && (
           <React.Fragment>
             <div>
               <Link href={`/${locale}/update-email`} passHref>
@@ -37,35 +63,31 @@ const SiteMenus: React.FC = () => {
                 </StyledLink>
               </Link>
             </div>
+            <div>
+              <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+                <StyledLink>
+                  {lang.account.top.menus.help}
+                  <Arrow>
+                    <ArrowLogo />
+                  </Arrow>
+                </StyledLink>
+              </Link>
+            </div>
+            <div>
+              <Link href={`/${locale}/logout`} passHref>
+                <StyledLink>
+                  {lang.account.top.menus.logout}
+                  <Arrow>
+                    <ArrowLogo />
+                  </Arrow>
+                </StyledLink>
+              </Link>
+            </div>
           </React.Fragment>
-        )}
-        {isLoadedUserInfo && !userInfo.isLoggedIn && (
-          <div>
-            <Link href={`/${locale}/login`} passHref>
-              <StyledLink>
-                {lang.account.top.menus.login}
-                <Arrow>
-                  <ArrowLogo />
-                </Arrow>
-              </StyledLink>
-            </Link>
-          </div>
-        )}
-        {isLoadedUserInfo && (
-          <div>
-            <Link href={`${globalConfig.HELP}/${locale}`} passHref>
-              <StyledLink>
-                {lang.account.top.menus.help}
-                <Arrow>
-                  <ArrowLogo />
-                </Arrow>
-              </StyledLink>
-            </Link>
-          </div>
         )}
       </List>
     </Container>
-  );
+  ) : null;
 };
 
 const Container = styled.div`

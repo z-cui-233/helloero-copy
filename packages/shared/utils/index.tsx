@@ -1,5 +1,4 @@
 import dateFormat from 'dateformat';
-import { FormikProps } from 'formik';
 import { LocaleData, LocaleType } from 'u-next/locales';
 
 export const createTitleThumbnailUrl = (
@@ -44,31 +43,4 @@ export const createExpireDate = (
   return local === 'ja'
     ? `${dateFormat(referenceDate, 'yyyy年m月d日 HH:MM')}まで視聴可能`
     : `Watch until ${dateFormat(referenceDate, 'mmm dd, yyyy HH:MM')} JST`;
-};
-
-export const getFormikFieldOptions = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formik: FormikProps<any>,
-  name: string,
-  type = 'text'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): any => {
-  return {
-    type,
-    name,
-    onChange: formik.handleChange,
-    onBlur: formik.handleBlur,
-    value: formik.values[name],
-    isError: !!formik.touched[name] && !!formik.errors[name],
-  };
-};
-
-export const getFormikErrorMessage = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formik: FormikProps<any>,
-  name: string
-): string => {
-  return formik.touched[name] && formik.errors[name]
-    ? (formik.errors[name] as string)
-    : '';
 };

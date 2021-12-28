@@ -9,9 +9,9 @@ import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const InputForm: React.FC<UseResetPassword> = (props) => {
   const { lang, locale } = useLocale();
@@ -48,10 +48,10 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
             <TextField
               label={formLabels.verificationCode.label[locale]}
               fieldOptions={{
-                ...getFormikFieldOptions(formik, 'verificationCode', 'tel'),
+                ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),
                 placeholder: formLabels.verificationCode.placeholder[locale],
               }}
-              validateMessage={getFormikErrorMessage(
+              validateMessage={formikHelper.errorMessage(
                 formik,
                 'verificationCode'
               )}
@@ -61,11 +61,11 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
             <TextField
               label={formLabels.newPassword.label[locale]}
               fieldOptions={{
-                ...getFormikFieldOptions(formik, 'newPassword', 'password'),
+                ...formikHelper.fieldOptions(formik, 'newPassword', 'password'),
                 autoComplete: 'new-password',
                 placeholder: formLabels.newPassword.placeholder[locale],
               }}
-              validateMessage={getFormikErrorMessage(formik, 'password')}
+              validateMessage={formikHelper.errorMessage(formik, 'newPassword')}
             />
           </FieldSection>
         </Section>

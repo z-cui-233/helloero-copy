@@ -7,7 +7,7 @@ import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
-const Entry: React.FC = () => {
+const EntryFlow: React.FC = () => {
   const store = useEntryWabiken();
 
   return (
@@ -25,4 +25,4 @@ const Entry: React.FC = () => {
   );
 };
 
-export default withAmplifyAuth(Entry, globalConfig);
+export default withAmplifyAuth(EntryFlow, globalConfig);

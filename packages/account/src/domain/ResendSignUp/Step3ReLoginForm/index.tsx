@@ -8,10 +8,10 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
   const { lang, locale } = useLocale();
@@ -37,10 +37,10 @@ const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
           <TextField
             label={formLabels.password.label[locale]}
             fieldOptions={{
-              ...getFormikFieldOptions(formik, 'password', 'password'),
+              ...formikHelper.fieldOptions(formik, 'password', 'password'),
               placeholder: formLabels.password.placeholder[locale],
             }}
-            validateMessage={getFormikErrorMessage(formik, 'password')}
+            validateMessage={formikHelper.errorMessage(formik, 'password')}
           />
         </FieldSection>
       </Section>

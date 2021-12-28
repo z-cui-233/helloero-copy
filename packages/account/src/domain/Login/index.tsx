@@ -8,7 +8,6 @@ import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const Login: React.FC = () => {
   const store = useLoginChallenge();
-
   return (
     <LayoutH2u options={globalConfig}>
       {store.loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (

@@ -9,9 +9,9 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const Step1InputForm: React.FC<UseSignUp> = (props) => {
   const { lang, locale } = useLocale();
@@ -43,23 +43,23 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
             <TextField
               label={formLabels.loginId.label[locale]}
               fieldOptions={{
-                ...getFormikFieldOptions(formik, 'loginId'),
+                ...formikHelper.fieldOptions(formik, 'loginId'),
                 autoComplete: 'username',
                 placeholder: formLabels.loginId.placeholder[locale],
               }}
-              validateMessage={getFormikErrorMessage(formik, 'loginId')}
+              validateMessage={formikHelper.errorMessage(formik, 'loginId')}
             />
           </FieldSection>
           <FieldSection>
             <TextField
               label={formLabels.password.label[locale]}
               fieldOptions={{
-                ...getFormikFieldOptions(formik, 'password'),
+                ...formikHelper.fieldOptions(formik, 'password'),
                 type: isMasked ? 'password' : 'text',
                 autoComplete: 'new-password',
                 placeholder: formLabels.password.placeholder[locale],
               }}
-              validateMessage={getFormikErrorMessage(formik, 'password')}
+              validateMessage={formikHelper.errorMessage(formik, 'password')}
             />
             <ShowPassword
               onClick={() => {
@@ -73,10 +73,10 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
             <TextField
               label={formLabels.email.label[locale]}
               fieldOptions={{
-                ...getFormikFieldOptions(formik, 'email'),
+                ...formikHelper.fieldOptions(formik, 'email'),
                 placeholder: formLabels.email.placeholder[locale],
               }}
-              validateMessage={getFormikErrorMessage(formik, 'email')}
+              validateMessage={formikHelper.errorMessage(formik, 'email')}
             />
           </FieldSection>
         </Section>
