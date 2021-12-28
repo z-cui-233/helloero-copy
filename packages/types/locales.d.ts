@@ -176,7 +176,6 @@ export interface LocaleData {
     signUpStep1: {
       title: string;
       text: string;
-      showPassword: string;
       button: string;
     };
     signUpStep2: {

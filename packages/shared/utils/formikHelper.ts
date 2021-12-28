@@ -1,23 +1,23 @@
 import { FormikHandlers, FormikProps } from 'formik';
 
-const fieldOptions = <T, U extends keyof T>(
+const fieldOptions = <T>(
   formik: FormikProps<T>,
-  name: U,
+  name: keyof T,
   type: 'text' | 'password' | 'tel' = 'text'
 ): {
   type: string;
-  name: U;
+  name: string;
   onChange: FormikHandlers['handleChange'];
   onBlur: FormikHandlers['handleBlur'];
-  value: T[U];
+  value: string;
   isError: boolean;
 } => {
   return {
     type,
-    name,
+    name: name as string,
     onChange: formik.handleChange,
     onBlur: formik.handleBlur,
-    value: formik.values[name],
+    value: formik.values[name] as unknown as string,
     isError: !!formik.touched[name] && !!formik.errors[name],
   };
 };

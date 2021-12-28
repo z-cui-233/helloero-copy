@@ -197,7 +197,6 @@ const lang: LocaleData = {
     signUpStep1: {
       title: 'H2Uアカウントの登録',
       text: '',
-      showPassword: 'パスワードを表示する',
       button: '次へ',
     },
     signUpStep2: {
