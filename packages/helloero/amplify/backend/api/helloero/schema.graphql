@@ -12,16 +12,6 @@ interface WabikenMetaBase {
 
 type UserWabikenMeta implements WabikenMetaBase
   @model
-  @key(
-    name: "ByOwnerByActivatedAt"
-    fields: ["owner", "activatedAt"]
-    queryField: "userWabikenMetaByOwnerByActivatedAt"
-  )
-  @key(
-    name: "ByOwnerByNotValidAfter"
-    fields: ["owner", "notValidAfter"]
-    queryField: "userWabikenMetaByOwnerByNotValidAfter"
-  )
   @auth(rules: [{ allow: owner }]) {
   """
   id is same as token
@@ -35,12 +25,18 @@ type UserWabikenMeta implements WabikenMetaBase
   validityPeriod: Int!
   issuerTrace: String
   createdAt: AWSTimestamp!
-  content: UserContentMeta!
+  content: UserContentMeta! @hasOne(indexName: "byDisplayName", fields: ["id"])
   """
   following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
   activatedAt: AWSTimestamp!
   owner: String
+    @index(name: "byOwnerByActivatedAt", sortKeyFields: ["activatedAt"])
+    @index(
+      name: "byOwnerByNotValidAfter"
+      queryField: "userWabikenMetaByOwnerByNotValidAfter"
+      sortKeyFields: ["notValidAfter"]
+    )
 }
 
 type WabikenMeta implements WabikenMetaBase {
@@ -57,7 +53,7 @@ type WabikenMeta implements WabikenMetaBase {
   createdAt: AWSTimestamp!
   content: ContentMeta!
   issuerTrace: String
-  activatedAt: AWSTimestamp # This will be null for non-activated wabiken
+  activatedAt: AWSTimestamp
 }
 
 interface ContentMetaBase {
@@ -82,10 +78,12 @@ type ContentMeta implements ContentMetaBase {
   thumbnails: ContentMetaThumbnail
   mainEpisodeCode: String
 }
-type UserContentMeta implements ContentMetaBase {
+
+type UserContentMeta implements ContentMetaBase @model {
   id: ID!
   key: ContentMetaKey!
   displayName: String!
+    @index(name: "byDisplayName", sortKeyFields: ["displayName"])
   catchphrase: String!
   comment: String!
   duration: Int!
@@ -124,10 +122,12 @@ type ContentMetaThumbnail {
   tsptFhds: String
   tsptFwxga: String
 }
+
 type ErrorCodeMessage {
   code: Int!
   message: String!
 }
+
 type WabikenMetaResponse {
   wabiken: WabikenMeta!
   result: Boolean!
@@ -173,12 +173,14 @@ type LicenseUrl {
   version: String!
   endpoint: AWSURL!
 }
+
 type PlayableCdn {
   cdnId: String
   weight: Int!
   playlistUrl: AWSURL!
   licenseUrlList: [LicenseUrl!]!
 }
+
 type Playable {
   type: String!
   cdns: [PlayableCdn!]!
@@ -198,6 +200,7 @@ type PlayInfoResponse {
   playInfo: PlayInfo!
   result: Boolean!
 }
+
 type Query {
   getWabikenMeta(id: ID!): WabikenMetaResponse
     @function(name: "helloeroLambdaResolver")
