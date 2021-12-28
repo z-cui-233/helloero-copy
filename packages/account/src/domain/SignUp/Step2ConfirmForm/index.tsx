@@ -8,10 +8,10 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { getFormikErrorMessage, getFormikFieldOptions } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
   const { lang, locale } = useLocale();
@@ -34,10 +34,10 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
           <TextField
             label={formLabels.verificationCode.label[locale]}
             fieldOptions={{
-              ...getFormikFieldOptions(formik, 'code', 'tel'),
+              ...formikHelper.fieldOptions(formik, 'code', 'tel'),
               placeholder: formLabels.verificationCode.placeholder[locale],
             }}
-            validateMessage={getFormikErrorMessage(formik, 'code')}
+            validateMessage={formikHelper.errorMessage(formik, 'code')}
           />
         </FieldSection>
       </Section>

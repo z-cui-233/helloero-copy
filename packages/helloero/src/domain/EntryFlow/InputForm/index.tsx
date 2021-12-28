@@ -9,9 +9,9 @@ import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { getFormikFieldOptions, getFormikErrorMessage } from '@/shared/utils';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
+import formikHelper from '@/shared/utils/formikHelper';
 
 const InputForm: React.FC<UseEntryWabiken> = (props) => {
   const { lang, locale } = useLocale();
@@ -34,10 +34,10 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
           <TextField
             label={formLabels.wabiken.label[locale]}
             fieldOptions={{
-              ...getFormikFieldOptions(formik, 'wabiken'),
+              ...formikHelper.fieldOptions(formik, 'wabiken'),
               placeholder: formLabels.wabiken.placeholder[locale],
             }}
-            validateMessage={getFormikErrorMessage(formik, 'wabiken')}
+            validateMessage={formikHelper.errorMessage(formik, 'wabiken')}
           />
         </FieldSection>
       </Section>

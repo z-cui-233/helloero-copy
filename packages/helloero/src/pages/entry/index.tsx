@@ -1,23 +1,31 @@
 import { NextPage } from 'next';
-import React from 'react';
+import { useRouter } from 'next/dist/client/router';
+import { setCookie } from 'nookies';
+import React, { useEffect } from 'react';
 import { globalConfig } from 'src/globalConfig';
-import Entry from '@/domain/Entry';
-import MetaTags from '@/shared/components/MetaTags';
-import { useLocale } from '@/shared/context/LocaleContext';
+import { cookieParams } from '@/shared/constants/cookies';
 
 const Page: NextPage = () => {
-  const { lang } = useLocale();
+  const router = useRouter();
 
-  return (
-    <React.Fragment>
-      <MetaTags
-        host={globalConfig.HELLOERO}
-        title={lang.helloero.meta.entry.title}
-        description={lang.helloero.meta.entry.description}
-      />
-      <Entry />
-    </React.Fragment>
-  );
+  useEffect(() => {
+    const wabiken = router.query.wabiken
+      ? (router.query.wabiken as string)
+      : '';
+
+    if (wabiken) {
+      setCookie(null, cookieParams.wabiken.name, wabiken, {
+        domain: globalConfig.COOKIE_DOMAIN,
+        path: cookieParams.wabiken.path,
+        secure: cookieParams.wabiken.secure,
+        httpOnly: cookieParams.wabiken.httpOnly,
+      });
+    }
+
+    router.replace(`/${router.locale}/entry/flow`);
+  }, [router]);
+
+  return <div />;
 };
 
 export default Page;

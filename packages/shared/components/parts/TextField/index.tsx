@@ -35,13 +35,14 @@ const Container = styled.div`
 
 const Label = styled.label`
   ${typo.Standard};
-  color: ${({ theme }) => theme.foreground.tertiary};
+  color: ${({ theme }) => theme.foreground.secondary};
+  background-color: ${({ theme }) => theme.background.primary};
   pointer-events: none;
   padding: 0 0.5rem;
   transition: all 0.1s ease;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: 0.5rem;
   margin: auto;
   position: absolute;
   height: 1rem;
@@ -59,21 +60,19 @@ const Input = styled.input<CustomInputProps>`
       isError ? theme.keyColor.color5 : theme.foreground.secondary};
   box-shadow: none;
   color: ${({ theme }) => theme.foreground.primary};
-  padding: 1rem 0.5rem 0;
+  padding: 0.5rem 1rem;
   height: 3.5rem;
   width: 100%;
   outline: none;
 
   &:focus + ${Label} {
     ${typo.Note};
-    transform: translate(0, -0.75rem);
-    opacity: 0.9;
+    transform: translate(0, -1.5rem);
   }
 
   &:not([value='']) + ${Label} {
     ${typo.Note};
-    transform: translate(0, -0.75rem);
-    opacity: 0.9;
+    transform: translate(0, -1.5rem);
   }
 
   &::placeholder {

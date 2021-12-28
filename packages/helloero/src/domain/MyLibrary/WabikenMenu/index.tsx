@@ -11,7 +11,7 @@ const WabikenMenu: React.FC = () => {
   return (
     <Container>
       <div>
-        <Link href={`/${locale}/entry`} passHref>
+        <Link href={`/${locale}/entry/flow`} passHref>
           <StyledLink>
             <div>
               {lang.helloero.myLibrary.wabiken.entry}

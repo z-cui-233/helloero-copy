@@ -162,7 +162,6 @@ const lang: LocaleData = {
       helloero: 'HELLOERO',
       account: 'Account',
       help: 'Help',
-      logout: 'Logout',
     },
     top: {
       service: {
@@ -171,10 +170,11 @@ const lang: LocaleData = {
       },
       menus: {
         title: 'Account',
+        login: 'Login',
         updateEmail: 'メールアドレスの変更',
         resetPassword: 'パスワードの変更',
-        help: 'Help Center',
-        login: 'Login',
+        logout: 'ログアウト',
+        help: 'ヘルプ',
       },
     },
     login: {

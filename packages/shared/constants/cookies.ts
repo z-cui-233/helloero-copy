@@ -6,4 +6,10 @@ export const cookieParams = {
     secure: true,
     httpOnly: false,
   },
+  wabiken: {
+    name: '_wabiken',
+    path: '/',
+    secure: true,
+    httpOnly: false,
+  },
 };
