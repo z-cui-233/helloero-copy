@@ -1,7 +1,9 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import typo from '../../../styles/typo';
 import ValidateMessage from '../../../components/parts/ValidateMessage';
+import VisibilityIcon from '../../../assets/icon/visibility_black_24dp.svg';
+import VisibilityOffIcon from '../../../assets/icon/visibility_off_black_24dp.svg';
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
@@ -18,11 +20,26 @@ const TextField: React.FC<Props> = ({
   validateMessage,
   fieldOptions,
 }) => {
+  const isPassword = fieldOptions.type === 'password';
+  const [isRevealPassword, setIsRevealPassword] = useState<boolean>(false);
+
   return (
     <div>
       <Container>
-        <Input {...fieldOptions} />
+        <Input
+          {...fieldOptions}
+          type={isPassword && isRevealPassword ? 'text' : fieldOptions.type}
+        />
         <Label>{label}</Label>
+        {isPassword && (
+          <PasswordReveal
+            onClick={() => {
+              setIsRevealPassword(!isRevealPassword);
+            }}
+          >
+            {isRevealPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+          </PasswordReveal>
+        )}
       </Container>
       {validateMessage && <ValidateMessage message={validateMessage} />}
     </div>
@@ -67,12 +84,14 @@ const Input = styled.input<CustomInputProps>`
 
   &:focus + ${Label} {
     ${typo.Note};
-    transform: translate(0, -1.5rem);
+    transform: translate(0, -1.65rem);
+    font-weight: bold;
   }
 
   &:not([value='']) + ${Label} {
     ${typo.Note};
-    transform: translate(0, -1.5rem);
+    transform: translate(0, -1.65rem);
+    font-weight: bold;
   }
 
   &::placeholder {
@@ -83,6 +102,21 @@ const Input = styled.input<CustomInputProps>`
 
   &:focus::placeholder {
     opacity: 1;
+  }
+`;
+
+const PasswordReveal = styled.div`
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 1.5rem;
+  opacity: 0.8;
+
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
 

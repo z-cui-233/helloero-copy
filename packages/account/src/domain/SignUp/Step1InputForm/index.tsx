@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -15,7 +15,6 @@ import formikHelper from '@/shared/utils/formikHelper';
 
 const Step1InputForm: React.FC<UseSignUp> = (props) => {
   const { lang, locale } = useLocale();
-  const [isMasked, setIsMasked] = useState<boolean>(true);
 
   const formik = useFormik({
     initialValues: props.signupState.step1FormValues,
@@ -54,20 +53,12 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
             <TextField
               label={formLabels.password.label[locale]}
               fieldOptions={{
-                ...formikHelper.fieldOptions(formik, 'password'),
-                type: isMasked ? 'password' : 'text',
+                ...formikHelper.fieldOptions(formik, 'password', 'password'),
                 autoComplete: 'new-password',
                 placeholder: formLabels.password.placeholder[locale],
               }}
               validateMessage={formikHelper.errorMessage(formik, 'password')}
             />
-            <ShowPassword
-              onClick={() => {
-                setIsMasked(!isMasked);
-              }}
-            >
-              {lang.account.signUpStep1.showPassword}
-            </ShowPassword>
           </FieldSection>
           <FieldSection>
             <TextField
@@ -105,13 +96,6 @@ const Section = styled.div`
 
 const FieldSection = styled.div`
   margin: 1rem 0 0;
-`;
-
-const ShowPassword = styled.div`
-  ${typo.Body};
-  margin: 0.5rem 0 0;
-  cursor: pointer;
-  display: inline-block;
 `;
 
 const ButtonSection = styled.div`
