@@ -48,7 +48,7 @@ const Container = styled.div`
 
 const HoverControl = styled.div`
   transition: opacity 0.3s ease-out;
-  background-color: ${({ theme }) => theme.foreground.secondary};
+  background-color: ${({ theme }) => theme.foreground.tertiary};
   position: absolute;
   top: 0;
   left: 0;

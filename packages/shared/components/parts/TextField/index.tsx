@@ -52,7 +52,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   ${typo.Standard};
-  color: ${({ theme }) => theme.foreground.secondary};
+  color: ${({ theme }) => theme.foreground.quaternary};
   background-color: ${({ theme }) => theme.background.primary};
   pointer-events: none;
   padding: 0 0.5rem;
@@ -74,7 +74,7 @@ const Input = styled.input<CustomInputProps>`
   background-color: ${({ theme }) => theme.background.primary};
   border: 2px solid
     ${({ theme, isError = false }) =>
-      isError ? theme.keyColor.color5 : theme.foreground.secondary};
+      isError ? theme.keyColor.color5 : theme.foreground.tertiary};
   box-shadow: none;
   color: ${({ theme }) => theme.foreground.primary};
   padding: 0.5rem 1rem;
@@ -84,18 +84,21 @@ const Input = styled.input<CustomInputProps>`
 
   &:focus + ${Label} {
     ${typo.Note};
+    color: ${({ theme }) => theme.foreground.secondary};
     transform: translate(0, -1.65rem);
     font-weight: bold;
   }
 
   &:not([value='']) + ${Label} {
     ${typo.Note};
+    color: ${({ theme }) => theme.foreground.secondary};
     transform: translate(0, -1.65rem);
     font-weight: bold;
   }
 
   &::placeholder {
     ${typo.Body};
+
     transition: opacity 0.3s ease-out;
     opacity: 0;
   }

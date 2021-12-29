@@ -160,8 +160,8 @@ export interface LocaleData {
     login: {
       title: string;
       button: string;
-      signUp: string;
       resetPassword: string;
+      signUp: string;
     };
     loginPasswordResetRequired: {
       title: string;
@@ -176,12 +176,16 @@ export interface LocaleData {
     signUpStep1: {
       title: string;
       text: string;
+      terms: {
+        title: string;
+        privacy: string;
+        service: string;
+      };
       button: string;
     };
     signUpStep2: {
       title: string;
       text: string;
-      terms: string;
       button: string;
     };
     signUpStep3: {

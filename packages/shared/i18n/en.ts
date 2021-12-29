@@ -180,8 +180,8 @@ const lang: LocaleData = {
     login: {
       title: 'H2Uにログイン',
       button: 'LOGIN',
-      signUp: 'H2Uアカウントを作成',
       resetPassword: 'パスワードを忘れた方',
+      signUp: 'H2Uアカウントを無料で登録',
     },
     loginPasswordResetRequired: {
       title: 'ログインができません。',
@@ -196,14 +196,18 @@ const lang: LocaleData = {
 
     signUpStep1: {
       title: 'H2Uアカウントの登録',
-      text: '',
-      button: '次へ',
+      text: 'お客様情報を入力してください',
+      terms: {
+        title: '登録ボタンを押すことにより、下記の規約に同意するものとします。',
+        privacy: '個人情報の取扱いについて',
+        service: '利用規約',
+      },
+      button: '規約に同意して登録',
     },
     signUpStep2: {
       title: 'H2Uアカウントの登録',
-      text: '',
-      terms: '利用規約',
-      button: '規約に同意して登録',
+      text: 'メールアドレスの確認を行います。メールアドレスに送信した本人確認コードを入力してください。',
+      button: '送信',
     },
     signUpStep3: {
       title: 'H2Uアカウントの登録が完了しました',

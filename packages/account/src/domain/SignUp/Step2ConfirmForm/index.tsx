@@ -19,7 +19,7 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
   const formik = useFormik({
     initialValues: props.signupState.step2FormValues,
     validationSchema: Yup.object().shape({
-      code: formValidations.verificationCode(locale),
+      verificationCode: formValidations.verificationCode(locale),
     }),
     onSubmit: props.verifyCode,
   });
@@ -27,6 +27,7 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.signupState.errorMessage} />
+      <Steps>STEP 2/2</Steps>
       <Title>{lang.account.signUpStep2.title}</Title>
       <Text>{lang.account.signUpStep2.text}</Text>
       <Section>
@@ -34,14 +35,16 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
           <TextField
             label={formLabels.verificationCode.label[locale]}
             fieldOptions={{
-              ...formikHelper.fieldOptions(formik, 'code', 'tel'),
+              ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),
               placeholder: formLabels.verificationCode.placeholder[locale],
             }}
-            validateMessage={formikHelper.errorMessage(formik, 'code')}
+            validateMessage={formikHelper.errorMessage(
+              formik,
+              'verificationCode'
+            )}
           />
         </FieldSection>
       </Section>
-      <Section>{lang.account.signUpStep2.terms}</Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -53,6 +56,11 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
     </MainContainer>
   );
 };
+
+const Steps = styled.div`
+  ${typo.Body};
+  font-weight: bold;
+`;
 
 const Title = styled.div`
   ${typo.Heading2};

@@ -41,7 +41,7 @@ const Container = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${({ theme }) => theme.foreground.secondary};
+  background-color: ${({ theme }) => theme.foreground.tertiary};
   z-index: 2000;
   animation: ${fadeIn} 0.3s ease;
   overflow: scroll;
