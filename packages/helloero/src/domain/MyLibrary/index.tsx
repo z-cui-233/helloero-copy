@@ -10,6 +10,7 @@ import LayoutHelloero from '@/shared/components/LayoutHelloero';
 import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
+import MainContainer from '@/shared/components/parts/MainContainer';
 
 const MyLibrary: React.FC = () => {
   const { lang } = useLocale();
@@ -17,7 +18,7 @@ const MyLibrary: React.FC = () => {
 
   return (
     <LayoutHelloero options={globalConfig}>
-      <Container>
+      <MainContainer size="large">
         <Title>{lang.helloero.myLibrary.purchased.title}</Title>
         <WabikenMenu />
         <ListController {...store} />
@@ -31,16 +32,10 @@ const MyLibrary: React.FC = () => {
           isShownDetail={store.purchasedListState.isShownDetail}
           onClickClose={store.closeTitleDetail}
         />
-      </Container>
+      </MainContainer>
     </LayoutHelloero>
   );
 };
-
-const Container = styled.div`
-  max-width: 840px;
-  margin: 4rem auto 0;
-  width: calc(100% - 2rem);
-`;
 
 const Title = styled.div`
   ${typo.Heading1};

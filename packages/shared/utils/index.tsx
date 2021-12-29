@@ -44,3 +44,16 @@ export const createExpireDate = (
     ? `${dateFormat(referenceDate, 'yyyy年m月d日 HH:MM')}まで視聴可能`
     : `Watch until ${dateFormat(referenceDate, 'mmm dd, yyyy HH:MM')} JST`;
 };
+
+export const convertDateToString = (
+  local: LocaleType,
+  date: Date | null
+): string => {
+  if (!date) {
+    return '';
+  }
+
+  return local === 'ja'
+    ? dateFormat(date, 'yyyy年m月d日')
+    : dateFormat(date, 'mmm dd, yyyy');
+};
