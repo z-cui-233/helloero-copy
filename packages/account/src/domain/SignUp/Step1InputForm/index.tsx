@@ -127,7 +127,7 @@ const FieldSection = styled.div`
 `;
 
 const Terms = styled.div`
-  ${typo.Body};
+  ${typo.Note};
   color: ${({ theme }) => theme.foreground.secondary};
   margin: 2rem 0 0;
 
