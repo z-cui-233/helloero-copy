@@ -23,7 +23,7 @@ const Container = styled.div`
   bottom: 3rem;
   margin: auto;
 
-  background-color: ${({ theme }) => theme.foreground.secondary};
+  background-color: ${({ theme }) => theme.foreground.tertiary};
   content: '';
   display: block;
   border-radius: 50%;

@@ -84,14 +84,14 @@ const DummyCard = styled.div`
 
 const Loading = styled.div`
   ${typo.Standard};
-  color: ${({ theme }) => theme.foreground.secondary};
+  color: ${({ theme }) => theme.foreground.tertiary};
   margin: 2rem 0 0;
   text-align: center;
 `;
 
 const NoData = styled.div`
   ${typo.Standard};
-  color: ${({ theme }) => theme.foreground.secondary};
+  color: ${({ theme }) => theme.foreground.tertiary};
   margin: 4rem 0;
 `;
 

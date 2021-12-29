@@ -14,6 +14,7 @@ declare module 'styled-components' {
       primaryInverted: string;
       secondary: string;
       tertiary: string;
+      quaternary: string;
     };
     background: {
       primary: string;

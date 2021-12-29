@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { globalConfig } from 'src/globalConfig';
 import { UseSignUp } from '../useSignUp';
 import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
@@ -29,6 +30,7 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.signupState.errorMessage} />
+      <Steps>STEP 1/2</Steps>
       <Title>{lang.account.signUpStep1.title}</Title>
       <Text>{lang.account.signUpStep1.text}</Text>
       <form
@@ -71,6 +73,27 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
             />
           </FieldSection>
         </Section>
+        <Terms>
+          <div>{lang.account.signUpStep1.terms.title}</div>
+          <div>
+            {/* 個人情報保護方針 */}
+            <a
+              href={`${globalConfig.HELP}/${locale}/terms/privacy`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {lang.account.signUpStep1.terms.privacy}
+            </a>
+            {/* 利用規約 */}
+            <a
+              href={`${globalConfig.HELP}/${locale}/terms/service`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {lang.account.signUpStep1.terms.service}
+            </a>
+          </div>
+        </Terms>
         <ButtonSection>
           <ButtonStandard
             type="submit"
@@ -81,6 +104,11 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
     </MainContainer>
   );
 };
+
+const Steps = styled.div`
+  ${typo.Body};
+  font-weight: bold;
+`;
 
 const Title = styled.div`
   ${typo.Heading2};
@@ -96,6 +124,23 @@ const Section = styled.div`
 
 const FieldSection = styled.div`
   margin: 1rem 0 0;
+`;
+
+const Terms = styled.div`
+  ${typo.Body};
+  color: ${({ theme }) => theme.foreground.secondary};
+  margin: 2rem 0 0;
+
+  & a {
+    font-size: inherit;
+    color: inherit;
+    text-decoration: underline;
+    display: inline-block;
+
+    & + a {
+      margin: 0 0 0 0.5rem;
+    }
+  }
 `;
 
 const ButtonSection = styled.div`

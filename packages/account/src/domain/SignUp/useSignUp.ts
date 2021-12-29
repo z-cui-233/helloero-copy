@@ -28,7 +28,7 @@ export interface UseSignUp {
       email: string;
     };
     step2FormValues: {
-      code: string;
+      verificationCode: string;
     };
   };
   challengeSignUp: (
@@ -48,7 +48,7 @@ const initialState: UseSignUp['signupState'] = {
     email: '',
   },
   step2FormValues: {
-    code: '',
+    verificationCode: '',
   },
 };
 
@@ -115,7 +115,7 @@ const useSignUp = (): UseSignUp => {
         setIsLoading(true);
         await Auth.confirmSignUp(
           signupState.step1FormValues.loginId,
-          values.code
+          values.verificationCode
         );
       } catch (error) {
         const errorCode = error instanceof Error ? error.name : undefined;

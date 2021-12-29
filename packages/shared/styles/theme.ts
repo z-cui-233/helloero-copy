@@ -8,6 +8,7 @@ const colors = {
   white: 'rgba(255, 255, 255, 1)',
   error: 'rgba(193, 62, 6, 1)',
   black: 'rgba(0, 0, 0, 1)',
+  black_80: 'rgba(0, 0, 0, 0.8)',
   black_60: 'rgba(0, 0, 0, 0.6)',
   black_40: 'rgba(0, 0, 0, 0.4)',
   grey_50: 'rgba(127, 127, 127, 1)',
@@ -28,8 +29,9 @@ const themeColors: DefaultTheme = {
   foreground: {
     primary: colors.black,
     primaryInverted: colors.white,
-    secondary: colors.black_60,
-    tertiary: colors.black_40,
+    secondary: colors.black_80,
+    tertiary: colors.black_60,
+    quaternary: colors.black_40,
   },
   background: {
     primary: colors.white,
