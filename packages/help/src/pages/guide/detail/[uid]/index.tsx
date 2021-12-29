@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import React from 'react';
-import TermsPrivacy from '@/domain/TermsPrivacy';
+import GuideDetail from '@/domain/GuideDetail';
 
 const Page: NextPage = () => {
   return (
     <React.Fragment>
-      <TermsPrivacy />
+      <GuideDetail />
     </React.Fragment>
   );
 };

@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import Top from '@/domain/Top';
+import HelpTop from '@/domain/HelpTop';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 
@@ -15,7 +15,7 @@ const Page: NextPage = () => {
         title={lang.help.meta.default.title}
         description={lang.help.meta.default.description}
       />
-      <Top />
+      <HelpTop />
     </React.Fragment>
   );
 };

@@ -1,11 +1,12 @@
 import { NextPage } from 'next';
 import React from 'react';
+import TermsService from '@/domain/TermsService';
 
 const Page: NextPage = () => {
   return (
-    <div>
-      <div>H2U terms service</div>
-    </div>
+    <React.Fragment>
+      <TermsService />
+    </React.Fragment>
   );
 };
 
