@@ -14,7 +14,7 @@ const MainContainer: React.VFC<Props> = ({ size = 'normal', children }) => {
 
 const Container = styled.div<{ size: Size }>`
   max-width: ${({ size }) => (size === 'normal' ? '640px' : '840px')};
-  margin: 4rem auto 0;
+  margin: 3rem auto 0;
   width: calc(100% - 2rem);
 `;
 

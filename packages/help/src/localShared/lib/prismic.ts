@@ -1,10 +1,32 @@
 import * as prismic from '@prismicio/client';
 import * as prismicT from '@prismicio/types';
 
-const API_ENDPOINT = 'https://helpcenter.cdn.prismic.io/api/v2';
-
 const apiClient = (): prismic.Client => {
-  return prismic.createClient(API_ENDPOINT, { fetch });
+  const endpoint = prismic.getEndpoint('helpcenter');
+  return prismic.createClient(endpoint, { fetch });
+};
+
+// お知らせ一覧
+export const fetchInfoList = (args: {
+  pageSize: number;
+  page: number;
+}): Promise<prismicT.Query<prismicT.PrismicDocument> | null> => {
+  return apiClient()
+    .getByType('info', {
+      pageSize: args.pageSize,
+      page: args.page,
+      orderings: [
+        {
+          field: 'my.info.publish_date',
+          direction: 'desc',
+        },
+        {
+          field: 'document.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .catch(() => null);
 };
 
 // お知らせ詳細
