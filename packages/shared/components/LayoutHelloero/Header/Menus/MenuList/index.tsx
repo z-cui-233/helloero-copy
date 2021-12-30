@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { Config } from 'u-next/config';
 import typo from '../../../../../styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
@@ -14,74 +13,35 @@ interface Props {
 
 const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const { locale, lang } = useLocale();
-  const backUrl = encodeURIComponent(`${options.HELLOERO}/${locale}`);
+  const { lang } = useLocale();
+  const backUrl = encodeURIComponent(options.HELLOERO);
 
   return (
     <Container>
       <React.Fragment>
-        <Title>{lang.helloero.menus.settings}</Title>
         <List>
           <li>
             {isLoadedUserInfo && !userInfo.isLoggedIn && (
-              <Link
-                href={`${options.ACCOUNT}/${locale}/login?back=${backUrl}`}
-                passHref
-              >
-                <StyledLink>
-                  {lang.helloero.menus.login}
-                  <StyledArrowLogo />
-                </StyledLink>
-              </Link>
+              <StyledLink href={`${options.ACCOUNT}/login?back=${backUrl}`}>
+                {lang.helloero.menus.login}
+                <StyledArrowLogo />
+              </StyledLink>
             )}
-            {isLoadedUserInfo && userInfo.isLoggedIn && (
-              <React.Fragment>
-                <Link href={`${options.ACCOUNT}/${locale}`} passHref>
-                  <StyledLink>
-                    {lang.helloero.menus.account}
-                    <StyledArrowLogo />
-                  </StyledLink>
-                </Link>
-                <Link href={`${options.ACCOUNT}/${locale}/logout`} passHref>
-                  <StyledLink>
-                    {lang.helloero.menus.logout}
-                    <StyledArrowLogo />
-                  </StyledLink>
-                </Link>
-              </React.Fragment>
-            )}
+          </li>
+          <li>
+            <StyledLink href={options.ACCOUNT}>
+              {lang.helloero.menus.account}
+              <StyledArrowLogo />
+            </StyledLink>
+          </li>
+          <li>
+            <StyledLink href={options.HELP}>
+              {lang.helloero.menus.help}
+              <StyledArrowLogo />
+            </StyledLink>
           </li>
         </List>
       </React.Fragment>
-      <Title>{lang.helloero.menus.help}</Title>
-      <List>
-        <li>
-          <StyledLink href={`${options.HELP}/${locale}`}>
-            {lang.helloero.menus.helpcenter}
-            <StyledArrowLogo />
-          </StyledLink>
-        </li>
-        <li>
-          <StyledLink
-            href="https://video.unext.jp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {lang.helloero.menus.terms}
-            <StyledArrowLogo />
-          </StyledLink>
-        </li>
-        <li>
-          <StyledLink
-            href="https://video.unext.jp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {lang.helloero.menus.support}
-            <StyledArrowLogo />
-          </StyledLink>
-        </li>
-      </List>
     </Container>
   );
 };
@@ -95,14 +55,8 @@ const Container = styled.div`
   }
 `;
 
-const Title = styled.div`
-  ${typo.Heading1};
-  margin: 4rem 0 0;
-  color: ${({ theme }) => theme.foreground.primaryInverted};
-`;
-
 const List = styled.ul`
-  margin: 1rem 0 0;
+  margin: 4rem 0 0;
 `;
 
 const StyledLink = styled.a`

@@ -28,7 +28,6 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.resetPasswordState.errorMessage} />
-      <Title>{lang.account.resetPassword.input.title}</Title>
       <Text>
         <div>{lang.account.resetPassword.input.text}</div>
       </Text>
@@ -82,10 +81,6 @@ const InputForm: React.FC<UseResetPassword> = (props) => {
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

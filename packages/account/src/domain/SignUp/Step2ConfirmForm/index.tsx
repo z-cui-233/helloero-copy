@@ -28,8 +28,7 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
     <MainContainer>
       <FormErrorMessage message={props.signupState.errorMessage} />
       <Steps>STEP 2/2</Steps>
-      <Title>{lang.account.signUpStep2.title}</Title>
-      <Text>{lang.account.signUpStep2.text}</Text>
+      <Text>{lang.account.signUp.step2.text}</Text>
       <Section>
         <FieldSection>
           <TextField
@@ -50,7 +49,7 @@ const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.signUpStep2.button}
+          label={lang.account.signUp.step2.button}
         />
       </ButtonSection>
     </MainContainer>
@@ -62,12 +61,8 @@ const Steps = styled.div`
   font-weight: bold;
 `;
 
-const Title = styled.div`
-  ${typo.Heading2};
-`;
-
 const Text = styled.div`
-  margin: 1rem 0 0;
+  margin: 0.5rem 0 0;
 `;
 
 const Section = styled.div`

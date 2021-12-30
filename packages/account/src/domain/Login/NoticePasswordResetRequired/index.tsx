@@ -7,12 +7,11 @@ const NoticePasswordResetRequired: React.FC = () => {
 
   return (
     <NoticePage
-      title={lang.account.loginPasswordResetRequired.title}
-      texts={lang.account.loginPasswordResetRequired.text}
+      texts={lang.account.login.passwordResetRequired.text}
       links={[
         {
           href: `/${locale}/reset-password`,
-          label: lang.account.loginPasswordResetRequired.button,
+          label: lang.account.login.passwordResetRequired.button,
         },
       ]}
     />

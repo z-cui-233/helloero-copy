@@ -7,12 +7,11 @@ const NoticeComplete: React.FC = () => {
 
   return (
     <NoticePage
-      title={lang.account.signUpStep3.title}
-      texts={lang.account.signUpStep3.text}
+      texts={lang.account.signUp.step3.text}
       links={[
         {
           href: `/${locale}`,
-          label: lang.account.signUpStep3.button,
+          label: lang.account.signUp.step3.button,
         },
       ]}
     />

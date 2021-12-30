@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseResendSignUp } from '../useResendSignUp';
-import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
@@ -27,8 +26,7 @@ const Step1InputForm: React.FC<UseResendSignUp> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.resendSignUpState.errorMessage} />
-      <Title>{lang.account.resendSignUpStep1.title}</Title>
-      <Text>{lang.account.resendSignUpStep1.text}</Text>
+      <Text>{lang.account.resendSignUp.step1.text}</Text>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -50,17 +48,13 @@ const Step1InputForm: React.FC<UseResendSignUp> = (props) => {
         <ButtonSection>
           <ButtonStandard
             type="submit"
-            label={lang.account.resendSignUpStep1.button}
+            label={lang.account.resendSignUp.step1.button}
           />
         </ButtonSection>
       </form>
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

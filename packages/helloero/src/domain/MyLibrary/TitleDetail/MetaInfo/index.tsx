@@ -40,14 +40,13 @@ const Container = styled.div`
   width: 100%;
 
   @media ${device.ltTablet} {
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 `;
 
 const TitleName = styled.div`
   ${typo.Heading3};
   line-height: 1.4;
-  max-height: 6.3rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -56,6 +55,7 @@ const TitleName = styled.div`
 
 const ExpireDate = styled.div`
   margin: 1rem 0 0;
+  ${typo.Body};
 `;
 
 const Button = styled.div`

@@ -29,7 +29,6 @@ const InputForm: React.FC<UseLoginChallenge> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.loginChallengeState.errorMessage} />
-      <Title>{lang.account.login.title}</Title>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -61,28 +60,27 @@ const InputForm: React.FC<UseLoginChallenge> = (props) => {
             <ResetPassword>
               <Link href={`/${locale}/reset-password`} passHref>
                 <ResetPasswordLink>
-                  {lang.account.login.resetPassword}
+                  {lang.account.login.input.resetPassword}
                 </ResetPasswordLink>
               </Link>
             </ResetPassword>
           </FieldSection>
         </Section>
         <ButtonSection>
-          <ButtonStandard type="submit" label={lang.account.login.button} />
+          <ButtonStandard
+            type="submit"
+            label={lang.account.login.input.button}
+          />
         </ButtonSection>
         <SignUp>
           <Link href={`/${locale}/signup`} passHref>
-            <SignUpLink>{lang.account.login.signUp}</SignUpLink>
+            <SignUpLink>{lang.account.login.input.signUp}</SignUpLink>
           </Link>
         </SignUp>
       </form>
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

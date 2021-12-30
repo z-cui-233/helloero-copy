@@ -12,23 +12,23 @@ interface Props {
 }
 
 const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
-  const { lang, locale } = useLocale();
+  const { lang } = useLocale();
 
   return (
     <Container isDisplayedMenu={isDisplayedMenu}>
       <MenuList>
         <MenuItem>
-          <Link href={`${options.HELLOERO}/${locale}`} passHref>
+          <Link href={`${options.HELLOERO}/`} passHref>
             <StyledLink>{lang.account.menus.helloero}</StyledLink>
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link href={`${options.ACCOUNT}/${locale}`} passHref>
+          <Link href={`${options.ACCOUNT}/`} passHref>
             <StyledLink>{lang.account.menus.account}</StyledLink>
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link href={`${options.HELP}/${locale}`} passHref>
+          <Link href={`${options.HELP}/`} passHref>
             <StyledLink>{lang.account.menus.help}</StyledLink>
           </Link>
         </MenuItem>

@@ -7,7 +7,6 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
@@ -29,7 +28,6 @@ const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.updateEmailState.errorMessage} />
-      <Title>{lang.account.updateEmail.email.title}</Title>
       <Text>{lang.account.updateEmail.email.text}</Text>
       <Section>
         <FieldSection>
@@ -54,10 +52,6 @@ const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

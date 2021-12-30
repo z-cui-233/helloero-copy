@@ -7,12 +7,11 @@ const NoticeUserNotConfirmed: React.FC = () => {
 
   return (
     <NoticePage
-      title={lang.account.loginNotConfirmed.title}
-      texts={lang.account.loginNotConfirmed.text}
+      texts={lang.account.login.notConfirmed.text}
       links={[
         {
           href: `/${locale}/resend-signup`,
-          label: lang.account.loginNotConfirmed.button,
+          label: lang.account.login.notConfirmed.button,
         },
       ]}
     />

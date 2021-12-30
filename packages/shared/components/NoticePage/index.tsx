@@ -5,26 +5,28 @@ import typo from '../../styles/typo';
 import MainContainer from '../../components/parts/MainContainer';
 
 interface Props {
-  title: string;
-  texts: string | string[];
+  title?: string;
+  texts?: string | string[];
   links: { href: string; label: string }[];
 }
 
 const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
   return (
     <MainContainer>
-      <Title>{title}</Title>
-      <Text>
-        {texts instanceof Array ? (
-          <div>
-            {texts.map((val) => (
-              <div key={val}>{val}</div>
-            ))}
-          </div>
-        ) : (
-          <div>{texts}</div>
-        )}
-      </Text>
+      {title && <Title>{title}</Title>}
+      {texts && (
+        <Text>
+          {texts instanceof Array ? (
+            <div>
+              {texts.map((val) => (
+                <div key={val}>{val}</div>
+              ))}
+            </div>
+          ) : (
+            <div>{texts}</div>
+          )}
+        </Text>
+      )}
       <LinkContainer>
         {links.map(({ href, label }) => (
           <div key={href}>
@@ -39,7 +41,7 @@ const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
 };
 
 const Title = styled.div`
-  ${typo.Heading2};
+  ${typo.Heading3};
 `;
 
 const Text = styled.div`
@@ -50,15 +52,28 @@ const Text = styled.div`
 
 const LinkContainer = styled.div`
   margin: 2rem 0 0;
+
+  & > div + div {
+    margin: 1rem 0 0;
+  }
 `;
 
 const StyledLink = styled.a`
-  ${typo.Standard};
-  color: ${({ theme }) => theme.foreground.primary};
+  ${typo.Body}
+  background-color: ${({ theme }) => theme.keyColor.color4};
+  color: ${({ theme }) => theme.foreground.primaryInverted};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  text-decoration: underline;
-  display: inline-block;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  min-width: 10rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 export default NoticePage;
