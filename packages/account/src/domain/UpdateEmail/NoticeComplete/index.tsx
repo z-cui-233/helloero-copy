@@ -7,7 +7,6 @@ const NoticeComplete: React.FC = () => {
 
   return (
     <NoticePage
-      title={lang.account.updateEmail.complete.title}
       texts={lang.account.updateEmail.complete.text}
       links={[
         {

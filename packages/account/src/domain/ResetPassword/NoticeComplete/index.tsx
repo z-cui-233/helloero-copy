@@ -7,7 +7,6 @@ const NoticeComplete: React.FC = () => {
 
   return (
     <NoticePage
-      title={lang.account.resetPassword.complete.title}
       texts={lang.account.resetPassword.complete.text}
       links={[
         {

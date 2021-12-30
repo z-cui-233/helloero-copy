@@ -7,6 +7,7 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLocale } from '@/shared/context/LocaleContext';
 import LayoutH2u from '@/shared/components/LayoutH2u';
+import BigBar from '@/shared/components/BigBar';
 
 const Logout: React.FC = () => {
   const { logoutChallengeState, invokeLogOut } = useLogoutChallenge();
@@ -14,9 +15,9 @@ const Logout: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
+      <BigBar title={lang.account.logout.title} />
       {logoutChallengeState.pageStatus === PAGE_STATUS.CONFIRM ? (
         <MainContainer>
-          <Title>{lang.account.logout.title}</Title>
           <Text>{lang.account.logout.text}</Text>
           <ButtonSection>
             <ButtonStandard
@@ -34,10 +35,6 @@ const Logout: React.FC = () => {
     </LayoutH2u>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

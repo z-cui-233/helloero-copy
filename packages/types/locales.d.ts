@@ -159,60 +159,62 @@ export interface LocaleData {
     };
     login: {
       title: string;
-      button: string;
-      resetPassword: string;
-      signUp: string;
-    };
-    loginPasswordResetRequired: {
-      title: string;
-      text: string;
-      button: string;
-    };
-    loginNotConfirmed: {
-      title: string;
-      text: string;
-      button: string;
-    };
-    signUpStep1: {
-      title: string;
-      text: string;
-      terms: {
-        title: string;
-        privacy: string;
-        service: string;
+      input: {
+        button: string;
+        resetPassword: string;
+        signUp: string;
       };
-      button: string;
+      passwordResetRequired: {
+        text: string;
+        button: string;
+      };
+      notConfirmed: {
+        text: string;
+        button: string;
+      };
     };
-    signUpStep2: {
+
+    signUp: {
       title: string;
-      text: string;
-      button: string;
+      step1: {
+        text: string;
+        terms: {
+          title: string;
+          privacy: string;
+          service: string;
+        };
+        button: string;
+      };
+      step2: {
+        text: string;
+        button: string;
+      };
+      step3: {
+        text: string;
+        button: string;
+      };
     };
-    signUpStep3: {
+
+    resendSignUp: {
       title: string;
-      text: string;
-      button: string;
+      step1: {
+        text: string;
+        button: string;
+      };
+      step2: {
+        text: string;
+        button: string;
+      };
+      step3: {
+        text: string;
+        button: string;
+      };
+      step4: {
+        text: string;
+        button: string;
+      };
     };
-    resendSignUpStep1: {
-      title: string;
-      text: string;
-      button: string;
-    };
-    resendSignUpStep2: {
-      title: string;
-      text: string;
-      button: string;
-    };
-    resendSignUpStep3: {
-      title: string;
-      text: string;
-      button: string;
-    };
-    resendSignUpStep4: {
-      title: string;
-      text: string;
-      button: string;
-    };
+
     logout: {
       title: string;
       text: string;
@@ -220,35 +222,31 @@ export interface LocaleData {
       cancel: string;
     };
     updateEmail: {
+      title: string;
       email: {
-        title: string;
         text: string;
         button: string;
       };
       verification: {
-        title: string;
         text: string;
         button: string;
       };
       complete: {
-        title: string;
         text: string;
         home: string;
       };
     };
     resetPassword: {
+      title: string;
       send: {
-        title: string;
         text: string;
         button: string;
       };
       input: {
-        title: string;
         text: string;
         button: string;
       };
       complete: {
-        title: string;
         text: string;
         home: string;
       };
@@ -266,14 +264,9 @@ export interface LocaleData {
       };
     };
     menus: {
-      settings: string;
       login: string;
-      logout: string;
       account: string;
       help: string;
-      helpcenter: string;
-      terms: string;
-      support: string;
     };
     top: {
       lead: string;
@@ -295,18 +288,16 @@ export interface LocaleData {
       };
     };
     entry: {
+      title: string;
       input: {
-        title: string;
         text: string;
         button: string;
       };
       confirm: {
-        title: string;
         text: string;
         button: string;
       };
       complete: {
-        title: string;
         text: string;
         home: string;
       };

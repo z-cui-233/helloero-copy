@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
@@ -13,8 +14,11 @@ interface Props {
 const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { locale, lang } = useLocale();
+  const router = useRouter();
 
-  return isLoadedUserInfo && !userInfo.isLoggedIn ? (
+  return isLoadedUserInfo &&
+    !userInfo.isLoggedIn &&
+    router.pathname !== '/login' ? (
     <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
       <Container>
         <div>{lang.account.menus.login}</div>

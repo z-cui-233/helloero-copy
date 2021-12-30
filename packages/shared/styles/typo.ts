@@ -16,7 +16,7 @@ const Heading2 = css`
 
 // 24
 const Heading3 = css`
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
   line-height: 1.4;
 `;

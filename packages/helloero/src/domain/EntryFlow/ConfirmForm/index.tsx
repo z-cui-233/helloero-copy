@@ -5,7 +5,6 @@ import TitleInfo from './TitleInfo';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import typo from '@/shared/styles/typo';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 
@@ -27,7 +26,6 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.entryWabikenState.errorMessage} />
-      <Title>{lang.helloero.entry.confirm.title}</Title>
       <Text>{lang.helloero.entry.confirm.text}</Text>
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
@@ -45,10 +43,6 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

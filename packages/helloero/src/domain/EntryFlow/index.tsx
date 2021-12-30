@@ -6,12 +6,16 @@ import NoticeComplete from './NoticeComplete';
 import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
+import BigBar from '@/shared/components/BigBar';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const EntryFlow: React.FC = () => {
   const store = useEntryWabiken();
+  const { lang } = useLocale();
 
   return (
     <LayoutHelloero options={globalConfig}>
+      <BigBar title={lang.helloero.entry.title} />
       {store.entryWabikenState.pageStatus === PAGE_STATUS.INPUT && (
         <InputForm {...store} />
       )}

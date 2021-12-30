@@ -32,7 +32,7 @@ const Contents = styled.div<{ size: Size }>`
 `;
 
 const Title = styled.h1`
-  ${typo.Heading2};
+  ${typo.Heading3};
 `;
 
 export default BigBar;

@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { UseResendSignUp } from '../useResendSignUp';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -27,8 +26,7 @@ const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.resendSignUpState.errorMessage} />
-      <Title>{lang.account.resendSignUpStep2.title}</Title>
-      <Text>{lang.account.resendSignUpStep2.text}</Text>
+      <Text>{lang.account.resendSignUp.step2.text}</Text>
       <Section>
         <FieldSection>
           <TextField
@@ -49,16 +47,12 @@ const Step2ConfirmForm: React.FC<UseResendSignUp> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.resendSignUpStep2.button}
+          label={lang.account.resendSignUp.step2.button}
         />
       </ButtonSection>
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

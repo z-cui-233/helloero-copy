@@ -194,86 +194,82 @@ const lang: LocaleData = {
       button: 'メールアドレスの確認',
     },
 
-    signUpStep1: {
+    signUp: {
       title: 'H2Uアカウントの登録',
-      text: 'お客様情報を入力してください',
-      terms: {
-        title: '登録ボタンを押すことにより、下記の規約に同意するものとします。',
-        privacy: '個人情報の取扱いについて',
-        service: '利用規約',
+      step1: {
+        text: 'お客様情報を入力してください',
+        terms: {
+          title:
+            '登録ボタンを押すことにより、下記の規約に同意するものとします。',
+          privacy: '個人情報の取扱いについて',
+          service: '利用規約',
+        },
+        button: '規約に同意して登録',
       },
-      button: '規約に同意して登録',
-    },
-    signUpStep2: {
-      title: 'H2Uアカウントの登録',
-      text: 'メールアドレスの確認を行います。メールアドレスに送信した本人確認コードを入力してください。',
-      button: '送信',
-    },
-    signUpStep3: {
-      title: 'H2Uアカウントの登録が完了しました',
-      text: '',
-      button: 'ホーム',
+      step2: {
+        text: 'メールアドレスの確認を行います。メールアドレスに送信した本人確認コードを入力してください。',
+        button: '送信',
+      },
+      step3: {
+        text: '登録が完了しました',
+        button: 'ホーム',
+      },
     },
 
-    resendSignUpStep1: {
+    resendSignUp: {
       title: 'H2Uアカウント登録の再開',
-      text: 'ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。',
-      button: '本人確認コードを送信',
-    },
-    resendSignUpStep2: {
-      title: 'H2Uアカウント登録の再開',
-      text: 'メールアドレスに送信した本人確認コードを入力してください。',
-      button: '本人確認コードを認証',
-    },
-    resendSignUpStep3: {
-      title: 'H2Uアカウント登録の再開',
-      text: 'パスワードを入力して、ログインしてください',
-      button: 'ログイン',
-    },
-    resendSignUpStep4: {
-      title: 'H2Uアカウントの登録が完了しました',
-      text: '',
-      button: 'ホーム',
+      step1: {
+        text: 'ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。',
+        button: '本人確認コードを送信',
+      },
+      step2: {
+        text: 'メールアドレスに送信した本人確認コードを入力してください。',
+        button: '本人確認コードを認証',
+      },
+      step3: {
+        text: 'パスワードを入力して、ログインしてください',
+        button: 'ログイン',
+      },
+      step4: {
+        text: 'H2Uアカウントの登録が完了しました',
+        button: 'ホーム',
+      },
     },
 
     logout: {
-      title: 'H2Uからログアウトしますか？',
-      text: '再度ログインするには、ログインIDとパスワードが必要です。',
+      title: 'ログアウト',
+      text: 'H2Uからログアウトしますか？再度ログインするには、ログインIDとパスワードが必要です。',
       button: 'LOG OUT',
       cancel: 'CANCEL',
     },
     updateEmail: {
+      title: 'メールアドレスの変更',
       email: {
-        title: 'メールアドレスの変更',
         text: 'ご希望のメールアドレスを入力して、本人確認コードを送信してください。',
         button: '本人確認コードを送信',
       },
       verification: {
-        title: 'メールアドレスの変更',
         text: 'メールアドレスに送信した本人確認コードを入力してください。',
         button: '本人確認コードを認証',
       },
       complete: {
-        title: '変更が完了しました',
-        text: 'メールアドレスの変更が完了しました。',
+        text: '変更が完了しました。',
         home: 'HOME',
       },
     },
     resetPassword: {
+      title: 'パスワードの変更',
       send: {
-        title: 'Reset Password',
-        text: 'パスワードを変更するには、本人確認が必要です。',
-        button: 'このアドレスに送信',
+        text: 'パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。',
+        button: '本人確認メールを送信',
       },
       input: {
-        title: 'Reset Password',
         text: '下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。',
         button: 'パスワードを変更',
       },
       complete: {
-        title: '変更が完了しました',
-        text: 'パスワードの変更が完了しました。',
-        home: 'HOME',
+        text: '変更が完了しました',
+        home: 'ホーム',
       },
     },
   },
@@ -290,14 +286,9 @@ const lang: LocaleData = {
       },
     },
     menus: {
-      settings: 'Settings',
       login: 'Login',
-      logout: 'Logout',
       account: 'Account',
       help: 'Help',
-      helpcenter: 'Help Center',
-      terms: 'Privacy',
-      support: 'Support',
     },
     top: {
       lead: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
@@ -320,20 +311,18 @@ const lang: LocaleData = {
       },
     },
     entry: {
+      title: 'シリアルコードの登録',
       input: {
-        title: 'シリアルコードの登録',
         text: '購入時に受け取った、シリアルコードを入力してください。',
-        button: 'VERIFY',
+        button: 'シリアルコードを確認',
       },
       confirm: {
-        title: 'シリアルコードの登録',
         text: '内容を確認の上、登録をして下さい。',
-        button: 'SUBMIT',
+        button: '動画を登録',
       },
       complete: {
-        title: '動画を登録しました',
-        text: '引き続き、HELLOEROをお楽しみ下さい。有効期限がある場合、作品詳細でも確認できます。',
-        home: 'HOME',
+        text: '動画を登録しました。有効期限がある場合、作品詳細でも確認できます。',
+        home: 'ホーム',
       },
     },
   },

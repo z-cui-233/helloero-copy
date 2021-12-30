@@ -27,8 +27,7 @@ const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.resendSignUpState.errorMessage} />
-      <Title>{lang.account.resendSignUpStep3.title}</Title>
-      <Text>{lang.account.resendSignUpStep3.text}</Text>
+      <Text>{lang.account.resendSignUp.step3.text}</Text>
       <Section>
         <FieldSection>
           <LoginId>{props.resendSignUpState.step1FormValues.loginId}</LoginId>
@@ -49,16 +48,12 @@ const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.resendSignUpStep3.button}
+          label={lang.account.resendSignUp.step3.button}
         />
       </ButtonSection>
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

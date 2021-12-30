@@ -6,12 +6,16 @@ import InputVerificationCodeForm from './InputVerificationCodeForm';
 import NoticeComplete from './NoticeComplete';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutH2u from '@/shared/components/LayoutH2u';
+import BigBar from '@/shared/components/BigBar';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const UpdateEmail: React.FC = () => {
   const store = useUpdateEmail();
+  const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
+      <BigBar title={lang.account.updateEmail.title} />
       {store.updateEmailState.pageStatus === PAGE_STATUS.INPUT_EMAIL && (
         <InputEmailForm {...store} />
       )}

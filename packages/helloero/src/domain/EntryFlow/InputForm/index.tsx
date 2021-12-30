@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import TextField from '@/shared/components/parts/TextField';
-import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -27,7 +26,6 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
   return (
     <MainContainer>
       <FormErrorMessage message={props.entryWabikenState.errorMessage} />
-      <Title>{lang.helloero.entry.input.title}</Title>
       <Text>{lang.helloero.entry.input.text}</Text>
       <Section>
         <FieldSection>
@@ -52,10 +50,6 @@ const InputForm: React.FC<UseEntryWabiken> = (props) => {
     </MainContainer>
   );
 };
-
-const Title = styled.div`
-  ${typo.Heading2};
-`;
 
 const Text = styled.div`
   margin: 1rem 0 0;

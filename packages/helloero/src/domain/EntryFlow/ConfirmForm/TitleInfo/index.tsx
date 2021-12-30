@@ -64,15 +64,11 @@ const MetaContainer = styled.div`
 const TitleName = styled.div`
   ${typo.Heading3};
   line-height: 1.4;
-  max-height: 8.4rem;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
 `;
 
 const ExpireDate = styled.div`
   margin: 1rem 0 0;
+  ${typo.Body};
 `;
 
 export default TitleInfo;

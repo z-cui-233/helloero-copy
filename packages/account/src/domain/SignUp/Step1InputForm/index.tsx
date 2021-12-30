@@ -31,8 +31,7 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
     <MainContainer>
       <FormErrorMessage message={props.signupState.errorMessage} />
       <Steps>STEP 1/2</Steps>
-      <Title>{lang.account.signUpStep1.title}</Title>
-      <Text>{lang.account.signUpStep1.text}</Text>
+      <Text>{lang.account.signUp.step1.text}</Text>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -74,7 +73,7 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
           </FieldSection>
         </Section>
         <Terms>
-          <div>{lang.account.signUpStep1.terms.title}</div>
+          <div>{lang.account.signUp.step1.terms.title}</div>
           <div>
             {/* 個人情報保護方針 */}
             <a
@@ -82,7 +81,7 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.signUpStep1.terms.privacy}
+              {lang.account.signUp.step1.terms.privacy}
             </a>
             {/* 利用規約 */}
             <a
@@ -90,14 +89,14 @@ const Step1InputForm: React.FC<UseSignUp> = (props) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.signUpStep1.terms.service}
+              {lang.account.signUp.step1.terms.service}
             </a>
           </div>
         </Terms>
         <ButtonSection>
           <ButtonStandard
             type="submit"
-            label={lang.account.signUpStep1.button}
+            label={lang.account.signUp.step1.button}
           />
         </ButtonSection>
       </form>
@@ -110,12 +109,9 @@ const Steps = styled.div`
   font-weight: bold;
 `;
 
-const Title = styled.div`
-  ${typo.Heading2};
-`;
-
 const Text = styled.div`
-  margin: 1rem 0 0;
+  ${typo.Standard};
+  margin: 0.5rem 0 0;
 `;
 
 const Section = styled.div`
