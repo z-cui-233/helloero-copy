@@ -10,6 +10,7 @@ import typo from '@/shared/styles/typo';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import { convertDateToString } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
+import BigBar from '@/shared/components/BigBar';
 
 interface Props {
   prismicData: prismicT.PrismicDocument;
@@ -24,18 +25,21 @@ const InfoDetail: React.FC<Props> = ({ prismicData }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
+      <BigBar size="large" title="お知らせ" />
       <MainContainer size="large">
-        <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
-        <Title>
-          <PrismicText
-            field={prismicData.data.title as prismicT.RichTextField}
-          />
-        </Title>
-        <RichTextContainer>
-          <PrismicRichText
-            field={prismicData.data.detail as prismicT.RichTextField}
-          />
-        </RichTextContainer>
+        <article>
+          <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
+          <Title>
+            <PrismicText
+              field={prismicData.data.title as prismicT.RichTextField}
+            />
+          </Title>
+          <RichTextContainer>
+            <PrismicRichText
+              field={prismicData.data.detail as prismicT.RichTextField}
+            />
+          </RichTextContainer>
+        </article>
       </MainContainer>
     </LayoutH2u>
   );
@@ -47,7 +51,7 @@ const ReleaseDate = styled.div`
   color: ${({ theme }) => theme.foreground.secondary};
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
   ${typo.Heading2};
   margin: 0.5rem 0 3rem;
 `;
