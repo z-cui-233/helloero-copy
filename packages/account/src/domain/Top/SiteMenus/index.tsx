@@ -29,7 +29,7 @@ const SiteMenus: React.FC = () => {
             </div>
             <div>
               <div>
-                <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+                <Link href={`${globalConfig.HELP}/`} passHref>
                   <StyledLink>
                     {lang.account.top.menus.help}
                     <Arrow>
@@ -64,7 +64,7 @@ const SiteMenus: React.FC = () => {
               </Link>
             </div>
             <div>
-              <Link href={`${globalConfig.HELP}/${locale}`} passHref>
+              <Link href={`${globalConfig.HELP}/`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.help}
                   <Arrow>
@@ -125,6 +125,7 @@ const Arrow = styled.div`
   width: 1rem;
   height: 1rem;
   margin: auto 0;
+  opacity: 0.6;
 `;
 
 export default SiteMenus;
