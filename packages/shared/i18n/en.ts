@@ -179,19 +179,19 @@ const lang: LocaleData = {
     },
     login: {
       title: 'H2Uにログイン',
-      button: 'LOGIN',
-      resetPassword: 'パスワードを忘れた方',
-      signUp: 'H2Uアカウントを無料で登録',
-    },
-    loginPasswordResetRequired: {
-      title: 'ログインができません。',
-      text: 'このアカウントはパスワードリセットされています。パスワードを再設定してください。',
-      button: 'パスワードの変更',
-    },
-    loginNotConfirmed: {
-      title: 'H2Uアカウントの登録が完了していません。',
-      text: 'メールアドレスの確認をしてアカウント登録を完了してください。',
-      button: 'メールアドレスの確認',
+      input: {
+        button: 'ログイン',
+        resetPassword: 'パスワードを忘れた方',
+        signUp: 'H2Uアカウントを無料で登録',
+      },
+      passwordResetRequired: {
+        text: 'ログインができません。このアカウントはパスワードリセットされています。パスワードを再設定してください。',
+        button: 'パスワードの変更',
+      },
+      notConfirmed: {
+        text: 'H2Uアカウントの登録が完了していません。メールアドレスの確認をしてアカウント登録を完了してください。',
+        button: 'メールアドレスの確認',
+      },
     },
 
     signUp: {
