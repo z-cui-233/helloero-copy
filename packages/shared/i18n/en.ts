@@ -381,6 +381,21 @@ const lang: LocaleData = {
         text: '「よくある質問」で解決しない問題についてお問い合わせください。',
       },
     },
+    info: {
+      title: 'お知らせ',
+    },
+    guide: {
+      title: 'よくある質問',
+    },
+    termsPrivacy: {
+      title: 'プライバシーポリシー',
+    },
+    termsService: {
+      title: 'サービス規約',
+    },
+    inquiry: {
+      title: 'お問い合わせ',
+    },
   },
 };
 

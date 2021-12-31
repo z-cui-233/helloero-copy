@@ -357,5 +357,20 @@ export interface LocaleData {
         text: string;
       };
     };
+    info: {
+      title: string;
+    };
+    guide: {
+      title: string;
+    };
+    termsPrivacy: {
+      title: string;
+    };
+    termsService: {
+      title: string;
+    };
+    inquiry: {
+      title: string;
+    };
   };
 }

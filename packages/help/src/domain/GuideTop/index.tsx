@@ -14,6 +14,9 @@ import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 import GuideCard from '@/localShared/components/GuideCard';
 import { useLocale } from '@/shared/context/LocaleContext';
+import BreadcrumbsList, {
+  Breadcrumbs,
+} from '@/localShared/components/BreadcrumbsList';
 
 interface Props {
   guideTopDocument: GuideTopDocument;
@@ -24,13 +27,24 @@ const GuideTop: React.FC<Props> = ({
   guideTopDocument,
   guideCategoryDocument,
 }) => {
-  const { locale } = useLocale();
+  const { locale, lang } = useLocale();
+
+  const breadcrumbs: Breadcrumbs[] = [
+    {
+      path: `/${locale}`,
+      text: lang.help.top.title,
+    },
+    {
+      path: `/${locale}/guide`,
+      text: lang.help.guide.title,
+    },
+  ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title="よくある質問" />
+      <BigBar size="large" title={lang.help.guide.title} />
       <MainContainer size="large">
-        <div>パンくず</div>
+        <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>
           {guideTopDocument.data.category_links.map((doc, index) => (
             <Section key={index}>
@@ -72,16 +86,16 @@ const Section = styled.div`
   margin: 3rem 0 0;
 
   &:first-child {
-    margin: 1rem 0 0;
+    margin: 1.5rem 0 0;
   }
 `;
 
 const Title = styled.h2`
-  ${typo.Heading2};
+  ${typo.Heading3};
 `;
 
 const List = styled.ul`
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
 `;
 
 const ListItem = styled.li`
