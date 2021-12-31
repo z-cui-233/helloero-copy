@@ -1,14 +1,110 @@
 import React from 'react';
+import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
+import Link from 'next/link';
+import { PrismicText } from '@prismicio/react';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
+import BigBar from '@/shared/components/BigBar';
+import {
+  GuideCategoryDocument,
+  GuideTopDocument,
+} from '@/localShared/lib/prismic/interfaces/guide';
+import typo from '@/shared/styles/typo';
+import ListRightArrow from '@/shared/components/ListRightArrow';
+import GuideCard from '@/localShared/components/GuideCard';
+import { useLocale } from '@/shared/context/LocaleContext';
 
-const GuideTop: React.FC = () => {
+interface Props {
+  guideTopDocument: GuideTopDocument;
+  guideCategoryDocument: GuideCategoryDocument[];
+}
+
+const GuideTop: React.FC<Props> = ({
+  guideTopDocument,
+  guideCategoryDocument,
+}) => {
+  const { locale } = useLocale();
+
   return (
     <LayoutH2u options={globalConfig}>
-      <MainContainer>GuideTop</MainContainer>
+      <BigBar size="large" title="よくある質問" />
+      <MainContainer size="large">
+        <div>パンくず</div>
+        <div>
+          {guideTopDocument.data.category_links.map((doc, index) => (
+            <Section key={index}>
+              <Title>
+                <PrismicText field={doc.category_link.data.title} />
+              </Title>
+              <List>
+                {[...Array(3)].map((_, i) => {
+                  const guideDocument =
+                    guideCategoryDocument[index].data.guide_links[i];
+
+                  return guideDocument ? (
+                    <ListItem key={i}>
+                      <GuideCard document={guideDocument.guide_link} />
+                    </ListItem>
+                  ) : null;
+                })}
+              </List>
+              {guideCategoryDocument[index].data.guide_links.length > 3 && (
+                <ReadMore>
+                  <Link
+                    href={`/${locale}/guide/browse/${doc.category_link.uid}`}
+                    passHref
+                  >
+                    <a>もっと見る</a>
+                  </Link>
+                  <ListRightArrow />
+                </ReadMore>
+              )}
+            </Section>
+          ))}
+        </div>
+      </MainContainer>
     </LayoutH2u>
   );
 };
+
+const Section = styled.div`
+  margin: 3rem 0 0;
+
+  &:first-child {
+    margin: 1rem 0 0;
+  }
+`;
+
+const Title = styled.h2`
+  ${typo.Heading2};
+`;
+
+const List = styled.ul`
+  margin: 1.5rem 0 0;
+`;
+
+const ListItem = styled.li`
+  border-bottom: 1px solid ${({ theme }) => theme.background.tertiary};
+
+  &:first-child {
+    border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+  }
+`;
+
+const ReadMore = styled.div`
+  padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+  text-align: right;
+  position: relative;
+
+  & a {
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
 
 export default GuideTop;

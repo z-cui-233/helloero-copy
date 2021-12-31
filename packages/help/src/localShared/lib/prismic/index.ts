@@ -2,7 +2,7 @@ import * as prismic from '@prismicio/client';
 import * as prismicT from '@prismicio/types';
 
 const apiClient = (): prismic.Client => {
-  const endpoint = prismic.getEndpoint('helpcenter');
+  const endpoint = prismic.getEndpoint('h2uhelp');
   return prismic.createClient(endpoint, { fetch });
 };
 
@@ -36,4 +36,29 @@ export const fetchInfoByUid = (args: {
   return apiClient()
     .getByUID('info', args.uid)
     .catch(() => null);
+};
+
+// よくある質問TOP
+export const fetchGuideTop = (): Promise<prismicT.PrismicDocument | null> => {
+  return apiClient()
+    .getSingle('guide_top', {
+      fetchLinks: ['guide_category.title'],
+    })
+    .catch(() => null);
+};
+
+// カテゴリ別よくある質問一覧
+export const fetchGuideByCategoryId = (args: {
+  uid: string;
+}): Promise<prismicT.PrismicDocument | null> => {
+  return apiClient().getByUID('guide_category', args.uid, {
+    fetchLinks: ['guide.question'],
+  });
+};
+
+// よくある質問詳細
+export const fetchGuideByUid = (args: {
+  uid: string;
+}): Promise<prismicT.PrismicDocument | null> => {
+  return apiClient().getByUID('guide', args.uid);
 };
