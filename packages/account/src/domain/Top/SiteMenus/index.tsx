@@ -5,7 +5,7 @@ import { globalConfig } from 'src/globalConfig';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
-import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
+import ListRightArrow from '@/shared/components/ListRightArrow';
 
 const SiteMenus: React.FC = () => {
   const { locale, lang } = useLocale();
@@ -21,9 +21,7 @@ const SiteMenus: React.FC = () => {
               <Link href={`/${locale}/login`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.login}
-                  <Arrow>
-                    <ArrowLogo />
-                  </Arrow>
+                  <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
@@ -32,9 +30,7 @@ const SiteMenus: React.FC = () => {
                 <Link href={`${globalConfig.HELP}/`} passHref>
                   <StyledLink>
                     {lang.account.top.menus.help}
-                    <Arrow>
-                      <ArrowLogo />
-                    </Arrow>
+                    <ListRightArrow />
                   </StyledLink>
                 </Link>
               </div>
@@ -47,9 +43,7 @@ const SiteMenus: React.FC = () => {
               <Link href={`/${locale}/update-email`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.updateEmail}
-                  <Arrow>
-                    <ArrowLogo />
-                  </Arrow>
+                  <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
@@ -57,9 +51,7 @@ const SiteMenus: React.FC = () => {
               <Link href={`/${locale}/reset-password`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.resetPassword}
-                  <Arrow>
-                    <ArrowLogo />
-                  </Arrow>
+                  <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
@@ -67,9 +59,7 @@ const SiteMenus: React.FC = () => {
               <Link href={`${globalConfig.HELP}/`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.help}
-                  <Arrow>
-                    <ArrowLogo />
-                  </Arrow>
+                  <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
@@ -77,9 +67,7 @@ const SiteMenus: React.FC = () => {
               <Link href={`/${locale}/logout`} passHref>
                 <StyledLink>
                   {lang.account.top.menus.logout}
-                  <Arrow>
-                    <ArrowLogo />
-                  </Arrow>
+                  <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
@@ -115,17 +103,6 @@ const StyledLink = styled.a`
     background-color: ${({ theme }) => theme.background.secondary};
     text-decoration: none;
   }
-`;
-
-const Arrow = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 1rem;
-  width: 1rem;
-  height: 1rem;
-  margin: auto 0;
-  opacity: 0.6;
 `;
 
 export default SiteMenus;

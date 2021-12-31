@@ -2,36 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import typo from '@/shared/styles/typo';
-import ArrowLogo from '@/shared/assets/icon/arrow_right.svg';
 import IconGuide from '@/shared/assets/icon/help_guide.svg';
 import IconInquiry from '@/shared/assets/icon/help_inquiry.svg';
 import IconInfo from '@/shared/assets/icon/help_info.svg';
+import ListRightArrow from '@/shared/components/ListRightArrow';
+import { useLocale } from '@/shared/context/LocaleContext';
 
-type UrlPattern = '/guide' | '/info' | '/inquiry';
+type UrlPattern = 'guide' | 'info' | 'inquiry';
 
 interface Props {
-  url: UrlPattern;
+  urlPattern: UrlPattern;
   title: string;
   texts: string;
 }
 
-const getIcon = (url: UrlPattern): JSX.Element => {
-  switch (url) {
-    case '/guide':
+const getIcon = (urlPattern: UrlPattern): JSX.Element => {
+  switch (urlPattern) {
+    case 'guide':
       return (
         <Icon>
           <IconGuide />
         </Icon>
       );
 
-    case '/info':
+    case 'info':
       return (
         <Icon>
           <IconInfo />
         </Icon>
       );
 
-    case '/inquiry':
+    case 'inquiry':
       return (
         <Icon>
           <IconInquiry />
@@ -47,17 +48,17 @@ const getIcon = (url: UrlPattern): JSX.Element => {
   }
 };
 
-const MenuCard: React.FC<Props> = ({ url, title, texts }) => {
+const MenuCard: React.FC<Props> = ({ urlPattern, title, texts }) => {
+  const { locale } = useLocale();
+
   return (
     <Container>
-      <Link href={url} passHref>
+      <Link href={`/${locale}/${urlPattern}`} passHref>
         <StyledLink>
-          {getIcon(url)}
+          {getIcon(urlPattern)}
           <Title>{title}</Title>
           <Text>{texts}</Text>
-          <Arrow>
-            <ArrowLogo />
-          </Arrow>
+          <ListRightArrow />
         </StyledLink>
       </Link>
     </Container>
@@ -108,17 +109,6 @@ const Icon = styled.div`
     height: 2.5rem;
     opacity: 0.8;
   }
-`;
-
-const Arrow = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 1rem;
-  width: 1rem;
-  height: 1rem;
-  margin: auto 0;
-  opacity: 0.6;
 `;
 
 export default MenuCard;

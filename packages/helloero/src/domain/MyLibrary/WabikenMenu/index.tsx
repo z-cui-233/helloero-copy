@@ -48,7 +48,7 @@ const StyledLink = styled.a`
   padding: 0.5rem 1.5rem 0.5rem 0;
   line-height: 1;
   position: relative;
-  transition: color 0.3s ease;
+  text-decoration: none;
 
   & svg {
     position: absolute;
@@ -59,20 +59,10 @@ const StyledLink = styled.a`
     width: 0.75rem;
     height: 0.75rem;
     display: block;
-
-    & path {
-      transition: fill 0.3s ease;
-    }
   }
 
   &:hover {
-    color: ${({ theme }) => theme.keyColor.color1};
-
-    & svg {
-      path {
-        fill: ${({ theme }) => theme.keyColor.color1};
-      }
-    }
+    text-decoration: none;
   }
 `;
 

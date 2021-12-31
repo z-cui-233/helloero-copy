@@ -1,25 +1,25 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
-import * as prismicT from '@prismicio/types';
 import InfoDetail from '@/domain/InfoDetail';
 import { fetchInfoByUid } from '@/localShared/lib/prismic';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 
 interface Props {
-  prismicData: prismicT.PrismicDocument;
+  infoDocument: InfoDocument;
 }
 
-const Page: NextPage<Props> = ({ prismicData }) => {
+const Page: NextPage<Props> = ({ infoDocument }) => {
   return (
     <React.Fragment>
-      <InfoDetail prismicData={prismicData} />
+      <InfoDetail infoDocument={infoDocument} />
     </React.Fragment>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const prismicData = await fetchInfoByUid({ uid: ctx.query.uid as string });
+  const infoDocument = await fetchInfoByUid({ uid: ctx.query.uid as string });
 
-  if (!prismicData) {
+  if (!infoDocument) {
     return {
       notFound: true,
     };
@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      prismicData,
+      infoDocument,
     },
   };
 };

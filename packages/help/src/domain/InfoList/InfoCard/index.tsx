@@ -1,5 +1,4 @@
 import { PrismicText } from '@prismicio/react';
-import * as prismicT from '@prismicio/types';
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -7,29 +6,28 @@ import * as prismicH from '@prismicio/helpers';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { convertDateToString } from '@/shared/utils';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import ListRightArrow from '@/shared/components/ListRightArrow';
 
 interface Props {
-  prismicDocument: prismicT.PrismicDocument;
+  infoDocument: InfoDocument;
 }
 
-const InfoCard: React.FC<Props> = ({ prismicDocument }) => {
+const InfoCard: React.FC<Props> = ({ infoDocument }) => {
   const { locale } = useLocale();
 
-  const date = prismicH.asDate(
-    prismicDocument.data.publish_date as prismicT.DateField
-  );
+  const date = prismicH.asDate(infoDocument.data.publish_date);
 
   return (
-    <Link href={`/${locale}/info/${prismicDocument.uid}`} passHref>
+    <Link href={`/${locale}/info/${infoDocument.uid}`} passHref>
       <Container>
         <article>
           <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
           <Title>
-            <PrismicText
-              field={prismicDocument.data.title as prismicT.RichTextField}
-            />
+            <PrismicText field={infoDocument.data.title} />
           </Title>
         </article>
+        <ListRightArrow />
       </Container>
     </Link>
   );
@@ -37,10 +35,11 @@ const InfoCard: React.FC<Props> = ({ prismicDocument }) => {
 
 const Container = styled.a`
   display: block;
-  padding: 1rem;
+  padding: 1.5rem 2.5rem 1.5rem 1rem;
   line-height: 1.6;
   text-decoration: none;
   transition: background-color 0.1s ease-out;
+  position: relative;
 
   &:hover {
     background-color: ${({ theme }) => theme.background.secondary};

@@ -6,20 +6,21 @@ import InfoCard from './InfoCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import BigBar from '@/shared/components/BigBar';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 
 interface Props {
-  prismicData: prismicT.Query<prismicT.PrismicDocument>;
+  infoDocuments: prismicT.Query<InfoDocument>;
 }
 
-const InfoList: React.FC<Props> = ({ prismicData }) => {
+const InfoList: React.FC<Props> = ({ infoDocuments }) => {
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar size="large" title="お知らせ" />
       <MainContainer size="large">
         <ul>
-          {prismicData?.results?.map((doc) => (
+          {infoDocuments.results.map((doc) => (
             <ListItem key={doc.id}>
-              <InfoCard prismicDocument={doc} />
+              <InfoCard infoDocument={doc} />
             </ListItem>
           ))}
         </ul>

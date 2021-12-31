@@ -3,25 +3,32 @@ import * as prismicT from '@prismicio/types';
 import React from 'react';
 import InfoList from '@/domain/InfoList';
 import { fetchInfoList } from '@/localShared/lib/prismic';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 
 interface Props {
-  prismicData: prismicT.Query<prismicT.PrismicDocument>;
+  infoDocuments: prismicT.Query<InfoDocument>;
 }
 
-const Page: NextPage<Props> = ({ prismicData }) => {
+const Page: NextPage<Props> = ({ infoDocuments }) => {
   return (
     <React.Fragment>
-      <InfoList prismicData={prismicData} />
+      <InfoList infoDocuments={infoDocuments} />
     </React.Fragment>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const prismicData = await fetchInfoList({ pageSize: 100, page: 1 });
+  const infoDocuments = await fetchInfoList({ pageSize: 100, page: 1 });
+
+  if (!infoDocuments) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      prismicData,
+      infoDocuments,
     },
   };
 };

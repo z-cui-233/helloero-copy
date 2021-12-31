@@ -14,17 +14,17 @@ const HelpTop: React.FC = () => {
       <BigBar size="large" title={lang.help.top.title} />
       <MainContainer size="large">
         <MenuCard
-          url={'/guide'}
+          urlPattern={'guide'}
           title={lang.help.top.guide.title}
           texts={lang.help.top.guide.text}
         />
         <MenuCard
-          url={'/info'}
+          urlPattern={'info'}
           title={lang.help.top.info.title}
           texts={lang.help.top.info.text}
         />
         <MenuCard
-          url={'/inquiry'}
+          urlPattern={'inquiry'}
           title={lang.help.top.inquiry.title}
           texts={lang.help.top.inquiry.text}
         />

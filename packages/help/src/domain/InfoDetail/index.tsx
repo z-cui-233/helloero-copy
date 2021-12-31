@@ -1,6 +1,5 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import * as prismicT from '@prismicio/types';
 import { PrismicText, PrismicRichText } from '@prismicio/react';
 import styled from 'styled-components';
 import * as prismicH from '@prismicio/helpers';
@@ -11,17 +10,16 @@ import RichTextContainer from '@/localShared/components/RichTextContainer';
 import { convertDateToString } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 
 interface Props {
-  prismicData: prismicT.PrismicDocument;
+  infoDocument: InfoDocument;
 }
 
-const InfoDetail: React.FC<Props> = ({ prismicData }) => {
+const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
   const { locale } = useLocale();
 
-  const date = prismicH.asDate(
-    prismicData.data.publish_date as prismicT.DateField
-  );
+  const date = prismicH.asDate(infoDocument.data.publish_date);
 
   return (
     <LayoutH2u options={globalConfig}>
@@ -30,14 +28,10 @@ const InfoDetail: React.FC<Props> = ({ prismicData }) => {
         <article>
           <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
           <Title>
-            <PrismicText
-              field={prismicData.data.title as prismicT.RichTextField}
-            />
+            <PrismicText field={infoDocument.data.title} />
           </Title>
           <RichTextContainer>
-            <PrismicRichText
-              field={prismicData.data.detail as prismicT.RichTextField}
-            />
+            <PrismicRichText field={infoDocument.data.text} />
           </RichTextContainer>
         </article>
       </MainContainer>
@@ -53,7 +47,7 @@ const ReleaseDate = styled.div`
 
 const Title = styled.h1`
   ${typo.Heading2};
-  margin: 0.5rem 0 3rem;
+  margin: 0.5rem 0 2rem;
 `;
 
 export default InfoDetail;
