@@ -96,7 +96,9 @@ const lang: LocaleData = {
     authForgotPassword: {
       UserNotFoundException: 'ログインIDが正しいかご確認下さい。', // そんなログインIDは、いない
       LimitExceededException:
-        '一定回数間違えたため、変更できません。しばらく時間をおいてから、再度お試しください。', // コード間違いの回数オーバー
+        '一定回数を超えたため変更できません。しばらく時間をおいてから、再度お試しください。', // PWを変更しすぎてLockされた
+      InvalidParameterException:
+        'メールアドレスの確認が完了していません。先にメールアドレスを再登録してください。', // メールがまだ認証されていないのでメール送信できない
     },
     authForgotPasswordSubmit: {
       CodeMismatchException: '本人確認コードが間違っています。', // 無効なコードが入力された場合に起こる。

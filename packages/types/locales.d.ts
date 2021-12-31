@@ -85,7 +85,8 @@ export interface LocaleData {
     };
     authForgotPassword: {
       UserNotFoundException: string; // そんなログインIDは、いない
-      LimitExceededException: string; // コード間違いの回数オーバー
+      LimitExceededException: string; // PWを変更しすぎてLockされた
+      InvalidParameterException: string; // メールがまだ認証されていないのでメール送信できない
     };
     authForgotPasswordSubmit: {
       CodeMismatchException: string; // 無効なコードが入力された場合に起こる。

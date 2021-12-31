@@ -17,10 +17,10 @@ const GuestUserForm: React.FC<UseResetPassword> = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      userName: props.resetPasswordState.formValues.userName,
+      loginId: props.resetPasswordState.formValues.loginId,
     },
     validationSchema: Yup.object().shape({
-      userName: formValidations.loginId(locale),
+      loginId: formValidations.loginId(locale),
     }),
     onSubmit: props.sendVerificationCode,
   });
@@ -34,10 +34,10 @@ const GuestUserForm: React.FC<UseResetPassword> = (props) => {
           <TextField
             label={formLabels.loginId.label[locale]}
             fieldOptions={{
-              ...formikHelper.fieldOptions(formik, 'userName'),
+              ...formikHelper.fieldOptions(formik, 'loginId'),
               placeholder: formLabels.loginId.placeholder[locale],
             }}
-            validateMessage={formikHelper.errorMessage(formik, 'userName')}
+            validateMessage={formikHelper.errorMessage(formik, 'loginId')}
           />
         </FieldSection>
       </Section>
