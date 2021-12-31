@@ -309,6 +309,38 @@ export interface LocaleData {
         title: string;
         description: string;
       };
+      info: {
+        title: string;
+        description: string;
+      };
+      infoDetail: {
+        title: string;
+        description: string;
+      };
+      guide: {
+        title: string;
+        description: string;
+      };
+      guideCategory: {
+        title: string;
+        description: string;
+      };
+      guideDetail: {
+        title: string;
+        description: string;
+      };
+      termsPrivacy: {
+        title: string;
+        description: string;
+      };
+      termsService: {
+        title: string;
+        description: string;
+      };
+      inquiry: {
+        title: string;
+        description: string;
+      };
     };
     top: {
       title: string;

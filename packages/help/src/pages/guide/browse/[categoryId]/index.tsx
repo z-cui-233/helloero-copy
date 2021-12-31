@@ -1,16 +1,29 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
+import { globalConfig } from 'src/globalConfig';
+import * as prismicH from '@prismicio/helpers';
 import GuideBrowse from '@/domain/GuideBrowse';
 import { fetchGuideByCategoryId } from '@/localShared/lib/prismic';
 import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces/guide';
+import MetaTags from '@/shared/components/MetaTags';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 interface Props {
   guideCategoryDocument: GuideCategoryDocument;
 }
 
 const Page: NextPage<Props> = ({ guideCategoryDocument }) => {
+  const { lang } = useLocale();
+  const title = prismicH.asText(guideCategoryDocument.data.title);
+
   return (
     <React.Fragment>
+      <MetaTags
+        host={globalConfig.HELP}
+        title={`${title}${lang.help.meta.guideCategory.title}`}
+        description={lang.help.meta.guideCategory.description}
+        isMultiLang={false}
+      />
       <GuideBrowse guideCategoryDocument={guideCategoryDocument} />
     </React.Fragment>
   );

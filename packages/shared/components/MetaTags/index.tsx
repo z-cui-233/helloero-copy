@@ -7,9 +7,15 @@ interface Props {
   host: string;
   title: string;
   description?: string;
+  isMultiLang?: boolean;
 }
 
-const MetaTags: React.FC<Props> = ({ host, title, description }) => {
+const MetaTags: React.FC<Props> = ({
+  host,
+  title,
+  description,
+  isMultiLang = true,
+}) => {
   const { asPath } = useRouter();
   const { locale } = useLocale();
 
@@ -32,9 +38,13 @@ const MetaTags: React.FC<Props> = ({ host, title, description }) => {
       />
       <meta property="og:url" content={canonicalUrl} />
       <link rel="canonical" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="en" href={canonicalEnUrl} />
-      <link rel="alternate" hrefLang="ja" href={canonicalJaUrl} />
-      <link rel="alternate" hrefLang="x-default" href={canonicalJaUrl} />
+      {isMultiLang && (
+        <React.Fragment>
+          <link rel="alternate" hrefLang="en" href={canonicalEnUrl} />
+          <link rel="alternate" hrefLang="ja" href={canonicalJaUrl} />
+          <link rel="alternate" hrefLang="x-default" href={canonicalJaUrl} />
+        </React.Fragment>
+      )}
     </Head>
   );
 };

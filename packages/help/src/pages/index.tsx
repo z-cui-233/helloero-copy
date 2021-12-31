@@ -14,6 +14,7 @@ const Page: NextPage = () => {
         host={globalConfig.HELP}
         title={lang.help.meta.default.title}
         description={lang.help.meta.default.description}
+        isMultiLang={false}
       />
       <HelpTop />
     </React.Fragment>

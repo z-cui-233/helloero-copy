@@ -51,14 +51,18 @@ export const fetchGuideTop = (): Promise<prismicT.PrismicDocument | null> => {
 export const fetchGuideByCategoryId = (args: {
   uid: string;
 }): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient().getByUID('guide_category', args.uid, {
-    fetchLinks: ['guide.question'],
-  });
+  return apiClient()
+    .getByUID('guide_category', args.uid, {
+      fetchLinks: ['guide.question'],
+    })
+    .catch(() => null);
 };
 
 // よくある質問詳細
 export const fetchGuideByUid = (args: {
   uid: string;
 }): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient().getByUID('guide', args.uid);
+  return apiClient()
+    .getByUID('guide', args.uid)
+    .catch(() => null);
 };
