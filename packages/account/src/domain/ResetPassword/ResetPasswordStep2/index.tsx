@@ -13,7 +13,7 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const InputForm: React.FC<UseResetPassword> = (props) => {
+const ResetPasswordStep2: React.FC<UseResetPassword> = (props) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
@@ -105,4 +105,4 @@ const ButtonSection = styled.div`
   text-align: center;
 `;
 
-export default InputForm;
+export default ResetPasswordStep2;

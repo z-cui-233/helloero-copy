@@ -1,9 +1,9 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import useResetPassword, { PAGE_STATUS } from './useResetPassword';
-import InputForm from './InputForm';
-import SendVerificationCodeForm from './SendVerificationCodeForm';
+import ResetPasswordStep1 from './ResetPasswordStep1';
 import NoticeComplete from './NoticeComplete';
+import ResetPasswordStep2 from './ResetPasswordStep2';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import BigBar from '@/shared/components/BigBar';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -15,12 +15,11 @@ const ResetPassword: React.FC = () => {
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar title={lang.account.resetPassword.title} />
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.SEND_MAIL && (
-        <SendVerificationCodeForm {...store} />
+      {store.resetPasswordState.pageStatus === PAGE_STATUS.STEP1_SEND_MAIL && (
+        <ResetPasswordStep1 {...store} />
       )}
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.INPUT_PASSWORD && (
-        <InputForm {...store} />
-      )}
+      {store.resetPasswordState.pageStatus ===
+        PAGE_STATUS.STEP2_INPUT_PASSWORD && <ResetPasswordStep2 {...store} />}
       {store.resetPasswordState.pageStatus === PAGE_STATUS.COMPLETE && (
         <NoticeComplete />
       )}

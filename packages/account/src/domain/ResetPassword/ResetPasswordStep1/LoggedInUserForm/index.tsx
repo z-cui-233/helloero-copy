@@ -19,7 +19,7 @@ const LoggedInUserForm: React.FC<UseResetPassword> = (props) => {
         <ButtonStandard
           onClick={() => {
             props.sendVerificationCode({
-              userName: userInfo.userInfo?.username as string,
+              loginId: userInfo.userInfo?.username as string,
             });
           }}
           label={lang.account.resetPassword.send.button}
