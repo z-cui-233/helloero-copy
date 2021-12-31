@@ -333,6 +333,38 @@ const lang: LocaleData = {
         description:
           'H2Uのヘルプセンターです。ヘルプページをお探しの方はこちらをご覧ください。',
       },
+      info: {
+        title: 'お知らせ - H2U ヘルプセンター',
+        description: '',
+      },
+      infoDetail: {
+        title: ' - お知らせ - H2U ヘルプセンター',
+        description: '',
+      },
+      guide: {
+        title: 'よくある質問 - H2U ヘルプセンター',
+        description: '',
+      },
+      guideCategory: {
+        title: ' - よくある質問 - H2U ヘルプセンター',
+        description: '',
+      },
+      guideDetail: {
+        title: ' - よくある質問 - H2U ヘルプセンター',
+        description: '',
+      },
+      termsPrivacy: {
+        title: 'プライバシーポリシー - H2U ヘルプセンター',
+        description: '',
+      },
+      termsService: {
+        title: 'サービス規約 - H2U ヘルプセンター',
+        description: '',
+      },
+      inquiry: {
+        title: 'お問い合わせ - H2U ヘルプセンター',
+        description: '',
+      },
     },
     top: {
       title: 'ヘルプセンター',

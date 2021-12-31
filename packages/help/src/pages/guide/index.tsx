@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
+import { globalConfig } from 'src/globalConfig';
 import GuideTop from '@/domain/GuideTop';
 import {
   fetchGuideByCategoryId,
@@ -9,6 +10,8 @@ import {
   GuideCategoryDocument,
   GuideTopDocument,
 } from '@/localShared/lib/prismic/interfaces/guide';
+import { useLocale } from '@/shared/context/LocaleContext';
+import MetaTags from '@/shared/components/MetaTags';
 
 interface Props {
   guideTopDocument: GuideTopDocument;
@@ -16,8 +19,16 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ guideTopDocument, guideCategoryDocument }) => {
+  const { lang } = useLocale();
+
   return (
     <React.Fragment>
+      <MetaTags
+        host={globalConfig.HELP}
+        title={lang.help.meta.guide.title}
+        description={lang.help.meta.guide.description}
+        isMultiLang={false}
+      />
       <GuideTop
         guideTopDocument={guideTopDocument}
         guideCategoryDocument={guideCategoryDocument}

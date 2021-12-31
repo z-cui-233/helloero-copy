@@ -1,9 +1,8 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import TermsService from '@/domain/TermsService';
-import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
+import { useLocale } from '@/shared/context/LocaleContext';
 
 const Page: NextPage = () => {
   const { lang } = useLocale();
@@ -12,11 +11,11 @@ const Page: NextPage = () => {
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={lang.help.meta.termsService.title}
-        description={lang.help.meta.termsService.description}
+        title={lang.help.meta.inquiry.title}
+        description={lang.help.meta.inquiry.description}
         isMultiLang={false}
       />
-      <TermsService />
+      <div>inquiry</div>
     </React.Fragment>
   );
 };
