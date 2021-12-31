@@ -3,6 +3,7 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
+import Inquiry from '@/domain/Inquiry';
 
 const Page: NextPage = () => {
   const { lang } = useLocale();
@@ -15,7 +16,7 @@ const Page: NextPage = () => {
         description={lang.help.meta.inquiry.description}
         isMultiLang={false}
       />
-      <div>inquiry</div>
+      <Inquiry />
     </React.Fragment>
   );
 };

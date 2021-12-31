@@ -11,21 +11,40 @@ import { convertDateToString } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import BreadcrumbsList, {
+  Breadcrumbs,
+} from '@/localShared/components/BreadcrumbsList';
 
 interface Props {
   infoDocument: InfoDocument;
 }
 
 const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
-  const { locale } = useLocale();
-
+  const { locale, lang } = useLocale();
   const date = prismicH.asDate(infoDocument.data.publish_date);
+  const title = prismicH.asText(infoDocument.data.title);
+
+  const breadcrumbs: Breadcrumbs[] = [
+    {
+      path: `/${locale}`,
+      text: lang.help.top.title,
+    },
+    {
+      path: `/${locale}/info`,
+      text: lang.help.info.title,
+    },
+    {
+      path: `/${locale}/info/${infoDocument.uid}`,
+      text: title as string,
+    },
+  ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title="お知らせ" />
+      <BigBar size="large" title={lang.help.info.title} />
       <MainContainer size="large">
-        <article>
+        <BreadcrumbsList breadcrumbs={breadcrumbs} />
+        <Container>
           <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
           <Title>
             <PrismicText field={infoDocument.data.title} />
@@ -33,11 +52,15 @@ const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
           <RichTextContainer>
             <PrismicRichText field={infoDocument.data.text} />
           </RichTextContainer>
-        </article>
+        </Container>
       </MainContainer>
     </LayoutH2u>
   );
 };
+
+const Container = styled.article`
+  margin: 1.5rem 0 0;
+`;
 
 const ReleaseDate = styled.div`
   ${typo.Body};
@@ -47,7 +70,7 @@ const ReleaseDate = styled.div`
 
 const Title = styled.h1`
   ${typo.Heading2};
-  margin: 0.5rem 0 2rem;
+  margin: 0 0 2rem;
 `;
 
 export default InfoDetail;

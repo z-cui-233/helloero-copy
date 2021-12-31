@@ -33,7 +33,9 @@ const Page: NextPage<Props> = ({ guideDocument }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const guideDocument = await fetchGuideByUid({ uid: ctx.query.uid as string });
+  const uid = ctx.query.uid as string;
+
+  const guideDocument = await fetchGuideByUid({ uid });
 
   if (!guideDocument) {
     return {
