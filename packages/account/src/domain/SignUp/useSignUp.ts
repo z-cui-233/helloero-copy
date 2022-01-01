@@ -3,12 +3,12 @@ import {
   AUTH_STATE_CHANGE_EVENT,
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
-import { Auth, Hub } from 'aws-amplify';
+import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { getErrorMessage } from '@/shared/utils';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useLocale } from '@/shared/context/LocaleContext';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -54,7 +54,9 @@ const initialState: UseSignUp['signupState'] = {
 
 const useSignUp = (): UseSignUp => {
   const router = useRouter();
-  const { locale, lang } = useLocale();
+  const { locale } = useLocale();
+  const { signUp, confirmSignUp, signIn } = useAmplifyAuth();
+
   const [signupState, setSignupState] =
     useState<UseSignUp['signupState']>(initialState);
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
@@ -63,108 +65,89 @@ const useSignUp = (): UseSignUp => {
 
   const challengeSignUp: UseSignUp['challengeSignUp'] = useCallback(
     async (values) => {
-      try {
-        if (isLoading) {
-          return;
-        }
+      if (isLoading) {
+        return;
+      }
 
-        setIsLoading(true);
+      setIsLoading(true);
 
-        await Auth.signUp({
-          username: values.loginId,
-          password: values.password,
-          attributes: {
-            email: values.email,
-          },
-        });
-
-        setSignupState((signupState) => ({
-          ...signupState,
-          pageStatus: PAGE_STATUS.STEP2_CONFIRM,
-          errorMessage: '',
-          step1FormValues: {
-            ...values,
-          },
-        }));
-      } catch (error: unknown) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(lang, 'authSignUp', errorCode);
-
+      const signUpResponse = await signUp(values);
+      if (signUpResponse.errorCode) {
         setSignupState((signupState) => ({
           ...signupState,
           pageStatus: PAGE_STATUS.STEP1_INPUT,
-          errorMessage,
+          errorMessage: signUpResponse.errorMessage,
           step1FormValues: {
             ...values,
           },
         }));
-      } finally {
         setIsLoading(false);
+        return;
       }
+
+      setSignupState((signupState) => ({
+        ...signupState,
+        pageStatus: PAGE_STATUS.STEP2_CONFIRM,
+        errorMessage: '',
+        step1FormValues: {
+          ...values,
+        },
+      }));
+      setIsLoading(false);
     },
-    [isLoading, lang]
+    [isLoading, signUp]
   );
 
   const verifyCode: UseSignUp['verifyCode'] = useCallback(
     async (values) => {
-      try {
-        if (isLoading) {
-          return;
-        }
-
-        setIsLoading(true);
-        await Auth.confirmSignUp(
-          signupState.step1FormValues.loginId,
-          values.verificationCode
-        );
-      } catch (error) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(
-          lang,
-          'authConfirmSignUp',
-          errorCode
-        );
-
-        setIsLoading(false);
-        setSignupState((signupState) => ({
-          ...signupState,
-          pageStatus: PAGE_STATUS.STEP2_CONFIRM,
-          errorMessage,
-          step2FormValues: {
-            ...values,
-          },
-        }));
+      if (isLoading) {
         return;
       }
 
-      try {
-        await Auth.signIn(
-          signupState.step1FormValues.loginId,
-          signupState.step1FormValues.password
-        );
+      setIsLoading(true);
 
-        Hub.dispatch(UI_AUTH_CHANNEL, {
-          event: AUTH_STATE_CHANGE_EVENT,
-          message: AuthState.SignIn,
-        });
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+      const confirmSignUpResponse = await confirmSignUp({
+        loginId: signupState.step1FormValues.loginId,
+        verificationCode: values.verificationCode,
+      });
+
+      if (confirmSignUpResponse.errorCode) {
         setSignupState((signupState) => ({
           ...signupState,
-          pageStatus: PAGE_STATUS.COMPLETE,
-          errorMessage: '',
+          pageStatus: PAGE_STATUS.STEP2_CONFIRM,
+          errorMessage: confirmSignUpResponse.errorMessage,
           step2FormValues: {
             ...values,
           },
         }));
+        setIsLoading(false);
+        return;
       }
+
+      await signIn({
+        loginId: signupState.step1FormValues.loginId,
+        password: signupState.step1FormValues.password,
+      });
+
+      Hub.dispatch(UI_AUTH_CHANNEL, {
+        event: AUTH_STATE_CHANGE_EVENT,
+        message: AuthState.SignIn,
+      });
+
+      setIsLoading(false);
+      setSignupState((signupState) => ({
+        ...signupState,
+        pageStatus: PAGE_STATUS.COMPLETE,
+        errorMessage: '',
+        step2FormValues: {
+          ...values,
+        },
+      }));
     },
     [
+      confirmSignUp,
       isLoading,
-      lang,
+      signIn,
       signupState.step1FormValues.loginId,
       signupState.step1FormValues.password,
     ]
