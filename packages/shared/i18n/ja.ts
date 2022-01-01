@@ -166,16 +166,22 @@ const lang: LocaleData = {
       help: 'ヘルプ',
     },
     top: {
+      title: 'アカウント',
+      subText: 'ようこそ {loginId} さん',
       service: {
         title: 'サービス',
         helloero: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
       },
-      menus: {
-        title: 'アカウント',
-        login: 'ログイン',
+      accountMenus: {
+        title: 'アカウントの設定',
+        login: 'ログインすると利用できます。',
         updateEmail: 'メールアドレスの変更',
         resetPassword: 'パスワードの変更',
         logout: 'ログアウト',
+      },
+      siteMenus: {
+        title: 'サービス',
+        helloero: 'HELLOERO',
         help: 'ヘルプ',
       },
     },

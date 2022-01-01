@@ -145,16 +145,22 @@ export interface LocaleData {
       help: string;
     };
     top: {
+      title: string;
+      subText: string;
       service: {
         title: string;
         helloero: string;
       };
-      menus: {
+      accountMenus: {
         title: string;
         login: string;
         updateEmail: string;
         resetPassword: string;
         logout: string;
+      };
+      siteMenus: {
+        title: string;
+        helloero: string;
         help: string;
       };
     };

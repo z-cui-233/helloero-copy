@@ -3,84 +3,40 @@ import React from 'react';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import { useLocale } from '@/shared/context/LocaleContext';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
 const SiteMenus: React.FC = () => {
-  const { locale, lang } = useLocale();
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+  const { lang } = useLocale();
 
-  return isLoadedUserInfo ? (
+  return (
     <Container>
-      <Title>{lang.account.top.menus.title}</Title>
+      <Title>{lang.account.top.siteMenus.title}</Title>
       <List>
-        {!userInfo.isLoggedIn && (
-          <React.Fragment>
-            <div>
-              <Link href={`/${locale}/login`} passHref>
-                <StyledLink>
-                  {lang.account.top.menus.login}
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <div>
-                <Link href={`${globalConfig.HELP}/`} passHref>
-                  <StyledLink>
-                    {lang.account.top.menus.help}
-                    <ListRightArrow />
-                  </StyledLink>
-                </Link>
-              </div>
-            </div>
-          </React.Fragment>
-        )}
-        {userInfo.isLoggedIn && (
-          <React.Fragment>
-            <div>
-              <Link href={`/${locale}/update-email`} passHref>
-                <StyledLink>
-                  {lang.account.top.menus.updateEmail}
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <Link href={`/${locale}/reset-password`} passHref>
-                <StyledLink>
-                  {lang.account.top.menus.resetPassword}
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <Link href={`${globalConfig.HELP}/`} passHref>
-                <StyledLink>
-                  {lang.account.top.menus.help}
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <Link href={`/${locale}/logout`} passHref>
-                <StyledLink>
-                  {lang.account.top.menus.logout}
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-          </React.Fragment>
-        )}
+        <div>
+          <Link href={`${globalConfig.HELLOERO}/`} passHref>
+            <StyledLink>
+              {lang.account.top.siteMenus.helloero}
+              <ListRightArrow />
+            </StyledLink>
+          </Link>
+        </div>
+        <div>
+          <Link href={`${globalConfig.HELP}/`} passHref>
+            <StyledLink>
+              {lang.account.top.siteMenus.help}
+              <ListRightArrow />
+            </StyledLink>
+          </Link>
+        </div>
       </List>
     </Container>
-  ) : null;
+  );
 };
 
 const Container = styled.div`
-  margin: 3rem 0 0;
   border: 1px solid ${({ theme }) => theme.background.tertiary};
+  margin: 3rem 0 0;
 `;
 
 const Title = styled.div`

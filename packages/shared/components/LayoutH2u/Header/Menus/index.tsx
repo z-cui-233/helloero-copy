@@ -53,19 +53,20 @@ const Container = styled.nav<{ isDisplayedMenu: boolean }>`
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   @media ${device.mobile} {
-    left: 0rem;
-    top: 0rem;
-    right: 0rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
   }
 `;
 
 const MenuList = styled.ul`
-  margin: 4.5rem 0 0;
+  margin: 4rem 0 0;
   border-top: 1px solid ${({ theme }) => theme.background.tertiary};
   padding: 0 1rem 1rem;
 
   @media ${device.mobile} {
-    margin: 5rem 0 0;
+    margin: 4.5rem 0 0;
   }
 `;
 
