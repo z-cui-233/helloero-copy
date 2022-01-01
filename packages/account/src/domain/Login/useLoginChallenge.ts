@@ -3,13 +3,13 @@ import {
   AUTH_STATE_CHANGE_EVENT,
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
-import { Auth, Hub } from 'aws-amplify';
+import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { globalConfig } from 'src/globalConfig';
-import { getErrorMessage } from '@/shared/utils';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useLocale } from '@/shared/context/LocaleContext';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -56,10 +56,11 @@ const isValidUrl = (backUrl: string): boolean => {
 
 const useLoginChallenge = (): UseLoginChallenge => {
   const router = useRouter();
-  const { locale, lang } = useLocale();
+  const { locale } = useLocale();
+  const { signIn } = useAmplifyAuth();
+  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [loginChallengeState, setLoginChallengeState] =
     useState<UseLoginChallenge['loginChallengeState']>(initialState);
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   const redirect = useCallback((): void => {
     const backUrl = router.query.back
@@ -71,19 +72,10 @@ const useLoginChallenge = (): UseLoginChallenge => {
 
   const challengeLogin: UseLoginChallenge['challengeLogin'] = useCallback(
     async (values) => {
-      try {
-        await Auth.signIn(values.loginId, values.password);
+      const signInResponse = await signIn(values);
 
-        Hub.dispatch(UI_AUTH_CHANNEL, {
-          event: AUTH_STATE_CHANGE_EVENT,
-          message: AuthState.SignIn,
-        });
-
-        redirect();
-      } catch (error: unknown) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-
-        switch (errorCode) {
+      if (signInResponse.errorCode) {
+        switch (signInResponse.errorCode) {
           case 'PasswordResetRequiredException': {
             setLoginChallengeState((loginChallengeState) => ({
               ...loginChallengeState,
@@ -103,17 +95,24 @@ const useLoginChallenge = (): UseLoginChallenge => {
           }
 
           default: {
-            const errorMessage = getErrorMessage(lang, 'authSignIn', errorCode);
             setLoginChallengeState((loginChallengeState) => ({
               ...loginChallengeState,
-              errorMessage,
+              errorMessage: signInResponse.errorMessage,
             }));
             break;
           }
         }
+        return;
       }
+
+      Hub.dispatch(UI_AUTH_CHANNEL, {
+        event: AUTH_STATE_CHANGE_EVENT,
+        message: AuthState.SignIn,
+      });
+
+      redirect();
     },
-    [lang, redirect]
+    [redirect, signIn]
   );
 
   useEffect(() => {

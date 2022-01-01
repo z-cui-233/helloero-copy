@@ -1,14 +1,12 @@
-import { Auth, Hub } from 'aws-amplify';
+import { Hub } from 'aws-amplify';
 import { useCallback, useState } from 'react';
-import { CodeDeliveryDetails } from 'u-next/amplify';
 import {
   AuthState,
   AUTH_STATE_CHANGE_EVENT,
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
-import { useLocale } from '@/shared/context/LocaleContext';
-import { getErrorMessage } from '@/shared/utils';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   STEP1_SEND_MAIL: 'STEP1_SEND_MAIL',
@@ -49,71 +47,59 @@ const initialState: UseResetPassword['resetPasswordState'] = {
 };
 
 const useResetPassword = () => {
-  const { lang } = useLocale();
   const { userInfo } = useLoginStateContext();
+  const { forgotPassword, forgotPasswordSubmit, signIn } = useAmplifyAuth();
+
   const [resetPasswordState, setResetPasswordState] =
     useState<UseResetPassword['resetPasswordState']>(initialState);
 
   const sendVerificationCode: UseResetPassword['sendVerificationCode'] =
     useCallback(
       async (values) => {
-        try {
-          const response: CodeDeliveryDetails = await Auth.forgotPassword(
-            values.loginId
-          );
+        const forgotPasswordResponse = await forgotPassword(values);
 
+        if (forgotPasswordResponse.errorCode) {
           setResetPasswordState((resetPasswordState) => ({
             ...resetPasswordState,
-            pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
-            errorMessage: '',
-            destination: response?.CodeDeliveryDetails?.Destination ?? '',
-            formValues: {
-              ...resetPasswordState.formValues,
-              loginId: values.loginId,
-            },
-          }));
-        } catch (error: unknown) {
-          const errorCode = error instanceof Error ? error.name : undefined;
-          const errorMessage = getErrorMessage(
-            lang,
-            'authForgotPassword',
-            errorCode
-          );
-
-          setResetPasswordState((resetPasswordState) => ({
-            ...resetPasswordState,
-            errorMessage,
+            errorMessage: forgotPasswordResponse.errorMessage,
             formValues: {
               ...resetPasswordState.formValues,
               userName: values.loginId,
             },
           }));
+
+          return;
         }
+
+        setResetPasswordState((resetPasswordState) => ({
+          ...resetPasswordState,
+          pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
+          errorMessage: '',
+          destination:
+            forgotPasswordResponse.data?.CodeDeliveryDetails?.Destination ?? '',
+          formValues: {
+            ...resetPasswordState.formValues,
+            loginId: values.loginId,
+          },
+        }));
       },
-      [lang]
+      [forgotPassword]
     );
 
   const verifyCodeAndUpdatePassword: UseResetPassword['verifyCodeAndUpdatePassword'] =
     useCallback(
       async (values) => {
-        try {
-          await Auth.forgotPasswordSubmit(
-            resetPasswordState.formValues.loginId,
-            values.verificationCode,
-            values.newPassword
-          );
-        } catch (error: unknown) {
-          const errorCode = error instanceof Error ? error.name : undefined;
-          const errorMessage = getErrorMessage(
-            lang,
-            'authForgotPasswordSubmit',
-            errorCode
-          );
+        const forgotPasswordSubmitResponse = await forgotPasswordSubmit({
+          loginId: resetPasswordState.formValues.loginId,
+          verificationCode: values.verificationCode,
+          newPassword: values.newPassword,
+        });
 
+        if (forgotPasswordSubmitResponse.errorCode) {
           setResetPasswordState((resetPasswordState) => ({
             ...resetPasswordState,
             pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
-            errorMessage,
+            errorMessage: forgotPasswordSubmitResponse.errorMessage,
             formValues: {
               ...resetPasswordState.formValues,
               ...values,
@@ -123,29 +109,28 @@ const useResetPassword = () => {
         }
 
         if (!userInfo.isLoggedIn) {
-          try {
-            await Auth.signIn(
-              resetPasswordState.formValues.loginId,
-              values.newPassword
-            );
+          const signInResponse = await signIn({
+            loginId: resetPasswordState.formValues.loginId,
+            password: values.newPassword,
+          });
 
-            Hub.dispatch(UI_AUTH_CHANNEL, {
-              event: AUTH_STATE_CHANGE_EVENT,
-              message: AuthState.SignIn,
-            });
-          } catch (error) {
-            const errorCode = error instanceof Error ? error.name : undefined;
-            const errorMessage = getErrorMessage(lang, 'authSignIn', errorCode);
+          if (signInResponse.errorCode) {
             setResetPasswordState((resetPasswordState) => ({
               ...resetPasswordState,
               pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
-              errorMessage,
+              errorMessage: signInResponse.errorMessage,
               formValues: {
                 ...resetPasswordState.formValues,
                 ...values,
               },
             }));
+            return;
           }
+
+          Hub.dispatch(UI_AUTH_CHANNEL, {
+            event: AUTH_STATE_CHANGE_EVENT,
+            message: AuthState.SignIn,
+          });
         }
 
         setResetPasswordState((resetPasswordState) => ({
@@ -158,7 +143,12 @@ const useResetPassword = () => {
           },
         }));
       },
-      [lang, resetPasswordState.formValues.loginId, userInfo.isLoggedIn]
+      [
+        forgotPasswordSubmit,
+        resetPasswordState.formValues.loginId,
+        signIn,
+        userInfo.isLoggedIn,
+      ]
     );
 
   return {

@@ -1,7 +1,5 @@
-import { Auth } from 'aws-amplify';
 import { useCallback, useState } from 'react';
-import { useLocale } from '@/shared/context/LocaleContext';
-import { getErrorMessage } from '@/shared/utils';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   INPUT_EMAIL: 'INPUT_EMAIL',
@@ -33,78 +31,89 @@ const initialState: UseUpdateEmail['updateEmailState'] = {
 };
 
 const useUpdateEmail = (): UseUpdateEmail => {
-  const { lang } = useLocale();
+  const {
+    currentAuthenticatedUser,
+    updateUserAttributes,
+    verifyCurrentUserAttributeSubmit,
+  } = useAmplifyAuth();
   const [updateEmailState, setUpdateEmailState] =
     useState<UseUpdateEmail['updateEmailState']>(initialState);
 
   const confirmEmail: UseUpdateEmail['confirmEmail'] = useCallback(
     async (values) => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        await Auth.updateUserAttributes(user, {
-          email: values.email,
-        });
-
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
-          pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
-          errorMessage: '',
-          formValues: {
-            ...updateEmailState.formValues,
-            email: values.email,
-          },
-        }));
-      } catch (error: unknown) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(
-          lang,
-          'authUpdateUserAttributes',
-          errorCode
-        );
-
+      const currentAuthenticatedUserResponse = await currentAuthenticatedUser();
+      if (currentAuthenticatedUserResponse.errorCode) {
+        // ここでエラーになると、とても困る
         setUpdateEmailState((updateEmailState) => ({
           ...updateEmailState,
           pageStatus: PAGE_STATUS.INPUT_EMAIL,
-          errorMessage,
+          errorMessage: currentAuthenticatedUserResponse.errorMessage,
           formValues: {
             ...updateEmailState.formValues,
             email: values.email,
           },
         }));
+
+        return;
       }
+
+      const updateUserAttributesResponse = await updateUserAttributes({
+        user: currentAuthenticatedUserResponse.data,
+        email: values.email,
+      });
+
+      if (updateUserAttributesResponse.errorCode) {
+        setUpdateEmailState((updateEmailState) => ({
+          ...updateEmailState,
+          pageStatus: PAGE_STATUS.INPUT_EMAIL,
+          errorMessage: updateUserAttributesResponse.errorMessage,
+          formValues: {
+            ...updateEmailState.formValues,
+            email: values.email,
+          },
+        }));
+
+        return;
+      }
+
+      setUpdateEmailState((updateEmailState) => ({
+        ...updateEmailState,
+        pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
+        errorMessage: '',
+        formValues: {
+          ...updateEmailState.formValues,
+          email: values.email,
+        },
+      }));
     },
-    [lang]
+    [currentAuthenticatedUser, updateUserAttributes]
   );
 
   const verifyCode: UseUpdateEmail['verifyCode'] = useCallback(
     async (values) => {
-      try {
-        await Auth.verifyCurrentUserAttributeSubmit(
-          'email',
-          values.verificationCode
-        );
+      const verifyCurrentUserAttributeSubmitResponse =
+        await verifyCurrentUserAttributeSubmit({
+          attr: 'email',
+          verificationCode: values.verificationCode,
+        });
 
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
-          pageStatus: PAGE_STATUS.COMPLETE,
-          errorMessage: '',
-        }));
-      } catch (error: unknown) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(
-          lang,
-          'authVerifyCurrentUserAttributeSubmit',
-          errorCode
-        );
-
+      if (verifyCurrentUserAttributeSubmitResponse.errorCode) {
         setUpdateEmailState((updateEmailState) => ({
           ...updateEmailState,
           pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
-          errorMessage,
+          errorMessage: verifyCurrentUserAttributeSubmitResponse.errorMessage,
         }));
+
+        return;
       }
+
+      setUpdateEmailState((updateEmailState) => ({
+        ...updateEmailState,
+        pageStatus: PAGE_STATUS.COMPLETE,
+        errorMessage: '',
+      }));
     },
-    [lang]
+    [verifyCurrentUserAttributeSubmit]
   );
 
   return {

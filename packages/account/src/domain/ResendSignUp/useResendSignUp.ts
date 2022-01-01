@@ -1,4 +1,4 @@
-import { Auth, Hub } from 'aws-amplify';
+import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/dist/client/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
@@ -8,7 +8,7 @@ import {
 } from '@aws-amplify/ui-components';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { getErrorMessage } from '@/shared/utils';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -54,102 +54,91 @@ const initialState: UseResendSignUp['resendSignUpState'] = {
 
 const useResendSignUp = (): UseResendSignUp => {
   const router = useRouter();
-  const { locale, lang } = useLocale();
+  const { resendSignUp, confirmSignUp, signIn } = useAmplifyAuth();
+  const { locale } = useLocale();
   const [resendSignUpState, setResendSignupState] =
     useState<UseResendSignUp['resendSignUpState']>(initialState);
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   const resendCode: UseResendSignUp['resendCode'] = useCallback(
     async (values) => {
-      try {
-        await Auth.resendSignUp(values.loginId);
-
+      const resendSignUpResponse = await resendSignUp(values);
+      if (resendSignUpResponse.errorCode) {
         setResendSignupState((resendSignUpState) => ({
           ...resendSignUpState,
-          pageStatus: PAGE_STATUS.STEP2_CONFIRM,
-          errorMessage: '',
+          errorMessage: resendSignUpResponse.errorMessage,
           step1FormValues: values,
         }));
-      } catch (error) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(
-          lang,
-          'authResendSignUp',
-          errorCode
-        );
 
-        setResendSignupState((resendSignUpState) => ({
-          ...resendSignUpState,
-          errorMessage,
-          step1FormValues: values,
-        }));
+        return;
       }
+      setResendSignupState((resendSignUpState) => ({
+        ...resendSignUpState,
+        pageStatus: PAGE_STATUS.STEP2_CONFIRM,
+        errorMessage: '',
+        step1FormValues: values,
+      }));
     },
-    [lang]
+    [resendSignUp]
   );
 
   const verifyCode: UseResendSignUp['verifyCode'] = useCallback(
     async (values) => {
-      try {
-        await Auth.confirmSignUp(
-          resendSignUpState.step1FormValues.loginId,
-          values.verificationCode
-        );
+      const confirmSignUpResponse = await confirmSignUp({
+        loginId: resendSignUpState.step1FormValues.loginId,
+        verificationCode: values.verificationCode,
+      });
 
-        setResendSignupState((resendSignUpState) => ({
-          ...resendSignUpState,
-          pageStatus: PAGE_STATUS.STEP3_RE_LOGIN,
-          errorMessage: '',
-          step2FormValues: values,
-        }));
-      } catch (error) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(
-          lang,
-          'authConfirmSignUp',
-          errorCode
-        );
-
+      if (confirmSignUpResponse.errorCode) {
         setResendSignupState((resendSignUpState) => ({
           ...resendSignUpState,
           pageStatus: PAGE_STATUS.STEP2_CONFIRM,
-          errorMessage,
+          errorMessage: confirmSignUpResponse.errorMessage,
           step2FormValues: values,
         }));
+
+        return;
       }
+
+      setResendSignupState((resendSignUpState) => ({
+        ...resendSignUpState,
+        pageStatus: PAGE_STATUS.STEP3_RE_LOGIN,
+        errorMessage: '',
+        step2FormValues: values,
+      }));
     },
-    [lang, resendSignUpState.step1FormValues.loginId]
+    [confirmSignUp, resendSignUpState.step1FormValues.loginId]
   );
 
   const invokeLogin: UseResendSignUp['invokeLogin'] = useCallback(
     async (values) => {
-      try {
-        await Auth.signIn(
-          resendSignUpState.step1FormValues.loginId,
-          values.password
-        );
+      const signInResponse = await signIn({
+        loginId: resendSignUpState.step1FormValues.loginId,
+        password: values.password,
+      });
 
-        Hub.dispatch(UI_AUTH_CHANNEL, {
-          event: AUTH_STATE_CHANGE_EVENT,
-          message: AuthState.SignIn,
-        });
-
+      if (signInResponse.errorCode) {
         setResendSignupState((resendSignUpState) => ({
           ...resendSignUpState,
-          pageStatus: PAGE_STATUS.COMPLETE,
-          errorMessage: '',
-          step3FormValues: values,
+          errorMessage: signInResponse.errorMessage,
         }));
-      } catch (error) {
-        const errorCode = error instanceof Error ? error.name : undefined;
-        const errorMessage = getErrorMessage(lang, 'authSignIn', errorCode);
-        setResendSignupState((resendSignUpState) => ({
-          ...resendSignUpState,
-          errorMessage,
-        }));
+
+        return;
       }
+
+      Hub.dispatch(UI_AUTH_CHANNEL, {
+        event: AUTH_STATE_CHANGE_EVENT,
+        message: AuthState.SignIn,
+      });
+
+      setResendSignupState((resendSignUpState) => ({
+        ...resendSignUpState,
+        pageStatus: PAGE_STATUS.COMPLETE,
+        errorMessage: '',
+        step3FormValues: values,
+      }));
     },
-    [lang, resendSignUpState.step1FormValues.loginId]
+    [resendSignUpState.step1FormValues.loginId, signIn]
   );
 
   useEffect(() => {
