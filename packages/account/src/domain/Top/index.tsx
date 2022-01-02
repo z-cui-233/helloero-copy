@@ -21,7 +21,7 @@ const Top: React.FC = () => {
           userInfo.isLoggedIn
             ? lang.account.top.subText.replace(
                 '{loginId}',
-                userInfo.cognitoUserInfo?.getUsername() ?? ''
+                userInfo.userName ?? ''
               )
             : ''
         }

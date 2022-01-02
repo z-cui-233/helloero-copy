@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Auth } from 'aws-amplify';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 
-type LoginState = {
+type UserInfo = {
   isLoggedIn: boolean;
-  cognitoUserInfo: CognitoUser | null;
+  userName: string | null;
 };
 
-const initialState: LoginState = {
+const initialState: UserInfo = {
   isLoggedIn: false,
-  cognitoUserInfo: null,
+  userName: '',
 };
 
 const LoginStateContext = React.createContext({
@@ -20,19 +19,16 @@ const LoginStateContext = React.createContext({
 
 const LoginStateContextProvider: React.FC = ({ children }) => {
   const [isLoadedUserInfo, setIsLoadedUserInfo] = useState<boolean>(false);
-  const [cognitoUserInfo, setCognitoUserInfo] = useState<CognitoUser | null>(
-    null
-  );
+  const [userName, setUserName] = useState<string | null>(null);
   const [authState, setAuthState] = useState<AuthState>();
 
   useEffect(() => {
     Auth.currentAuthenticatedUser({ bypassCache: true })
       .then((user) => {
-        setCognitoUserInfo(user as CognitoUser);
+        setUserName(user.username); // 少々強引な取り方
         setIsLoadedUserInfo(true);
       })
       .catch(() => {
-        setCognitoUserInfo(null);
         setIsLoadedUserInfo(true);
       });
   }, [authState]);
@@ -43,16 +39,14 @@ const LoginStateContextProvider: React.FC = ({ children }) => {
     });
   }, []);
 
-  const mergedUserInfo: LoginState = {
-    isLoggedIn: isLoadedUserInfo && !!cognitoUserInfo,
-    cognitoUserInfo,
-  };
-
   return (
     <LoginStateContext.Provider
       value={{
         isLoadedUserInfo,
-        userInfo: mergedUserInfo,
+        userInfo: {
+          isLoggedIn: isLoadedUserInfo && !!userName,
+          userName,
+        },
       }}
     >
       {children}
@@ -62,7 +56,7 @@ const LoginStateContextProvider: React.FC = ({ children }) => {
 
 const useLoginStateContext = (): {
   isLoadedUserInfo: boolean;
-  userInfo: LoginState;
+  userInfo: UserInfo;
 } => {
   const { isLoadedUserInfo, userInfo } = useContext(LoginStateContext);
 

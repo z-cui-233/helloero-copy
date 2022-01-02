@@ -1,66 +1,78 @@
-import Script from 'next/script';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
-import LayoutHelloero from '@/shared/components/LayoutHelloero';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 const Internal: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+  const { currentAuthenticatedUser } = useAmplifyAuth();
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    if (!isLoadedUserInfo) {
+      return;
+    }
+    currentAuthenticatedUser().then((response) =>
+      setUser(response.data ?? undefined)
+    );
+  }, [currentAuthenticatedUser, isLoadedUserInfo]);
 
   return (
-    <LayoutHelloero options={globalConfig}>
-      <Container>
+    <LayoutH2u options={globalConfig}>
+      <MainContainer size="large">
         <FieldSection>
           <Title>LoginStatus</Title>
-          <Detail>{userInfo.isLoggedIn ? 'Logged in' : 'Not Logged in'}</Detail>
-        </FieldSection>
-        <FieldSection>
-          <Title>UserName</Title>
-          <Detail>{userInfo.cognitoUserInfo?.getUsername()}</Detail>
-        </FieldSection>
-        <FieldSection>
-          <Title>UserInfo</Title>
           <Detail>
             <JsonData>
-              {isLoadedUserInfo && (
-                <pre>
-                  <code className=" prettyprint">
-                    {JSON.stringify(userInfo, null, 2)}
-                  </code>
-                </pre>
-              )}
+              <pre>
+                {JSON.stringify(
+                  { isLoggedIn: isLoadedUserInfo ? userInfo.isLoggedIn : '--' },
+                  null,
+                  2
+                )}
+              </pre>
             </JsonData>
           </Detail>
         </FieldSection>
-        <Script
-          strategy="lazyOnload"
-          src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang-js"
-          onLoad={() => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (window as any).PR.prettyPrint();
-          }}
-        />
-      </Container>
-    </LayoutHelloero>
+        <FieldSection>
+          <Title>UserName</Title>
+          <Detail>
+            <JsonData>
+              <pre>
+                {JSON.stringify(
+                  { userName: isLoadedUserInfo ? userInfo.userName : '--' },
+                  null,
+                  2
+                )}
+              </pre>
+            </JsonData>
+          </Detail>
+        </FieldSection>
+        <FieldSection>
+          <Title>CognitoUser</Title>
+          <Detail>
+            <JsonData>
+              <pre>{JSON.stringify(user, null, 2)}</pre>
+            </JsonData>
+          </Detail>
+        </FieldSection>
+      </MainContainer>
+    </LayoutH2u>
   );
 };
 
-const Container = styled.div`
-  max-width: 840px;
-  margin: 4rem auto 0;
-  width: calc(100% - 2rem);
-`;
-
 const FieldSection = styled.div`
-  margin: 1rem 0 0;
+  margin: 2rem 0 0;
 `;
 
 const Title = styled.div`
-  ${typo.Lead1};
+  ${typo.Lead2};
   font-weight: bold;
-  font-weight: bold;
+  font-family: monospace, sans-serif;
 `;
 
 const Detail = styled.div`
@@ -71,10 +83,10 @@ const Detail = styled.div`
 
 const JsonData = styled.div`
   ${typo.Body};
-  background-color: ${({ theme }) => theme.keyColor.color3};
-  padding: 1.5rem;
+  background-color: ${({ theme }) => theme.background.tertiary};
+  padding: 1rem;
   overflow: scroll;
-  font-family: sans-serif;
+  font-family: monospace, sans-serif;
 `;
 
 export default Internal;

@@ -27,7 +27,7 @@ const LoggedInUserForm: React.FC<Props> = ({
         <ButtonStandard
           onClick={() => {
             sendVerificationCode({
-              loginId: userInfo.cognitoUserInfo?.getUsername() ?? '',
+              loginId: userInfo.userName ?? '',
             });
           }}
           label={lang.account.resetPassword.send.button}
