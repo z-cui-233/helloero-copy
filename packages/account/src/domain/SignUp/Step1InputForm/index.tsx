@@ -14,22 +14,27 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const Step1InputForm: React.FC<UseSignUp> = (props) => {
+type Props = {
+  signUpState: UseSignUp['signUpState'];
+  challengeSignUp: UseSignUp['challengeSignUp'];
+};
+
+const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.signupState.step1FormValues,
+    initialValues: signUpState.step1FormValues,
     validationSchema: Yup.object().shape({
       loginId: formValidations.loginId(locale),
       password: formValidations.password(locale),
       email: formValidations.email(locale),
     }),
-    onSubmit: props.challengeSignUp,
+    onSubmit: challengeSignUp,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.signupState.errorMessage} />
+      <FormErrorMessage message={signUpState.errorMessage} />
       <Steps>STEP 1/2</Steps>
       <Text>{lang.account.signUp.step1.text}</Text>
       <form

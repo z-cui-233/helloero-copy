@@ -5,9 +5,9 @@ import { Config } from 'u-next/config';
 import Logo from '../../../../assets/logo/h2uRed.svg';
 import { useLocale } from '../../../../context/LocaleContext';
 
-interface Props {
+type Props = {
   options: Config;
-}
+};
 
 const SiteLogo: React.FC<Props> = ({ options }) => {
   const { locale } = useLocale();

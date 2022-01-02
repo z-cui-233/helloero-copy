@@ -5,7 +5,7 @@ import {
 } from '@aws-amplify/ui-components';
 import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useLocale } from '@/shared/context/LocaleContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
@@ -16,40 +16,24 @@ export const PAGE_STATUS = {
   STEP2_CONFIRM: 'STEP2_CONFIRM',
   COMPLETE: 'COMPLETE',
 } as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-export interface UseSignUp {
-  signupState: {
-    pageStatus: PageStatus;
-    errorMessage: string;
-    step1FormValues: {
-      loginId: string;
-      password: string;
-      email: string;
-    };
-    step2FormValues: {
-      verificationCode: string;
-    };
-  };
-  challengeSignUp: (
-    values: UseSignUp['signupState']['step1FormValues']
-  ) => Promise<void>;
-  verifyCode: (
-    values: UseSignUp['signupState']['step2FormValues']
-  ) => Promise<void>;
-}
-
-const initialState: UseSignUp['signupState'] = {
-  pageStatus: PAGE_STATUS.INIT,
-  errorMessage: '',
+type SignUpState = {
+  pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+  errorMessage: string;
   step1FormValues: {
-    loginId: '',
-    password: '',
-    email: '',
-  },
+    loginId: string;
+    password: string;
+    email: string;
+  };
   step2FormValues: {
-    verificationCode: '',
-  },
+    verificationCode: string;
+  };
+};
+
+export type UseSignUp = {
+  signUpState: SignUpState;
+  challengeSignUp: (values: SignUpState['step1FormValues']) => Promise<void>;
+  verifyCode: (values: SignUpState['step2FormValues']) => Promise<void>;
 };
 
 const useSignUp = (): UseSignUp => {
@@ -57,76 +41,83 @@ const useSignUp = (): UseSignUp => {
   const { locale } = useLocale();
   const { signUp, confirmSignUp, signIn } = useAmplifyAuth();
 
-  const [signupState, setSignupState] =
-    useState<UseSignUp['signupState']>(initialState);
+  const [signUpState, setSignUpState] = useState<SignUpState>({
+    pageStatus: PAGE_STATUS.INIT,
+    errorMessage: '',
+    step1FormValues: {
+      loginId: '',
+      password: '',
+      email: '',
+    },
+    step2FormValues: {
+      verificationCode: '',
+    },
+  });
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const isLoading = useRef<boolean>(false);
 
   const challengeSignUp: UseSignUp['challengeSignUp'] = useCallback(
     async (values) => {
-      if (isLoading) {
+      if (isLoading.current) {
         return;
       }
-
-      setIsLoading(true);
+      isLoading.current = true;
 
       const signUpResponse = await signUp(values);
+      isLoading.current = false;
+
       if (signUpResponse.errorCode) {
-        setSignupState((signupState) => ({
-          ...signupState,
+        setSignUpState((signUpState) => ({
+          ...signUpState,
           pageStatus: PAGE_STATUS.STEP1_INPUT,
           errorMessage: signUpResponse.errorMessage,
           step1FormValues: {
             ...values,
           },
         }));
-        setIsLoading(false);
         return;
       }
 
-      setSignupState((signupState) => ({
-        ...signupState,
+      setSignUpState((signUpState) => ({
+        ...signUpState,
         pageStatus: PAGE_STATUS.STEP2_CONFIRM,
         errorMessage: '',
         step1FormValues: {
           ...values,
         },
       }));
-      setIsLoading(false);
     },
     [isLoading, signUp]
   );
 
   const verifyCode: UseSignUp['verifyCode'] = useCallback(
     async (values) => {
-      if (isLoading) {
+      if (isLoading.current) {
         return;
       }
-
-      setIsLoading(true);
+      isLoading.current = true;
 
       const confirmSignUpResponse = await confirmSignUp({
-        loginId: signupState.step1FormValues.loginId,
+        loginId: signUpState.step1FormValues.loginId,
         verificationCode: values.verificationCode,
       });
 
       if (confirmSignUpResponse.errorCode) {
-        setSignupState((signupState) => ({
-          ...signupState,
+        isLoading.current = false;
+        setSignUpState((signUpState) => ({
+          ...signUpState,
           pageStatus: PAGE_STATUS.STEP2_CONFIRM,
           errorMessage: confirmSignUpResponse.errorMessage,
           step2FormValues: {
             ...values,
           },
         }));
-        setIsLoading(false);
         return;
       }
 
       await signIn({
-        loginId: signupState.step1FormValues.loginId,
-        password: signupState.step1FormValues.password,
+        loginId: signUpState.step1FormValues.loginId,
+        password: signUpState.step1FormValues.password,
       });
 
       Hub.dispatch(UI_AUTH_CHANNEL, {
@@ -134,9 +125,9 @@ const useSignUp = (): UseSignUp => {
         message: AuthState.SignIn,
       });
 
-      setIsLoading(false);
-      setSignupState((signupState) => ({
-        ...signupState,
+      isLoading.current = false;
+      setSignUpState((signUpState) => ({
+        ...signUpState,
         pageStatus: PAGE_STATUS.COMPLETE,
         errorMessage: '',
         step2FormValues: {
@@ -148,13 +139,13 @@ const useSignUp = (): UseSignUp => {
       confirmSignUp,
       isLoading,
       signIn,
-      signupState.step1FormValues.loginId,
-      signupState.step1FormValues.password,
+      signUpState.step1FormValues.loginId,
+      signUpState.step1FormValues.password,
     ]
   );
 
   useEffect(() => {
-    if (signupState.pageStatus !== PAGE_STATUS.INIT) {
+    if (signUpState.pageStatus !== PAGE_STATUS.INIT) {
       return;
     }
 
@@ -167,20 +158,20 @@ const useSignUp = (): UseSignUp => {
       return;
     }
 
-    setSignupState((signupState) => ({
-      ...signupState,
+    setSignUpState((signUpState) => ({
+      ...signUpState,
       pageStatus: PAGE_STATUS.STEP1_INPUT,
     }));
   }, [
     isLoadedUserInfo,
     locale,
     router,
-    signupState.pageStatus,
+    signUpState.pageStatus,
     userInfo.isLoggedIn,
   ]);
 
   return {
-    signupState,
+    signUpState,
     challengeSignUp,
     verifyCode,
   };

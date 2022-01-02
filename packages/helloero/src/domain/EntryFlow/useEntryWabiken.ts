@@ -29,30 +29,20 @@ export const PAGE_STATUS = {
   CONFIRM: 'CONFIRM',
   COMPLETE: 'COMPLETE',
 } as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-export interface UseEntryWabiken {
-  entryWabikenState: {
-    pageStatus: PageStatus;
-    errorMessage: string;
-    formValues: {
-      wabiken: string;
-    };
-    getWabikenMetaQuery: GetWabikenMetaQuery | null;
-  };
-  confirmWabiken: (
-    values: UseEntryWabiken['entryWabikenState']['formValues']
-  ) => Promise<void>;
-  consumeWabiken: () => Promise<void>;
-}
-
-const initialState: UseEntryWabiken['entryWabikenState'] = {
-  pageStatus: PAGE_STATUS.INIT,
-  errorMessage: '',
+type EntryWabikenState = {
+  pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+  errorMessage: string;
   formValues: {
-    wabiken: '',
-  },
-  getWabikenMetaQuery: null,
+    wabiken: string;
+  };
+  getWabikenMetaQuery: GetWabikenMetaQuery | null;
+};
+
+export type UseEntryWabiken = {
+  entryWabikenState: EntryWabikenState;
+  confirmWabiken: (values: EntryWabikenState['formValues']) => Promise<void>;
+  consumeWabiken: () => Promise<void>;
 };
 
 const isCreateUserWabikenMetaInput = (
@@ -70,8 +60,16 @@ const useEntryWabiken = (): UseEntryWabiken => {
   const router = useRouter();
   const { lang } = useLocale();
 
-  const [entryWabikenState, setEntryWabikenState] =
-    useState<UseEntryWabiken['entryWabikenState']>(initialState);
+  const [entryWabikenState, setEntryWabikenState] = useState<EntryWabikenState>(
+    {
+      pageStatus: PAGE_STATUS.INIT,
+      errorMessage: '',
+      formValues: {
+        wabiken: '',
+      },
+      getWabikenMetaQuery: null,
+    }
+  );
 
   const {
     fetcher: getWabikenMetaQueryFetcher,

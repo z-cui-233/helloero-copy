@@ -10,22 +10,32 @@ import BigBar from '@/shared/components/BigBar';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const ResendSignUp: React.FC = () => {
-  const store = useResendSignUp();
+  const { resendSignUpState, resendCode, verifyCode, invokeLogin } =
+    useResendSignUp();
   const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar title={lang.account.resendSignUp.title} />
-      {store.resendSignUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
-        <Step1InputForm {...store} />
+      {resendSignUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
+        <Step1InputForm
+          resendSignUpState={resendSignUpState}
+          resendCode={resendCode}
+        />
       )}
-      {store.resendSignUpState.pageStatus === PAGE_STATUS.STEP2_CONFIRM && (
-        <Step2ConfirmForm {...store} />
+      {resendSignUpState.pageStatus === PAGE_STATUS.STEP2_CONFIRM && (
+        <Step2ConfirmForm
+          resendSignUpState={resendSignUpState}
+          verifyCode={verifyCode}
+        />
       )}
-      {store.resendSignUpState.pageStatus === PAGE_STATUS.STEP3_RE_LOGIN && (
-        <Step3ReLoginForm {...store} />
+      {resendSignUpState.pageStatus === PAGE_STATUS.STEP3_RE_LOGIN && (
+        <Step3ReLoginForm
+          resendSignUpState={resendSignUpState}
+          invokeLogin={invokeLogin}
+        />
       )}
-      {store.resendSignUpState.pageStatus === PAGE_STATUS.COMPLETE && (
+      {resendSignUpState.pageStatus === PAGE_STATUS.COMPLETE && (
         <NoticeComplete />
       )}
     </LayoutH2u>

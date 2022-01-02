@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { createPortal } from 'react-dom';
 
-interface Props {
+type Props = {
   onClickClose: (e: unknown) => unknown;
-}
+};
 
 const PortalModal: React.FC<Props> = ({ children, onClickClose }) => {
   const [mounted, setMounted] = useState<boolean>(false);

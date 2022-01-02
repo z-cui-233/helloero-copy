@@ -4,7 +4,7 @@ import {
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
 import { Hub } from 'aws-amplify';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -14,17 +14,14 @@ export const PAGE_STATUS = {
   INIT: 'INIT',
   CONFIRM: 'CONFIRM',
 } as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-interface UseLogoutChallenge {
-  logoutChallengeState: {
-    pageStatus: PageStatus;
-  };
+type LogoutChallengeState = {
+  pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+};
+
+type UseLogoutChallenge = {
+  logoutChallengeState: LogoutChallengeState;
   invokeLogOut: () => Promise<void>;
-}
-
-const initialState: UseLogoutChallenge['logoutChallengeState'] = {
-  pageStatus: PAGE_STATUS.INIT,
 };
 
 const useLogoutChallenge = (): UseLogoutChallenge => {
@@ -33,12 +30,19 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
   const { signOut } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [logoutChallengeState, setLogoutChallengeState] =
-    useState<UseLogoutChallenge['logoutChallengeState']>(initialState);
+    useState<LogoutChallengeState>({
+      pageStatus: PAGE_STATUS.INIT,
+    });
+  const isLoading = useRef<boolean>(false);
 
   const invokeLogOut: UseLogoutChallenge['invokeLogOut'] =
     useCallback(async (): Promise<void> => {
-      await signOut();
+      if (isLoading.current) {
+        return;
+      }
+      isLoading.current = true;
 
+      await signOut();
       Hub.dispatch(UI_AUTH_CHANNEL, {
         event: AUTH_STATE_CHANGE_EVENT,
         message: AuthState.SignOut,
@@ -57,7 +61,7 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
     }
 
     if (!userInfo.isLoggedIn) {
-      location.replace(`/${locale}`);
+      router.replace(`/${locale}`);
       return;
     }
 
@@ -69,6 +73,7 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
     isLoadedUserInfo,
     locale,
     logoutChallengeState.pageStatus,
+    router,
     userInfo.isLoggedIn,
   ]);
 

@@ -13,10 +13,10 @@ import {
 import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 
-interface Props {
+type Props = {
   guideTopDocument: GuideTopDocument;
   guideCategoryDocument: GuideCategoryDocument[];
-}
+};
 
 const Page: NextPage<Props> = ({ guideTopDocument, guideCategoryDocument }) => {
   const { lang } = useLocale();

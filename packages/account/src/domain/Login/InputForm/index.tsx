@@ -14,21 +14,29 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const InputForm: React.FC<UseLoginChallenge> = (props) => {
+type Props = {
+  loginChallengeState: UseLoginChallenge['loginChallengeState'];
+  challengeLogin: UseLoginChallenge['challengeLogin'];
+};
+
+const InputForm: React.FC<Props> = ({
+  loginChallengeState,
+  challengeLogin,
+}) => {
   const { locale, lang } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.loginChallengeState.formValues,
+    initialValues: loginChallengeState.formValues,
     validationSchema: Yup.object().shape({
       loginId: formValidations.loginId(locale),
       password: formValidations.password(locale),
     }),
-    onSubmit: props.challengeLogin,
+    onSubmit: challengeLogin,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.loginChallengeState.errorMessage} />
+      <FormErrorMessage message={loginChallengeState.errorMessage} />
       <form
         onSubmit={(e) => {
           e.preventDefault();

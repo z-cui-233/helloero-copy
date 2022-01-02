@@ -6,9 +6,9 @@ import { GuideDocument } from '@/localShared/lib/prismic/interfaces/guide';
 import { useLocale } from '@/shared/context/LocaleContext';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
-interface Props {
+type Props = {
   document: GuideDocument;
-}
+};
 
 const GuideCard: React.FC<Props> = ({ document }) => {
   const { locale } = useLocale();

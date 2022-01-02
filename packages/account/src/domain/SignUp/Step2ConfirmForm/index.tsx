@@ -13,20 +13,25 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const Step2ConfirmForm: React.FC<UseSignUp> = (props) => {
+type Props = {
+  signUpState: UseSignUp['signUpState'];
+  verifyCode: UseSignUp['verifyCode'];
+};
+
+const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.signupState.step2FormValues,
+    initialValues: signUpState.step2FormValues,
     validationSchema: Yup.object().shape({
       verificationCode: formValidations.verificationCode(locale),
     }),
-    onSubmit: props.verifyCode,
+    onSubmit: verifyCode,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.signupState.errorMessage} />
+      <FormErrorMessage message={signUpState.errorMessage} />
       <Steps>STEP 2/2</Steps>
       <Text>{lang.account.signUp.step2.text}</Text>
       <Section>

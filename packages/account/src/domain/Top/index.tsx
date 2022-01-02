@@ -9,7 +9,7 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 const Top: React.FC = () => {
-  const { userInfo } = useLoginStateContext();
+  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { lang } = useLocale();
 
   return (
@@ -21,14 +21,18 @@ const Top: React.FC = () => {
           userInfo.isLoggedIn
             ? lang.account.top.subText.replace(
                 '{loginId}',
-                userInfo.userInfo?.username ?? ''
+                userInfo.cognitoUserInfo?.getUsername() ?? ''
               )
             : ''
         }
       />
       <MainContainer size="large">
-        <AccountMenus />
-        <SiteMenus />
+        {isLoadedUserInfo && (
+          <React.Fragment>
+            <AccountMenus />
+            <SiteMenus />
+          </React.Fragment>
+        )}
       </MainContainer>
     </LayoutH2u>
   );

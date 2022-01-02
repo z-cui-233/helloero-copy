@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   title: string;
   text: string;
   errorCode: string;
-}
+};
 
 const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
   const { locale, lang } = useLocale();

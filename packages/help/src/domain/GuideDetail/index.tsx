@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { globalConfig } from 'src/globalConfig';
 import { PrismicRichText, PrismicText } from '@prismicio/react';
 import * as prismicH from '@prismicio/helpers';
+import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { GuideDocument } from '@/localShared/lib/prismic/interfaces/guide';
@@ -14,9 +14,9 @@ import BreadcrumbsList, {
 } from '@/localShared/components/BreadcrumbsList';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   guideDocument: GuideDocument;
-}
+};
 
 const GuideDetail: React.FC<Props> = ({ guideDocument }) => {
   const { locale, lang } = useLocale();

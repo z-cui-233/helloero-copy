@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   onClick: () => void;
-}
+};
 
 const DetailButton: React.FC<Props> = ({ onClick }) => {
   const { lang } = useLocale();

@@ -9,21 +9,22 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 
 const SignUp: React.FC = () => {
-  const store = useSignUp();
+  const { signUpState, challengeSignUp, verifyCode } = useSignUp();
   const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar title={lang.account.signUp.title} />
-      {store.signupState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
-        <Step1InputForm {...store} />
+      {signUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
+        <Step1InputForm
+          signUpState={signUpState}
+          challengeSignUp={challengeSignUp}
+        />
       )}
-      {store.signupState.pageStatus === PAGE_STATUS.STEP2_CONFIRM && (
-        <Step2ConfirmForm {...store} />
+      {signUpState.pageStatus === PAGE_STATUS.STEP2_CONFIRM && (
+        <Step2ConfirmForm signUpState={signUpState} verifyCode={verifyCode} />
       )}
-      {store.signupState.pageStatus === PAGE_STATUS.COMPLETE && (
-        <NoticeComplete />
-      )}
+      {signUpState.pageStatus === PAGE_STATUS.COMPLETE && <NoticeComplete />}
     </LayoutH2u>
   );
 };

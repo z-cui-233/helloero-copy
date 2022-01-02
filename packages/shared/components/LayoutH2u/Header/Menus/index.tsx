@@ -6,10 +6,10 @@ import { useLocale } from '../../../../context/LocaleContext';
 import device from '../../../../styles/device';
 import typo from '../../../../styles/typo';
 
-interface Props {
+type Props = {
   isDisplayedMenu: boolean;
   options: Config;
-}
+};
 
 const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
   const { lang } = useLocale();

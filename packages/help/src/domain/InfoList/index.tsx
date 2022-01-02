@@ -12,9 +12,9 @@ import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 
-interface Props {
+type Props = {
   infoDocuments: prismicT.Query<InfoDocument>;
-}
+};
 
 const InfoList: React.FC<Props> = ({ infoDocuments }) => {
   const { locale, lang } = useLocale();

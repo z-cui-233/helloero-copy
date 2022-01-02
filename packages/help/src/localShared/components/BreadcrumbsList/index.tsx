@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { globalConfig } from 'src/globalConfig';
 import typo from '@/shared/styles/typo';
 
-export interface Breadcrumbs {
+export type Breadcrumbs = {
   path: string;
   text: string;
-}
+};
 
-interface Props {
+type Props = {
   breadcrumbs: Breadcrumbs[];
-}
+};
 
 const BreadcrumbsList: React.FC<Props> = ({ breadcrumbs }) => {
   const jsonLd = {

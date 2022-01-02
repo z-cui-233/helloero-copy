@@ -4,13 +4,13 @@ import typo from '../../../styles/typo';
 import AddIcon from '../../../assets/icon/add.svg';
 import PlayIcon from '../../../assets/icon/play_arrow.svg';
 
-interface Props {
+type Props = {
   onClick?: (e: unknown) => unknown;
   label: string;
   iconType?: ButtonIcons;
   disabled?: boolean;
   type?: 'button' | 'submit';
-}
+};
 
 export const BUTTON_ICONS = {
   ADD: 'add',

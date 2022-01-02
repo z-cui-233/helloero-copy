@@ -12,22 +12,30 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const GuestUserForm: React.FC<UseResetPassword> = (props) => {
+type Props = {
+  resetPasswordState: UseResetPassword['resetPasswordState'];
+  sendVerificationCode: UseResetPassword['sendVerificationCode'];
+};
+
+const GuestUserForm: React.FC<Props> = ({
+  resetPasswordState,
+  sendVerificationCode,
+}) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
     initialValues: {
-      loginId: props.resetPasswordState.formValues.loginId,
+      loginId: resetPasswordState.formValues.loginId,
     },
     validationSchema: Yup.object().shape({
       loginId: formValidations.loginId(locale),
     }),
-    onSubmit: props.sendVerificationCode,
+    onSubmit: sendVerificationCode,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.resetPasswordState.errorMessage} />
+      <FormErrorMessage message={resetPasswordState.errorMessage} />
       <Text>{lang.account.resetPassword.send.text}</Text>
       <Section>
         <FieldSection>

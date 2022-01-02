@@ -7,9 +7,9 @@ import { useLocale } from '../../../../context/LocaleContext';
 import { useLoginStateContext } from '../../../../context/LoginStateContext';
 import typo from '../../../../styles/typo';
 
-interface Props {
+type Props = {
   options: Config;
-}
+};
 
 const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();

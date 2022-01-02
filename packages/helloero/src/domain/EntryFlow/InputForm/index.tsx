@@ -12,20 +12,25 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const InputForm: React.FC<UseEntryWabiken> = (props) => {
+type Props = {
+  entryWabikenState: UseEntryWabiken['entryWabikenState'];
+  confirmWabiken: UseEntryWabiken['confirmWabiken'];
+};
+
+const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.entryWabikenState.formValues,
+    initialValues: entryWabikenState.formValues,
     validationSchema: Yup.object().shape({
       wabiken: formValidations.wabiken(locale),
     }),
-    onSubmit: props.confirmWabiken,
+    onSubmit: confirmWabiken,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.entryWabikenState.errorMessage} />
+      <FormErrorMessage message={entryWabikenState.errorMessage} />
       <Text>{lang.helloero.entry.input.text}</Text>
       <Section>
         <FieldSection>

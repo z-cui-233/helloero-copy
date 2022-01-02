@@ -9,9 +9,9 @@ import { convertDateToString } from '@/shared/utils';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
-interface Props {
+type Props = {
   infoDocument: InfoDocument;
-}
+};
 
 const InfoCard: React.FC<Props> = ({ infoDocument }) => {
   const { locale } = useLocale();

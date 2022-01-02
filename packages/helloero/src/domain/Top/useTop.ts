@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
-interface UseTop {
+type UseTop = {
   isInitialized: boolean;
-}
+};
 
 const useTop = (): UseTop => {
   const { locale } = useLocale();

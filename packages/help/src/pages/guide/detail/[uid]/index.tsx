@@ -1,16 +1,16 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
-import { globalConfig } from 'src/globalConfig';
 import * as prismicH from '@prismicio/helpers';
+import { globalConfig } from 'src/globalConfig';
 import GuideDetail from '@/domain/GuideDetail';
 import { fetchGuideByUid } from '@/localShared/lib/prismic';
 import { GuideDocument } from '@/localShared/lib/prismic/interfaces/guide';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   guideDocument: GuideDocument;
-}
+};
 
 const Page: NextPage<Props> = ({ guideDocument }) => {
   const { lang } = useLocale();

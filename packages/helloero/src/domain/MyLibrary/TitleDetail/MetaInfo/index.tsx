@@ -7,11 +7,11 @@ import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   titleName: string;
   displayExpireDate: string;
   onClick: () => void;
-}
+};
 
 const MetaInfo: React.FC<Props> = ({
   titleName,

@@ -3,12 +3,12 @@ import Head from 'next/head';
 import React from 'react';
 import { useLocale } from '../../context/LocaleContext';
 
-interface Props {
+type Props = {
   host: string;
   title: string;
   description?: string;
   isMultiLang?: boolean;
-}
+};
 
 const MetaTags: React.FC<Props> = ({
   host,

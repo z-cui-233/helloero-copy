@@ -12,22 +12,30 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const InputEmailForm: React.FC<UseUpdateEmail> = (props) => {
+type Props = {
+  updateEmailState: UseUpdateEmail['updateEmailState'];
+  confirmEmail: UseUpdateEmail['confirmEmail'];
+};
+
+const InputEmailForm: React.FC<Props> = ({
+  updateEmailState,
+  confirmEmail,
+}) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
     initialValues: {
-      email: props.updateEmailState.formValues.email,
+      email: updateEmailState.formValues.email,
     },
     validationSchema: Yup.object().shape({
       email: formValidations.email(locale),
     }),
-    onSubmit: props.confirmEmail,
+    onSubmit: confirmEmail,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.updateEmailState.errorMessage} />
+      <FormErrorMessage message={updateEmailState.errorMessage} />
       <Text>{lang.account.updateEmail.email.text}</Text>
       <Section>
         <FieldSection>

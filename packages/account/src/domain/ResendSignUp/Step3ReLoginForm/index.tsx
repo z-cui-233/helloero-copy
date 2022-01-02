@@ -13,24 +13,32 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const Step3ReLoginForm: React.FC<UseResendSignUp> = (props) => {
+type Props = {
+  resendSignUpState: UseResendSignUp['resendSignUpState'];
+  invokeLogin: UseResendSignUp['invokeLogin'];
+};
+
+const Step3ReLoginForm: React.FC<Props> = ({
+  resendSignUpState,
+  invokeLogin,
+}) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.resendSignUpState.step3FormValues,
+    initialValues: resendSignUpState.step3FormValues,
     validationSchema: Yup.object().shape({
       password: formValidations.password(locale),
     }),
-    onSubmit: props.invokeLogin,
+    onSubmit: invokeLogin,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.resendSignUpState.errorMessage} />
+      <FormErrorMessage message={resendSignUpState.errorMessage} />
       <Text>{lang.account.resendSignUp.step3.text}</Text>
       <Section>
         <FieldSection>
-          <LoginId>{props.resendSignUpState.step1FormValues.loginId}</LoginId>
+          <LoginId>{resendSignUpState.step1FormValues.loginId}</LoginId>
         </FieldSection>
         <FieldSection>
           <TextField

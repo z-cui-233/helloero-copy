@@ -10,10 +10,10 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   options: Config;
-}
+};
 
 const LayoutHelloero: React.VFC<Props> = ({ children, options }) => {
   return (

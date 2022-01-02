@@ -4,11 +4,11 @@ import Thumbnail from './Thumbnail';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 
-interface Props {
+type Props = {
   thumbnail: string;
   titleName: string;
   displayExpireDate: string;
-}
+};
 
 const TitleInfo: React.FC<Props> = ({
   thumbnail,

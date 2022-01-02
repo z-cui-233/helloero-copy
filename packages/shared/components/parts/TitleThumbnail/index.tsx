@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
+type Props = {
   src: string;
-}
+};
 
 const TitleThumbnail: React.FC<Props> = ({ src }) => {
   return (
