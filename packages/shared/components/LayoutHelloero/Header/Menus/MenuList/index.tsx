@@ -7,9 +7,9 @@ import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
 import { useLocale } from '../../../../../context/LocaleContext';
 
-interface Props {
+type Props = {
   options: Config;
-}
+};
 
 const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();

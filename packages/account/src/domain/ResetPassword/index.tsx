@@ -9,18 +9,29 @@ import BigBar from '@/shared/components/BigBar';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const ResetPassword: React.FC = () => {
-  const store = useResetPassword();
+  const {
+    resetPasswordState,
+    sendVerificationCode,
+    verifyCodeAndUpdatePassword,
+  } = useResetPassword();
   const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar title={lang.account.resetPassword.title} />
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.STEP1_SEND_MAIL && (
-        <ResetPasswordStep1 {...store} />
+      {resetPasswordState.pageStatus === PAGE_STATUS.STEP1_SEND_MAIL && (
+        <ResetPasswordStep1
+          resetPasswordState={resetPasswordState}
+          sendVerificationCode={sendVerificationCode}
+        />
       )}
-      {store.resetPasswordState.pageStatus ===
-        PAGE_STATUS.STEP2_INPUT_PASSWORD && <ResetPasswordStep2 {...store} />}
-      {store.resetPasswordState.pageStatus === PAGE_STATUS.COMPLETE && (
+      {resetPasswordState.pageStatus === PAGE_STATUS.STEP2_INPUT_PASSWORD && (
+        <ResetPasswordStep2
+          resetPasswordState={resetPasswordState}
+          verifyCodeAndUpdatePassword={verifyCodeAndUpdatePassword}
+        />
+      )}
+      {resetPasswordState.pageStatus === PAGE_STATUS.COMPLETE && (
         <NoticeComplete />
       )}
     </LayoutH2u>

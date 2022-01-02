@@ -4,11 +4,11 @@ import typo from '../../styles/typo';
 
 type Size = 'normal' | 'large';
 
-interface Props {
+type Props = {
   size?: Size;
   title: string;
   subText?: string;
-}
+};
 
 const BigBar: React.FC<Props> = ({ size = 'normal', title, subText }) => {
   return (

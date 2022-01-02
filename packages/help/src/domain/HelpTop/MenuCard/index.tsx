@@ -10,11 +10,11 @@ import { useLocale } from '@/shared/context/LocaleContext';
 
 type UrlPattern = 'guide' | 'info' | 'inquiry';
 
-interface Props {
+type Props = {
   urlPattern: UrlPattern;
   title: string;
   texts: string;
-}
+};
 
 const getIcon = (urlPattern: UrlPattern): JSX.Element => {
   switch (urlPattern) {

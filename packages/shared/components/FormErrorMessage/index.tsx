@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import typo from '../../styles/typo';
 
-interface Props {
+type Props = {
   message: string;
-}
+};
 
 const FormErrorMessage: React.FC<Props> = ({ message }) => {
   useEffect(() => {

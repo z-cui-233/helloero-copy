@@ -1,8 +1,8 @@
 import React from 'react';
-import { globalConfig } from 'src/globalConfig';
 import { PrismicText, PrismicRichText } from '@prismicio/react';
 import styled from 'styled-components';
 import * as prismicH from '@prismicio/helpers';
+import { globalConfig } from 'src/globalConfig';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
@@ -15,9 +15,9 @@ import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 
-interface Props {
+type Props = {
   infoDocument: InfoDocument;
-}
+};
 
 const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
   const { locale, lang } = useLocale();

@@ -10,19 +10,26 @@ import BigBar from '@/shared/components/BigBar';
 import { useLocale } from '@/shared/context/LocaleContext';
 
 const EntryFlow: React.FC = () => {
-  const store = useEntryWabiken();
+  const { entryWabikenState, confirmWabiken, consumeWabiken } =
+    useEntryWabiken();
   const { lang } = useLocale();
 
   return (
     <LayoutHelloero options={globalConfig}>
       <BigBar title={lang.helloero.entry.title} />
-      {store.entryWabikenState.pageStatus === PAGE_STATUS.INPUT && (
-        <InputForm {...store} />
+      {entryWabikenState.pageStatus === PAGE_STATUS.INPUT && (
+        <InputForm
+          entryWabikenState={entryWabikenState}
+          confirmWabiken={confirmWabiken}
+        />
       )}
-      {store.entryWabikenState.pageStatus === PAGE_STATUS.CONFIRM && (
-        <ConfirmForm {...store} />
+      {entryWabikenState.pageStatus === PAGE_STATUS.CONFIRM && (
+        <ConfirmForm
+          entryWabikenState={entryWabikenState}
+          consumeWabiken={consumeWabiken}
+        />
       )}
-      {store.entryWabikenState.pageStatus === PAGE_STATUS.COMPLETE && (
+      {entryWabikenState.pageStatus === PAGE_STATUS.COMPLETE && (
         <NoticeComplete />
       )}
     </LayoutHelloero>

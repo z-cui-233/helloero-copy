@@ -8,9 +8,9 @@ import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   infoDocuments: prismicT.Query<InfoDocument>;
-}
+};
 
 const Page: NextPage<Props> = ({ infoDocuments }) => {
   const { lang } = useLocale();

@@ -6,9 +6,9 @@ import LoginButton from './LoginButton';
 import Menus from './Menus';
 import SiteLogo from './SiteLogo';
 
-interface Props {
+type Props = {
   options: Config;
-}
+};
 
 const Header: React.FC<Props> = ({ options }) => {
   const [isDisplayedMenu, setIsDisplayedMenu] = useState<boolean>(false);

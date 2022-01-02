@@ -1,19 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  AuthState,
-  CognitoUserInterface,
-  onAuthUIStateChange,
-} from '@aws-amplify/ui-components';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Auth } from 'aws-amplify';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
-interface LoginState {
+type LoginState = {
   isLoggedIn: boolean;
-  userInfo: CognitoUserInterface | null;
-}
+  cognitoUserInfo: CognitoUser | null;
+};
 
 const initialState: LoginState = {
   isLoggedIn: false,
-  userInfo: null,
+  cognitoUserInfo: null,
 };
 
 const LoginStateContext = React.createContext({
@@ -23,17 +20,19 @@ const LoginStateContext = React.createContext({
 
 const LoginStateContextProvider: React.FC = ({ children }) => {
   const [isLoadedUserInfo, setIsLoadedUserInfo] = useState<boolean>(false);
-  const [userInfo, setUserInfo] = useState<CognitoUserInterface | null>(null);
+  const [cognitoUserInfo, setCognitoUserInfo] = useState<CognitoUser | null>(
+    null
+  );
   const [authState, setAuthState] = useState<AuthState>();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser()
+    Auth.currentAuthenticatedUser({ bypassCache: true })
       .then((user) => {
-        setUserInfo(user as CognitoUserInterface);
+        setCognitoUserInfo(user as CognitoUser);
         setIsLoadedUserInfo(true);
       })
       .catch(() => {
-        setUserInfo(null);
+        setCognitoUserInfo(null);
         setIsLoadedUserInfo(true);
       });
   }, [authState]);
@@ -45,8 +44,8 @@ const LoginStateContextProvider: React.FC = ({ children }) => {
   }, []);
 
   const mergedUserInfo: LoginState = {
-    isLoggedIn: isLoadedUserInfo && !!userInfo,
-    userInfo,
+    isLoggedIn: isLoadedUserInfo && !!cognitoUserInfo,
+    cognitoUserInfo,
   };
 
   return (

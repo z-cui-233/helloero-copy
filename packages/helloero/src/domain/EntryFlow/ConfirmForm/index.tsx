@@ -8,24 +8,32 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
+type Props = {
+  entryWabikenState: UseEntryWabiken['entryWabikenState'];
+  consumeWabiken: UseEntryWabiken['consumeWabiken'];
+};
+
+const ConfirmForm: React.FC<Props> = ({
+  entryWabikenState,
+  consumeWabiken,
+}) => {
   const { locale, lang } = useLocale();
 
   const titleName =
-    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
+    entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
       .displayName ?? '';
 
   const thumbnail =
-    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
+    entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken.content
       .thumbnails?.standard;
 
   const validityPeriod =
-    props.entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken
+    entryWabikenState.getWabikenMetaQuery?.getWabikenMeta?.wabiken
       .validityPeriod;
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.entryWabikenState.errorMessage} />
+      <FormErrorMessage message={entryWabikenState.errorMessage} />
       <Text>{lang.helloero.entry.confirm.text}</Text>
       <TitleInfo
         thumbnail={createTitleThumbnailUrl(thumbnail)}
@@ -35,7 +43,7 @@ const ConfirmForm: React.FC<UseEntryWabiken> = (props) => {
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
-            props.consumeWabiken();
+            consumeWabiken();
           }}
           label={lang.helloero.entry.confirm.button}
         />

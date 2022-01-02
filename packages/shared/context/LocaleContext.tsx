@@ -6,11 +6,11 @@ import langEn from '../i18n/en';
 
 const LOCALES = ['ja', 'en'] as const;
 
-interface ContextProps {
+type ContextProps = {
   locale: LocaleType;
   locales: typeof LOCALES;
   lang: LocaleData;
-}
+};
 
 const LocaleContext: React.Context<ContextProps> = React.createContext(
   {} as ContextProps

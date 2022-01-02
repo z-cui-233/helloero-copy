@@ -7,19 +7,27 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
-const LoggedInUserForm: React.FC<UseResetPassword> = (props) => {
+type Props = {
+  resetPasswordState: UseResetPassword['resetPasswordState'];
+  sendVerificationCode: UseResetPassword['sendVerificationCode'];
+};
+
+const LoggedInUserForm: React.FC<Props> = ({
+  resetPasswordState,
+  sendVerificationCode,
+}) => {
   const { lang } = useLocale();
   const { userInfo } = useLoginStateContext();
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.resetPasswordState.errorMessage} />
+      <FormErrorMessage message={resetPasswordState.errorMessage} />
       <Text>{lang.account.resetPassword.send.text}</Text>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
-            props.sendVerificationCode({
-              loginId: userInfo.userInfo?.username as string,
+            sendVerificationCode({
+              loginId: userInfo.cognitoUserInfo?.getUsername() ?? '',
             });
           }}
           label={lang.account.resetPassword.send.button}

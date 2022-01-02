@@ -4,9 +4,9 @@ import NoticePage from '@/shared/components/NoticePage';
 import { useLocale } from '@/shared/context/LocaleContext';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
-interface Props {
+type Props = {
   statusCode: number;
-}
+};
 
 const CustomError: React.FC<Props> = ({ statusCode }) => {
   const { locale, lang } = useLocale();

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
 import device from '@/shared/styles/device';
 
-interface Props {
+type Props = {
   src: string;
-}
+};
 
 const Thumbnail: React.FC<Props> = ({ src }) => (
   <Container>

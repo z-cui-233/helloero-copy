@@ -5,7 +5,7 @@ import {
 } from '@aws-amplify/ui-components';
 import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { useLocale } from '@/shared/context/LocaleContext';
@@ -17,29 +17,19 @@ export const PAGE_STATUS = {
   NOTICE_PASSWORD_RESET_REQUIRED: 'NOTICE_PASSWORD_RESET_REQUIRED',
   NOTICE_USER_NOT_CONFIRMED: 'NOTICE_USER_NOT_CONFIRMED',
 } as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-export interface UseLoginChallenge {
-  loginChallengeState: {
-    pageStatus: PageStatus;
-    errorMessage: string;
-    formValues: {
-      loginId: string;
-      password: string;
-    };
-  };
-  challengeLogin: (
-    values: UseLoginChallenge['loginChallengeState']['formValues']
-  ) => Promise<void>;
-}
-
-const initialState: UseLoginChallenge['loginChallengeState'] = {
-  pageStatus: PAGE_STATUS.INIT,
-  errorMessage: '',
+type LoginChallengeState = {
+  pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+  errorMessage: string;
   formValues: {
-    loginId: '',
-    password: '',
-  },
+    loginId: string;
+    password: string;
+  };
+};
+
+export type UseLoginChallenge = {
+  loginChallengeState: LoginChallengeState;
+  challengeLogin: (values: LoginChallengeState['formValues']) => Promise<void>;
 };
 
 const isValidUrl = (backUrl: string): boolean => {
@@ -60,7 +50,15 @@ const useLoginChallenge = (): UseLoginChallenge => {
   const { signIn } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [loginChallengeState, setLoginChallengeState] =
-    useState<UseLoginChallenge['loginChallengeState']>(initialState);
+    useState<LoginChallengeState>({
+      pageStatus: PAGE_STATUS.INIT,
+      errorMessage: '',
+      formValues: {
+        loginId: '',
+        password: '',
+      },
+    });
+  const isLoading = useRef<boolean>(false);
 
   const redirect = useCallback((): void => {
     const backUrl = router.query.back
@@ -72,7 +70,13 @@ const useLoginChallenge = (): UseLoginChallenge => {
 
   const challengeLogin: UseLoginChallenge['challengeLogin'] = useCallback(
     async (values) => {
+      if (isLoading.current) {
+        return;
+      }
+      isLoading.current = true;
+
       const signInResponse = await signIn(values);
+      isLoading.current = false;
 
       if (signInResponse.errorCode) {
         switch (signInResponse.errorCode) {
@@ -82,7 +86,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
               pageStatus: PAGE_STATUS.NOTICE_PASSWORD_RESET_REQUIRED,
               errorMessage: '',
             }));
-            break;
+            return;
           }
 
           case 'UserNotConfirmedException': {
@@ -91,7 +95,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
               pageStatus: PAGE_STATUS.NOTICE_USER_NOT_CONFIRMED,
               errorMessage: '',
             }));
-            break;
+            return;
           }
 
           default: {
@@ -99,10 +103,9 @@ const useLoginChallenge = (): UseLoginChallenge => {
               ...loginChallengeState,
               errorMessage: signInResponse.errorMessage,
             }));
-            break;
+            return;
           }
         }
-        return;
       }
 
       Hub.dispatch(UI_AUTH_CHANNEL, {
@@ -139,6 +142,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
     redirect,
     userInfo.isLoggedIn,
   ]);
+
   return {
     loginChallengeState,
     challengeLogin,

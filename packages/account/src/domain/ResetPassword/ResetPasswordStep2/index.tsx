@@ -13,21 +13,29 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 
-const ResetPasswordStep2: React.FC<UseResetPassword> = (props) => {
+type Props = {
+  resetPasswordState: UseResetPassword['resetPasswordState'];
+  verifyCodeAndUpdatePassword: UseResetPassword['verifyCodeAndUpdatePassword'];
+};
+
+const ResetPasswordStep2: React.FC<Props> = ({
+  resetPasswordState,
+  verifyCodeAndUpdatePassword,
+}) => {
   const { lang, locale } = useLocale();
 
   const formik = useFormik({
-    initialValues: props.resetPasswordState.formValues,
+    initialValues: resetPasswordState.formValues,
     validationSchema: Yup.object().shape({
       verificationCode: formValidations.verificationCode(locale),
       newPassword: formValidations.password(locale),
     }),
-    onSubmit: props.verifyCodeAndUpdatePassword,
+    onSubmit: verifyCodeAndUpdatePassword,
   });
 
   return (
     <MainContainer>
-      <FormErrorMessage message={props.resetPasswordState.errorMessage} />
+      <FormErrorMessage message={resetPasswordState.errorMessage} />
       <Text>
         <div>{lang.account.resetPassword.input.text}</div>
       </Text>
@@ -39,9 +47,7 @@ const ResetPasswordStep2: React.FC<UseResetPassword> = (props) => {
       >
         <Section>
           <FieldSection>
-            <DestinationMail>
-              {props.resetPasswordState.destination}
-            </DestinationMail>
+            <DestinationMail>{resetPasswordState.destination}</DestinationMail>
           </FieldSection>
           <FieldSection>
             <TextField

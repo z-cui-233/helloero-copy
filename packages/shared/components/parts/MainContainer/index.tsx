@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 type Size = 'normal' | 'large';
 
-interface Props {
+type Props = {
   size?: Size;
   children: React.ReactNode;
-}
+};
 
 const MainContainer: React.VFC<Props> = ({ size = 'normal', children }) => {
   return <Container size={size}>{children}</Container>;

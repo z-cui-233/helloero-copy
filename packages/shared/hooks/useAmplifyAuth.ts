@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { CodeDeliveryDetails } from 'u-next/amplify';
 import { LocaleData } from 'u-next/locales';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 import { useLocale } from '../context/LocaleContext';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,11 +79,21 @@ const useAmplifyAuth = () => {
     [lang]
   );
 
-  const currentAuthenticatedUser = useCallback((): AmplifyAuthResponse => {
-    return Auth.currentAuthenticatedUser()
-      .then(getResponse)
-      .catch((error) => getErrorResponse({ lang, error }));
-  }, [lang]);
+  const verifyCurrentUserAttribute = useCallback(
+    (values: { attr: 'email' }): AmplifyAuthResponse => {
+      return Auth.verifyCurrentUserAttribute(values.attr)
+        .then(getResponse)
+        .catch((error) => getErrorResponse({ lang, error }));
+    },
+    [lang]
+  );
+
+  const currentAuthenticatedUser =
+    useCallback((): AmplifyAuthResponse<CognitoUser> => {
+      return Auth.currentAuthenticatedUser({ bypassCache: true })
+        .then(getResponse)
+        .catch((error) => getErrorResponse({ lang, error }));
+    }, [lang]);
 
   const updateUserAttributes = useCallback(
     (values: { user: unknown; email: string }): AmplifyAuthResponse => {
@@ -176,6 +187,7 @@ const useAmplifyAuth = () => {
     signOut,
     signUp,
     confirmSignUp,
+    verifyCurrentUserAttribute,
     currentAuthenticatedUser,
     updateUserAttributes,
     verifyCurrentUserAttributeSubmit,

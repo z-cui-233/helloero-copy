@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
+type Props = {
   isDisplayedMenu: boolean;
   onClick: () => void;
-}
+};
 
 const HamburgerButton: React.FC<Props> = ({ isDisplayedMenu, onClick }) => {
   return (

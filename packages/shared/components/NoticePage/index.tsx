@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import typo from '../../styles/typo';
 import MainContainer from '../../components/parts/MainContainer';
 
-interface Props {
+type Props = {
   title?: string;
   texts?: string | string[];
   links: { href: string; label: string }[];
-}
+};
 
 const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
   return (

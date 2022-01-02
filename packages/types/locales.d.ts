@@ -230,6 +230,11 @@ export interface LocaleData {
     };
     updateEmail: {
       title: string;
+      resend: {
+        text: string;
+        button: string;
+        skipButton: string;
+      };
       email: {
         text: string;
         button: string;

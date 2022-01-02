@@ -5,10 +5,10 @@ import device from '../../../../styles/device';
 import LogoMark from './LogoMark';
 import MenuList from './MenuList';
 
-interface Props {
+type Props = {
   isDisplayedMenu: boolean;
   options: Config;
-}
+};
 
 const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
   return (

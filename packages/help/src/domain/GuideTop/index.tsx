@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { globalConfig } from 'src/globalConfig';
 import Link from 'next/link';
 import { PrismicText } from '@prismicio/react';
+import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import BigBar from '@/shared/components/BigBar';
@@ -18,10 +18,10 @@ import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 
-interface Props {
+type Props = {
   guideTopDocument: GuideTopDocument;
   guideCategoryDocument: GuideCategoryDocument[];
-}
+};
 
 const GuideTop: React.FC<Props> = ({
   guideTopDocument,

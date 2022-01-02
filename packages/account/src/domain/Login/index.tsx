@@ -9,20 +9,23 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 
 const Login: React.FC = () => {
-  const store = useLoginChallenge();
+  const { loginChallengeState, challengeLogin } = useLoginChallenge();
   const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
       <BigBar title={lang.account.login.title} />
-      {store.loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (
-        <InputForm {...store} />
+      {loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (
+        <InputForm
+          loginChallengeState={loginChallengeState}
+          challengeLogin={challengeLogin}
+        />
       )}
-      {store.loginChallengeState.pageStatus ===
+      {loginChallengeState.pageStatus ===
         PAGE_STATUS.NOTICE_PASSWORD_RESET_REQUIRED && (
         <NoticePasswordResetRequired />
       )}
-      {store.loginChallengeState.pageStatus ===
+      {loginChallengeState.pageStatus ===
         PAGE_STATUS.NOTICE_USER_NOT_CONFIRMED && <NoticeUserNotConfirmed />}
     </LayoutH2u>
   );

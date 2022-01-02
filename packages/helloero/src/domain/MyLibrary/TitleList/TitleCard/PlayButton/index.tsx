@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '@/shared/assets/icon/play_arrow.svg';
 
-interface Props {
+type Props = {
   onClick: () => void;
-}
+};
 
 const PlayButton: React.FC<Props> = ({ onClick }) => (
   <Container onClick={onClick}>

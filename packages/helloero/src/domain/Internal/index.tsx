@@ -18,7 +18,7 @@ const Internal: React.FC = () => {
         </FieldSection>
         <FieldSection>
           <Title>UserName</Title>
-          <Detail>{userInfo.userInfo?.username}</Detail>
+          <Detail>{userInfo.cognitoUserInfo?.getUsername()}</Detail>
         </FieldSection>
         <FieldSection>
           <Title>UserInfo</Title>

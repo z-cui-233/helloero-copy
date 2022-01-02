@@ -9,11 +9,11 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-interface Props {
+type Props = {
   label: string;
   validateMessage?: string | undefined;
   fieldOptions: CustomInputProps;
-}
+};
 
 const TextField: React.FC<Props> = ({
   label,

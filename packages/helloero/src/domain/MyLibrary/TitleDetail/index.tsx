@@ -10,11 +10,11 @@ import device from '@/shared/styles/device';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 
-interface Props {
+type Props = {
   userWabikenMeta: UserWabikenMeta | null;
   isShownDetail: boolean;
   onClickClose: UsePurchasedList['closeTitleDetail'];
-}
+};
 
 const TitleDetail: React.FC<Props> = ({
   userWabikenMeta,

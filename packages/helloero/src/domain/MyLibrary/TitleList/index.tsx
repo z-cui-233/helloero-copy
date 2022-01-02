@@ -6,11 +6,11 @@ import TitleCard from './TitleCard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 
-interface Props {
+type Props = {
   purchasedListState: UsePurchasedList['purchasedListState'];
   openTitleDetail: UsePurchasedList['openTitleDetail'];
   fetchListData: UsePurchasedList['fetchListData'];
-}
+};
 
 const TitleList: React.FC<Props> = ({
   purchasedListState,

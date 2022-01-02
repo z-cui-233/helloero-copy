@@ -9,10 +9,10 @@ import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
 import device from '@/shared/styles/device';
 import { createTitleThumbnailUrl } from '@/shared/utils';
 
-interface Props {
+type Props = {
   userWabikenMeta: UserWabikenMeta;
   openTitleDetail: UsePurchasedList['openTitleDetail'];
-}
+};
 
 const TitleCard: React.FC<Props> = ({ openTitleDetail, userWabikenMeta }) => {
   const router = useRouter();
