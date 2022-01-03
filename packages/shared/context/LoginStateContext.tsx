@@ -29,6 +29,7 @@ const LoginStateContextProvider: React.FC = ({ children }) => {
         setIsLoadedUserInfo(true);
       })
       .catch(() => {
+        setUserName(null);
         setIsLoadedUserInfo(true);
       });
   }, [authState]);
