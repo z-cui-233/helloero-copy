@@ -31,6 +31,7 @@ const Page: NextPage<Props> = ({ guideCategoryDocument }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const guideCategoryDocument = await fetchGuideByCategoryId({
+    ctx,
     uid: ctx.query.categoryId as string,
   });
 

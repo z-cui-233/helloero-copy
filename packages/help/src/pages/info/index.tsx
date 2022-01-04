@@ -28,8 +28,8 @@ const Page: NextPage<Props> = ({ infoDocuments }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const infoDocuments = await fetchInfoList({ pageSize: 100, page: 1 });
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const infoDocuments = await fetchInfoList({ ctx, pageSize: 100, page: 1 });
 
   if (!infoDocuments) {
     return {

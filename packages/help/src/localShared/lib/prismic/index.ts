@@ -1,23 +1,51 @@
 import * as prismic from '@prismicio/client';
 import * as prismicT from '@prismicio/types';
+import * as prismicH from '@prismicio/helpers';
+import { GetServerSidePropsContext } from 'next';
+import { GuideDocument } from './interfaces/guide';
+import { InfoDocument } from './interfaces/info';
 
-const apiClient = (): prismic.Client => {
+const CUSTOM_TYPE = {
+  INFO: 'info',
+  GUIDE_TOP: 'guide_top',
+  GUIDE_CATEGORY: 'guide_category',
+  GUIDE: 'guide',
+} as const;
+
+const apiClient = (ctx: GetServerSidePropsContext): prismic.Client => {
   const endpoint = prismic.getEndpoint('h2uhelp');
-  return prismic.createClient(endpoint, { fetch });
+  const client = prismic.createClient(endpoint, { fetch });
+  client.enableAutoPreviewsFromReq(ctx.req);
+
+  return client;
+};
+
+const linkResolver: prismicH.LinkResolverFunction = (doc) => {
+  console.log('doc is !!!!!!!!!', doc);
+  if (doc.type === CUSTOM_TYPE.INFO) {
+    return `/info/${doc.uid}`;
+  }
+
+  if (doc.type === CUSTOM_TYPE.GUIDE) {
+    return `/guide/detail/${doc.uid}`;
+  }
+
+  return '/';
 };
 
 // お知らせ一覧
 export const fetchInfoList = (args: {
+  ctx: GetServerSidePropsContext;
   pageSize: number;
   page: number;
-}): Promise<prismicT.Query<prismicT.PrismicDocument> | null> => {
-  return apiClient()
-    .getByType('info', {
+}): Promise<prismicT.Query<InfoDocument> | null> => {
+  return apiClient(args.ctx)
+    .getByType<InfoDocument>(CUSTOM_TYPE.INFO, {
       pageSize: args.pageSize,
       page: args.page,
       orderings: [
         {
-          field: 'my.info.publish_date',
+          field: `my.${CUSTOM_TYPE.INFO}.publish_date`,
           direction: 'desc',
         },
         {
@@ -31,17 +59,20 @@ export const fetchInfoList = (args: {
 
 // お知らせ詳細
 export const fetchInfoByUid = (args: {
+  ctx: GetServerSidePropsContext;
   uid: string;
-}): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient()
-    .getByUID('info', args.uid)
+}): Promise<InfoDocument | null> => {
+  return apiClient(args.ctx)
+    .getByUID<InfoDocument>(CUSTOM_TYPE.INFO, args.uid)
     .catch(() => null);
 };
 
 // よくある質問TOP
-export const fetchGuideTop = (): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient()
-    .getSingle('guide_top', {
+export const fetchGuideTop = (args: {
+  ctx: GetServerSidePropsContext;
+}): Promise<prismicT.PrismicDocument | null> => {
+  return apiClient(args.ctx)
+    .getSingle(CUSTOM_TYPE.GUIDE_TOP, {
       fetchLinks: ['guide_category.title'],
     })
     .catch(() => null);
@@ -49,10 +80,11 @@ export const fetchGuideTop = (): Promise<prismicT.PrismicDocument | null> => {
 
 // カテゴリ別よくある質問一覧
 export const fetchGuideByCategoryId = (args: {
+  ctx: GetServerSidePropsContext;
   uid: string;
 }): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient()
-    .getByUID('guide_category', args.uid, {
+  return apiClient(args.ctx)
+    .getByUID(CUSTOM_TYPE.GUIDE_CATEGORY, args.uid, {
       fetchLinks: ['guide.question'],
     })
     .catch(() => null);
@@ -60,9 +92,26 @@ export const fetchGuideByCategoryId = (args: {
 
 // よくある質問詳細
 export const fetchGuideByUid = (args: {
+  ctx: GetServerSidePropsContext;
   uid: string;
-}): Promise<prismicT.PrismicDocument | null> => {
-  return apiClient()
-    .getByUID('guide', args.uid)
+}): Promise<GuideDocument | null> => {
+  return apiClient(args.ctx)
+    .getByUID<GuideDocument>(CUSTOM_TYPE.GUIDE, args.uid)
     .catch(() => null);
+};
+
+// preview
+export const fetchPreviewUrl = (args: {
+  ctx: GetServerSidePropsContext;
+  token: string;
+  documentId: string;
+}): Promise<string> => {
+  return apiClient(args.ctx)
+    .resolvePreviewURL({
+      linkResolver,
+      defaultURL: '/',
+      previewToken: args.token,
+      documentID: args.documentId,
+    })
+    .then((url: string) => url);
 };
