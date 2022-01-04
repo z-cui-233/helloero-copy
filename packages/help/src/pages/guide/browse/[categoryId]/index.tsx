@@ -4,7 +4,7 @@ import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import GuideBrowse from '@/domain/GuideBrowse';
 import { fetchGuideByCategoryId } from '@/localShared/lib/prismic';
-import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces/guide';
+import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 

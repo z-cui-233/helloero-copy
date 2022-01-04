@@ -9,7 +9,7 @@ import {
 import {
   GuideCategoryDocument,
   GuideTopDocument,
-} from '@/localShared/lib/prismic/interfaces/guide';
+} from '@/localShared/lib/prismic/interfaces';
 import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 

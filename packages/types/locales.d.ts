@@ -353,6 +353,10 @@ export interface LocaleData {
         title: string;
         description: string;
       };
+      systemTrouble: {
+        title: string;
+        description: string;
+      };
     };
     top: {
       title: string;
@@ -382,6 +386,9 @@ export interface LocaleData {
       title: string;
     };
     inquiry: {
+      title: string;
+    };
+    systemTrouble: {
       title: string;
     };
   };

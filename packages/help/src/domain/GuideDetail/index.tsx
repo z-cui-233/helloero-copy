@@ -5,7 +5,7 @@ import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { GuideDocument } from '@/localShared/lib/prismic/interfaces/guide';
+import { GuideDocument } from '@/localShared/lib/prismic/interfaces';
 import BigBar from '@/shared/components/BigBar';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import typo from '@/shared/styles/typo';

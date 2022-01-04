@@ -5,7 +5,7 @@ import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces/guide';
+import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import BigBar from '@/shared/components/BigBar';
 import typo from '@/shared/styles/typo';
 import GuideCard from '@/localShared/components/GuideCard';

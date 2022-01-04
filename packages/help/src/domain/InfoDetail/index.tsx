@@ -10,7 +10,7 @@ import RichTextContainer from '@/localShared/components/RichTextContainer';
 import { convertDateToString } from '@/shared/utils';
 import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';

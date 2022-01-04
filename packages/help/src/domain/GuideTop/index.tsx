@@ -9,7 +9,7 @@ import BigBar from '@/shared/components/BigBar';
 import {
   GuideCategoryDocument,
   GuideTopDocument,
-} from '@/localShared/lib/prismic/interfaces/guide';
+} from '@/localShared/lib/prismic/interfaces';
 import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 import GuideCard from '@/localShared/components/GuideCard';

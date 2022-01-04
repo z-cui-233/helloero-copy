@@ -2,14 +2,15 @@ import * as prismic from '@prismicio/client';
 import * as prismicT from '@prismicio/types';
 import * as prismicH from '@prismicio/helpers';
 import { GetServerSidePropsContext } from 'next';
-import { GuideDocument } from './interfaces/guide';
-import { InfoDocument } from './interfaces/info';
+import { GuideDocument, SystemTroubleDocument } from './interfaces';
+import { InfoDocument } from './interfaces';
 
 const CUSTOM_TYPE = {
   INFO: 'info',
   GUIDE_TOP: 'guide_top',
   GUIDE_CATEGORY: 'guide_category',
   GUIDE: 'guide',
+  SYSTEM_TROUBLE: 'systemtrouble',
 } as const;
 
 const apiClient = (ctx: GetServerSidePropsContext): prismic.Client => {
@@ -21,7 +22,6 @@ const apiClient = (ctx: GetServerSidePropsContext): prismic.Client => {
 };
 
 const linkResolver: prismicH.LinkResolverFunction = (doc) => {
-  console.log('doc is !!!!!!!!!', doc);
   if (doc.type === CUSTOM_TYPE.INFO) {
     return `/info/${doc.uid}`;
   }
@@ -31,6 +31,18 @@ const linkResolver: prismicH.LinkResolverFunction = (doc) => {
   }
 
   return '/';
+};
+
+// 緊急のお知らせ
+export const fetchSystemTroubleByUid = (args: {
+  ctx: GetServerSidePropsContext;
+}): Promise<SystemTroubleDocument | null> => {
+  return apiClient(args.ctx)
+    .getByUID<SystemTroubleDocument>(
+      CUSTOM_TYPE.SYSTEM_TROUBLE,
+      CUSTOM_TYPE.SYSTEM_TROUBLE
+    )
+    .catch(() => null);
 };
 
 // お知らせ一覧

@@ -1,5 +1,11 @@
 import * as prismicT from '@prismicio/types';
 
+export type InfoDocument = prismicT.PrismicDocument<{
+  title: prismicT.RichTextField;
+  text: prismicT.RichTextField;
+  publish_date: prismicT.DateField;
+}>;
+
 export type GuideDocument = prismicT.PrismicDocument<{
   question: prismicT.RichTextField;
   answer: prismicT.RichTextField;
@@ -19,4 +25,9 @@ export type GuideTopDocument = prismicT.PrismicDocument<{
   category_links: {
     category_link: GuideCategoryDocument; // 正しい設定が不明
   }[];
+}>;
+
+export type SystemTroubleDocument = prismicT.PrismicDocument<{
+  title: prismicT.RichTextField;
+  text: prismicT.RichTextField;
 }>;
