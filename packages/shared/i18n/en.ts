@@ -378,6 +378,10 @@ const lang: LocaleData = {
         title: 'お問い合わせ - H2U ヘルプセンター',
         description: '',
       },
+      systemTrouble: {
+        title: '緊急のお知らせ - H2U ヘルプセンター',
+        description: '',
+      },
     },
     top: {
       title: 'ヘルプセンター',
@@ -408,6 +412,9 @@ const lang: LocaleData = {
     },
     inquiry: {
       title: 'お問い合わせ',
+    },
+    systemTrouble: {
+      title: '緊急のお知らせ',
     },
   },
 };

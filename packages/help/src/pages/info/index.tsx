@@ -4,7 +4,7 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import InfoList from '@/domain/InfoList';
 import { fetchInfoList } from '@/localShared/lib/prismic';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import MetaTags from '@/shared/components/MetaTags';
 import { useLocale } from '@/shared/context/LocaleContext';
 

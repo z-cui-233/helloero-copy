@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { PrismicText } from '@prismicio/react';
-import { GuideDocument } from '@/localShared/lib/prismic/interfaces/guide';
+import { GuideDocument } from '@/localShared/lib/prismic/interfaces';
 import { useLocale } from '@/shared/context/LocaleContext';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 

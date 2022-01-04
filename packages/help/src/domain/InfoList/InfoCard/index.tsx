@@ -6,7 +6,7 @@ import * as prismicH from '@prismicio/helpers';
 import typo from '@/shared/styles/typo';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { convertDateToString } from '@/shared/utils';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
 type Props = {

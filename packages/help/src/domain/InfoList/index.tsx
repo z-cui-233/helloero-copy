@@ -6,7 +6,7 @@ import InfoCard from './InfoCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import BigBar from '@/shared/components/BigBar';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import { useLocale } from '@/shared/context/LocaleContext';
 import BreadcrumbsList, {
   Breadcrumbs,

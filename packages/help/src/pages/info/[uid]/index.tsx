@@ -4,7 +4,7 @@ import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import InfoDetail from '@/domain/InfoDetail';
 import { fetchInfoByUid } from '@/localShared/lib/prismic';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces/info';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 
