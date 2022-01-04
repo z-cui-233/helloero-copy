@@ -30,7 +30,10 @@ const Page: NextPage<Props> = ({ infoDocument }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const infoDocument = await fetchInfoByUid({ uid: ctx.query.uid as string });
+  const infoDocument = await fetchInfoByUid({
+    ctx,
+    uid: ctx.query.uid as string,
+  });
 
   if (!infoDocument) {
     return {

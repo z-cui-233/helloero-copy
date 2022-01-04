@@ -37,8 +37,8 @@ const Page: NextPage<Props> = ({ guideTopDocument, guideCategoryDocument }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const guideTopDocument = (await fetchGuideTop()) as GuideTopDocument;
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const guideTopDocument = (await fetchGuideTop({ ctx })) as GuideTopDocument;
 
   if (!guideTopDocument) {
     return {
@@ -49,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const guideCategoryDocument = await Promise.all(
     guideTopDocument.data.category_links.map((doc) => {
       return fetchGuideByCategoryId({
+        ctx,
         uid: doc.category_link.uid as string,
       });
     })
