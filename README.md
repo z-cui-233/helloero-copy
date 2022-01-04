@@ -8,19 +8,19 @@ helloero, account, help sites for h2u
 
 ## 1.1 helloero
 
-1. Go to `/packages/helloero
+1. Go to `/packages/helloero`
 2. Run `amplify pull --appId d2lpn6hawe153k --envName dev` (will be redirected to browser for login-credential input)
 3. Verify auto-generation of `/src/aws-export.js`
 
 ## 1.2 account
 
-1. Go to `/packages/account
+1. Go to `/packages/account`
 2. Run `amplify pull --appId d2n1qbnmkdgxvt --envName develop` (will be redirected to browser for login-credential input)
 3. Verify auto-generation of `/src/aws-export.js`
 
 ## 1.1 help
 
-1. Go to `/packages/help
+1. Go to `/packages/help`
 2. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
 3. Verify auto-generation of `/src/aws-export.js`
 
