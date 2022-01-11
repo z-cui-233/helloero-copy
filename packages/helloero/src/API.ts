@@ -47,6 +47,7 @@ export type UserWabikenMeta = {
   validityPeriod: number;
   issuerTrace?: string | null;
   createdAt: number;
+  contentDisplayName: string;
   content: UserContentMeta;
   activatedAt: number;
   owner?: string | null;
@@ -136,13 +137,14 @@ export type CreateUserWabikenMetaInput = {
   validityPeriod: number;
   issuerTrace?: string | null;
   createdAt: number;
+  contentDisplayName: string;
   content: UserContentMetaInput;
   activatedAt: number;
   owner?: string | null;
 };
 
 export type UserContentMetaInput = {
-  id: string;
+  id?: string | null;
   key: ContentMetaKeyInput;
   displayName: string;
   catchphrase: string;
@@ -160,7 +162,7 @@ export type UserContentMetaInput = {
 };
 
 export type ContentMetaKeyInput = {
-  id: string;
+  id?: string | null;
   type: string;
   providerId: string;
 };
@@ -193,7 +195,9 @@ export type ModelUserWabikenMetaConditionInput = {
   validityPeriod?: ModelIntInput | null;
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
+  contentDisplayName?: ModelStringInput | null;
   activatedAt?: ModelIntInput | null;
+  owner?: ModelStringInput | null;
   and?: Array<ModelUserWabikenMetaConditionInput | null> | null;
   or?: Array<ModelUserWabikenMetaConditionInput | null> | null;
   not?: ModelUserWabikenMetaConditionInput | null;
@@ -267,6 +271,7 @@ export type UpdateUserWabikenMetaInput = {
   validityPeriod?: number | null;
   issuerTrace?: string | null;
   createdAt?: number | null;
+  contentDisplayName?: string | null;
   content?: UserContentMetaInput | null;
   activatedAt?: number | null;
   owner?: string | null;
@@ -365,6 +370,7 @@ export type ModelUserWabikenMetaFilterInput = {
   validityPeriod?: ModelIntInput | null;
   issuerTrace?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
+  contentDisplayName?: ModelStringInput | null;
   activatedAt?: ModelIntInput | null;
   owner?: ModelStringInput | null;
   and?: Array<ModelUserWabikenMetaFilterInput | null> | null;
@@ -407,6 +413,16 @@ export enum ModelSortDirection {
   ASC = 'ASC',
   DESC = 'DESC',
 }
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
 
 export type ActivateWabikenMutationVariables = {
   id: string;
@@ -500,6 +516,7 @@ export type CreateUserWabikenMetaMutation = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -574,6 +591,7 @@ export type UpdateUserWabikenMetaMutation = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -648,6 +666,7 @@ export type DeleteUserWabikenMetaMutation = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -863,6 +882,7 @@ export type GetUserWabikenMetaQuery = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -940,88 +960,7 @@ export type ListUserWabikenMetasQuery = {
       validityPeriod: number;
       issuerTrace?: string | null;
       createdAt: number;
-      content: {
-        __typename: 'UserContentMeta';
-        id: string;
-        key: {
-          __typename: 'ContentMetaKey';
-          id: string;
-          type: string;
-          providerId: string;
-        };
-        displayName: string;
-        catchphrase: string;
-        comment: string;
-        duration: number;
-        evaluationPoint: number;
-        maker: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        series: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        salePeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        paymentBadge: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        thumbnails: {
-          __typename: 'ContentMetaThumbnail';
-          packageL?: string | null;
-          packageM?: string | null;
-          packageS?: string | null;
-          standard?: string | null;
-          tsptFhds?: string | null;
-          tsptFwxga?: string | null;
-        };
-        mainEpisodeCode: string;
-      };
-      activatedAt: number;
-      owner?: string | null;
-      updatedAt: string;
-    }>;
-    nextToken?: string | null;
-  } | null;
-};
-
-export type UserWabikenMetaByOwnerByActivatedAtQueryVariables = {
-  owner?: string | null;
-  activatedAt?: ModelIntKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserWabikenMetaFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type UserWabikenMetaByOwnerByActivatedAtQuery = {
-  userWabikenMetaByOwnerByActivatedAt?: {
-    __typename: 'ModelUserWabikenMetaConnection';
-    items: Array<{
-      __typename: 'UserWabikenMeta';
-      id: string;
-      version: number;
-      notValidBefore: number;
-      notValidAfter: number;
-      lockRequired: boolean;
-      playbackRemaining: number;
-      validityPeriod: number;
-      issuerTrace?: string | null;
-      createdAt: number;
+      contentDisplayName: string;
       content: {
         __typename: 'UserContentMeta';
         id: string;
@@ -1104,6 +1043,90 @@ export type UserWabikenMetaByOwnerByNotValidAfterQuery = {
       validityPeriod: number;
       issuerTrace?: string | null;
       createdAt: number;
+      contentDisplayName: string;
+      content: {
+        __typename: 'UserContentMeta';
+        id: string;
+        key: {
+          __typename: 'ContentMetaKey';
+          id: string;
+          type: string;
+          providerId: string;
+        };
+        displayName: string;
+        catchphrase: string;
+        comment: string;
+        duration: number;
+        evaluationPoint: number;
+        maker: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        series: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        releaseDate: string;
+        publicPeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        salePeriod: {
+          __typename: 'Period';
+          since?: number | null;
+          until?: number | null;
+        };
+        paymentBadge: {
+          __typename: 'CodeName';
+          code: string;
+          name: string;
+        };
+        thumbnails: {
+          __typename: 'ContentMetaThumbnail';
+          packageL?: string | null;
+          packageM?: string | null;
+          packageS?: string | null;
+          standard?: string | null;
+          tsptFhds?: string | null;
+          tsptFwxga?: string | null;
+        };
+        mainEpisodeCode: string;
+      };
+      activatedAt: number;
+      owner?: string | null;
+      updatedAt: string;
+    }>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type UserWabikenMetaByOwnerByContentDisplayNameQueryVariables = {
+  owner?: string | null;
+  contentDisplayName?: ModelStringKeyConditionInput | null;
+  sortDirection?: ModelSortDirection | null;
+  filter?: ModelUserWabikenMetaFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type UserWabikenMetaByOwnerByContentDisplayNameQuery = {
+  userWabikenMetaByOwnerByContentDisplayName?: {
+    __typename: 'ModelUserWabikenMetaConnection';
+    items: Array<{
+      __typename: 'UserWabikenMeta';
+      id: string;
+      version: number;
+      notValidBefore: number;
+      notValidAfter: number;
+      lockRequired: boolean;
+      playbackRemaining: number;
+      validityPeriod: number;
+      issuerTrace?: string | null;
+      createdAt: number;
+      contentDisplayName: string;
       content: {
         __typename: 'UserContentMeta';
         id: string;
@@ -1164,7 +1187,7 @@ export type UserWabikenMetaByOwnerByNotValidAfterQuery = {
 };
 
 export type OnCreateUserWabikenMetaSubscriptionVariables = {
-  owner: string;
+  owner?: string | null;
 };
 
 export type OnCreateUserWabikenMetaSubscription = {
@@ -1179,6 +1202,7 @@ export type OnCreateUserWabikenMetaSubscription = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -1237,7 +1261,7 @@ export type OnCreateUserWabikenMetaSubscription = {
 };
 
 export type OnUpdateUserWabikenMetaSubscriptionVariables = {
-  owner: string;
+  owner?: string | null;
 };
 
 export type OnUpdateUserWabikenMetaSubscription = {
@@ -1252,6 +1276,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;
@@ -1310,7 +1335,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
 };
 
 export type OnDeleteUserWabikenMetaSubscriptionVariables = {
-  owner: string;
+  owner?: string | null;
 };
 
 export type OnDeleteUserWabikenMetaSubscription = {
@@ -1325,6 +1350,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
     validityPeriod: number;
     issuerTrace?: string | null;
     createdAt: number;
+    contentDisplayName: string;
     content: {
       __typename: 'UserContentMeta';
       id: string;

@@ -17,7 +17,6 @@ import {
   createUserWabikenMeta,
 } from '../../graphql/mutations';
 import { getWabikenMeta } from '../../graphql/queries';
-import { API_VERSION } from '@/localShared/constants';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 import { useLocale } from '@/shared/context/LocaleContext';
 import { getErrorMessage } from '@/shared/utils';
@@ -50,6 +49,7 @@ const isCreateUserWabikenMetaInput = (
 ): input is CreateUserWabikenMetaInput => {
   return !!(
     input &&
+    (input as CreateUserWabikenMetaInput).contentDisplayName &&
     input.content &&
     input.content.key &&
     input.content.thumbnails
@@ -136,10 +136,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
         ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
 
-      if (
-        !getWabikenMeta ||
-        !isCreateUserWabikenMetaInput(getWabikenMeta?.wabiken)
-      ) {
+      if (!getWabikenMeta) {
         setEntryWabikenState((entryWabikenState) => ({
           ...entryWabikenState,
           errorMessage: lang.messages.default,
@@ -155,7 +152,15 @@ const useEntryWabiken = (): UseEntryWabiken => {
         }
       );
 
-      if (activateWabikenApiData.errors) {
+      const createWabikenInput = getWabikenMeta?.wabiken && {
+        ...getWabikenMeta?.wabiken,
+        contentDisplayName: getWabikenMeta.wabiken.content.displayName,
+      };
+
+      if (
+        activateWabikenApiData.errors ||
+        !isCreateUserWabikenMetaInput(createWabikenInput)
+      ) {
         const errorMessage = getErrorMessage(
           lang,
           'activateWabiken',
@@ -173,21 +178,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       const createUserWabikenMetaApiData = await createUserWabikenMetaFetcher(
         createUserWabikenMeta,
         {
-          input: {
-            id: getWabikenMeta.wabiken.id,
-            version: API_VERSION,
-            notValidBefore: getWabikenMeta.wabiken.notValidBefore,
-            notValidAfter: activateWabikenApiData.data?.activateWabiken?.wabiken
-              .notValidAfter as number,
-            lockRequired: getWabikenMeta.wabiken.lockRequired,
-            playbackRemaining: getWabikenMeta.wabiken.playbackRemaining,
-            validityPeriod: getWabikenMeta.wabiken.validityPeriod,
-            issuerTrace: getWabikenMeta.wabiken.issuerTrace,
-            createdAt: getWabikenMeta.wabiken.createdAt,
-            content: getWabikenMeta.wabiken.content,
-            activatedAt: activateWabikenApiData.data?.activateWabiken?.wabiken
-              .activatedAt as number,
-          },
+          input: createWabikenInput,
         }
       );
 

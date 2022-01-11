@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authhelloerof377b7dd"
+    },
+    "conflictResolution": {},
+    "apiName": "helloero",
+    "gqlSchemaPath": "/Users/k-vaibhav/Documents/Development/helloero/packages/helloero/amplify/backend/api/helloero/schema.graphql"
+  }
+}

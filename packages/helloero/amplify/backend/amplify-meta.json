@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-helloero-dev-175146-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-dev-175146-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-dev-175146-authRole",
+      "AuthRoleName": "amplify-helloero-vbfive-154858-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-vbfive-154858-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-vbfive-154858-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-helloero-dev-175146-deployment",
-      "UnauthRoleName": "amplify-helloero-dev-175146-unauthRole",
-      "StackName": "amplify-helloero-dev-175146",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-dev-175146/04813640-0714-11ec-af4c-0e9cfcf32e9f",
+      "DeploymentBucketName": "amplify-helloero-vbfive-154858-deployment",
+      "UnauthRoleName": "amplify-helloero-vbfive-154858-unauthRole",
+      "StackName": "amplify-helloero-vbfive-154858",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-vbfive-154858/11b75e80-704f-11ec-8fc1-06ed5ebe7121",
       "AmplifyAppId": "d2lpn6hawe153k"
     }
   },
@@ -31,21 +31,21 @@
         "usernameAttributes": [],
         "verificationMechanisms": ["EMAIL"]
       },
-      "output": {
-        "UserPoolId": "ap-northeast-1_Fa8RYnzZ1",
-        "AppClientIDWeb": "1cfqtbluolk14ijbsq2osqbspp",
-        "AppClientID": "2rqnu6mn54q155hop2fqi9crpq",
-        "IdentityPoolId": "ap-northeast-1:839e24ad-2969-4320-b01a-55049f3972b0",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_Fa8RYnzZ1",
-        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__dev",
-        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd"
-      },
-      "lastPushTimeStamp": "2021-12-18T03:49:30.253Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-dev-175146-deployment/amplify-cfn-templates/auth/helloerof377b7dd-cloudformation-template.yml",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/auth/helloerof377b7dd-cloudformation-template.yml",
         "logicalId": "authhelloerof377b7dd"
       },
-      "lastPushDirHash": "BFd7+8SbqHAlQ1UfljjA6JBDCcU="
+      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
+      "output": {
+        "UserPoolId": "ap-northeast-1_nAkm1oSzc",
+        "AppClientIDWeb": "pdpohbqddtpgec58v2js47qof",
+        "AppClientID": "7r48o6b0jvar6td8huhegfscp6",
+        "IdentityPoolId": "ap-northeast-1:64ef4456-6a4d-4d59-9e21-7f7effcc963e",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_nAkm1oSzc",
+        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__vbfive",
+        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd"
+      },
+      "lastPushDirHash": "U3/uPE3PlF8VnwVFCoE/oSuZiyA="
     }
   },
   "api": {
@@ -62,15 +62,15 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "h6kles34obbx3aqlnuo5hchiau",
-        "GraphQLAPIEndpointOutput": "https://vvyienpejjg5dprkdtxtaaylgu.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+        "GraphQLAPIIdOutput": "bdw47oxx5fbh7i5dtipxbovdda",
+        "GraphQLAPIEndpointOutput": "https://tzvi6qxbhvcxrgje5qpa7vfala.appsync-api.ap-northeast-1.amazonaws.com/graphql"
       },
-      "lastPushTimeStamp": "2021-12-18T03:49:30.254Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-dev-175146-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apihelloero"
       },
-      "lastPushDirHash": "2dTy1yJiTh2BauAPxKpyUtcaLBQ="
+      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
+      "lastPushDirHash": "LWd7jL2UBzubwPceZ+oe+KwkCOk="
     }
   },
   "function": {
@@ -79,26 +79,26 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [],
-      "output": {
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroLambdaResolver-dev",
-        "Name": "helloeroLambdaResolver-dev",
-        "LambdaExecutionRole": "helloeroLambdaRole3abe891b-dev"
+      "lastBuildTimeStamp": "2022-01-08T06:50:48.950Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-01-08T06:50:49.615Z",
+      "distZipFilename": "helloeroLambdaResolver-6f375245593363716e63-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-helloero-vbfive-154858-deployment",
+        "s3Key": "amplify-builds/helloeroLambdaResolver-6f375245593363716e63-build.zip"
       },
-      "lastPushTimeStamp": "2021-12-18T03:49:30.255Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-dev-175146-deployment/amplify-cfn-templates/function/helloeroLambdaResolver-cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/function/helloeroLambdaResolver-cloudformation-template.json",
         "logicalId": "functionhelloeroLambdaResolver"
       },
-      "lastBuildTimeStamp": "2021-12-18T01:42:26.219Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2021-12-18T01:42:26.372Z",
-      "distZipFilename": "helloeroLambdaResolver-61656e592b4d62454842-build.zip",
-      "s3Bucket": {
-        "deploymentBucketName": "amplify-helloero-dev-175146-deployment",
-        "s3Key": "amplify-builds/helloeroLambdaResolver-61656e592b4d62454842-build.zip"
+      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
+      "output": {
+        "Region": "ap-northeast-1",
+        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroLambdaResolver-vbfive",
+        "Name": "helloeroLambdaResolver-vbfive",
+        "LambdaExecutionRole": "helloeroLambdaRole3abe891b-vbfive"
       },
-      "lastPushDirHash": "fXtg+M5j0dm+4P+SZMOXBMjSt/c="
+      "lastPushDirHash": "PyURQgYhu9G1KugWuKD0AlSb/30="
     }
   }
 }

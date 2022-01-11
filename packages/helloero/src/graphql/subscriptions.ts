@@ -3,7 +3,7 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUserWabikenMeta = /* GraphQL */ `
-  subscription OnCreateUserWabikenMeta($owner: String!) {
+  subscription OnCreateUserWabikenMeta($owner: String) {
     onCreateUserWabikenMeta(owner: $owner) {
       id
       version
@@ -14,6 +14,7 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {
@@ -64,7 +65,7 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
   }
 `;
 export const onUpdateUserWabikenMeta = /* GraphQL */ `
-  subscription OnUpdateUserWabikenMeta($owner: String!) {
+  subscription OnUpdateUserWabikenMeta($owner: String) {
     onUpdateUserWabikenMeta(owner: $owner) {
       id
       version
@@ -75,6 +76,7 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {
@@ -125,7 +127,7 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
   }
 `;
 export const onDeleteUserWabikenMeta = /* GraphQL */ `
-  subscription OnDeleteUserWabikenMeta($owner: String!) {
+  subscription OnDeleteUserWabikenMeta($owner: String) {
     onDeleteUserWabikenMeta(owner: $owner) {
       id
       version
@@ -136,6 +138,7 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {

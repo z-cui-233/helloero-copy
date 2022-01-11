@@ -12,7 +12,7 @@ interface WabikenMetaBase {
 
 type UserWabikenMeta implements WabikenMetaBase
   @model
-  @auth(rules: [{ allow: owner }]) {
+  @auth(rules: [{ allow: owner, operations: [read, create] }]) {
   """
   id is same as token
   """
@@ -25,7 +25,8 @@ type UserWabikenMeta implements WabikenMetaBase
   validityPeriod: Int!
   issuerTrace: String
   createdAt: AWSTimestamp!
-  content: UserContentMeta! @hasOne(indexName: "byDisplayName", fields: ["id"])
+  contentDisplayName: String!
+  content: UserContentMeta!
   """
   following are required fields in UserWabikenMeta (as they are activated wabikens)
   """
@@ -36,6 +37,11 @@ type UserWabikenMeta implements WabikenMetaBase
       name: "byOwnerByNotValidAfter"
       queryField: "userWabikenMetaByOwnerByNotValidAfter"
       sortKeyFields: ["notValidAfter"]
+    )
+    @index(
+      name: "byOwnerByContentDisplayName"
+      queryField: "userWabikenMetaByOwnerByContentDisplayName"
+      sortKeyFields: ["contentDisplayName"]
     )
 }
 
@@ -79,11 +85,10 @@ type ContentMeta implements ContentMetaBase {
   mainEpisodeCode: String
 }
 
-type UserContentMeta implements ContentMetaBase @model {
+type UserContentMeta implements ContentMetaBase {
   id: ID!
   key: ContentMetaKey!
   displayName: String!
-    @index(name: "byDisplayName", sortKeyFields: ["displayName"])
   catchphrase: String!
   comment: String!
   duration: Int!

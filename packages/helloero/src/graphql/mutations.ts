@@ -79,6 +79,7 @@ export const createUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {
@@ -143,6 +144,7 @@ export const updateUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {
@@ -207,6 +209,7 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
       validityPeriod
       issuerTrace
       createdAt
+      contentDisplayName
       content {
         id
         key {
