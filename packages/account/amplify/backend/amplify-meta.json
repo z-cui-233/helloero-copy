@@ -20,30 +20,26 @@
       "dependsOn": [],
       "customAuth": false,
       "output": {
-        "UserPoolId": "ap-northeast-1_Fa8RYnzZ1",
-        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd-dev",
-        "AppClientID": "1cfqtbluolk14ijbsq2osqbspp",
-        "AppClientIDWeb": "1cfqtbluolk14ijbsq2osqbspp",
-        "IdentityPoolId": "ap-northeast-1:839e24ad-2969-4320-b01a-55049f3972b0",
-        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__dev"
+        "UserPoolId": "ap-northeast-1_lTdEZSQDV",
+        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd-develop",
+        "AppClientID": "20hmcv0qji2lhltviqjo9hiaml",
+        "AppClientIDWeb": "20hmcv0qji2lhltviqjo9hiaml",
+        "IdentityPoolId": "ap-northeast-1:237ea8a9-af44-4339-91f1-7c86f12d8838",
+        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__develop"
       },
       "frontendAuthConfig": {
         "socialProviders": [],
         "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
+        "signupAttributes": ["EMAIL"],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
+        "verificationMechanisms": ["EMAIL"]
       },
-      "lastPushTimeStamp": "2021-12-22T04:39:47.674Z"
+      "lastPushTimeStamp": "2022-01-11T05:58:31.244Z"
     }
   }
 }
