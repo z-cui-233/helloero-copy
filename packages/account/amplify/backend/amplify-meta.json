@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-account-develop-82901-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-account-develop-82901-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-account-develop-82901-authRole",
+      "AuthRoleName": "amplify-h2umonopackagesaccou-dev-171737-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackagesaccou-dev-171737-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackagesaccou-dev-171737-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-account-develop-82901-deployment",
-      "UnauthRoleName": "amplify-account-develop-82901-unauthRole",
-      "StackName": "amplify-account-develop-82901",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-account-develop-82901/8ddce2b0-5fdc-11ec-ac7f-06f023bdb16d",
+      "DeploymentBucketName": "amplify-h2umonopackagesaccou-dev-171737-deployment",
+      "UnauthRoleName": "amplify-h2umonopackagesaccou-dev-171737-unauthRole",
+      "StackName": "amplify-h2umonopackagesaccou-dev-171737",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackagesaccou-dev-171737/f470cbd0-72b6-11ec-a51b-068ca1ce4eab",
       "AmplifyAppId": "d2n1qbnmkdgxvt"
     }
   },
@@ -39,7 +39,7 @@
         "mfaTypes": [],
         "verificationMechanisms": ["EMAIL"]
       },
-      "lastPushTimeStamp": "2022-01-11T05:58:31.244Z"
+      "lastPushTimeStamp": "2022-01-11T08:23:22.745Z"
     }
   }
 }
