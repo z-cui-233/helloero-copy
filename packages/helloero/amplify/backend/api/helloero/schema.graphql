@@ -12,7 +12,12 @@ interface WabikenMetaBase {
 
 type UserWabikenMeta implements WabikenMetaBase
   @model
-  @auth(rules: [{ allow: owner, operations: [read, create] }]) {
+  @auth(
+    rules: [
+      { allow: owner, operations: [read, create] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
   """
   id is same as token
   """
