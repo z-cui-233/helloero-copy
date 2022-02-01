@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   auth: {
-    helloerof377b7dd: {
+    h2umonopackageshelloc636e5bc: {
       IdentityPoolId: 'string';
       IdentityPoolName: 'string';
       UserPoolId: 'string';
@@ -8,20 +8,21 @@ export type AmplifyDependentResourcesAttributes = {
       UserPoolName: 'string';
       AppClientIDWeb: 'string';
       AppClientID: 'string';
-    };
-  };
-  api: {
-    helloero: {
-      GraphQLAPIIdOutput: 'string';
-      GraphQLAPIEndpointOutput: 'string';
+      CreatedSNSRole: 'string';
     };
   };
   function: {
-    helloeroLambdaResolver: {
+    helloeroApiLambdaResolver: {
       Name: 'string';
       Arn: 'string';
       Region: 'string';
       LambdaExecutionRole: 'string';
+    };
+  };
+  api: {
+    helloeroApi: {
+      GraphQLAPIIdOutput: 'string';
+      GraphQLAPIEndpointOutput: 'string';
     };
   };
 };

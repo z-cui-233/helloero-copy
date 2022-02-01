@@ -109,3 +109,8 @@ Possible options:
 - [Next JS SSR deployment](https://docs.aws.amazon.com/ja_jp/amplify/latest/userguide/server-side-rendering-amplify.html#ssr-Amplify-support)
 - [User pool v/s Identity pool](https://medium.com/swlh/amazon-cognito-what-is-the-difference-between-user-pool-and-identity-pool-ff0c71d79ca7)
 - [GQL directives](https://docs.amplify.aws/cli/graphql-transformer/directives/)
+
+## Common debugging
+
+- for `Error: auth headless is missing the following inputParams userPoolId, webClientId, ...`
+  <https://github.com/aws-amplify/amplify-console/issues/2269#issuecomment-925379232>

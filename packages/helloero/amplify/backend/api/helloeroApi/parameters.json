@@ -1,8 +1,8 @@
 {
-  "AppSyncApiName": "helloero",
+  "AppSyncApiName": "helloeroApi",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
   "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": ["authhelloerof377b7dd", "Outputs.UserPoolId"]
+    "Fn::GetAtt": ["authh2umonopackageshelloc636e5bc", "Outputs.UserPoolId"]
   }
 }

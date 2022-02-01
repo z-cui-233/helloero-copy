@@ -1,6 +1,6 @@
 {
   "providers": ["awscloudformation"],
-  "projectName": "helloero",
+  "projectName": "h2umonopackageshello",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {

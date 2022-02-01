@@ -1,25 +1,26 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-helloero-vbfive-154858-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-vbfive-154858-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-vbfive-154858-authRole",
+      "AuthRoleName": "amplify-h2umonopackageshello-develop-51032-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-helloero-vbfive-154858-deployment",
-      "UnauthRoleName": "amplify-helloero-vbfive-154858-unauthRole",
-      "StackName": "amplify-helloero-vbfive-154858",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-vbfive-154858/11b75e80-704f-11ec-8fc1-06ed5ebe7121",
+      "DeploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
+      "UnauthRoleName": "amplify-h2umonopackageshello-develop-51032-unauthRole",
+      "StackName": "amplify-h2umonopackageshello-develop-51032",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshello-develop-51032/48754d20-831d-11ec-9d18-0e35c8638783",
       "AmplifyAppId": "d2lpn6hawe153k"
     }
   },
   "auth": {
-    "helloerof377b7dd": {
+    "h2umonopackageshelloc636e5bc": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": ["EMAIL"],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "signupAttributes": ["EMAIL"],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -27,29 +28,56 @@
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": ["SMS"],
-        "socialProviders": [],
-        "usernameAttributes": [],
         "verificationMechanisms": ["EMAIL"]
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/auth/helloerof377b7dd-cloudformation-template.yml",
-        "logicalId": "authhelloerof377b7dd"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/auth/h2umonopackageshelloc636e5bc-cloudformation-template.json",
+        "logicalId": "authh2umonopackageshelloc636e5bc"
       },
-      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
+      "lastPushTimeStamp": "2022-02-01T10:06:19.856Z",
       "output": {
-        "UserPoolId": "ap-northeast-1_nAkm1oSzc",
-        "AppClientIDWeb": "pdpohbqddtpgec58v2js47qof",
-        "AppClientID": "7r48o6b0jvar6td8huhegfscp6",
-        "IdentityPoolId": "ap-northeast-1:64ef4456-6a4d-4d59-9e21-7f7effcc963e",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_nAkm1oSzc",
-        "IdentityPoolName": "helloerof377b7dd_identitypool_f377b7dd__vbfive",
-        "UserPoolName": "helloerof377b7dd_userpool_f377b7dd"
+        "CreatedSNSRole": "arn:aws:iam::094309139025:role/snsc636e5bc51032-develop",
+        "UserPoolId": "ap-northeast-1_qSxUth64s",
+        "AppClientIDWeb": "70p5v295aai8u49ag3c538a1vu",
+        "AppClientID": "1ko9h539q5tfkrjq4o6onqv75h",
+        "IdentityPoolId": "ap-northeast-1:47db5939-0b53-4ef5-b2c4-7f7bdd2ea7a9",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_qSxUth64s",
+        "IdentityPoolName": "h2umonopackageshelloc636e5bc_identitypool_c636e5bc__develop",
+        "UserPoolName": "h2umonopackageshelloc636e5bc_userpool_c636e5bc"
       },
-      "lastPushDirHash": "U3/uPE3PlF8VnwVFCoE/oSuZiyA="
+      "lastPushDirHash": "a0J9Bj/9GU3CQ4cL/5baTOlqrEg="
+    }
+  },
+  "function": {
+    "helloeroApiLambdaResolver": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [],
+      "lastBuildTimeStamp": "2022-02-01T09:58:16.540Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-02-01T09:58:16.767Z",
+      "distZipFilename": "helloeroApiLambdaResolver-6e72553675324f505874-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
+        "s3Key": "amplify-builds/helloeroApiLambdaResolver-6e72553675324f505874-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/function/helloeroApiLambdaResolver-cloudformation-template.json",
+        "logicalId": "functionhelloeroApiLambdaResolver"
+      },
+      "lastPushTimeStamp": "2022-02-01T10:06:19.856Z",
+      "output": {
+        "Region": "ap-northeast-1",
+        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroApiLambdaResolver-develop",
+        "Name": "helloeroApiLambdaResolver-develop",
+        "LambdaExecutionRole": "h2umonopackageshelloLambdaRolea5a071ac-develop"
+      },
+      "lastPushDirHash": "W7JzS2nVe224P6ZUUGwbZgAu1gg="
     }
   },
   "api": {
-    "helloero": {
+    "helloeroApi": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -57,48 +85,20 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authhelloerof377b7dd"
+              "userPoolId": "authh2umonopackageshelloc636e5bc"
             }
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "bdw47oxx5fbh7i5dtipxbovdda",
-        "GraphQLAPIEndpointOutput": "https://tzvi6qxbhvcxrgje5qpa7vfala.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+        "GraphQLAPIIdOutput": "af7aleonmzawdbu6a3ixpcdaxu",
+        "GraphQLAPIEndpointOutput": "https://qqryr42xevbk7nx7yhd3kgx7si.appsync-api.ap-northeast-1.amazonaws.com/graphql"
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-        "logicalId": "apihelloero"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apihelloeroApi"
       },
-      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
-      "lastPushDirHash": "LWd7jL2UBzubwPceZ+oe+KwkCOk="
-    }
-  },
-  "function": {
-    "helloeroLambdaResolver": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [],
-      "lastBuildTimeStamp": "2022-01-08T06:50:48.950Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-01-08T06:50:49.615Z",
-      "distZipFilename": "helloeroLambdaResolver-6f375245593363716e63-build.zip",
-      "s3Bucket": {
-        "deploymentBucketName": "amplify-helloero-vbfive-154858-deployment",
-        "s3Key": "amplify-builds/helloeroLambdaResolver-6f375245593363716e63-build.zip"
-      },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-vbfive-154858-deployment/amplify-cfn-templates/function/helloeroLambdaResolver-cloudformation-template.json",
-        "logicalId": "functionhelloeroLambdaResolver"
-      },
-      "lastPushTimeStamp": "2022-01-08T06:58:05.485Z",
-      "output": {
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroLambdaResolver-vbfive",
-        "Name": "helloeroLambdaResolver-vbfive",
-        "LambdaExecutionRole": "helloeroLambdaRole3abe891b-vbfive"
-      },
-      "lastPushDirHash": "PyURQgYhu9G1KugWuKD0AlSb/30="
+      "lastPushTimeStamp": "2022-02-01T10:06:19.856Z",
+      "lastPushDirHash": "tc8iKdIOJnwYYYq5aWyEMvBuKXw="
     }
   }
 }

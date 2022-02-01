@@ -396,7 +396,7 @@ export type ModelIDInput = {
 
 export type ModelUserWabikenMetaConnection = {
   __typename: 'ModelUserWabikenMetaConnection';
-  items: Array<UserWabikenMeta>;
+  items: Array<UserWabikenMeta | null>;
   nextToken?: string | null;
 };
 
@@ -1015,13 +1015,13 @@ export type ListUserWabikenMetasQuery = {
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
-    }>;
+    } | null>;
     nextToken?: string | null;
   } | null;
 };
 
 export type UserWabikenMetaByOwnerByNotValidAfterQueryVariables = {
-  owner?: string | null;
+  owner: string;
   notValidAfter?: ModelIntKeyConditionInput | null;
   sortDirection?: ModelSortDirection | null;
   filter?: ModelUserWabikenMetaFilterInput | null;
@@ -1098,13 +1098,13 @@ export type UserWabikenMetaByOwnerByNotValidAfterQuery = {
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
-    }>;
+    } | null>;
     nextToken?: string | null;
   } | null;
 };
 
 export type UserWabikenMetaByOwnerByContentDisplayNameQueryVariables = {
-  owner?: string | null;
+  owner: string;
   contentDisplayName?: ModelStringKeyConditionInput | null;
   sortDirection?: ModelSortDirection | null;
   filter?: ModelUserWabikenMetaFilterInput | null;
@@ -1181,7 +1181,7 @@ export type UserWabikenMetaByOwnerByContentDisplayNameQuery = {
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
-    }>;
+    } | null>;
     nextToken?: string | null;
   } | null;
 };

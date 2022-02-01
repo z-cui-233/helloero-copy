@@ -260,7 +260,7 @@ export const listUserWabikenMetas = /* GraphQL */ `
 `;
 export const userWabikenMetaByOwnerByNotValidAfter = /* GraphQL */ `
   query UserWabikenMetaByOwnerByNotValidAfter(
-    $owner: String
+    $owner: String!
     $notValidAfter: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelUserWabikenMetaFilterInput
@@ -339,7 +339,7 @@ export const userWabikenMetaByOwnerByNotValidAfter = /* GraphQL */ `
 `;
 export const userWabikenMetaByOwnerByContentDisplayName = /* GraphQL */ `
   query UserWabikenMetaByOwnerByContentDisplayName(
-    $owner: String
+    $owner: String!
     $contentDisplayName: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelUserWabikenMetaFilterInput

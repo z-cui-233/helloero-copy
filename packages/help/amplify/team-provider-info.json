@@ -1,32 +1,15 @@
 {
-  "dev": {
+  "develop": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-h2umonopackageshelp-dev-171759-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshelp-dev-171759-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshelp-dev-171759-authRole",
+      "AuthRoleName": "amplify-h2umonopackageshelp-develop-102812-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshelp-develop-102812-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshelp-develop-102812-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-h2umonopackageshelp-dev-171759-deployment",
-      "UnauthRoleName": "amplify-h2umonopackageshelp-dev-171759-unauthRole",
-      "StackName": "amplify-h2umonopackageshelp-dev-171759",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshelp-dev-171759/00d54040-72b7-11ec-903b-06d5b63015d5",
+      "DeploymentBucketName": "amplify-h2umonopackageshelp-develop-102812-deployment",
+      "UnauthRoleName": "amplify-h2umonopackageshelp-develop-102812-unauthRole",
+      "StackName": "amplify-h2umonopackageshelp-develop-102812",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshelp-develop-102812/a8c4be00-8349-11ec-b9a4-0e59e9acebef",
       "AmplifyAppId": "d1lfbnhojp19y0"
-    },
-    "categories": {
-      "auth": {
-        "h2umonopackageshelp": {
-          "userPoolId": "ap-northeast-1_lTdEZSQDV",
-          "userPoolName": "helloerof377b7dd_userpool_f377b7dd-develop",
-          "webClientId": "20hmcv0qji2lhltviqjo9hiaml",
-          "nativeClientId": "20hmcv0qji2lhltviqjo9hiaml",
-          "identityPoolId": "ap-northeast-1:237ea8a9-af44-4339-91f1-7c86f12d8838",
-          "identityPoolName": "helloerof377b7dd_identitypool_f377b7dd__develop",
-          "allowUnauthenticatedIdentities": false,
-          "authRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-65757-authRole",
-          "authRoleName": "amplify-h2umonopackageshello-develop-65757-authRole",
-          "unauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-65757-unauthRole",
-          "unauthRoleName": "amplify-h2umonopackageshello-develop-65757-unauthRole"
-        }
-      }
     }
   }
 }

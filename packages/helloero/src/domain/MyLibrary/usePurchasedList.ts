@@ -101,17 +101,15 @@ const usePurchasedList = (): UsePurchasedList => {
 
       const newList = apiData.data?.listUserWabikenMetas?.items ?? [];
 
-      setPurchasedListState((purchasedListState) => {
-        return {
-          ...purchasedListState,
-          isInitialized: true,
-          userWabikenMetas: [
-            ...purchasedListState.userWabikenMetas,
-            ...newList,
-          ],
-          nextToken: apiData.data?.listUserWabikenMetas?.nextToken ?? undefined,
-        };
-      });
+      setPurchasedListState((purchasedListState) => ({
+        ...purchasedListState,
+        isInitialized: true,
+        userWabikenMetas: [
+          ...purchasedListState.userWabikenMetas,
+          ...newList,
+        ] as UserWabikenMeta[],
+        nextToken: apiData.data?.listUserWabikenMetas?.nextToken ?? undefined,
+      }));
     },
     [fetcher]
   );

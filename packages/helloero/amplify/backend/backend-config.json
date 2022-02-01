@@ -1,24 +1,34 @@
 {
   "auth": {
-    "helloerof377b7dd": {
+    "h2umonopackageshelloc636e5bc": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": ["EMAIL"],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "signupAttributes": ["EMAIL"],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
         "mfaConfiguration": "OFF",
-        "mfaTypes": ["SMS"]
+        "mfaTypes": ["SMS"],
+        "verificationMechanisms": ["EMAIL"]
       }
     }
   },
+  "function": {
+    "helloeroApiLambdaResolver": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    }
+  },
   "api": {
-    "helloero": {
+    "helloeroApi": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -26,20 +36,12 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authhelloerof377b7dd"
+              "userPoolId": "authh2umonopackageshelloc636e5bc"
             }
           },
           "additionalAuthenticationProviders": []
         }
       }
-    }
-  },
-  "function": {
-    "helloeroLambdaResolver": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
     }
   }
 }
