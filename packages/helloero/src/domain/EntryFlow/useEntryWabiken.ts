@@ -50,6 +50,7 @@ const isCreateUserWabikenMetaInput = (
   return !!(
     input &&
     (input as CreateUserWabikenMetaInput).contentDisplayName &&
+    input.activatedAt &&
     input.content &&
     input.content.key &&
     input.content.thumbnails
@@ -154,7 +155,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
 
       const createWabikenInput = getWabikenMeta?.wabiken && {
         ...getWabikenMeta?.wabiken,
-        ...activateWabikenApiData.data?.activateWabiken?.wabiken,
+        activatedAt:
+          activateWabikenApiData.data?.activateWabiken?.wabiken.activatedAt,
         contentDisplayName: getWabikenMeta.wabiken.content.displayName,
       };
 
