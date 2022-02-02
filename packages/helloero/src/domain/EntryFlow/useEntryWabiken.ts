@@ -154,6 +154,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
 
       const createWabikenInput = getWabikenMeta?.wabiken && {
         ...getWabikenMeta?.wabiken,
+        ...activateWabikenApiData.data?.activateWabiken?.wabiken,
         contentDisplayName: getWabikenMeta.wabiken.content.displayName,
       };
 

@@ -213,15 +213,15 @@ type PlayInfoResponse {
 
 type Query {
   getWabikenMeta(id: ID!): WabikenMetaResponse
-    @function(name: "helloeroLambdaResolver")
+    @function(name: "helloeroApiLambdaResolver")
   getPlayInfo(
     wabikenId: String!
     deviceCode: String!
     deviceId: String!
-  ): PlayInfoResponse @function(name: "helloeroLambdaResolver")
+  ): PlayInfoResponse @function(name: "helloeroApiLambdaResolver")
 }
 
 type Mutation {
   activateWabiken(id: ID!): WabikenMetaResponse
-    @function(name: "helloeroLambdaResolver")
+    @function(name: "helloeroApiLambdaResolver")
 }
