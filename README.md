@@ -6,23 +6,41 @@ helloero, account, help sites for h2u
 
 ### STEP1: add config file
 
-## 1.1 helloero
-
-1. Go to `/packages/helloero`
-2. Run `amplify pull --appId d2lpn6hawe153k --envName dev` (will be redirected to browser for login-credential input)
-3. Verify auto-generation of `/src/aws-export.js`
-
-## 1.2 account
+## 1.1 account
 
 1. Go to `/packages/account`
-2. Run `amplify pull --appId d2n1qbnmkdgxvt --envName develop` (will be redirected to browser for login-credential input)
-3. Verify auto-generation of `/src/aws-export.js`
+2. Run `rm -rf amplify`
+3. Run `amplify pull --appId d2n1qbnmkdgxvt --envName develop` (will be redirected to browser for login-credential input)
+4. Set up
 
-## 1.1 help
+```
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you're building javascript
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: .next
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+? Do you plan on modifying this backend? No
+```
+
+5. Verify auto-generation of `/src/aws-export.js`
+
+## 1.2 helloero
+
+1. Go to `/packages/helloero`
+2. Run `rm -rf amplify`
+3. Run `amplify pull --appId d2lpn6hawe153k --envName develop` (will be redirected to browser for login-credential input)
+4. Set up same as account.
+5. Verify auto-generation of `/src/aws-export.js`
+
+## 1.3 help
 
 1. Go to `/packages/help`
-2. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
-3. Verify auto-generation of `/src/aws-export.js`
+2. Run `rm -rf amplify`
+3. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
+4. Set up same as account.
+5. Verify auto-generation of `/src/aws-export.js`
 
 ### STEP2: add ENV
 

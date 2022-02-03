@@ -1,5 +1,6 @@
 {
-  "projectPath": "/Users/k-vaibhav/Documents/Development/helloero/packages/helloero",
+  "projectPath": "/Users/t-nakajima/_repo/helloero/packages/helloero",
   "envName": "develop",
-  "defaultEditor": "vscode"
+  "defaultEditor": "vscode",
+  "noUpdateBackend": true
 }
