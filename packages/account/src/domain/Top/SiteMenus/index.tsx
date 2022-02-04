@@ -37,6 +37,7 @@ const SiteMenus: React.FC = () => {
 const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.background.tertiary};
   margin: 3rem 0 0;
+  border-radius: 0.2rem;
 `;
 
 const Title = styled.div`

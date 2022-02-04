@@ -34,7 +34,7 @@ const SortBox: React.FC<UsePurchasedList> = ({ updateDisplayOrder }) => {
 
 const Container = styled.div`
   border: 2px solid ${({ theme }) => theme.keyColor.color4};
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   position: relative;
   opacity: 0.75;
   height: 2.5rem;

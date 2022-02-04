@@ -59,7 +59,7 @@ const Button = styled.button<{ hasIcon: boolean }>`
   ${typo.Standard};
   appearance: none;
   cursor: pointer;
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   font-weight: bold;
 
   display: block;
