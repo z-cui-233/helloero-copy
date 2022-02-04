@@ -49,7 +49,7 @@ const StyledIcon = styled(Icon)`
 
 const Input = styled.input`
   ${typo.Standard};
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   appearance: none;
   background-color: ${({ theme }) => theme.background.secondary};
   border: none;

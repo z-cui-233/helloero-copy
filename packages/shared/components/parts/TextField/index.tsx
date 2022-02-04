@@ -69,7 +69,7 @@ const Label = styled.label`
 
 const Input = styled.input<CustomInputProps>`
   ${typo.Standard};
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   appearance: none;
   background-color: ${({ theme }) => theme.background.primary};
   border: 2px solid

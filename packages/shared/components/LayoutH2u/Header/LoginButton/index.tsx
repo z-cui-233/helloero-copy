@@ -38,6 +38,7 @@ const Container = styled.a`
   margin: auto 0;
   background-color: ${({ theme }) => theme.background.primaryInverted};
   color: ${({ theme }) => theme.foreground.primaryInverted};
+  border-radius: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;

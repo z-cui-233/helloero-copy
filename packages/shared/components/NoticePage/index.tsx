@@ -69,7 +69,7 @@ const StyledLink = styled.a`
   padding: 0.5rem 1rem;
   text-decoration: none;
   min-width: 10rem;
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
 
   &:hover {
     text-decoration: none;
