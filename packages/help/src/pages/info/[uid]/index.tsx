@@ -22,7 +22,6 @@ const Page: NextPage<Props> = ({ infoDocument }) => {
         host={globalConfig.HELP}
         title={`${title}${lang.help.meta.infoDetail.title}`}
         description={lang.help.meta.infoDetail.description}
-        isMultiLang={false}
       />
       <InfoDetail infoDocument={infoDocument} />
     </React.Fragment>

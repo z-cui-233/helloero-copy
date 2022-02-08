@@ -25,7 +25,6 @@ const Page: NextPage<Props> = ({ guideDocument }) => {
           lang.help.meta.guideDetail.title
         }`}
         description={lang.help.meta.guideDetail.description}
-        isMultiLang={false}
       />
       <GuideDetail guideDocument={guideDocument} />
     </React.Fragment>

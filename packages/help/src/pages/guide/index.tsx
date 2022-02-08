@@ -27,7 +27,6 @@ const Page: NextPage<Props> = ({ guideTopDocument, guideCategoryDocument }) => {
         host={globalConfig.HELP}
         title={lang.help.meta.guide.title}
         description={lang.help.meta.guide.description}
-        isMultiLang={false}
       />
       <GuideTop
         guideTopDocument={guideTopDocument}

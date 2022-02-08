@@ -7,22 +7,15 @@ type Props = {
   host: string;
   title: string;
   description?: string;
-  isMultiLang?: boolean;
 };
 
-const MetaTags: React.FC<Props> = ({
-  host,
-  title,
-  description,
-  isMultiLang = true,
-}) => {
+const MetaTags: React.FC<Props> = ({ host, title, description }) => {
   const { asPath } = useRouter();
   const { locale } = useLocale();
 
   const canonicalPath = asPath.split('?')[0];
   const canonicalUrl = `${host}/${locale}${canonicalPath}`;
-  const canonicalJaUrl = `${host}/ja${canonicalPath}`;
-  const canonicalEnUrl = `${host}/en${canonicalPath}`;
+  const ogImageUrl = `${host}/images/share.jpg`;
 
   return (
     <Head>
@@ -37,14 +30,8 @@ const MetaTags: React.FC<Props> = ({
         key="og:description"
       />
       <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImageUrl} />
       <link rel="canonical" href={canonicalUrl} />
-      {isMultiLang && (
-        <React.Fragment>
-          <link rel="alternate" hrefLang="en" href={canonicalEnUrl} />
-          <link rel="alternate" hrefLang="ja" href={canonicalJaUrl} />
-          <link rel="alternate" hrefLang="x-default" href={canonicalJaUrl} />
-        </React.Fragment>
-      )}
     </Head>
   );
 };

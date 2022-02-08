@@ -22,7 +22,6 @@ const Page: NextPage<Props> = ({ guideCategoryDocument }) => {
         host={globalConfig.HELP}
         title={`${title}${lang.help.meta.guideCategory.title}`}
         description={lang.help.meta.guideCategory.description}
-        isMultiLang={false}
       />
       <GuideBrowse guideCategoryDocument={guideCategoryDocument} />
     </React.Fragment>

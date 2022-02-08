@@ -13,11 +13,16 @@ const GlobalHead: React.FC = () => {
       <link
         rel="shortcut icon"
         type="image/png"
-        href="/images/favicon.png?t=20211101"
+        href="/images/favicon.png?t=20220208"
       />
       <link
         rel="apple-touch-icon"
-        href="/images/apple-touch-icon.png?t=20211101"
+        href="/images/apple-touch-icon.png?t=20220208"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        href="/images/android-icon.png?t=20220208"
       />
     </Head>
   );
