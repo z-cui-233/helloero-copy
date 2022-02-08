@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { LocaleData, LocaleType } from 'u-next/locales';
 import langJa from '../i18n/ja';
-import langEn from '../i18n/en';
 
-const LOCALES = ['ja', 'en'] as const;
+const LOCALES = ['ja'] as const;
 
 type ContextProps = {
   locale: LocaleType;
@@ -18,7 +17,7 @@ const LocaleContext: React.Context<ContextProps> = React.createContext(
 
 const LocaleProvider: React.FC = ({ children }) => {
   const locale = useRouter().locale as LocaleType;
-  const lang = locale === LOCALES[0] ? langJa : langEn;
+  const lang = langJa;
 
   return (
     <LocaleContext.Provider

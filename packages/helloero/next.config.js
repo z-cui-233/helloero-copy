@@ -18,7 +18,7 @@ module.exports = {
   compress: false,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
   i18n: {
-    locales: ['ja', 'en'],
+    locales: ['ja'],
     defaultLocale: 'ja',
   },
   webpack(config) {
