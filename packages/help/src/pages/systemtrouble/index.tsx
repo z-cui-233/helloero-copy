@@ -20,7 +20,6 @@ const Page: NextPage<Props> = ({ systemTroubleDocument }) => {
         host={globalConfig.HELP}
         title={lang.help.meta.systemTrouble.title}
         description={lang.help.meta.systemTrouble.description}
-        isMultiLang={false}
       />
       <SystemTrouble systemTroubleDocument={systemTroubleDocument} />
     </React.Fragment>
