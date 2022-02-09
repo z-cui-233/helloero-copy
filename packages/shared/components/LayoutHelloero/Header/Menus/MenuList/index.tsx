@@ -13,34 +13,37 @@ type Props = {
 
 const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const { lang } = useLocale();
+  const { lang, locale } = useLocale();
   const backUrl = encodeURIComponent(options.HELLOERO);
 
   return (
     <Container>
       <React.Fragment>
-        <List>
-          <li>
-            {isLoadedUserInfo && !userInfo.isLoggedIn && (
-              <StyledLink href={`${options.ACCOUNT}/login?back=${backUrl}`}>
-                {lang.helloero.menus.login}
+        {isLoadedUserInfo && (
+          <List>
+            <li>
+              {!userInfo.isLoggedIn ? (
+                <StyledLink
+                  href={`${options.ACCOUNT}/${locale}/login?back=${backUrl}`}
+                >
+                  {lang.helloero.menus.login}
+                  <StyledArrowLogo />
+                </StyledLink>
+              ) : (
+                <StyledLink href={options.ACCOUNT}>
+                  {lang.helloero.menus.account}
+                  <StyledArrowLogo />
+                </StyledLink>
+              )}
+            </li>
+            <li>
+              <StyledLink href={options.HELP}>
+                {lang.helloero.menus.help}
                 <StyledArrowLogo />
               </StyledLink>
-            )}
-          </li>
-          <li>
-            <StyledLink href={options.ACCOUNT}>
-              {lang.helloero.menus.account}
-              <StyledArrowLogo />
-            </StyledLink>
-          </li>
-          <li>
-            <StyledLink href={options.HELP}>
-              {lang.helloero.menus.help}
-              <StyledArrowLogo />
-            </StyledLink>
-          </li>
-        </List>
+            </li>
+          </List>
+        )}
       </React.Fragment>
     </Container>
   );
