@@ -60,7 +60,7 @@ const formValidations = {
   password: (locale: LocaleType) =>
     Yup.string()
       .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]/, validationMessages['alphanumerical'][locale])
+      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
       .min(8, validationMessages['min8'][locale]),
 
   email: (locale: LocaleType) =>
