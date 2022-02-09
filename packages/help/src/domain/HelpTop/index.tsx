@@ -11,8 +11,8 @@ const HelpTop: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.top.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.top.title} />
+      <MainContainer>
         <MenuCard
           urlPattern={'guide'}
           title={lang.help.top.guide.title}

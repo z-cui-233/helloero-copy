@@ -10,7 +10,7 @@ const TermsPrivacy: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.termsPrivacy.title} />
+      <BigBar title={lang.help.termsPrivacy.title} />
       <MainContainer>TermsPrivacy</MainContainer>
     </LayoutH2u>
   );

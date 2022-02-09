@@ -39,8 +39,8 @@ const GuideBrowse: React.FC<Props> = ({ guideCategoryDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.guide.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.guide.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Title>
           <PrismicText field={guideCategoryDocument.data.title} />

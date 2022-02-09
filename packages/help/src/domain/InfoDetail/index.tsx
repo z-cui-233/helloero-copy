@@ -41,8 +41,8 @@ const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.info.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.info.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>
           <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>

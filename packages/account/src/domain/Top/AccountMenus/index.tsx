@@ -13,7 +13,7 @@ const AccountMenus: React.FC = () => {
   return isLoadedUserInfo ? (
     <Container>
       <Title>{lang.account.top.accountMenus.title}</Title>
-      <List>
+      <div>
         {!userInfo.isLoggedIn && (
           <React.Fragment>
             <div>
@@ -54,7 +54,7 @@ const AccountMenus: React.FC = () => {
             </div>
           </React.Fragment>
         )}
-      </List>
+      </div>
     </Container>
   ) : null;
 };
@@ -67,11 +67,7 @@ const Container = styled.div`
 
 const Title = styled.div`
   ${typo.Heading3};
-  margin: 1.5rem 1.5rem 0;
-`;
-
-const List = styled.div`
-  margin: 1.5rem 0 0 1.5rem;
+  padding: 1.5rem 1rem;
 `;
 
 const StyledLink = styled.a`

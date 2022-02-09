@@ -30,7 +30,7 @@ const Container = styled.div`
 const Contents = styled.div<{ size: Size }>`
   margin: 0 auto;
   width: calc(100% - 2rem);
-  max-width: ${({ size }) => (size === 'normal' ? '640px' : '840px')};
+  max-width: ${({ size }) => (size === 'normal' ? '40rem' : '46rem')};
 `;
 
 const Title = styled.h1`

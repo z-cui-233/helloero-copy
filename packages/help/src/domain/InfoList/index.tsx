@@ -32,8 +32,8 @@ const InfoList: React.FC<Props> = ({ infoDocuments }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.info.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.info.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <List>
           {infoDocuments.results.map((doc) => (

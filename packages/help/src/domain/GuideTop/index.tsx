@@ -42,8 +42,8 @@ const GuideTop: React.FC<Props> = ({
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.guide.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.guide.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>
           {guideTopDocument.data.category_links.map((doc, index) => (
