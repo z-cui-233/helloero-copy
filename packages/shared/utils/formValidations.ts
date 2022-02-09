@@ -49,12 +49,12 @@ const formValidations = {
   verificationCode: (locale: LocaleType) =>
     Yup.string()
       .required(validationMessages['required'][locale])
-      .matches(/^[0-9]/, validationMessages['numerical'][locale]),
+      .matches(/^[0-9]*$/, validationMessages['numerical'][locale]),
 
   loginId: (locale: LocaleType) =>
     Yup.string()
       .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]/, validationMessages['alphanumerical'][locale])
+      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
       .min(6, validationMessages['min6'][locale]),
 
   password: (locale: LocaleType) =>
@@ -71,7 +71,7 @@ const formValidations = {
   wabiken: (locale: LocaleType) =>
     Yup.string()
       .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]/, validationMessages['alphanumerical'][locale])
+      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
       .length(16, validationMessages['length16'][locale]),
 };
 
