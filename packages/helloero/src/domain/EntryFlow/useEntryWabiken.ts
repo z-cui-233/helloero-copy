@@ -157,6 +157,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         ...getWabikenMeta?.wabiken,
         activatedAt:
           activateWabikenApiData.data?.activateWabiken?.wabiken.activatedAt,
+        notValidAfter: activateWabikenApiData.data?.activateWabiken?.wabiken
+          .notValidAfter as number,
         contentDisplayName: getWabikenMeta.wabiken.content.displayName,
       };
 
