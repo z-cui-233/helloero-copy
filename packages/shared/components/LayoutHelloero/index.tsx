@@ -20,7 +20,7 @@ const LayoutHelloero: React.VFC<Props> = ({ children, options }) => {
     <Container>
       <Header options={options} />
       <Main>{children}</Main>
-      <Footer />
+      <Footer options={options} />
     </Container>
   );
 };

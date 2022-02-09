@@ -144,6 +144,12 @@ export interface LocaleData {
       account: string;
       help: string;
     };
+    footer: {
+      help: string;
+      company: string;
+      privacy: string;
+      terms: string;
+    };
     top: {
       title: string;
       service: {
@@ -275,6 +281,13 @@ export interface LocaleData {
       account: string;
       help: string;
     };
+    footer: {
+      account: string;
+      help: string;
+      company: string;
+      privacy: string;
+      terms: string;
+    };
     top: {
       lead: string;
       description: string;
@@ -367,6 +380,7 @@ export interface LocaleData {
         title: string;
         text: string;
       };
+      terms: string;
     };
     info: {
       title: string;

@@ -165,6 +165,12 @@ const lang: LocaleData = {
       account: 'アカウント',
       help: 'ヘルプ',
     },
+    footer: {
+      help: 'ヘルプ',
+      company: '運営会社',
+      privacy: '個人情報保護方針',
+      terms: '利用規約',
+    },
     top: {
       title: 'アカウント',
       service: {
@@ -298,6 +304,13 @@ const lang: LocaleData = {
       account: 'アカウント',
       help: 'ヘルプ',
     },
+    footer: {
+      account: 'アカウント',
+      help: 'ヘルプ',
+      company: '運営会社',
+      privacy: '個人情報保護方針',
+      terms: '利用規約',
+    },
     top: {
       lead: 'シンプルに、カジュアルに。アダルトコンテンツを楽しもう。',
       description:
@@ -392,6 +405,7 @@ const lang: LocaleData = {
         title: 'お問い合わせ',
         text: '「よくある質問」で解決しない問題についてお問い合わせください。',
       },
+      terms: '利用規約',
     },
     info: {
       title: 'お知らせ',
@@ -403,7 +417,7 @@ const lang: LocaleData = {
       title: 'プライバシーポリシー',
     },
     termsService: {
-      title: 'サービス規約',
+      title: '利用規約',
     },
     inquiry: {
       title: 'お問い合わせ',

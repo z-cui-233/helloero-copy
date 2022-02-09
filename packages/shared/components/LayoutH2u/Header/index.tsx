@@ -23,12 +23,8 @@ const Header: React.FC<Props> = ({ options }) => {
 
 const Container = styled.header`
   background-color: ${({ theme }) => theme.keyColor.color1};
-  position: fixed;
-  top: 0;
-  left: 0.5rem;
-  right: 0.5rem;
+  position: relative;
   height: 4.5rem;
-  z-index: 100;
 `;
 
 const HeaderContents = styled.div`

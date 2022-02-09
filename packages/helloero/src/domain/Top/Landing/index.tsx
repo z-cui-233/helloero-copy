@@ -49,20 +49,19 @@ const Landing: React.FC = () => {
 };
 
 const Container = styled.section`
-  max-width: 1024px;
+  max-width: 60rem;
   margin: 4rem auto 0;
-  width: calc(100% - 4rem);
+  width: calc(100% - 2rem);
 
   @media ${device.ltSd} {
-    max-width: 640px;
-    width: calc(100% - 2rem);
+    max-width: 30rem;
   }
 `;
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 4rem;
+  grid-gap: 2.5rem;
 
   @media ${device.ltSd} {
     grid-template-columns: 1fr;
@@ -82,6 +81,11 @@ const Artwork = styled.div`
     content: '';
     display: block;
     background-color: ${({ theme }) => theme.keyColor.color3};
+  }
+
+  @media ${device.ltSd} {
+    max-width: 25rem;
+    margin: 0 auto;
   }
 `;
 
