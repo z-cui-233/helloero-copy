@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "types": "index.d.ts",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "echo 'no build'",
     "lint": "eslint \"./**/*.{ts,tsx,js}\"",
