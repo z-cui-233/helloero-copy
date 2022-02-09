@@ -38,7 +38,7 @@ const Main = styled.div`
   position: relative;
   width: 100%;
   margin: 0 auto;
-  padding: 4.5rem 0;
+  padding: 4.5rem 0 5rem;
   background-color: ${({ theme }) => theme.background.primary};
 `;
 
