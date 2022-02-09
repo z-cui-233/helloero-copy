@@ -1,32 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
-import HamburgerButton from './HamburgerButton';
 import LoginButton from './LoginButton';
-import Menus from './Menus';
 import SiteLogo from './SiteLogo';
+import UserName from './UserName';
 
 type Props = {
   options: Config;
 };
 
 const Header: React.FC<Props> = ({ options }) => {
-  const [isDisplayedMenu, setIsDisplayedMenu] = useState<boolean>(false);
-
-  const handleClickHamburger = (): void => {
-    setIsDisplayedMenu(!isDisplayedMenu);
-  };
-
   return (
     <Container>
       <HeaderContents>
         <SiteLogo options={options} />
         <LoginButton options={options} />
-        <HamburgerButton
-          isDisplayedMenu={isDisplayedMenu}
-          onClick={handleClickHamburger}
-        />
-        <Menus isDisplayedMenu={isDisplayedMenu} options={options} />
+        <UserName />
       </HeaderContents>
     </Container>
   );

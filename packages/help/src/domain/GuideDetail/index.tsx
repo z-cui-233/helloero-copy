@@ -39,8 +39,8 @@ const GuideDetail: React.FC<Props> = ({ guideDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.guide.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.guide.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>
           <Title>

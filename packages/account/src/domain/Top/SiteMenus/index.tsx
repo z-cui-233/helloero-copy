@@ -4,61 +4,69 @@ import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
-import ListRightArrow from '@/shared/components/ListRightArrow';
+import LogoHelloero from '@/shared/assets/logo/helloeroBlack.svg';
+import device from '@/shared/styles/device';
 
 const SiteMenus: React.FC = () => {
   const { lang } = useLocale();
 
   return (
     <Container>
-      <Title>{lang.account.top.siteMenus.title}</Title>
-      <List>
-        <div>
-          <Link href={`${globalConfig.HELLOERO}/`} passHref>
-            <StyledLink>
-              {lang.account.top.siteMenus.helloero}
-              <ListRightArrow />
-            </StyledLink>
-          </Link>
-        </div>
-        <div>
-          <Link href={`${globalConfig.HELP}/`} passHref>
-            <StyledLink>
-              {lang.account.top.siteMenus.help}
-              <ListRightArrow />
-            </StyledLink>
-          </Link>
-        </div>
-      </List>
+      <Title>{lang.account.top.service.title}</Title>
+      <Link href={`${globalConfig.HELLOERO}/`} passHref>
+        <ServiceCard>
+          <ServiceName>
+            {lang.account.top.service.helloero1}
+            <br />
+            {lang.account.top.service.helloero2}
+          </ServiceName>
+          <ServiceLogo>
+            <LogoHelloero />
+          </ServiceLogo>
+        </ServiceCard>
+      </Link>
     </Container>
   );
 };
 
 const Container = styled.div`
-  border: 1px solid ${({ theme }) => theme.background.tertiary};
   margin: 3rem 0 0;
-  border-radius: 0.2rem;
 `;
 
 const Title = styled.div`
-  ${typo.Heading3};
-  margin: 1.5rem 1.5rem 0;
+  ${typo.Lead1};
 `;
 
-const List = styled.div`
-  margin: 1.5rem 0 0 1.5rem;
-`;
-
-const StyledLink = styled.a`
-  border-top: 1px solid ${({ theme }) => theme.background.tertiary};
-  padding: 1rem 2.5rem 1rem 1rem;
+const ServiceCard = styled.a`
   display: block;
-  transition: background-color 0.1s ease-out;
-  position: relative;
+  margin: 1rem 0 0;
+  border: 1px solid ${({ theme }) => theme.background.tertiary};
+  border-radius: 0.2rem;
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr 40%;
+  grid-gap: 1.5rem;
+  align-items: center;
+
+  @media ${device.ltTablet} {
+    grid-template-columns: 1fr;
+  }
 
   &:hover {
-    background-color: ${({ theme }) => theme.background.secondary};
     text-decoration: none;
+  }
+`;
+
+const ServiceName = styled.div`
+  ${typo.Lead2};
+  color: ${({ theme }) => theme.foreground.primary};
+  font-weight: bold;
+`;
+
+const ServiceLogo = styled.div`
+  & > svg {
+    max-width: 20rem;
   }
 `;
 

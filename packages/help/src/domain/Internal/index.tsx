@@ -23,7 +23,7 @@ const Internal: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <MainContainer size="large">
+      <MainContainer>
         <FieldSection>
           <Title>LoginStatus</Title>
           <Detail>

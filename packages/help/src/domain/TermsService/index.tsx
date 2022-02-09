@@ -10,7 +10,7 @@ const TermsService: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.termsService.title} />
+      <BigBar title={lang.help.termsService.title} />
       <MainContainer>TermsService</MainContainer>
     </LayoutH2u>
   );

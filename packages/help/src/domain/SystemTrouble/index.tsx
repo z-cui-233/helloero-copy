@@ -33,8 +33,8 @@ const SystemTrouble: React.FC<Props> = ({ systemTroubleDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar size="large" title={lang.help.systemTrouble.title} />
-      <MainContainer size="large">
+      <BigBar title={lang.help.systemTrouble.title} />
+      <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>
           <RichTextContainer>

@@ -146,10 +146,10 @@ export interface LocaleData {
     };
     top: {
       title: string;
-      subText: string;
       service: {
         title: string;
-        helloero: string;
+        helloero1: string;
+        helloero2: string;
       };
       accountMenus: {
         title: string;
@@ -157,11 +157,6 @@ export interface LocaleData {
         updateEmail: string;
         resetPassword: string;
         logout: string;
-      };
-      siteMenus: {
-        title: string;
-        helloero: string;
-        help: string;
       };
     };
     login: {

@@ -29,7 +29,7 @@ const StyledLogo = styled(Logo)`
     bottom: 0;
     margin: auto;
     height: 2.5rem;
-    width: auto 0;
+    width: auto;
     display: block;
   }
 `;

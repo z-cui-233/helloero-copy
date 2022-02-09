@@ -31,7 +31,7 @@ const Container = styled.a`
   ${typo.Body}
   position: absolute;
   top: 0;
-  right: 3.5rem;
+  right: 1rem;
   bottom: 0;
   height: 2.5rem;
   z-index: 1000;
