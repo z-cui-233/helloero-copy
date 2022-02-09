@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { globalConfig } from 'src/globalConfig';
 import { UseSignUp } from '../useSignUp';
 import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/parts/MainContainer';
@@ -13,6 +12,7 @@ import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import { PRIVACY_URL, TERMS_URL } from '@/shared/constants/terms';
 
 type Props = {
   signUpState: UseSignUp['signUpState'];
@@ -81,19 +81,11 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
           <div>{lang.account.signUp.step1.terms.title}</div>
           <div>
             {/* 個人情報保護方針 */}
-            <a
-              href={`${globalConfig.HELP}/${locale}/terms/privacy`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
               {lang.account.signUp.step1.terms.privacy}
             </a>
             {/* 利用規約 */}
-            <a
-              href={`${globalConfig.HELP}/${locale}/terms/service`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={TERMS_URL} target="_blank" rel="noopener noreferrer">
               {lang.account.signUp.step1.terms.service}
             </a>
           </div>

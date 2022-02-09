@@ -25,7 +25,7 @@ const GuideCard: React.FC<Props> = ({ document }) => {
 
 const Container = styled.a`
   display: block;
-  padding: 1.5rem 2.5rem 1.5rem 1rem;
+  padding: 1rem 2.5rem 1rem 1rem;
   text-decoration: none;
   transition: background-color 0.1s ease-out;
   position: relative;
