@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
-import { useLocale } from '../../../../context/LocaleContext';
 import { useLoginStateContext } from '../../../../context/LoginStateContext';
 import typo from '../../../../styles/typo';
 
@@ -13,15 +12,14 @@ type Props = {
 
 const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const { locale, lang } = useLocale();
   const router = useRouter();
 
   return isLoadedUserInfo &&
     !userInfo.isLoggedIn &&
     router.pathname !== '/login' ? (
-    <Link href={`${options.ACCOUNT}/${locale}/login`} passHref>
+    <Link href={`${options.ACCOUNT}/login`} passHref>
       <Container>
-        <div>{lang.account.menus.login}</div>
+        <div>ログイン</div>
       </Container>
     </Link>
   ) : null;

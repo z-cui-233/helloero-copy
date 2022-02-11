@@ -1,5 +1,5 @@
 import dateFormat from 'dateformat';
-import { LocaleData, LocaleType } from 'u-next/locales';
+import { MessageKeys, MESSAGES } from '../constants/messages';
 
 export const createTitleThumbnailUrl = (
   url: string | undefined | null
@@ -16,44 +16,35 @@ export const createTitleThumbnailUrl = (
 };
 
 export const getErrorMessage = (
-  lang: LocaleData,
-  key: keyof typeof lang.messages,
+  key: MessageKeys,
   code: number | string | undefined
 ): string => {
-  const messageList = lang.messages[key];
+  const messageList = MESSAGES[key];
   const errorMessage =
-    messageList[code as keyof typeof messageList] ?? lang.messages.default;
+    messageList[code as keyof typeof messageList] ?? MESSAGES.default;
 
   return errorMessage;
 };
 
 export const createExpireDate = (
-  local: LocaleType,
   validityPeriod: number | undefined,
   notValidAfter?: number
 ): string => {
   // 0sec = EST. we should not show expireDate
   if (!validityPeriod || validityPeriod === 0) {
-    return local === 'ja' ? '無期限で視聴可能' : 'Watch no expiration';
+    return '無期限で視聴可能';
   }
 
   const referenceDate = notValidAfter ? new Date(0) : new Date();
   referenceDate.setSeconds(notValidAfter ? notValidAfter : validityPeriod);
 
-  return local === 'ja'
-    ? `${dateFormat(referenceDate, 'yyyy年m月d日 HH:MM')}まで視聴可能`
-    : `Watch until ${dateFormat(referenceDate, 'mmm dd, yyyy HH:MM')} JST`;
+  return `${dateFormat(referenceDate, 'yyyy年m月d日 HH:MM')}まで視聴可能`;
 };
 
-export const convertDateToString = (
-  local: LocaleType,
-  date: Date | null
-): string => {
+export const convertDateToString = (date: Date | null): string => {
   if (!date) {
     return '';
   }
 
-  return local === 'ja'
-    ? dateFormat(date, 'yyyy年m月d日')
-    : dateFormat(date, 'mmm dd, yyyy');
+  return dateFormat(date, 'yyyy年m月d日');
 };

@@ -6,7 +6,6 @@ import IconGuide from '@/shared/assets/icon/help_guide.svg';
 import IconInquiry from '@/shared/assets/icon/help_inquiry.svg';
 import IconInfo from '@/shared/assets/icon/help_info.svg';
 import ListRightArrow from '@/shared/components/ListRightArrow';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type UrlPattern = 'guide' | 'info' | 'inquiry';
 
@@ -49,11 +48,9 @@ const getIcon = (urlPattern: UrlPattern): JSX.Element => {
 };
 
 const MenuCard: React.FC<Props> = ({ urlPattern, title, texts }) => {
-  const { locale } = useLocale();
-
   return (
     <Container>
-      <Link href={`/${locale}/${urlPattern}`} passHref>
+      <Link href={`/${urlPattern}`} passHref>
         <StyledLink>
           {getIcon(urlPattern)}
           <Title>{title}</Title>

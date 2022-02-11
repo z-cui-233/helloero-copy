@@ -8,7 +8,6 @@ import Thumbnail from './Thumbnail';
 import PortalModal from '@/shared/components/PortalModal';
 import device from '@/shared/styles/device';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type Props = {
   userWabikenMeta: UserWabikenMeta | null;
@@ -21,7 +20,6 @@ const TitleDetail: React.FC<Props> = ({
   isShownDetail,
   onClickClose,
 }) => {
-  const { locale } = useLocale();
   const router = useRouter();
 
   return isShownDetail && userWabikenMeta ? (
@@ -41,7 +39,6 @@ const TitleDetail: React.FC<Props> = ({
             <MetaInfo
               titleName={userWabikenMeta.content.displayName}
               displayExpireDate={createExpireDate(
-                locale,
                 userWabikenMeta.validityPeriod,
                 userWabikenMeta.notValidAfter
               )}

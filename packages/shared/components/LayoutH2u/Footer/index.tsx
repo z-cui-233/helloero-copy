@@ -5,15 +5,12 @@ import typo from '../../../styles/typo';
 import IconH2U from '../../../assets/logo/h2uWhite.svg';
 import device from '../../../styles/device';
 import { COMPANY_URL, PRIVACY_URL, TERMS_URL } from '../../../constants/terms';
-import { useLocale } from '../../../context/LocaleContext';
 
 type Props = {
   options: Config;
 };
 
 const Footer: React.FC<Props> = ({ options }) => {
-  const { lang } = useLocale();
-
   return (
     <Container>
       <Contents>
@@ -27,7 +24,7 @@ const Footer: React.FC<Props> = ({ options }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.footer.help}
+              ヘルプ
             </StyledLink>
           </LinkItem>
           <LinkItem>
@@ -36,7 +33,7 @@ const Footer: React.FC<Props> = ({ options }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.footer.company}
+              運営会社
             </StyledLink>
           </LinkItem>
           <LinkItem>
@@ -45,7 +42,7 @@ const Footer: React.FC<Props> = ({ options }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.footer.privacy}
+              個人情報保護方針
             </StyledLink>
           </LinkItem>
           <LinkItem>
@@ -54,7 +51,7 @@ const Footer: React.FC<Props> = ({ options }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {lang.account.footer.terms}
+              利用規約
             </StyledLink>
           </LinkItem>
         </Links>

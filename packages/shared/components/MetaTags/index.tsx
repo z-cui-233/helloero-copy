@@ -1,7 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
-import { useLocale } from '../../context/LocaleContext';
 
 type Props = {
   host: string;
@@ -11,10 +10,9 @@ type Props = {
 
 const MetaTags: React.FC<Props> = ({ host, title, description }) => {
   const { asPath } = useRouter();
-  const { locale } = useLocale();
 
   const canonicalPath = asPath.split('?')[0];
-  const canonicalUrl = `${host}/${locale}${canonicalPath}`;
+  const canonicalUrl = `${host}/${canonicalPath}`;
   const ogImageUrl = `${host}/images/share.jpg`;
 
   return (

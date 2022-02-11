@@ -12,34 +12,32 @@ import typo from '@/shared/styles/typo';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type Props = {
   guideDocument: GuideDocument;
 };
 
 const GuideDetail: React.FC<Props> = ({ guideDocument }) => {
-  const { locale, lang } = useLocale();
   const title = prismicH.asText(guideDocument.data.question);
 
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/guide`,
-      text: lang.help.guide.title,
+      path: '/guide',
+      text: 'よくある質問',
     },
     {
-      path: `/${locale}/guide/detail/${guideDocument.uid}`,
+      path: `/guide/detail/${guideDocument.uid}`,
       text: title as string,
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.guide.title} />
+      <BigBar title="よくある質問" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>

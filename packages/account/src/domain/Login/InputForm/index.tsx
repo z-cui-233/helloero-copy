@@ -9,7 +9,6 @@ import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -23,13 +22,11 @@ const InputForm: React.FC<Props> = ({
   loginChallengeState,
   challengeLogin,
 }) => {
-  const { locale, lang } = useLocale();
-
   const formik = useFormik({
     initialValues: loginChallengeState.formValues,
     validationSchema: Yup.object().shape({
-      loginId: formValidations.loginId(locale),
-      password: formValidations.password(locale),
+      loginId: formValidations.loginId,
+      password: formValidations.password,
     }),
     onSubmit: challengeLogin,
   });
@@ -46,43 +43,38 @@ const InputForm: React.FC<Props> = ({
         <Section>
           <FieldSection>
             <TextField
-              label={formLabels.loginId.label[locale]}
+              label={formLabels.loginId.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'loginId'),
                 autoComplete: 'username',
-                placeholder: formLabels.loginId.placeholder[locale],
+                placeholder: formLabels.loginId.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'loginId')}
             />
           </FieldSection>
           <FieldSection>
             <TextField
-              label={formLabels.password.label[locale]}
+              label={formLabels.password.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'password', 'password'),
                 autoComplete: 'new-password',
-                placeholder: formLabels.password.placeholder[locale],
+                placeholder: formLabels.password.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'password')}
             />
             <ResetPassword>
-              <Link href={`/${locale}/reset-password`} passHref>
-                <ResetPasswordLink>
-                  {lang.account.login.input.resetPassword}
-                </ResetPasswordLink>
+              <Link href={'/reset-password'} passHref>
+                <ResetPasswordLink>パスワードを忘れた方</ResetPasswordLink>
               </Link>
             </ResetPassword>
           </FieldSection>
         </Section>
         <ButtonSection>
-          <ButtonStandard
-            type="submit"
-            label={lang.account.login.input.button}
-          />
+          <ButtonStandard type="submit" label="ログイン" />
         </ButtonSection>
         <SignUp>
-          <Link href={`/${locale}/signup`} passHref>
-            <SignUpLink>{lang.account.login.input.signUp}</SignUpLink>
+          <Link href={'/signup'} passHref>
+            <SignUpLink>H2Uアカウントを無料で登録</SignUpLink>
           </Link>
         </SignUp>
       </form>

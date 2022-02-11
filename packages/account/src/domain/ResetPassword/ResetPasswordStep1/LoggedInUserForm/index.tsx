@@ -4,7 +4,6 @@ import { UseResetPassword } from '../../useResetPassword';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 type Props = {
@@ -16,13 +15,14 @@ const LoggedInUserForm: React.FC<Props> = ({
   resetPasswordState,
   sendVerificationCode,
 }) => {
-  const { lang } = useLocale();
   const { userInfo } = useLoginStateContext();
 
   return (
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
-      <Text>{lang.account.resetPassword.send.text}</Text>
+      <Text>
+        パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
+      </Text>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -30,7 +30,7 @@ const LoggedInUserForm: React.FC<Props> = ({
               loginId: userInfo.userName ?? '',
             });
           }}
-          label={lang.account.resetPassword.send.button}
+          label="本人確認メールを送信"
         />
       </ButtonSection>
     </MainContainer>

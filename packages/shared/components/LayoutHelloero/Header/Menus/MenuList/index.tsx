@@ -5,7 +5,6 @@ import typo from '../../../../../styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
-import { useLocale } from '../../../../../context/LocaleContext';
 
 type Props = {
   options: Config;
@@ -13,7 +12,6 @@ type Props = {
 
 const MenuList: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const { lang, locale } = useLocale();
   const backUrl = encodeURIComponent(options.HELLOERO);
 
   return (
@@ -23,22 +21,20 @@ const MenuList: React.FC<Props> = ({ options }) => {
           <List>
             <li>
               {!userInfo.isLoggedIn ? (
-                <StyledLink
-                  href={`${options.ACCOUNT}/${locale}/login?back=${backUrl}`}
-                >
-                  {lang.helloero.menus.login}
+                <StyledLink href={`${options.ACCOUNT}/login?back=${backUrl}`}>
+                  ログイン/登録
                   <StyledArrowLogo />
                 </StyledLink>
               ) : (
                 <StyledLink href={options.ACCOUNT}>
-                  {lang.helloero.menus.account}
+                  アカウント
                   <StyledArrowLogo />
                 </StyledLink>
               )}
             </li>
             <li>
               <StyledLink href={options.HELP}>
-                {lang.helloero.menus.help}
+                ヘルプ
                 <StyledArrowLogo />
               </StyledLink>
             </li>

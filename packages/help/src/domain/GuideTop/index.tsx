@@ -13,7 +13,6 @@ import {
 import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 import GuideCard from '@/localShared/components/GuideCard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
@@ -27,22 +26,20 @@ const GuideTop: React.FC<Props> = ({
   guideTopDocument,
   guideCategoryDocument,
 }) => {
-  const { locale, lang } = useLocale();
-
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/guide`,
-      text: lang.help.guide.title,
+      path: '/guide',
+      text: 'よくある質問',
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.guide.title} />
+      <BigBar title="よくある質問" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>
@@ -66,7 +63,7 @@ const GuideTop: React.FC<Props> = ({
               {guideCategoryDocument[index].data.guide_links.length > 3 && (
                 <ReadMore>
                   <Link
-                    href={`/${locale}/guide/browse/${doc.category_link.uid}`}
+                    href={`/guide/browse/${doc.category_link.uid}`}
                     passHref
                   >
                     <a>もっと見る</a>

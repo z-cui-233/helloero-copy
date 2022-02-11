@@ -2,23 +2,20 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
 import LogoHelloero from '@/shared/assets/logo/helloeroBlack.svg';
 import device from '@/shared/styles/device';
 
 const SiteMenus: React.FC = () => {
-  const { lang } = useLocale();
-
   return (
     <Container>
-      <Title>{lang.account.top.service.title}</Title>
+      <Title>サービス</Title>
       <Link href={`${globalConfig.HELLOERO}/`} passHref>
         <ServiceCard>
           <ServiceName>
-            {lang.account.top.service.helloero1}
+            シンプルに、カジュアルに。
             <br />
-            {lang.account.top.service.helloero2}
+            アダルトコンテンツを楽しもう。
           </ServiceName>
           <ServiceLogo>
             <LogoHelloero />

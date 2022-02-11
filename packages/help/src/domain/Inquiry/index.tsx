@@ -2,29 +2,26 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 
 const Inquiry: React.FC = () => {
-  const { locale, lang } = useLocale();
-
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/inquiry`,
-      text: lang.help.inquiry.title,
+      path: '/inquiry',
+      text: 'お問い合わせ',
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.inquiry.title} />
+      <BigBar title="お問い合わせ" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>Inquiry</div>

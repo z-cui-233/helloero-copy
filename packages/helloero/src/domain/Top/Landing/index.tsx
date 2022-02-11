@@ -5,15 +5,13 @@ import { globalConfig } from 'src/globalConfig';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const Landing: React.FC = () => {
   const router = useRouter();
-  const { locale, lang } = useLocale();
 
   const handleClickSingIn = (): void => {
-    const backUrl = encodeURIComponent(`${globalConfig.HELLOERO}/${locale}`);
-    router.push(`${globalConfig.ACCOUNT}/${locale}/login?back=${backUrl}`);
+    const backUrl = encodeURIComponent(globalConfig.HELLOERO);
+    router.push(`${globalConfig.ACCOUNT}/login?back=${backUrl}`);
   };
 
   return (
@@ -31,14 +29,18 @@ const Landing: React.FC = () => {
         </div>
         <LeadTexts>
           <div>
-            <Title>{lang.helloero.top.lead}</Title>
-            <Text>{lang.helloero.top.description}</Text>
+            <Title>
+              シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
+            </Title>
+            <Text>
+              ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
+            </Text>
             <ButtonContainer>
               <ButtonStandard
                 onClick={() => {
                   handleClickSingIn();
                 }}
-                label={lang.helloero.top.button}
+                label="ログイン/アカウント登録"
               />
             </ButtonContainer>
           </div>

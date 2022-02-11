@@ -4,9 +4,7 @@ import React from 'react';
 import nookies from 'nookies';
 import { fetchPreviewUrl } from '@/localShared/lib/prismic';
 
-const Page: NextPage = () => {
-  return <div>preview page</div>;
-};
+const Page: NextPage = () => <div>preview page</div>;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.query.token as string;

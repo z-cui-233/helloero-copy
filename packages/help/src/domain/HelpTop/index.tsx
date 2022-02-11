@@ -6,34 +6,41 @@ import MenuCard from './MenuCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import BigBar from '@/shared/components/BigBar';
-import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
 
-const HelpTop: React.FC = () => {
-  const { lang } = useLocale();
+const MenuList = [
+  {
+    key: 'guide',
+    title: 'よくある質問',
+    text: 'H2U、HELLOEROについて、使い方やご質問、ご不明な点を確認できます。',
+  },
+  {
+    key: 'info',
+    title: 'お知らせ',
+    text: 'H2Uからのお知らせを確認できます。',
+  },
+  {
+    key: 'inquiry',
+    title: 'お問い合わせ',
+    text: '「よくある質問」で解決しない問題についてお問い合わせください。',
+  },
+] as const;
 
+const HelpTop: React.FC = () => {
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.top.title} />
+      <BigBar title="ヘルプセンター" />
       <MainContainer>
-        <MenuCard
-          urlPattern={'guide'}
-          title={lang.help.top.guide.title}
-          texts={lang.help.top.guide.text}
-        />
-        <MenuCard
-          urlPattern={'info'}
-          title={lang.help.top.info.title}
-          texts={lang.help.top.info.text}
-        />
-        <MenuCard
-          urlPattern={'inquiry'}
-          title={lang.help.top.inquiry.title}
-          texts={lang.help.top.inquiry.text}
-        />
+        {MenuList.map((data) => {
+          <MenuCard
+            urlPattern={data.key}
+            title={data.title}
+            texts={data.text}
+          />;
+        })}
         <TermsLink>
           <Link href="/terms/service" passHref>
-            <a>{lang.help.top.terms}</a>
+            <a>利用規約</a>
           </Link>
         </TermsLink>
       </MainContainer>

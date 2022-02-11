@@ -7,7 +7,6 @@ import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { useLocale } from '@/shared/context/LocaleContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
@@ -38,7 +37,6 @@ export type UseSignUp = {
 
 const useSignUp = (): UseSignUp => {
   const router = useRouter();
-  const { locale } = useLocale();
   const { signUp, confirmSignUp, signIn } = useAmplifyAuth();
 
   const [signUpState, setSignUpState] = useState<SignUpState>({
@@ -154,7 +152,7 @@ const useSignUp = (): UseSignUp => {
     }
 
     if (userInfo.isLoggedIn) {
-      router.replace(`/${locale}`);
+      router.replace('/');
       return;
     }
 
@@ -162,13 +160,7 @@ const useSignUp = (): UseSignUp => {
       ...signUpState,
       pageStatus: PAGE_STATUS.STEP1_INPUT,
     }));
-  }, [
-    isLoadedUserInfo,
-    locale,
-    router,
-    signUpState.pageStatus,
-    userInfo.isLoggedIn,
-  ]);
+  }, [isLoadedUserInfo, router, signUpState.pageStatus, userInfo.isLoggedIn]);
 
   return {
     signUpState,

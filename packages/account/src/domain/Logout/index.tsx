@@ -5,29 +5,29 @@ import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { useLocale } from '@/shared/context/LocaleContext';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import BigBar from '@/shared/components/BigBar';
 
 const Logout: React.FC = () => {
   const { logoutChallengeState, invokeLogOut } = useLogoutChallenge();
-  const { locale, lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.account.logout.title} />
+      <BigBar title="ログアウト" />
       {logoutChallengeState.pageStatus === PAGE_STATUS.CONFIRM ? (
         <MainContainer>
-          <Text>{lang.account.logout.text}</Text>
+          <Text>
+            H2Uからログアウトしますか？再度ログインするには、ログインIDとパスワードが必要です。
+          </Text>
           <ButtonSection>
             <ButtonStandard
               onClick={() => {
                 invokeLogOut();
               }}
-              label={lang.account.logout.button}
+              label="ログアウト"
             />
-            <Link href={`/${locale}`} passHref>
-              <StyledLink>{lang.account.logout.cancel}</StyledLink>
+            <Link href="/" passHref>
+              <StyledLink>キャンセル</StyledLink>
             </Link>
           </ButtonSection>
         </MainContainer>

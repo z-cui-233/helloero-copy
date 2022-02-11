@@ -7,7 +7,6 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -18,12 +17,10 @@ type Props = {
 };
 
 const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: resendSignUpState.step1FormValues,
     validationSchema: Yup.object().shape({
-      loginId: formValidations.loginId(locale),
+      loginId: formValidations.loginId,
     }),
     onSubmit: resendCode,
   });
@@ -31,7 +28,9 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={resendSignUpState.errorMessage} />
-      <Text>{lang.account.resendSignUp.step1.text}</Text>
+      <Text>
+        ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。
+      </Text>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -41,20 +40,17 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
         <Section>
           <FieldSection>
             <TextField
-              label={formLabels.loginId.label[locale]}
+              label={formLabels.loginId.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'loginId'),
-                placeholder: formLabels.loginId.placeholder[locale],
+                placeholder: formLabels.loginId.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'loginId')}
             />
           </FieldSection>
         </Section>
         <ButtonSection>
-          <ButtonStandard
-            type="submit"
-            label={lang.account.resendSignUp.step1.button}
-          />
+          <ButtonStandard type="submit" label="本人確認コードを送信" />
         </ButtonSection>
       </form>
     </MainContainer>

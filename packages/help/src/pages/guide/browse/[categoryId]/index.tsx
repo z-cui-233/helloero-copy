@@ -6,22 +6,19 @@ import GuideBrowse from '@/domain/GuideBrowse';
 import { fetchGuideByCategoryId } from '@/localShared/lib/prismic';
 import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import MetaTags from '@/shared/components/MetaTags';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type Props = {
   guideCategoryDocument: GuideCategoryDocument;
 };
 
 const Page: NextPage<Props> = ({ guideCategoryDocument }) => {
-  const { lang } = useLocale();
   const title = prismicH.asText(guideCategoryDocument.data.title);
 
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={`${title}${lang.help.meta.guideCategory.title}`}
-        description={lang.help.meta.guideCategory.description}
+        title={`${title} - よくある質問 - H2U ヘルプセンター`}
       />
       <GuideBrowse guideCategoryDocument={guideCategoryDocument} />
     </React.Fragment>

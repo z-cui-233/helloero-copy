@@ -8,7 +8,6 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -20,14 +19,12 @@ type Props = {
 };
 
 const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: signUpState.step1FormValues,
     validationSchema: Yup.object().shape({
-      loginId: formValidations.loginId(locale),
-      password: formValidations.password(locale),
-      email: formValidations.email(locale),
+      loginId: formValidations.loginId,
+      password: formValidations.password,
+      email: formValidations.email,
     }),
     onSubmit: challengeSignUp,
   });
@@ -36,7 +33,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
     <MainContainer>
       <FormErrorMessage message={signUpState.errorMessage} />
       <Steps>STEP 1/2</Steps>
-      <Text>{lang.account.signUp.step1.text}</Text>
+      <Text>お客様情報を入力してください</Text>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -46,55 +43,53 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
         <Section>
           <FieldSection>
             <TextField
-              label={formLabels.loginId.label[locale]}
+              label={formLabels.loginId.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'loginId'),
                 autoComplete: 'username',
-                placeholder: formLabels.loginId.placeholder[locale],
+                placeholder: formLabels.loginId.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'loginId')}
             />
           </FieldSection>
           <FieldSection>
             <TextField
-              label={formLabels.password.label[locale]}
+              label={formLabels.password.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'password', 'password'),
                 autoComplete: 'new-password',
-                placeholder: formLabels.password.placeholder[locale],
+                placeholder: formLabels.password.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'password')}
             />
           </FieldSection>
           <FieldSection>
             <TextField
-              label={formLabels.email.label[locale]}
+              label={formLabels.email.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'email'),
-                placeholder: formLabels.email.placeholder[locale],
+                placeholder: formLabels.email.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'email')}
             />
           </FieldSection>
         </Section>
         <Terms>
-          <div>{lang.account.signUp.step1.terms.title}</div>
           <div>
-            {/* 個人情報保護方針 */}
+            登録ボタンを押すことにより、下記の規約に同意するものとします。
+          </div>
+          <div>
             <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
-              {lang.account.signUp.step1.terms.privacy}
+              個人情報の取扱いについて
             </a>
-            {/* 利用規約 */}
+
             <a href={TERMS_URL} target="_blank" rel="noopener noreferrer">
-              {lang.account.signUp.step1.terms.service}
+              利用規約
             </a>
           </div>
         </Terms>
         <ButtonSection>
-          <ButtonStandard
-            type="submit"
-            label={lang.account.signUp.step1.button}
-          />
+          <ButtonStandard type="submit" label="規約に同意して登録" />
         </ButtonSection>
       </form>
     </MainContainer>

@@ -3,17 +3,13 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import Logout from '@/domain/Logout';
 import MetaTags from '@/shared/components/MetaTags';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const Page: NextPage = () => {
-  const { lang } = useLocale();
-
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.ACCOUNT}
-        title={lang.account.meta.logout.title}
-        description={lang.account.meta.logout.description}
+        title="ログアウト - H2Uアカウント"
       />
       <Logout />
     </React.Fragment>

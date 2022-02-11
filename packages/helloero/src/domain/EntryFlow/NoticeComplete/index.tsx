@@ -1,17 +1,14 @@
 import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const NoticeComplete: React.FC = () => {
-  const { locale, lang } = useLocale();
-
   return (
     <NoticePage
-      texts={lang.helloero.entry.complete.text}
+      texts="動画を登録しました。有効期限がある場合、作品詳細でも確認できます。"
       links={[
         {
-          href: `/${locale}/my-library`,
-          label: lang.helloero.entry.complete.home,
+          href: '/my-library',
+          label: 'ホーム',
         },
       ]}
     />

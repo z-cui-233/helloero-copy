@@ -5,7 +5,6 @@ import ButtonStandard, {
 } from '@/shared/components/parts/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type Props = {
   titleName: string;
@@ -17,23 +16,19 @@ const MetaInfo: React.FC<Props> = ({
   titleName,
   displayExpireDate,
   onClick,
-}) => {
-  const { lang } = useLocale();
-
-  return (
-    <Container>
-      <TitleName>{titleName}</TitleName>
-      <ExpireDate>{displayExpireDate}</ExpireDate>
-      <Button>
-        <ButtonStandard
-          iconType={BUTTON_ICONS.PLAY}
-          onClick={onClick}
-          label={lang.helloero.myLibrary.purchased.watch}
-        />
-      </Button>
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <TitleName>{titleName}</TitleName>
+    <ExpireDate>{displayExpireDate}</ExpireDate>
+    <Button>
+      <ButtonStandard
+        iconType={BUTTON_ICONS.PLAY}
+        onClick={onClick}
+        label="この動画を再生"
+      />
+    </Button>
+  </Container>
+);
 
 const Container = styled.div`
   padding: 3rem 2rem;

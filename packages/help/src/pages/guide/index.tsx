@@ -10,7 +10,6 @@ import {
   GuideCategoryDocument,
   GuideTopDocument,
 } from '@/localShared/lib/prismic/interfaces';
-import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 
 type Props = {
@@ -19,14 +18,11 @@ type Props = {
 };
 
 const Page: NextPage<Props> = ({ guideTopDocument, guideCategoryDocument }) => {
-  const { lang } = useLocale();
-
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={lang.help.meta.guide.title}
-        description={lang.help.meta.guide.description}
+        title="よくある質問 - H2U ヘルプセンター"
       />
       <GuideTop
         guideTopDocument={guideTopDocument}

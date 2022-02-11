@@ -1,17 +1,14 @@
 import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const NoticeComplete: React.FC = () => {
-  const { locale, lang } = useLocale();
-
   return (
     <NoticePage
-      texts={lang.account.resetPassword.complete.text}
+      texts="変更が完了しました"
       links={[
         {
-          href: `/${locale}`,
-          label: lang.account.resetPassword.complete.home,
+          href: '/',
+          label: 'ホーム',
         },
       ]}
     />

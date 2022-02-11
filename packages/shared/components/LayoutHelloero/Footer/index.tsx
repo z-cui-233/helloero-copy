@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Config } from 'u-next/config';
 import IconHelloEro from '../../../assets/logo/helloeroFullWhite.svg';
 import { COMPANY_URL, PRIVACY_URL, TERMS_URL } from '../../../constants/terms';
-import { useLocale } from '../../../context/LocaleContext';
 import device from '../../../styles/device';
 import typo from '../../../styles/typo';
 
@@ -12,8 +11,6 @@ type Props = {
 };
 
 const Footer: React.FC<Props> = ({ options }) => {
-  const { lang } = useLocale();
-
   return (
     <Container>
       <Contents>
@@ -28,7 +25,7 @@ const Footer: React.FC<Props> = ({ options }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {lang.helloero.footer.account}
+                アカウント
               </StyledLink>
             </LinkItem>
             <LinkItem>
@@ -37,7 +34,7 @@ const Footer: React.FC<Props> = ({ options }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {lang.helloero.footer.help}
+                ヘルプ
               </StyledLink>
             </LinkItem>
           </Links>
@@ -48,7 +45,7 @@ const Footer: React.FC<Props> = ({ options }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {lang.helloero.footer.company}
+                運営会社
               </StyledLink>
             </LinkItem>
             <LinkItem>
@@ -57,7 +54,7 @@ const Footer: React.FC<Props> = ({ options }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {lang.helloero.footer.privacy}
+                個人情報保護方針
               </StyledLink>
             </LinkItem>
             <LinkItem>
@@ -66,7 +63,7 @@ const Footer: React.FC<Props> = ({ options }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {lang.helloero.footer.terms}
+                利用規約
               </StyledLink>
             </LinkItem>
           </Links>

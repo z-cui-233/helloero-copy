@@ -8,7 +8,6 @@ import MainContainer from '@/shared/components/parts/MainContainer';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -22,13 +21,11 @@ const ResetPasswordStep2: React.FC<Props> = ({
   resetPasswordState,
   verifyCodeAndUpdatePassword,
 }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: resetPasswordState.formValues,
     validationSchema: Yup.object().shape({
-      verificationCode: formValidations.verificationCode(locale),
-      newPassword: formValidations.password(locale),
+      verificationCode: formValidations.verificationCode,
+      newPassword: formValidations.password,
     }),
     onSubmit: verifyCodeAndUpdatePassword,
   });
@@ -37,7 +34,7 @@ const ResetPasswordStep2: React.FC<Props> = ({
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
       <Text>
-        <div>{lang.account.resetPassword.input.text}</div>
+        下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。
       </Text>
       <form
         onSubmit={(e) => {
@@ -51,10 +48,10 @@ const ResetPasswordStep2: React.FC<Props> = ({
           </FieldSection>
           <FieldSection>
             <TextField
-              label={formLabels.verificationCode.label[locale]}
+              label={formLabels.verificationCode.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),
-                placeholder: formLabels.verificationCode.placeholder[locale],
+                placeholder: formLabels.verificationCode.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(
                 formik,
@@ -64,11 +61,11 @@ const ResetPasswordStep2: React.FC<Props> = ({
           </FieldSection>
           <FieldSection>
             <TextField
-              label={formLabels.newPassword.label[locale]}
+              label={formLabels.newPassword.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'newPassword', 'password'),
                 autoComplete: 'new-password',
-                placeholder: formLabels.newPassword.placeholder[locale],
+                placeholder: formLabels.newPassword.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'newPassword')}
             />
@@ -80,7 +77,7 @@ const ResetPasswordStep2: React.FC<Props> = ({
               return;
             }}
             type="submit"
-            label={lang.account.resetPassword.input.button}
+            label="パスワードを変更"
           />
         </ButtonSection>
       </form>

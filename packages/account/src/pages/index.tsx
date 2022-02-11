@@ -2,18 +2,16 @@ import { NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import Top from '@/domain/Top';
-import { useLocale } from '@/shared/context/LocaleContext';
+
 import MetaTags from '@/shared/components/MetaTags';
 
 const Page: NextPage = () => {
-  const { lang } = useLocale();
-
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.ACCOUNT}
-        title={lang.account.meta.default.title}
-        description={lang.account.meta.default.description}
+        title="H2Uアカウント"
+        description="H2Uアカウントの登録、ログイン、各種設定を行えます。"
       />
       <Top />
     </React.Fragment>

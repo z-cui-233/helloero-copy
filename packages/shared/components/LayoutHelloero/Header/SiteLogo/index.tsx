@@ -2,13 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Logo from '../../../../assets/logo/helloeroBlack.svg';
-import { useLocale } from '../../../../context/LocaleContext';
 
 const SiteLogo: React.FC = () => {
-  const { locale } = useLocale();
-
   return (
-    <Link href={`/${locale}`} passHref>
+    <Link href="/" passHref>
       <a>
         <StyledLogo />
       </a>

@@ -7,7 +7,6 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -21,14 +20,12 @@ const InputVerificationCodeForm: React.FC<Props> = ({
   updateEmailState,
   verifyCode,
 }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: {
       verificationCode: updateEmailState.formValues.verificationCode,
     },
     validationSchema: Yup.object().shape({
-      verificationCode: formValidations.verificationCode(locale),
+      verificationCode: formValidations.verificationCode,
     }),
     onSubmit: verifyCode,
   });
@@ -36,14 +33,14 @@ const InputVerificationCodeForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={updateEmailState.errorMessage} />
-      <Text>{lang.account.updateEmail.verification.text}</Text>
+      <Text>メールアドレスに送信した本人確認コードを入力してください。</Text>
       <Section>
         <FieldSection>
           <TextField
-            label={formLabels.verificationCode.label[locale]}
+            label={formLabels.verificationCode.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),
-              placeholder: formLabels.verificationCode.placeholder[locale],
+              placeholder: formLabels.verificationCode.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(
               formik,
@@ -57,7 +54,7 @@ const InputVerificationCodeForm: React.FC<Props> = ({
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.updateEmail.verification.button}
+          label="本人確認コードを認証"
         />
       </ButtonSection>
     </MainContainer>

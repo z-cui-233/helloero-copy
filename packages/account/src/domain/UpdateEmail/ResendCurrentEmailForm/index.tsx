@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { UseUpdateEmail } from '../useUpdateEmail';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
 
 type Props = {
@@ -15,17 +14,17 @@ const ResendCurrentEmailForm: React.FC<Props> = ({
   resendCurrentEmail,
   requestNewEmail,
 }) => {
-  const { lang } = useLocale();
-
   return (
     <MainContainer>
-      <Text>{lang.account.updateEmail.resend.text}</Text>
+      <Text>
+        メールアドレスの確認が完了していません。もう一度本人確認コードを送信してしてください。
+      </Text>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
             resendCurrentEmail();
           }}
-          label={lang.account.updateEmail.resend.button}
+          label="本人確認コードを送信"
         />
       </ButtonSection>
       <Skip>
@@ -35,7 +34,7 @@ const ResendCurrentEmailForm: React.FC<Props> = ({
             requestNewEmail();
           }}
         >
-          {lang.account.updateEmail.resend.skipButton}
+          別のメールアドレスを登録
         </SkipButton>
       </Skip>
     </MainContainer>
