@@ -171,6 +171,12 @@ const useAmplifyAuth = () => {
     []
   );
 
+  const deleteUser = useCallback(() => {
+    return Auth.deleteUser()
+      .then(getResponse)
+      .catch((error) => getErrorResponse({ error }));
+  }, []);
+
   return {
     signIn,
     signOut,
@@ -183,6 +189,7 @@ const useAmplifyAuth = () => {
     forgotPassword,
     forgotPasswordSubmit,
     resendSignUp,
+    deleteUser,
   };
 };
 
