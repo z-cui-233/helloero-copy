@@ -17,10 +17,6 @@ module.exports = {
   poweredByHeader: false,
   compress: false,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
-  i18n: {
-    locales: ['ja'],
-    defaultLocale: 'ja',
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
