@@ -4,7 +4,6 @@ import { globalConfig } from 'src/globalConfig';
 import { PrismicRichText } from '@prismicio/react';
 import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
@@ -17,23 +16,21 @@ type Props = {
 };
 
 const SystemTrouble: React.FC<Props> = ({ systemTroubleDocument }) => {
-  const { locale, lang } = useLocale();
-
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
 
     {
-      path: `/${locale}/systemtrouble`,
-      text: lang.help.systemTrouble.title,
+      path: '/systemtrouble',
+      text: '緊急のお知らせ',
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.systemTrouble.title} />
+      <BigBar title="緊急のお知らせ" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>

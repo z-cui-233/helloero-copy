@@ -9,7 +9,6 @@ import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import BigBar from '@/shared/components/BigBar';
 import typo from '@/shared/styles/typo';
 import GuideCard from '@/localShared/components/GuideCard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
@@ -19,27 +18,26 @@ type Props = {
 };
 
 const GuideBrowse: React.FC<Props> = ({ guideCategoryDocument }) => {
-  const { locale, lang } = useLocale();
   const title = prismicH.asText(guideCategoryDocument.data.title);
 
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/guide`,
-      text: lang.help.guide.title,
+      path: '/guide',
+      text: 'よくある質問',
     },
     {
-      path: `/${locale}/guide/browse/${guideCategoryDocument.uid}`,
+      path: '/guide/browse/${guideCategoryDocument.uid}',
       text: title as string,
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.guide.title} />
+      <BigBar title="よくある質問" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Title>

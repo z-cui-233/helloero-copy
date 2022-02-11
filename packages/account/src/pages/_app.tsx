@@ -7,7 +7,6 @@ import config from '../aws-exports';
 import theme from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import GlobalHead from '@/shared/components/GlobalHead';
-import { LocaleProvider } from '@/shared/context/LocaleContext';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import GlobalScripts from '@/shared/components/GlobalScripts';
 
@@ -28,15 +27,13 @@ Amplify.configure({
 const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
-      <LocaleProvider>
-        <GlobalStyle />
-        <GlobalHead />
-        <LoginStateContextProvider>
-          <Component {...pageProps} />
-          <div id="modal" />
-        </LoginStateContextProvider>
-        <GlobalScripts />
-      </LocaleProvider>
+      <GlobalStyle />
+      <GlobalHead />
+      <LoginStateContextProvider>
+        <Component {...pageProps} />
+        <div id="modal" />
+      </LoginStateContextProvider>
+      <GlobalScripts />
     </ThemeProvider>
   );
 };

@@ -7,7 +7,6 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import TextField from '@/shared/components/parts/TextField';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -18,12 +17,10 @@ type Props = {
 };
 
 const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: entryWabikenState.formValues,
     validationSchema: Yup.object().shape({
-      wabiken: formValidations.wabiken(locale),
+      wabiken: formValidations.wabiken,
     }),
     onSubmit: confirmWabiken,
   });
@@ -31,14 +28,14 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={entryWabikenState.errorMessage} />
-      <Text>{lang.helloero.entry.input.text}</Text>
+      <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
       <Section>
         <FieldSection>
           <TextField
-            label={formLabels.wabiken.label[locale]}
+            label={formLabels.wabiken.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'wabiken'),
-              placeholder: formLabels.wabiken.placeholder[locale],
+              placeholder: formLabels.wabiken.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(formik, 'wabiken')}
           />
@@ -49,7 +46,7 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.helloero.entry.input.button}
+          label="シリアルコードを確認"
         />
       </ButtonSection>
     </MainContainer>

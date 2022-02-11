@@ -8,7 +8,6 @@ import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import { convertDateToString } from '@/shared/utils';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
@@ -20,32 +19,31 @@ type Props = {
 };
 
 const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
-  const { locale, lang } = useLocale();
   const date = prismicH.asDate(infoDocument.data.publish_date);
   const title = prismicH.asText(infoDocument.data.title);
 
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/info`,
-      text: lang.help.info.title,
+      path: '/info',
+      text: 'お知らせ',
     },
     {
-      path: `/${locale}/info/${infoDocument.uid}`,
+      path: `/info/${infoDocument.uid}`,
       text: title as string,
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.info.title} />
+      <BigBar title="お知らせ" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <Container>
-          <ReleaseDate>{convertDateToString(locale, date)}</ReleaseDate>
+          <ReleaseDate>{convertDateToString(date)}</ReleaseDate>
           <Title>
             <PrismicText field={infoDocument.data.title} />
           </Title>

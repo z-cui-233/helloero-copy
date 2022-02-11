@@ -3,28 +3,23 @@ import styled from 'styled-components';
 import { UsePurchasedList } from '../../usePurchasedList';
 import typo from '@/shared/styles/typo';
 import Icon from '@/shared/assets/icon/search.svg';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const SearchBox: React.FC<UsePurchasedList> = ({
   purchasedListState,
   updateSearchQuery,
-}) => {
-  const { lang } = useLocale();
-
-  return (
-    <Container>
-      <StyledIcon />
-      <Input
-        type="text"
-        value={purchasedListState.query}
-        placeholder={lang.helloero.myLibrary.filter.search}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          updateSearchQuery(e.target.value);
-        }}
-      />
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <StyledIcon />
+    <Input
+      type="text"
+      value={purchasedListState.query}
+      placeholder="タイトル名で検索"
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        updateSearchQuery(e.target.value);
+      }}
+    />
+  </Container>
+);
 
 const Container = styled.div`
   position: relative;

@@ -6,7 +6,6 @@ import {
   AUTH_STATE_CHANGE_EVENT,
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
-import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
@@ -42,7 +41,6 @@ export type UseResendSignUp = {
 const useResendSignUp = (): UseResendSignUp => {
   const router = useRouter();
   const { resendSignUp, confirmSignUp, signIn } = useAmplifyAuth();
-  const { locale } = useLocale();
   const [resendSignUpState, setResendSignupState] = useState<ResendSignUpState>(
     {
       pageStatus: PAGE_STATUS.INIT,
@@ -165,7 +163,7 @@ const useResendSignUp = (): UseResendSignUp => {
     }
 
     if (userInfo.isLoggedIn) {
-      router.replace(`/${locale}`);
+      router.replace('/');
       return;
     }
 
@@ -175,7 +173,6 @@ const useResendSignUp = (): UseResendSignUp => {
     }));
   }, [
     isLoadedUserInfo,
-    locale,
     resendSignUpState.pageStatus,
     router,
     userInfo.isLoggedIn,

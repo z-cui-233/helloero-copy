@@ -5,16 +5,14 @@ import InputForm from './InputForm';
 import NoticePasswordResetRequired from './NoticePasswordResetRequired';
 import NoticeUserNotConfirmed from './NoticeUserNotConfirmed';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BigBar from '@/shared/components/BigBar';
 
 const Login: React.FC = () => {
   const { loginChallengeState, challengeLogin } = useLoginChallenge();
-  const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.account.login.title} />
+      <BigBar title="ログイン" />
       {loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (
         <InputForm
           loginChallengeState={loginChallengeState}

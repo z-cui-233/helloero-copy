@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { PrismicText } from '@prismicio/react';
 import { GuideDocument } from '@/localShared/lib/prismic/interfaces';
-import { useLocale } from '@/shared/context/LocaleContext';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
 type Props = {
@@ -11,10 +10,8 @@ type Props = {
 };
 
 const GuideCard: React.FC<Props> = ({ document }) => {
-  const { locale } = useLocale();
-
   return (
-    <Link passHref href={`/${locale}/guide/detail/${document.uid}`}>
+    <Link passHref href={`/guide/detail/${document.uid}`}>
       <Container>
         <PrismicText field={document.data.question} />
         <ListRightArrow />

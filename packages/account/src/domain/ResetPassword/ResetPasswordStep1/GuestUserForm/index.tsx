@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { UseResetPassword } from '../../useResetPassword';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import { useLocale } from '@/shared/context/LocaleContext';
 import TextField from '@/shared/components/parts/TextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
@@ -21,14 +20,12 @@ const GuestUserForm: React.FC<Props> = ({
   resetPasswordState,
   sendVerificationCode,
 }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: {
       loginId: resetPasswordState.formValues.loginId,
     },
     validationSchema: Yup.object().shape({
-      loginId: formValidations.loginId(locale),
+      loginId: formValidations.loginId,
     }),
     onSubmit: sendVerificationCode,
   });
@@ -36,14 +33,16 @@ const GuestUserForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
-      <Text>{lang.account.resetPassword.send.text}</Text>
+      <Text>
+        パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
+      </Text>
       <Section>
         <FieldSection>
           <TextField
-            label={formLabels.loginId.label[locale]}
+            label={formLabels.loginId.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'loginId'),
-              placeholder: formLabels.loginId.placeholder[locale],
+              placeholder: formLabels.loginId.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(formik, 'loginId')}
           />
@@ -54,7 +53,7 @@ const GuestUserForm: React.FC<Props> = ({
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.resetPassword.send.button}
+          label="本人確認メールを送信"
         />
       </ButtonSection>
     </MainContainer>

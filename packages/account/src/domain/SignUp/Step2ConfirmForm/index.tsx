@@ -8,7 +8,6 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -19,12 +18,10 @@ type Props = {
 };
 
 const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: signUpState.step2FormValues,
     validationSchema: Yup.object().shape({
-      verificationCode: formValidations.verificationCode(locale),
+      verificationCode: formValidations.verificationCode,
     }),
     onSubmit: verifyCode,
   });
@@ -33,14 +30,16 @@ const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
     <MainContainer>
       <FormErrorMessage message={signUpState.errorMessage} />
       <Steps>STEP 2/2</Steps>
-      <Text>{lang.account.signUp.step2.text}</Text>
+      <Text>
+        メールアドレスの確認を行います。メールアドレスに送信した本人確認コードを入力してください。
+      </Text>
       <Section>
         <FieldSection>
           <TextField
-            label={formLabels.verificationCode.label[locale]}
+            label={formLabels.verificationCode.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),
-              placeholder: formLabels.verificationCode.placeholder[locale],
+              placeholder: formLabels.verificationCode.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(
               formik,
@@ -54,7 +53,7 @@ const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.signUp.step2.button}
+          label="本人確認コードを確認"
         />
       </ButtonSection>
     </MainContainer>

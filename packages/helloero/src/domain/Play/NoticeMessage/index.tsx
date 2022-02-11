@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
-import { useLocale } from '@/shared/context/LocaleContext';
+import { MESSAGES } from '@/shared/constants/messages';
 
 type Props = {
   title: string;
@@ -11,18 +11,16 @@ type Props = {
 };
 
 const NoticeMessage: React.FC<Props> = ({ title, text, errorCode }) => {
-  const { locale, lang } = useLocale();
-
   return (
     <Container>
       <BodyContent>
         <Title>{title ? title : '再生できません'}</Title>
         <Text>
-          {text ? text : lang.messages.default}
+          {text ? text : MESSAGES.default}
           {errorCode && <div>({errorCode})</div>}
         </Text>
         <LinkContainer>
-          <Link href={`/${locale}`} passHref>
+          <Link href="/" passHref>
             <StyledLink>ホーム</StyledLink>
           </Link>
         </LinkContainer>

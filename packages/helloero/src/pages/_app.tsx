@@ -14,7 +14,6 @@ import GlobalScripts from '@/shared/components/GlobalScripts';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import { cookieParams } from '@/shared/constants/cookies';
 import { i18n_messages } from '@/localShared/constants/babystar';
-import { LocaleProvider } from '@/shared/context/LocaleContext';
 
 Amplify.configure({
   ...config,
@@ -34,15 +33,13 @@ const CoreApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <IntlProvider locale="ja-JP" messages={i18n_messages}>
       <ThemeProvider theme={theme}>
-        <LocaleProvider>
-          <GlobalStyle />
-          <GlobalHead />
-          <LoginStateContextProvider>
-            <Component {...pageProps} />
-            <div id="modal" />
-          </LoginStateContextProvider>
-          <GlobalScripts />
-        </LocaleProvider>
+        <GlobalStyle />
+        <GlobalHead />
+        <LoginStateContextProvider>
+          <Component {...pageProps} />
+          <div id="modal" />
+        </LoginStateContextProvider>
+        <GlobalScripts />
       </ThemeProvider>
     </IntlProvider>
   );

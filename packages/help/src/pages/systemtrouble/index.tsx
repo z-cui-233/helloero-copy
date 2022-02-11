@@ -2,7 +2,6 @@ import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import SystemTrouble from '@/domain/SystemTrouble';
-import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 import { fetchSystemTroubleByUid } from '@/localShared/lib/prismic';
 import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
@@ -12,14 +11,11 @@ type Props = {
 };
 
 const Page: NextPage<Props> = ({ systemTroubleDocument }) => {
-  const { lang } = useLocale();
-
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={lang.help.meta.systemTrouble.title}
-        description={lang.help.meta.systemTrouble.description}
+        title="緊急のお知らせ - H2U ヘルプセンター"
       />
       <SystemTrouble systemTroubleDocument={systemTroubleDocument} />
     </React.Fragment>

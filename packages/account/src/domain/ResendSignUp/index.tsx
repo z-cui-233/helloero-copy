@@ -7,16 +7,14 @@ import NoticeComplete from './NoticeComplete';
 import Step3ReLoginForm from './Step3ReLoginForm';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import BigBar from '@/shared/components/BigBar';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const ResendSignUp: React.FC = () => {
   const { resendSignUpState, resendCode, verifyCode, invokeLogin } =
     useResendSignUp();
-  const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.account.resendSignUp.title} />
+      <BigBar title="アカウント登録の再開" />
       {resendSignUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
         <Step1InputForm
           resendSignUpState={resendSignUpState}

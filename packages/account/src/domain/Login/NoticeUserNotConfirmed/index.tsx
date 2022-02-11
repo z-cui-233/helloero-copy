@@ -1,17 +1,14 @@
 import React from 'react';
 import NoticePage from '@/shared/components/NoticePage';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const NoticeUserNotConfirmed: React.FC = () => {
-  const { locale, lang } = useLocale();
-
   return (
     <NoticePage
-      texts={lang.account.login.notConfirmed.text}
+      texts="アカウント登録が完了していません。メールアドレスの確認をしてアカウント登録を完了してください。"
       links={[
         {
-          href: `/${locale}/resend-signup`,
-          label: lang.account.login.notConfirmed.button,
+          href: '/resend-signup',
+          label: 'メールアドレスの確認',
         },
       ]}
     />

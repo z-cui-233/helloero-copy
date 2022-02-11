@@ -5,7 +5,6 @@ import { globalConfig } from 'src/globalConfig';
 import InfoDetail from '@/domain/InfoDetail';
 import { fetchInfoByUid } from '@/localShared/lib/prismic';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
-import { useLocale } from '@/shared/context/LocaleContext';
 import MetaTags from '@/shared/components/MetaTags';
 
 type Props = {
@@ -13,15 +12,13 @@ type Props = {
 };
 
 const Page: NextPage<Props> = ({ infoDocument }) => {
-  const { lang } = useLocale();
   const title = prismicH.asText(infoDocument.data.title);
 
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={`${title}${lang.help.meta.infoDetail.title}`}
-        description={lang.help.meta.infoDetail.description}
+        title={`${title} - お知らせ - H2U ヘルプセンター`}
       />
       <InfoDetail infoDocument={infoDocument} />
     </React.Fragment>

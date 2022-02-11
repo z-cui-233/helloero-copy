@@ -6,21 +6,17 @@ import InfoList from '@/domain/InfoList';
 import { fetchInfoList } from '@/localShared/lib/prismic';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import MetaTags from '@/shared/components/MetaTags';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 type Props = {
   infoDocuments: prismicT.Query<InfoDocument>;
 };
 
 const Page: NextPage<Props> = ({ infoDocuments }) => {
-  const { lang } = useLocale();
-
   return (
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title={lang.help.meta.info.title}
-        description={lang.help.meta.info.description}
+        title="お知らせ - H2U ヘルプセンター"
       />
       <InfoList infoDocuments={infoDocuments} />
     </React.Fragment>

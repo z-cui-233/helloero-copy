@@ -1,78 +1,38 @@
-import { LocaleType } from 'u-next/locales';
 import * as Yup from 'yup';
 
-type ValidationMessages = {
-  [key in
-    | 'required'
-    | 'email'
-    | 'min6'
-    | 'min8'
-    | 'length16'
-    | 'alphanumerical'
-    | 'numerical']: {
-    [key in LocaleType]: string;
-  };
-};
-
-const validationMessages: ValidationMessages = {
-  required: {
-    ja: '入力必須です',
-    en: 'Required',
-  },
-  email: {
-    ja: 'メールアドレスを入力してください',
-    en: 'メールアドレスを入力してください',
-  },
-  min6: {
-    ja: '6文字以上で入力してください',
-    en: '6文字以上で入力してください',
-  },
-  min8: {
-    ja: '8文字以上で入力してください',
-    en: '8文字以上で入力してください',
-  },
-  length16: {
-    ja: '16文字で入力してください',
-    en: '16文字で入力してください',
-  },
-  alphanumerical: {
-    ja: '半角英数字で入力してください',
-    en: '半角英数字で入力してください',
-  },
-  numerical: {
-    ja: '半角数字で入力してください',
-    en: '半角数字で入力してください',
-  },
-};
+const validationMessages = {
+  required: '入力必須です',
+  email: 'メールアドレスを入力してください',
+  min6: '6文字以上で入力してください',
+  min8: '8文字以上で入力してください',
+  length16: '16文字で入力してください',
+  alphanumerical: '半角英数字で入力してください',
+  numerical: '半角数字で入力してください',
+} as const;
 
 const formValidations = {
-  verificationCode: (locale: LocaleType) =>
-    Yup.string()
-      .required(validationMessages['required'][locale])
-      .matches(/^[0-9]*$/, validationMessages['numerical'][locale]),
+  verificationCode: Yup.string()
+    .required(validationMessages['required'])
+    .matches(/^[0-9]*$/, validationMessages['numerical']),
 
-  loginId: (locale: LocaleType) =>
-    Yup.string()
-      .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
-      .min(6, validationMessages['min6'][locale]),
+  loginId: Yup.string()
+    .required(validationMessages['required'])
+    .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
+    .min(6, validationMessages['min6']),
 
-  password: (locale: LocaleType) =>
-    Yup.string()
-      .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
-      .min(8, validationMessages['min8'][locale]),
+  password: Yup.string()
+    .required(validationMessages['required'])
+    .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
+    .min(8, validationMessages['min8']),
 
-  email: (locale: LocaleType) =>
-    Yup.string()
-      .required(validationMessages['required'][locale])
-      .email(validationMessages['email'][locale]),
+  email: Yup.string()
+    .required(validationMessages['required'])
+    .email(validationMessages['email']),
 
-  wabiken: (locale: LocaleType) =>
-    Yup.string()
-      .required(validationMessages['required'][locale])
-      .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'][locale])
-      .length(16, validationMessages['length16'][locale]),
+  wabiken: Yup.string()
+    .required(validationMessages['required'])
+    .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
+    .length(16, validationMessages['length16']),
 };
 
 export default formValidations;

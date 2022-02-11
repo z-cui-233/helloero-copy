@@ -2,9 +2,8 @@ import { Auth } from 'aws-amplify';
 import { useCallback } from 'react';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { CodeDeliveryDetails } from 'u-next/amplify';
-import { LocaleData } from 'u-next/locales';
 import { CognitoUser } from 'amazon-cognito-identity-js';
-import { useLocale } from '../context/LocaleContext';
+import { MessageKeys, MESSAGES } from '../constants/messages';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AmplifyAuthResponse<T = any> = Promise<{
@@ -22,16 +21,11 @@ const getResponse = (data: any) => {
   };
 };
 
-const getErrorResponse = (args: {
-  lang: LocaleData;
-  key?: keyof typeof args.lang.messages;
-  error: unknown;
-}) => {
+const getErrorResponse = (args: { key?: MessageKeys; error: unknown }) => {
   const errorCode = args.error instanceof Error ? args.error.name : '';
-  const messageList = args.key ? args.lang.messages[args.key] : [];
+  const messageList = args.key ? MESSAGES[args.key] : [];
   const errorMessage =
-    messageList[errorCode as keyof typeof messageList] ??
-    args.lang.messages.default;
+    messageList[errorCode as keyof typeof messageList] ?? MESSAGES.default;
 
   return {
     data: null,
@@ -41,22 +35,20 @@ const getErrorResponse = (args: {
 };
 
 const useAmplifyAuth = () => {
-  const { lang } = useLocale();
-
   const signIn = useCallback(
     (values: { loginId: string; password: string }): AmplifyAuthResponse => {
       return Auth.signIn(values.loginId, values.password)
         .then(getResponse)
-        .catch((error) => getErrorResponse({ lang, key: 'authSignIn', error }));
+        .catch((error) => getErrorResponse({ key: 'authSignIn', error }));
     },
-    [lang]
+    []
   );
 
   const signOut = useCallback((): AmplifyAuthResponse => {
     return Auth.signOut()
       .then(getResponse)
-      .catch((error) => getErrorResponse({ lang, error }));
-  }, [lang]);
+      .catch((error) => getErrorResponse({ error }));
+  }, []);
 
   const signUp = useCallback(
     (values: {
@@ -74,36 +66,36 @@ const useAmplifyAuth = () => {
 
       return Auth.signUp(params)
         .then(getResponse)
-        .catch((error) => getErrorResponse({ lang, key: 'authSignUp', error }));
+        .catch((error) => getErrorResponse({ key: 'authSignUp', error }));
     },
-    [lang]
+    []
   );
 
   const verifyCurrentUserAttribute = useCallback(
     (values: { attr: 'email' }): AmplifyAuthResponse => {
       return Auth.verifyCurrentUserAttribute(values.attr)
         .then(getResponse)
-        .catch((error) => getErrorResponse({ lang, error }));
+        .catch((error) => getErrorResponse({ error }));
     },
-    [lang]
+    []
   );
 
   const currentAuthenticatedUser =
     useCallback((): AmplifyAuthResponse<CognitoUser> => {
       return Auth.currentAuthenticatedUser({ bypassCache: true })
         .then(getResponse)
-        .catch((error) => getErrorResponse({ lang, error }));
-    }, [lang]);
+        .catch((error) => getErrorResponse({ error }));
+    }, []);
 
   const updateUserAttributes = useCallback(
     (values: { user: unknown; email: string }): AmplifyAuthResponse => {
       return Auth.updateUserAttributes(values.user, { email: values.email })
         .then(getResponse)
         .catch((error) =>
-          getErrorResponse({ lang, key: 'authUpdateUserAttributes', error })
+          getErrorResponse({ key: 'authUpdateUserAttributes', error })
         );
     },
-    [lang]
+    []
   );
 
   const verifyCurrentUserAttributeSubmit = useCallback(
@@ -118,13 +110,12 @@ const useAmplifyAuth = () => {
         .then(getResponse)
         .catch((error) =>
           getErrorResponse({
-            lang,
             key: 'authVerifyCurrentUserAttributeSubmit',
             error,
           })
         );
     },
-    [lang]
+    []
   );
 
   const forgotPassword = useCallback(
@@ -132,10 +123,10 @@ const useAmplifyAuth = () => {
       return Auth.forgotPassword(values.loginId)
         .then(getResponse)
         .catch((error) =>
-          getErrorResponse({ lang, key: 'authForgotPassword', error })
+          getErrorResponse({ key: 'authForgotPassword', error })
         );
     },
-    [lang]
+    []
   );
 
   const forgotPasswordSubmit = useCallback(
@@ -151,21 +142,19 @@ const useAmplifyAuth = () => {
       )
         .then(getResponse)
         .catch((error) =>
-          getErrorResponse({ lang, key: 'authForgotPasswordSubmit', error })
+          getErrorResponse({ key: 'authForgotPasswordSubmit', error })
         );
     },
-    [lang]
+    []
   );
 
   const resendSignUp = useCallback(
     (values: { loginId: string }): AmplifyAuthResponse => {
       return Auth.resendSignUp(values.loginId)
         .then(getResponse)
-        .catch((error) =>
-          getErrorResponse({ lang, key: 'authResendSignUp', error })
-        );
+        .catch((error) => getErrorResponse({ key: 'authResendSignUp', error }));
     },
-    [lang]
+    []
   );
 
   const confirmSignUp = useCallback(
@@ -176,10 +165,10 @@ const useAmplifyAuth = () => {
       return Auth.confirmSignUp(values.loginId, values.verificationCode)
         .then(getResponse)
         .catch((error) =>
-          getErrorResponse({ lang, key: 'authConfirmSignUp', error })
+          getErrorResponse({ key: 'authConfirmSignUp', error })
         );
     },
-    [lang]
+    []
   );
 
   return {

@@ -1,25 +1,23 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import { useLocale } from '@/shared/context/LocaleContext';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
 
 const AccountMenus: React.FC = () => {
-  const { locale, lang } = useLocale();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return isLoadedUserInfo ? (
     <Container>
-      <Title>{lang.account.top.accountMenus.title}</Title>
+      <Title>アカウント設定</Title>
       <div>
         {!userInfo.isLoggedIn && (
           <React.Fragment>
             <div>
-              <Link href={`/${locale}/login`} passHref>
+              <Link href={`/login`} passHref>
                 <StyledLink>
-                  {lang.account.top.accountMenus.login}
+                  ログインすると利用できます。
                   <ListRightArrow />
                 </StyledLink>
               </Link>
@@ -29,25 +27,25 @@ const AccountMenus: React.FC = () => {
         {userInfo.isLoggedIn && (
           <React.Fragment>
             <div>
-              <Link href={`/${locale}/update-email`} passHref>
+              <Link href={'/update-email'} passHref>
                 <StyledLink>
-                  {lang.account.top.accountMenus.updateEmail}
+                  メールアドレスの変更
                   <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
             <div>
-              <Link href={`/${locale}/reset-password`} passHref>
+              <Link href={'/reset-password'} passHref>
                 <StyledLink>
-                  {lang.account.top.accountMenus.resetPassword}
+                  パスワードの変更
                   <ListRightArrow />
                 </StyledLink>
               </Link>
             </div>
             <div>
-              <Link href={`/${locale}/logout`} passHref>
+              <Link href={'/logout'} passHref>
                 <StyledLink>
-                  {lang.account.top.accountMenus.logout}
+                  ログアウト
                   <ListRightArrow />
                 </StyledLink>
               </Link>

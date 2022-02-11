@@ -11,7 +11,6 @@ import { getPlayInfo } from '../../graphql/queries';
 import { DEVICE_CODE } from '@/localShared/constants';
 import { cookieParams } from '@/shared/constants/cookies';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
-import { useLocale } from '@/shared/context/LocaleContext';
 import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
@@ -49,7 +48,6 @@ const initialState: UsePlayer['playerState'] = {
 
 const usePlayer = (): UsePlayer => {
   const router = useRouter();
-  const { lang } = useLocale();
 
   const [playerState, setPlayerState] =
     useState<UsePlayer['playerState']>(initialState);
@@ -159,7 +157,7 @@ const usePlayer = (): UsePlayer => {
 
       if (apiData.errors) {
         const errorCode = apiData.errors?.[0]?.errorInfo?.code;
-        const errorMessage = getErrorMessage(lang, 'getPlayInfo', errorCode);
+        const errorMessage = getErrorMessage('getPlayInfo', errorCode);
 
         setPlayerState((playerState) => ({
           ...playerState,
@@ -188,7 +186,7 @@ const usePlayer = (): UsePlayer => {
         playerProps,
       }));
     })();
-  }, [creatPlayerPropsFromPlayInfo, fetcher, lang, router.query.wabiken]);
+  }, [creatPlayerPropsFromPlayInfo, fetcher, router.query.wabiken]);
 
   return {
     playerState,

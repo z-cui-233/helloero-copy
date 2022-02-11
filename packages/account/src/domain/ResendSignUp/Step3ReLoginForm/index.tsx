@@ -8,7 +8,6 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
 import TextField from '@/shared/components/parts/TextField';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import { useLocale } from '@/shared/context/LocaleContext';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -22,12 +21,10 @@ const Step3ReLoginForm: React.FC<Props> = ({
   resendSignUpState,
   invokeLogin,
 }) => {
-  const { lang, locale } = useLocale();
-
   const formik = useFormik({
     initialValues: resendSignUpState.step3FormValues,
     validationSchema: Yup.object().shape({
-      password: formValidations.password(locale),
+      password: formValidations.password,
     }),
     onSubmit: invokeLogin,
   });
@@ -35,17 +32,17 @@ const Step3ReLoginForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resendSignUpState.errorMessage} />
-      <Text>{lang.account.resendSignUp.step3.text}</Text>
+      <Text>パスワードを入力して、ログインしてください</Text>
       <Section>
         <FieldSection>
           <LoginId>{resendSignUpState.step1FormValues.loginId}</LoginId>
         </FieldSection>
         <FieldSection>
           <TextField
-            label={formLabels.password.label[locale]}
+            label={formLabels.password.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'password', 'password'),
-              placeholder: formLabels.password.placeholder[locale],
+              placeholder: formLabels.password.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(formik, 'password')}
           />
@@ -56,7 +53,7 @@ const Step3ReLoginForm: React.FC<Props> = ({
           onClick={() => {
             formik.handleSubmit();
           }}
-          label={lang.account.resendSignUp.step3.button}
+          label="ログイン"
         />
       </ButtonSection>
     </MainContainer>

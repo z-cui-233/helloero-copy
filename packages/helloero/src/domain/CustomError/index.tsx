@@ -1,7 +1,6 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import NoticePage from '@/shared/components/NoticePage';
-import { useLocale } from '@/shared/context/LocaleContext';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 
 type Props = {
@@ -9,17 +8,21 @@ type Props = {
 };
 
 const CustomError: React.FC<Props> = ({ statusCode }) => {
-  const { locale, lang } = useLocale();
-
   const title =
     statusCode === 404
-      ? lang.error.notFound.title
-      : lang.error.unexpected.title;
+      ? 'お探しのページが見つかりません'
+      : '予期せぬエラーが発生しました';
 
   const texts =
     statusCode === 404
-      ? [lang.error.notFound.text, `（${statusCode}）`]
-      : [lang.error.unexpected.text, `（${statusCode}）`];
+      ? [
+          '入力したアドレスが間違っているか、ページが移動した可能性があります。',
+          `（${statusCode}）`,
+        ]
+      : [
+          'サーバへのアクセスが混み合っているか、メンテナンス中の可能性があります。しばらく時間をおいてから、もう一度アクセスしてください。',
+          `（${statusCode}）`,
+        ];
 
   return (
     <LayoutHelloero options={globalConfig}>
@@ -28,8 +31,8 @@ const CustomError: React.FC<Props> = ({ statusCode }) => {
         texts={texts}
         links={[
           {
-            href: `/${locale}`,
-            label: lang.error.notFound.home,
+            href: '/',
+            label: 'ホーム',
           },
         ]}
       />

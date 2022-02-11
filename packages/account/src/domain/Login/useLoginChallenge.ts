@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { useLocale } from '@/shared/context/LocaleContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
@@ -46,7 +45,6 @@ const isValidUrl = (backUrl: string): boolean => {
 
 const useLoginChallenge = (): UseLoginChallenge => {
   const router = useRouter();
-  const { locale } = useLocale();
   const { signIn } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [loginChallengeState, setLoginChallengeState] =
@@ -65,8 +63,8 @@ const useLoginChallenge = (): UseLoginChallenge => {
       ? decodeURIComponent(router.query.back as string)
       : '';
 
-    router.replace(isValidUrl(backUrl) ? backUrl : `/${locale}`);
-  }, [locale, router]);
+    router.replace(isValidUrl(backUrl) ? backUrl : '/');
+  }, [router]);
 
   const challengeLogin: UseLoginChallenge['challengeLogin'] = useCallback(
     async (values) => {

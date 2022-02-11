@@ -7,7 +7,6 @@ import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import BigBar from '@/shared/components/BigBar';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
-import { useLocale } from '@/shared/context/LocaleContext';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
@@ -17,22 +16,20 @@ type Props = {
 };
 
 const InfoList: React.FC<Props> = ({ infoDocuments }) => {
-  const { locale, lang } = useLocale();
-
   const breadcrumbs: Breadcrumbs[] = [
     {
-      path: `/${locale}`,
-      text: lang.help.top.title,
+      path: '/',
+      text: 'ヘルプセンター',
     },
     {
-      path: `/${locale}/info`,
-      text: lang.help.info.title,
+      path: '/info',
+      text: 'お知らせ',
     },
   ];
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.help.info.title} />
+      <BigBar title="お知らせ" />
       <MainContainer>
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <List>

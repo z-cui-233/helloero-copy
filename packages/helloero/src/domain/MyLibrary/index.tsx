@@ -7,19 +7,17 @@ import TitleDetail from './TitleDetail';
 import TitleList from './TitleList';
 import WabikenMenu from './WabikenMenu';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
-import { useLocale } from '@/shared/context/LocaleContext';
 import typo from '@/shared/styles/typo';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import MainContainer from '@/shared/components/parts/MainContainer';
 
 const MyLibrary: React.FC = () => {
-  const { lang } = useLocale();
   const store = usePurchasedList();
 
   return (
     <LayoutHelloero options={globalConfig}>
       <MainContainer size="large">
-        <Title>{lang.helloero.myLibrary.purchased.title}</Title>
+        <Title>購入済み作品</Title>
         <WabikenMenu />
         <ListController {...store} />
         <TitleList

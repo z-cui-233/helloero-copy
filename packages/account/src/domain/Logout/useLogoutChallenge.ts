@@ -7,7 +7,6 @@ import { Hub } from 'aws-amplify';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import { useLocale } from '@/shared/context/LocaleContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
@@ -26,7 +25,6 @@ type UseLogoutChallenge = {
 
 const useLogoutChallenge = (): UseLogoutChallenge => {
   const router = useRouter();
-  const { locale } = useLocale();
   const { signOut } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const [logoutChallengeState, setLogoutChallengeState] =
@@ -48,8 +46,8 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
         message: AuthState.SignOut,
       });
 
-      router.replace(`/${locale}`);
-    }, [locale, router, signOut]);
+      router.replace('/');
+    }, [router, signOut]);
 
   useEffect(() => {
     if (!isLoadedUserInfo) {
@@ -61,7 +59,7 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
     }
 
     if (!userInfo.isLoggedIn) {
-      router.replace(`/${locale}`);
+      router.replace('/');
       return;
     }
 
@@ -71,7 +69,6 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
     }));
   }, [
     isLoadedUserInfo,
-    locale,
     logoutChallengeState.pageStatus,
     router,
     userInfo.isLoggedIn,

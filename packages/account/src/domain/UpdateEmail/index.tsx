@@ -8,7 +8,6 @@ import ResendCurrentEmailForm from './ResendCurrentEmailForm';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import BigBar from '@/shared/components/BigBar';
-import { useLocale } from '@/shared/context/LocaleContext';
 
 const UpdateEmail: React.FC = () => {
   const {
@@ -18,11 +17,10 @@ const UpdateEmail: React.FC = () => {
     confirmEmail,
     verifyCode,
   } = useUpdateEmail();
-  const { lang } = useLocale();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title={lang.account.updateEmail.title} />
+      <BigBar title="メールアドレスの変更" />
       {updateEmailState.pageStatus === PAGE_STATUS.RE_SEND_CURRENT_EMAIL && (
         <ResendCurrentEmailForm
           resendCurrentEmail={resendCurrentEmail}
