@@ -121,7 +121,7 @@ const Container = styled.div`
   }
 
   .color-warning {
-    color: ${({ theme }) => theme.keyColor.color5};
+    color: ${({ theme }) => theme.keyColor.error};
     font-weight: bold;
   }
 

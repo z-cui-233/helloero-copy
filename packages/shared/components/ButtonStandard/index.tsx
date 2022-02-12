@@ -10,6 +10,7 @@ type Props = {
   iconType?: ButtonIcons;
   disabled?: boolean;
   type?: 'button' | 'submit';
+  style?: React.CSSProperties;
 };
 
 export const BUTTON_ICONS = {
@@ -37,6 +38,7 @@ const ButtonStandard: React.FC<Props> = ({
   iconType,
   disabled,
   type = 'button',
+  style,
 }) => {
   const hasIcon = !!iconType;
 
@@ -47,6 +49,7 @@ const ButtonStandard: React.FC<Props> = ({
         type={type}
         hasIcon={hasIcon}
         disabled={disabled}
+        style={style}
       >
         {hasIcon && <Icon>{getIcon(iconType)}</Icon>}
         <div>{label}</div>

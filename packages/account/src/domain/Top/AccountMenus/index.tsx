@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import typo from '@/shared/styles/typo';
 import ListRightArrow from '@/shared/components/ListRightArrow';
+import ArrowTextLink from '@/shared/components/ArrowTextLink';
 
 const AccountMenus: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
@@ -13,43 +14,48 @@ const AccountMenus: React.FC = () => {
       <Title>アカウント設定</Title>
       <div>
         {!userInfo.isLoggedIn && (
-          <React.Fragment>
-            <div>
-              <Link href={`/login`} passHref>
+          <Menus>
+            <MenusItem>
+              <Link href="/login" passHref>
                 <StyledLink>
-                  ログインすると利用できます。
+                  ログインすると利用できます
                   <ListRightArrow />
                 </StyledLink>
               </Link>
-            </div>
-          </React.Fragment>
+            </MenusItem>
+          </Menus>
         )}
         {userInfo.isLoggedIn && (
           <React.Fragment>
-            <div>
-              <Link href={'/update-email'} passHref>
-                <StyledLink>
-                  メールアドレスの変更
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <Link href={'/reset-password'} passHref>
-                <StyledLink>
-                  パスワードの変更
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
-            <div>
-              <Link href={'/logout'} passHref>
-                <StyledLink>
-                  ログアウト
-                  <ListRightArrow />
-                </StyledLink>
-              </Link>
-            </div>
+            <Menus>
+              <MenusItem>
+                <Link href="/update-email" passHref>
+                  <StyledLink>
+                    メールアドレスの変更
+                    <ListRightArrow />
+                  </StyledLink>
+                </Link>
+              </MenusItem>
+              <MenusItem>
+                <Link href="/reset-password" passHref>
+                  <StyledLink>
+                    パスワードの変更
+                    <ListRightArrow />
+                  </StyledLink>
+                </Link>
+              </MenusItem>
+              <MenusItem>
+                <Link href="/logout" passHref>
+                  <StyledLink>
+                    ログアウト
+                    <ListRightArrow />
+                  </StyledLink>
+                </Link>
+              </MenusItem>
+            </Menus>
+            <DeletionLink>
+              <ArrowTextLink href="/account-deletion" text="アカウントの削除" />
+            </DeletionLink>
           </React.Fragment>
         )}
       </div>
@@ -58,18 +64,27 @@ const AccountMenus: React.FC = () => {
 };
 
 const Container = styled.div`
-  border: 1px solid ${({ theme }) => theme.background.tertiary};
   margin: 3rem 0 0;
-  border-radius: 0.2rem;
 `;
 
 const Title = styled.div`
-  ${typo.Heading3};
-  padding: 1.5rem 1rem;
+  ${typo.Lead1};
+  padding: 0 0 0 1rem;
+`;
+
+const Menus = styled.div`
+  margin: 1rem 0 0;
+`;
+
+const MenusItem = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.background.tertiary};
+
+  &:first-child {
+    border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+  }
 `;
 
 const StyledLink = styled.a`
-  border-top: 1px solid ${({ theme }) => theme.background.tertiary};
   padding: 1rem 2.5rem 1rem 1rem;
   display: block;
   transition: background-color 0.1s ease-out;
@@ -79,6 +94,12 @@ const StyledLink = styled.a`
     background-color: ${({ theme }) => theme.background.secondary};
     text-decoration: none;
   }
+`;
+
+const DeletionLink = styled.div`
+  margin: 2rem 0 0;
+  padding: 0 1rem 0 0;
+  text-align: right;
 `;
 
 export default AccountMenus;

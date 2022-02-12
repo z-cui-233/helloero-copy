@@ -10,7 +10,7 @@ const SiteMenus: React.FC = () => {
   return (
     <Container>
       <Title>サービス</Title>
-      <Link href={`${globalConfig.HELLOERO}/`} passHref>
+      <Link href={globalConfig.HELLOERO} passHref>
         <ServiceCard>
           <ServiceName>
             シンプルに、カジュアルに。
@@ -32,6 +32,7 @@ const Container = styled.div`
 
 const Title = styled.div`
   ${typo.Lead1};
+  padding: 0 0 0 1rem;
 `;
 
 const ServiceCard = styled.a`
@@ -39,7 +40,7 @@ const ServiceCard = styled.a`
   margin: 1rem 0 0;
   border: 1px solid ${({ theme }) => theme.background.tertiary};
   border-radius: 0.2rem;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr 40%;

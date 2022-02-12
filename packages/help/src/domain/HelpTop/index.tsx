@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { globalConfig } from 'src/globalConfig';
 import MenuCard from './MenuCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';
-import typo from '@/shared/styles/typo';
 import PageTitle from '@/shared/components/PageTitle';
+import ArrowTextLink from '@/shared/components/ArrowTextLink';
 
 const MenuList = [
   {
@@ -42,9 +41,7 @@ const HelpTop: React.FC = () => {
           ))}
         </Menus>
         <TermsLink>
-          <Link href="/terms" passHref>
-            <a>利用規約</a>
-          </Link>
+          <ArrowTextLink href="/terms" text="利用規約" />
         </TermsLink>
       </MainContainer>
     </LayoutH2u>
@@ -57,11 +54,8 @@ const Menus = styled.section`
 
 const TermsLink = styled.div`
   margin: 2rem 0 0;
-  text-align: center;
-
-  & > a {
-    ${typo.Standard};
-  }
+  padding: 0 1rem 0 0;
+  text-align: right;
 `;
 
 export default HelpTop;

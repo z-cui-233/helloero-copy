@@ -51,7 +51,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
             <FormTextField
               label={formLabels.loginId.label}
               fieldOptions={{
-                ...formikHelper.fieldOptions(formik, 'loginId'),
+                ...formikHelper.fieldOptions(formik, 'loginId', 'text'),
                 autoComplete: 'username',
                 placeholder: formLabels.loginId.placeholder,
               }}

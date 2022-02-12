@@ -72,9 +72,10 @@ export default createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
     color: ${({ theme }) => theme.foreground.primary};
+    text-underline-offset: 0.25em;
 
     &:hover {
-    text-decoration: underline;
+      text-decoration: underline;
     }
   }
 

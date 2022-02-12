@@ -25,7 +25,8 @@ const getErrorResponse = (args: { key?: MessageKeys; error: unknown }) => {
   const errorCode = args.error instanceof Error ? args.error.name : '';
   const messageList = args.key ? MESSAGES[args.key] : [];
   const errorMessage =
-    messageList[errorCode as keyof typeof messageList] ?? MESSAGES.default;
+    messageList[errorCode as keyof typeof messageList] ??
+    `${MESSAGES.default}(${errorCode})`;
 
   return {
     data: null,

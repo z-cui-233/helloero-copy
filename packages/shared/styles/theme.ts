@@ -24,7 +24,7 @@ const themeColors: DefaultTheme = {
     color2: colors.pink,
     color3: colors.skin,
     color4: colors.blue,
-    color5: colors.error,
+    error: colors.error,
   },
   foreground: {
     primary: colors.black,

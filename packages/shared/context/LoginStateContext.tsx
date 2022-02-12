@@ -17,7 +17,11 @@ const LoginStateContext = React.createContext({
   userInfo: initialState,
 });
 
-const LoginStateContextProvider: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const LoginStateContextProvider: React.VFC<Props> = ({ children }) => {
   const [isLoadedUserInfo, setIsLoadedUserInfo] = useState<boolean>(false);
   const [userName, setUserName] = useState<string | null>(null);
   const [authState, setAuthState] = useState<AuthState>();
