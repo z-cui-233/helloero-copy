@@ -5,7 +5,6 @@ import ResetPasswordStep1 from './ResetPasswordStep1';
 import NoticeComplete from './NoticeComplete';
 import ResetPasswordStep2 from './ResetPasswordStep2';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
 
 const ResetPassword: React.FC = () => {
   const {
@@ -16,7 +15,6 @@ const ResetPassword: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="パスワードの変更" />
       {resetPasswordState.pageStatus === PAGE_STATUS.STEP1_SEND_MAIL && (
         <ResetPasswordStep1
           resetPasswordState={resetPasswordState}

@@ -6,14 +6,11 @@ import Step2ConfirmForm from './Step2ConfirmForm';
 import useSignUp, { PAGE_STATUS } from './useSignUp';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 
-import BigBar from '@/shared/components/BigBar';
-
 const SignUp: React.FC = () => {
   const { signUpState, challengeSignUp, verifyCode } = useSignUp();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="アカウント登録" />
       {signUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
         <Step1InputForm
           signUpState={signUpState}

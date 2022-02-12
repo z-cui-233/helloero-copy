@@ -6,7 +6,6 @@ import NoticeComplete from './NoticeComplete';
 import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
-import BigBar from '@/shared/components/BigBar';
 
 const EntryFlow: React.FC = () => {
   const { entryWabikenState, confirmWabiken, consumeWabiken } =
@@ -14,7 +13,6 @@ const EntryFlow: React.FC = () => {
 
   return (
     <LayoutHelloero options={globalConfig}>
-      <BigBar title="シリアルコードの登録" />
       {entryWabikenState.pageStatus === PAGE_STATUS.INPUT && (
         <InputForm
           entryWabikenState={entryWabikenState}

@@ -6,7 +6,6 @@ import Step2ConfirmForm from './Step2ConfirmForm';
 import NoticeComplete from './NoticeComplete';
 import Step3ReLoginForm from './Step3ReLoginForm';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
 
 const ResendSignUp: React.FC = () => {
   const { resendSignUpState, resendCode, verifyCode, invokeLogin } =
@@ -14,7 +13,6 @@ const ResendSignUp: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="アカウント登録の再開" />
       {resendSignUpState.pageStatus === PAGE_STATUS.STEP1_INPUT && (
         <Step1InputForm
           resendSignUpState={resendSignUpState}

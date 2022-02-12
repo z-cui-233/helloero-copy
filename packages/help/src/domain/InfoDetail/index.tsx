@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrismicText, PrismicRichText } from '@prismicio/react';
+import { PrismicRichText } from '@prismicio/react';
 import styled from 'styled-components';
 import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
@@ -8,11 +8,11 @@ import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import { convertDateToString } from '@/shared/utils';
-import BigBar from '@/shared/components/BigBar';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   infoDocument: InfoDocument;
@@ -20,7 +20,7 @@ type Props = {
 
 const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
   const date = prismicH.asDate(infoDocument.data.publish_date);
-  const title = prismicH.asText(infoDocument.data.title);
+  const title = prismicH.asText(infoDocument.data.title) ?? '';
 
   const breadcrumbs: Breadcrumbs[] = [
     {
@@ -39,36 +39,28 @@ const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="お知らせ" />
       <MainContainer>
+        <ReleaseDate>{convertDateToString(date)}</ReleaseDate>
+        <PageTitle text={title} />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
-        <Container>
-          <ReleaseDate>{convertDateToString(date)}</ReleaseDate>
-          <Title>
-            <PrismicText field={infoDocument.data.title} />
-          </Title>
+        <Section>
           <RichTextContainer>
             <PrismicRichText field={infoDocument.data.text} />
           </RichTextContainer>
-        </Container>
+        </Section>
       </MainContainer>
     </LayoutH2u>
   );
 };
 
-const Container = styled.article`
-  margin: 1.5rem 0 0;
+const Section = styled.article`
+  margin: 2rem 0 0;
 `;
 
 const ReleaseDate = styled.div`
   ${typo.Body};
   font-weight: bold;
   color: ${({ theme }) => theme.foreground.secondary};
-`;
-
-const Title = styled.h1`
-  ${typo.Heading2};
-  margin: 0 0 2rem;
 `;
 
 export default InfoDetail;

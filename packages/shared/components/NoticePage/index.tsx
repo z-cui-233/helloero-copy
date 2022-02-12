@@ -41,17 +41,17 @@ const NoticePage: React.FC<Props> = ({ title, texts, links }) => {
 };
 
 const Title = styled.div`
-  ${typo.Heading3};
+  ${typo.Heading2};
 `;
 
 const Text = styled.div`
   ${typo.Standard};
   color: ${({ theme }) => theme.foreground.primary};
-  margin: 1.5rem 0 0;
+  margin: 2rem 0 0;
 `;
 
 const LinkContainer = styled.div`
-  margin: 2rem 0 0;
+  margin: 3rem 0 0;
 
   & > div + div {
     margin: 1rem 0 0;
@@ -60,7 +60,7 @@ const LinkContainer = styled.div`
 
 const StyledLink = styled.a`
   ${typo.Body}
-  background-color: ${({ theme }) => theme.keyColor.color4};
+  background-color: ${({ theme }) => theme.background.primaryInverted};
   color: ${({ theme }) => theme.foreground.primaryInverted};
   display: inline-flex;
   align-items: center;

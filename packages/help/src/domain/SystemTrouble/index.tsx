@@ -4,12 +4,12 @@ import { globalConfig } from 'src/globalConfig';
 import { PrismicRichText } from '@prismicio/react';
 import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   systemTroubleDocument: SystemTroubleDocument;
@@ -30,21 +30,21 @@ const SystemTrouble: React.FC<Props> = ({ systemTroubleDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="緊急のお知らせ" />
       <MainContainer>
+        <PageTitle text="緊急のお知らせ" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
-        <Container>
+        <Section>
           <RichTextContainer>
             <PrismicRichText field={systemTroubleDocument.data.text} />
           </RichTextContainer>
-        </Container>
+        </Section>
       </MainContainer>
     </LayoutH2u>
   );
 };
 
-const Container = styled.article`
-  margin: 1.5rem 0 0;
+const Section = styled.article`
+  margin: 2rem 0 0;
 `;
 
 export default SystemTrouble;

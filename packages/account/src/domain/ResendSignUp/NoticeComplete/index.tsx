@@ -4,7 +4,8 @@ import NoticePage from '@/shared/components/NoticePage';
 const NoticeComplete: React.FC = () => {
   return (
     <NoticePage
-      texts="アカウントの登録が完了しました"
+      title="アカウント登録の再開"
+      texts="アカウントの登録が完了しました。"
       links={[
         {
           href: '/',

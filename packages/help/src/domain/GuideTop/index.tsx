@@ -5,7 +5,6 @@ import { PrismicText } from '@prismicio/react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import BigBar from '@/shared/components/BigBar';
 import {
   GuideCategoryDocument,
   GuideTopDocument,
@@ -16,6 +15,7 @@ import GuideCard from '@/localShared/components/GuideCard';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   guideTopDocument: GuideTopDocument;
@@ -39,8 +39,8 @@ const GuideTop: React.FC<Props> = ({
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="よくある質問" />
       <MainContainer>
+        <PageTitle text="よくある質問" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>
           {guideTopDocument.data.category_links.map((doc, index) => (
@@ -80,15 +80,11 @@ const GuideTop: React.FC<Props> = ({
 };
 
 const Section = styled.div`
-  margin: 3rem 0 0;
-
-  &:first-child {
-    margin: 1.5rem 0 0;
-  }
+  margin: 2rem 0 0;
 `;
 
 const Title = styled.h2`
-  ${typo.Heading3};
+  ${typo.Lead1};
 `;
 
 const List = styled.ul`
@@ -109,7 +105,6 @@ const ReadMore = styled.div`
   position: relative;
 
   & a {
-    font-weight: bold;
     text-decoration: none;
 
     &:hover {

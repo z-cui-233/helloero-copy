@@ -10,6 +10,7 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resendSignUpState: UseResendSignUp['resendSignUpState'];
@@ -28,9 +29,7 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={resendSignUpState.errorMessage} />
-      <Text>
-        ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。
-      </Text>
+      <PageTitle text="アカウント登録の再開" />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -38,6 +37,9 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
         }}
       >
         <Section>
+          <div>
+            ログインIDを入力して、ご登録のメールアドレスに本人確認コードを送信してください。
+          </div>
           <FieldSection>
             <TextField
               label={formLabels.loginId.label}
@@ -56,10 +58,6 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

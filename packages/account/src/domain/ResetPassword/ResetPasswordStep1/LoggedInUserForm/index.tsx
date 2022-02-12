@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { UseResetPassword } from '../../useResetPassword';
-import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];
@@ -20,9 +21,12 @@ const LoggedInUserForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
-      <Text>
-        パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
-      </Text>
+      <PageTitle text="パスワードの変更" />
+      <Section>
+        <div>
+          パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
+        </div>
+      </Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -37,8 +41,8 @@ const LoggedInUserForm: React.FC<Props> = ({
   );
 };
 
-const Text = styled.div`
-  margin: 1rem 0 0;
+const Section = styled.div`
+  margin: 2rem 0 0;
 `;
 
 const ButtonSection = styled.div`

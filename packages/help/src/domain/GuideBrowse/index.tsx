@@ -6,12 +6,12 @@ import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
-import BigBar from '@/shared/components/BigBar';
 import typo from '@/shared/styles/typo';
 import GuideCard from '@/localShared/components/GuideCard';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   guideCategoryDocument: GuideCategoryDocument;
@@ -37,27 +37,32 @@ const GuideBrowse: React.FC<Props> = ({ guideCategoryDocument }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="よくある質問" />
       <MainContainer>
+        <PageTitle text="よくある質問" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
-        <Title>
-          <PrismicText field={guideCategoryDocument.data.title} />
-        </Title>
-        <List>
-          {guideCategoryDocument.data.guide_links.map((doc) => (
-            <ListItem key={doc.guide_link.uid}>
-              <GuideCard document={doc.guide_link} />
-            </ListItem>
-          ))}
-        </List>
+        <Section>
+          <Title>
+            <PrismicText field={guideCategoryDocument.data.title} />
+          </Title>
+          <List>
+            {guideCategoryDocument.data.guide_links.map((doc) => (
+              <ListItem key={doc.guide_link.uid}>
+                <GuideCard document={doc.guide_link} />
+              </ListItem>
+            ))}
+          </List>
+        </Section>
       </MainContainer>
     </LayoutH2u>
   );
 };
 
+const Section = styled.div`
+  margin: 2rem 0 0;
+`;
+
 const Title = styled.h1`
-  ${typo.Heading3};
-  margin: 1.5rem 0 0;
+  ${typo.Lead1};
 `;
 
 const List = styled.ul`

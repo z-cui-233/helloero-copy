@@ -6,19 +6,23 @@ import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
+import PageTitle from '@/shared/components/PageTitle';
 
 const Logout: React.FC = () => {
   const { logoutChallengeState, invokeLogOut } = useLogoutChallenge();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="ログアウト" />
       {logoutChallengeState.pageStatus === PAGE_STATUS.CONFIRM ? (
         <MainContainer>
-          <Text>
-            H2Uからログアウトしますか？再度ログインするには、ログインIDとパスワードが必要です。
-          </Text>
+          <PageTitle text="ログアウト" />
+          <Section>
+            <div>
+              H2Uからログアウトしますか？
+              <br />
+              再度ログインするには、ログインIDとパスワードが必要です。
+            </div>
+          </Section>
           <ButtonSection>
             <ButtonStandard
               onClick={() => {
@@ -36,8 +40,8 @@ const Logout: React.FC = () => {
   );
 };
 
-const Text = styled.div`
-  margin: 1rem 0 0;
+const Section = styled.div`
+  margin: 2rem 0 0;
 `;
 
 const ButtonSection = styled.div`

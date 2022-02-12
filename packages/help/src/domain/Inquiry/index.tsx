@@ -2,10 +2,10 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import BigBar from '@/shared/components/BigBar';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 const Inquiry: React.FC = () => {
   const breadcrumbs: Breadcrumbs[] = [
@@ -21,8 +21,8 @@ const Inquiry: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="お問い合わせ" />
       <MainContainer>
+        <PageTitle text="お問い合わせ" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <div>Inquiry</div>
       </MainContainer>

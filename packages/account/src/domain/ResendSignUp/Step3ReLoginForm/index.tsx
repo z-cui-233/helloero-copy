@@ -11,6 +11,7 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resendSignUpState: UseResendSignUp['resendSignUpState'];
@@ -32,8 +33,9 @@ const Step3ReLoginForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resendSignUpState.errorMessage} />
-      <Text>パスワードを入力して、ログインしてください</Text>
+      <PageTitle text="アカウント登録の再開" />
       <Section>
+        <div>パスワードを入力して、ログインしてください</div>
         <FieldSection>
           <LoginId>{resendSignUpState.step1FormValues.loginId}</LoginId>
         </FieldSection>
@@ -59,10 +61,6 @@ const Step3ReLoginForm: React.FC<Props> = ({
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

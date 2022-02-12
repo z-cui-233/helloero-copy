@@ -11,6 +11,7 @@ import typo from '@/shared/styles/typo';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];
@@ -33,9 +34,7 @@ const ResetPasswordStep2: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
-      <Text>
-        下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。
-      </Text>
+      <PageTitle text="パスワードの変更" />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -43,6 +42,9 @@ const ResetPasswordStep2: React.FC<Props> = ({
         }}
       >
         <Section>
+          <div>
+            下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。
+          </div>
           <FieldSection>
             <DestinationMail>{resetPasswordState.destination}</DestinationMail>
           </FieldSection>
@@ -84,10 +86,6 @@ const ResetPasswordStep2: React.FC<Props> = ({
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const DestinationMail = styled.div`
   ${typo.Standard};
