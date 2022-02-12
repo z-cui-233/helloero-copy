@@ -12,6 +12,7 @@ import TextField from '@/shared/components/parts/TextField';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   loginChallengeState: UseLoginChallenge['loginChallengeState'];
@@ -34,6 +35,7 @@ const InputForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={loginChallengeState.errorMessage} />
+      <PageTitle text="ログイン" />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -74,7 +76,7 @@ const InputForm: React.FC<Props> = ({
         </ButtonSection>
         <SignUp>
           <Link href={'/signup'} passHref>
-            <SignUpLink>H2Uアカウントを無料で登録</SignUpLink>
+            <SignUpLink>アカウントを無料で登録</SignUpLink>
           </Link>
         </SignUp>
       </form>

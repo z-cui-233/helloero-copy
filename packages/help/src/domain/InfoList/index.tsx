@@ -5,11 +5,11 @@ import { globalConfig } from 'src/globalConfig';
 import InfoCard from './InfoCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import BigBar from '@/shared/components/BigBar';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   infoDocuments: prismicT.Query<InfoDocument>;
@@ -29,8 +29,8 @@ const InfoList: React.FC<Props> = ({ infoDocuments }) => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="お知らせ" />
       <MainContainer>
+        <PageTitle text="お知らせ" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
         <List>
           {infoDocuments.results.map((doc) => (
@@ -45,7 +45,7 @@ const InfoList: React.FC<Props> = ({ infoDocuments }) => {
 };
 
 const List = styled.ul`
-  margin: 1.5rem 0 0;
+  margin: 2rem 0 0;
 `;
 
 const ListItem = styled.li`

@@ -5,8 +5,8 @@ import { globalConfig } from 'src/globalConfig';
 import MenuCard from './MenuCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
-import BigBar from '@/shared/components/BigBar';
 import typo from '@/shared/styles/typo';
+import PageTitle from '@/shared/components/PageTitle';
 
 const MenuList = [
   {
@@ -29,16 +29,18 @@ const MenuList = [
 const HelpTop: React.FC = () => {
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="ヘルプセンター" />
       <MainContainer>
-        {MenuList.map((data) => (
-          <MenuCard
-            key={data.key}
-            urlPattern={data.key}
-            title={data.title}
-            texts={data.text}
-          />
-        ))}
+        <PageTitle text="ヘルプセンター" />
+        <Menus>
+          {MenuList.map((data) => (
+            <MenuCard
+              key={data.key}
+              urlPattern={data.key}
+              title={data.title}
+              texts={data.text}
+            />
+          ))}
+        </Menus>
         <TermsLink>
           <Link href="/terms/service" passHref>
             <a>利用規約</a>
@@ -49,8 +51,12 @@ const HelpTop: React.FC = () => {
   );
 };
 
+const Menus = styled.section`
+  margin: 2rem 0 0;
+`;
+
 const TermsLink = styled.div`
-  margin: 3rem 0 0;
+  margin: 2rem 0 0;
   text-align: center;
 
   & > a {

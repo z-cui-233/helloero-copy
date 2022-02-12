@@ -4,6 +4,7 @@ import { UseUpdateEmail } from '../useUpdateEmail';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import typo from '@/shared/styles/typo';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resendCurrentEmail: UseUpdateEmail['resendCurrentEmail'];
@@ -16,9 +17,14 @@ const ResendCurrentEmailForm: React.FC<Props> = ({
 }) => {
   return (
     <MainContainer>
-      <Text>
-        メールアドレスの確認が完了していません。もう一度本人確認コードを送信してしてください。
-      </Text>
+      <PageTitle text="メールアドレスの変更" />
+      <Section>
+        <div>
+          メールアドレスの確認が完了していません。
+          <br />
+          もう一度本人確認コードを送信して、メールアドレスの確認を完了してください。
+        </div>
+      </Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -41,8 +47,8 @@ const ResendCurrentEmailForm: React.FC<Props> = ({
   );
 };
 
-const Text = styled.div`
-  margin: 1rem 0 0;
+const Section = styled.div`
+  margin: 2rem 0 0;
 `;
 
 const ButtonSection = styled.div`

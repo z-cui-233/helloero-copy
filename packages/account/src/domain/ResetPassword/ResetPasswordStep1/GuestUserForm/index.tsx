@@ -4,12 +4,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { UseResetPassword } from '../../useResetPassword';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
 import TextField from '@/shared/components/parts/TextField';
-import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import MainContainer from '@/shared/components/parts/MainContainer';
+import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];
@@ -33,10 +34,11 @@ const GuestUserForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={resetPasswordState.errorMessage} />
-      <Text>
-        パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
-      </Text>
+      <PageTitle text="パスワードの変更" />
       <Section>
+        <div>
+          パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
+        </div>
         <FieldSection>
           <TextField
             label={formLabels.loginId.label}
@@ -59,10 +61,6 @@ const GuestUserForm: React.FC<Props> = ({
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

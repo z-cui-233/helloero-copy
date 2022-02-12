@@ -6,6 +6,7 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   entryWabikenState: UseEntryWabiken['entryWabikenState'];
@@ -31,12 +32,15 @@ const ConfirmForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={entryWabikenState.errorMessage} />
-      <Text>内容を確認の上、登録をして下さい。</Text>
-      <TitleInfo
-        thumbnail={createTitleThumbnailUrl(thumbnail)}
-        titleName={titleName}
-        displayExpireDate={createExpireDate(validityPeriod)}
-      />
+      <PageTitle text="シリアルコードの登録" />
+      <Section>
+        <div>内容を確認の上、登録をして下さい。</div>
+        <TitleInfo
+          thumbnail={createTitleThumbnailUrl(thumbnail)}
+          titleName={titleName}
+          displayExpireDate={createExpireDate(validityPeriod)}
+        />
+      </Section>
       <ButtonSection>
         <ButtonStandard
           onClick={() => {
@@ -49,8 +53,8 @@ const ConfirmForm: React.FC<Props> = ({
   );
 };
 
-const Text = styled.div`
-  margin: 1rem 0 0;
+const Section = styled.div`
+  margin: 2rem 0 0;
 `;
 
 const ButtonSection = styled.div`

@@ -11,6 +11,7 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   signUpState: UseSignUp['signUpState'];
@@ -29,11 +30,10 @@ const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={signUpState.errorMessage} />
-      <Steps>STEP 2/2</Steps>
-      <Text>
-        メールアドレスの確認を行います。メールアドレスに送信した本人確認コードを入力してください。
-      </Text>
+      <PageTitle text="アカウント登録" />
       <Section>
+        <Steps>STEP 2/2</Steps>
+        <Text>メールアドレスに送信した本人確認コードを入力してください。</Text>
         <FieldSection>
           <TextField
             label={formLabels.verificationCode.label}
@@ -61,7 +61,7 @@ const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
 };
 
 const Steps = styled.div`
-  ${typo.Body};
+  ${typo.Note};
   font-weight: bold;
 `;
 

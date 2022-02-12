@@ -52,6 +52,7 @@ const Container = styled.ol`
   display: flex;
   flex-wrap: wrap;
   line-height: 1.4;
+  margin: 0.5rem 0 0;
 `;
 
 const Item = styled.li`

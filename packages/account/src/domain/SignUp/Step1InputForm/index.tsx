@@ -12,6 +12,7 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import { PRIVACY_URL, TERMS_URL } from '@/shared/constants/terms';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   signUpState: UseSignUp['signUpState'];
@@ -32,8 +33,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={signUpState.errorMessage} />
-      <Steps>STEP 1/2</Steps>
-      <Text>お客様情報を入力してください</Text>
+      <PageTitle text="アカウント登録" />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -41,6 +41,8 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
         }}
       >
         <Section>
+          <Steps>STEP 1/2</Steps>
+          <Text>お客様情報を入力してください</Text>
           <FieldSection>
             <TextField
               label={formLabels.loginId.label}
@@ -97,12 +99,11 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
 };
 
 const Steps = styled.div`
-  ${typo.Body};
+  ${typo.Note};
   font-weight: bold;
 `;
 
 const Text = styled.div`
-  ${typo.Standard};
   margin: 0.5rem 0 0;
 `;
 

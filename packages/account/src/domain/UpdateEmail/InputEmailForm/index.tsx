@@ -10,6 +10,7 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   updateEmailState: UseUpdateEmail['updateEmailState'];
@@ -33,10 +34,11 @@ const InputEmailForm: React.FC<Props> = ({
   return (
     <MainContainer>
       <FormErrorMessage message={updateEmailState.errorMessage} />
-      <Text>
-        ご希望のメールアドレスを入力して、本人確認コードを送信してください。
-      </Text>
+      <PageTitle text="メールアドレスの変更" />
       <Section>
+        <div>
+          ご希望のメールアドレスを入力して、本人確認コードを送信してください。
+        </div>
         <FieldSection>
           <TextField
             label={formLabels.email.label}
@@ -59,10 +61,6 @@ const InputEmailForm: React.FC<Props> = ({
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

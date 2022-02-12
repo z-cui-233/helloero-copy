@@ -10,6 +10,7 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   entryWabikenState: UseEntryWabiken['entryWabikenState'];
@@ -28,8 +29,9 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
   return (
     <MainContainer>
       <FormErrorMessage message={entryWabikenState.errorMessage} />
-      <Text>購入時に受け取った、シリアルコードを入力してください。</Text>
+      <PageTitle text="シリアルコードの登録" />
       <Section>
+        <div>購入時に受け取った、シリアルコードを入力してください。</div>
         <FieldSection>
           <TextField
             label={formLabels.wabiken.label}
@@ -52,10 +54,6 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
     </MainContainer>
   );
 };
-
-const Text = styled.div`
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

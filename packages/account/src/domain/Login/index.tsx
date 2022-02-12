@@ -5,14 +5,12 @@ import InputForm from './InputForm';
 import NoticePasswordResetRequired from './NoticePasswordResetRequired';
 import NoticeUserNotConfirmed from './NoticeUserNotConfirmed';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
 
 const Login: React.FC = () => {
   const { loginChallengeState, challengeLogin } = useLoginChallenge();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="ログイン" />
       {loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (
         <InputForm
           loginChallengeState={loginChallengeState}

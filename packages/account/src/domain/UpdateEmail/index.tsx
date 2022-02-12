@@ -7,7 +7,6 @@ import NoticeComplete from './NoticeComplete';
 import ResendCurrentEmailForm from './ResendCurrentEmailForm';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import BigBar from '@/shared/components/BigBar';
 
 const UpdateEmail: React.FC = () => {
   const {
@@ -20,7 +19,6 @@ const UpdateEmail: React.FC = () => {
 
   return (
     <LayoutH2u options={globalConfig}>
-      <BigBar title="メールアドレスの変更" />
       {updateEmailState.pageStatus === PAGE_STATUS.RE_SEND_CURRENT_EMAIL && (
         <ResendCurrentEmailForm
           resendCurrentEmail={resendCurrentEmail}
