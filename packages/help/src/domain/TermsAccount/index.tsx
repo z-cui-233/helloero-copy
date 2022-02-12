@@ -10,7 +10,7 @@ type Props = {
   termsDocument: TermsDocument;
 };
 
-const TermsService: React.FC<Props> = ({ termsDocument }) => {
+const TermsAccount: React.FC<Props> = ({ termsDocument }) => {
   return (
     <LayoutH2u options={globalConfig}>
       <MainContainer>
@@ -22,4 +22,4 @@ const TermsService: React.FC<Props> = ({ termsDocument }) => {
   );
 };
 
-export default TermsService;
+export default TermsAccount;

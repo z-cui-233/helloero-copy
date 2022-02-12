@@ -4,7 +4,7 @@ import { Config } from 'u-next/config';
 import typo from '../../../styles/typo';
 import IconH2U from '../../../assets/logo/h2uWhite.svg';
 import device from '../../../styles/device';
-import { COMPANY_URL, PRIVACY_URL, TERMS_URL } from '../../../constants/terms';
+import { COMPANY_URL } from '../../../constants/terms';
 
 type Props = {
   options: Config;
@@ -19,13 +19,10 @@ const Footer: React.FC<Props> = ({ options }) => {
         </Logo>
         <Links>
           <LinkItem>
-            <StyledLink
-              href={options.HELP}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ヘルプ
-            </StyledLink>
+            <StyledLink href={options.ACCOUNT}>アカウント</StyledLink>
+          </LinkItem>
+          <LinkItem>
+            <StyledLink href={options.HELP}>ヘルプ</StyledLink>
           </LinkItem>
           <LinkItem>
             <StyledLink
@@ -38,16 +35,7 @@ const Footer: React.FC<Props> = ({ options }) => {
           </LinkItem>
           <LinkItem>
             <StyledLink
-              href={PRIVACY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              個人情報保護方針
-            </StyledLink>
-          </LinkItem>
-          <LinkItem>
-            <StyledLink
-              href={TERMS_URL}
+              href={`${options.HELP}/terms`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -70,7 +58,7 @@ const Contents = styled.div`
   width: calc(100% - 2rem);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 33% 1fr;
+  grid-template-columns: 25% 1fr;
   grid-gap: 1.5rem;
   align-items: center;
 
@@ -80,6 +68,9 @@ const Contents = styled.div`
 `;
 
 const Logo = styled.div`
+  display: flex;
+  align-items: center;
+
   & > svg {
     height: 2.5rem;
     width: auto;
@@ -88,11 +79,7 @@ const Logo = styled.div`
 
 const Links = styled.div`
   display: flex;
-  justify-content: flex-end;
-
-  @media ${device.ltTablet} {
-    justify-content: flex-start;
-  }
+  flex-wrap: wrap;
 `;
 
 const LinkItem = styled.div`

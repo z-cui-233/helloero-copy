@@ -2,7 +2,11 @@ import * as prismic from '@prismicio/client';
 import * as prismicT from '@prismicio/types';
 import * as prismicH from '@prismicio/helpers';
 import { GetServerSidePropsContext } from 'next';
-import { GuideDocument, SystemTroubleDocument } from './interfaces';
+import {
+  GuideDocument,
+  SystemTroubleDocument,
+  TermsDocument,
+} from './interfaces';
 import { InfoDocument } from './interfaces';
 
 const CUSTOM_TYPE = {
@@ -11,6 +15,8 @@ const CUSTOM_TYPE = {
   GUIDE_CATEGORY: 'guide_category',
   GUIDE: 'guide',
   SYSTEM_TROUBLE: 'systemtrouble',
+  TERMS_SERVICE: 'terms_service',
+  TERMS_ACCOUNT: 'terms_account',
 } as const;
 
 const apiClient = (ctx: GetServerSidePropsContext): prismic.Client => {
@@ -109,6 +115,24 @@ export const fetchGuideByUid = (args: {
 }): Promise<GuideDocument | null> => {
   return apiClient(args.ctx)
     .getByUID<GuideDocument>(CUSTOM_TYPE.GUIDE, args.uid)
+    .catch(() => null);
+};
+
+// HelloEroサービス利用規約
+export const fetchTermsHelloEroService = (args: {
+  ctx: GetServerSidePropsContext;
+}): Promise<TermsDocument | null> => {
+  return apiClient(args.ctx)
+    .getSingle<TermsDocument>(CUSTOM_TYPE.TERMS_SERVICE)
+    .catch(() => null);
+};
+
+// H2Uアカウント利用規約
+export const fetchTermsAccount = (args: {
+  ctx: GetServerSidePropsContext;
+}): Promise<TermsDocument | null> => {
+  return apiClient(args.ctx)
+    .getSingle<TermsDocument>(CUSTOM_TYPE.TERMS_ACCOUNT)
     .catch(() => null);
 };
 

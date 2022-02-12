@@ -12,7 +12,7 @@ const MenuList = [
   {
     key: 'guide',
     title: 'よくある質問',
-    text: 'H2U、HELLOEROについて、使い方やご質問、ご不明な点を確認できます。',
+    text: '使い方やご質問、ご不明な点を確認できます。',
   },
   {
     key: 'info',
@@ -42,7 +42,7 @@ const HelpTop: React.FC = () => {
           ))}
         </Menus>
         <TermsLink>
-          <Link href="/terms/service" passHref>
+          <Link href="/terms" passHref>
             <a>利用規約</a>
           </Link>
         </TermsLink>

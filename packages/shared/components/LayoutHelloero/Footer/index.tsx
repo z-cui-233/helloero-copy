@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
 import IconHelloEro from '../../../assets/logo/helloeroFullWhite.svg';
-import { COMPANY_URL, PRIVACY_URL, TERMS_URL } from '../../../constants/terms';
+import { COMPANY_URL } from '../../../constants/terms';
 import device from '../../../styles/device';
 import typo from '../../../styles/typo';
 
@@ -20,25 +20,11 @@ const Footer: React.FC<Props> = ({ options }) => {
         <div>
           <Links>
             <LinkItem>
-              <StyledLink
-                href={options.ACCOUNT}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                アカウント
-              </StyledLink>
+              <StyledLink href={options.ACCOUNT}>アカウント</StyledLink>
             </LinkItem>
             <LinkItem>
-              <StyledLink
-                href={options.HELP}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ヘルプ
-              </StyledLink>
+              <StyledLink href={options.HELP}>ヘルプ</StyledLink>
             </LinkItem>
-          </Links>
-          <Links>
             <LinkItem>
               <StyledLink
                 href={COMPANY_URL}
@@ -50,16 +36,7 @@ const Footer: React.FC<Props> = ({ options }) => {
             </LinkItem>
             <LinkItem>
               <StyledLink
-                href={PRIVACY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                個人情報保護方針
-              </StyledLink>
-            </LinkItem>
-            <LinkItem>
-              <StyledLink
-                href={TERMS_URL}
+                href={`${options.HELP}/terms`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -79,7 +56,7 @@ const Container = styled.footer`
 `;
 
 const Contents = styled.div`
-  max-width: 46rem;
+  max-width: 40rem;
   width: calc(100% - 2rem);
   margin: 0 auto;
   display: grid;
@@ -95,7 +72,6 @@ const Contents = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
 
   & > svg {
     height: 2.5rem;
@@ -107,10 +83,6 @@ const Logo = styled.div`
 const Links = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  & + & {
-    margin: 1rem 0 0;
-  }
 `;
 
 const LinkItem = styled.div`
