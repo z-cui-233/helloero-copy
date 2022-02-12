@@ -16,7 +16,7 @@
     "@aws-amplify/ui-components": "^1.9.6",
     "@u-next/site_config": "file:../site_config",
     "@u-next/videoplayer-react": "^1.5.0",
-    "aws-amplify": "^4.3.11",
+    "aws-amplify": "^4.3.14",
     "dateformat": "^5.0.2",
     "formik": "^2.2.9",
     "next": "11.1.2",
