@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from '../../../styles/typo';
+import typo from '../../styles/typo';
 
 type Props = {
   message: string;
 };
 
-const ValidateMessage: React.FC<Props> = ({ message }) => {
-  return <Container>{message}</Container>;
-};
+const FormValidateMessage: React.FC<Props> = ({ message }) => (
+  <Container>{message}</Container>
+);
 
 const Container = styled.div`
   ${typo.Body};
@@ -18,4 +18,4 @@ const Container = styled.div`
   font-weight: bold;
 `;
 
-export default ValidateMessage;
+export default FormValidateMessage;

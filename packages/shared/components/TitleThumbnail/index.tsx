@@ -5,13 +5,11 @@ type Props = {
   src: string;
 };
 
-const TitleThumbnail: React.FC<Props> = ({ src }) => {
-  return (
-    <Container>
-      <Image src={src} alt="" />
-    </Container>
-  );
-};
+const TitleThumbnail: React.FC<Props> = ({ src }) => (
+  <Container>
+    <Image src={src} alt="" />
+  </Container>
+);
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.keyColor.color3};

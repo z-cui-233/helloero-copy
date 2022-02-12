@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 

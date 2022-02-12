@@ -9,7 +9,7 @@ import WabikenMenu from './WabikenMenu';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 import typo from '@/shared/styles/typo';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 
 const MyLibrary: React.FC = () => {
   const store = usePurchasedList();

@@ -4,7 +4,7 @@ import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 const Internal: React.FC = () => {
@@ -16,6 +16,7 @@ const Internal: React.FC = () => {
     if (!isLoadedUserInfo) {
       return;
     }
+
     currentAuthenticatedUser().then((response) =>
       setUser(response.data ?? undefined)
     );

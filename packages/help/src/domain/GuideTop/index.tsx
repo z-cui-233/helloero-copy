@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { PrismicText } from '@prismicio/react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import {
   GuideCategoryDocument,
   GuideTopDocument,

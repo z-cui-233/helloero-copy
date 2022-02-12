@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import typo from '../../../styles/typo';
-import ValidateMessage from '../../../components/parts/ValidateMessage';
-import VisibilityIcon from '../../../assets/icon/visibility_black_24dp.svg';
-import VisibilityOffIcon from '../../../assets/icon/visibility_off_black_24dp.svg';
+import typo from '../../styles/typo';
+import FormValidateMessage from '../FormValidateMessage';
+import VisibilityIcon from '../../assets/icon/visibility_black_24dp.svg';
+import VisibilityOffIcon from '../../assets/icon/visibility_off_black_24dp.svg';
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
@@ -15,7 +15,7 @@ type Props = {
   fieldOptions: CustomInputProps;
 };
 
-const TextField: React.FC<Props> = ({
+const FormTextField: React.FC<Props> = ({
   label,
   validateMessage,
   fieldOptions,
@@ -41,7 +41,7 @@ const TextField: React.FC<Props> = ({
           </PasswordReveal>
         )}
       </Container>
-      {validateMessage && <ValidateMessage message={validateMessage} />}
+      {validateMessage && <FormValidateMessage message={validateMessage} />}
     </div>
   );
 };
@@ -123,4 +123,4 @@ const PasswordReveal = styled.div`
   }
 `;
 
-export default TextField;
+export default FormTextField;

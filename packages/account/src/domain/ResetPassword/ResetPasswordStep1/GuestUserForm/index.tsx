@@ -3,12 +3,12 @@ import * as Yup from 'yup';
 import React from 'react';
 import styled from 'styled-components';
 import { UseResetPassword } from '../../useResetPassword';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import TextField from '@/shared/components/parts/TextField';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import FormTextField from '@/shared/components/FormTextField';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import PageTitle from '@/shared/components/PageTitle';
 
@@ -40,7 +40,7 @@ const GuestUserForm: React.FC<Props> = ({
           パスワードを変更するには、本人確認が必要です。ご登録のメールアドレスに確認メールを送信します。
         </div>
         <FieldSection>
-          <TextField
+          <FormTextField
             label={formLabels.loginId.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'loginId'),

@@ -1,31 +1,20 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
+import useInquiry, { PAGE_STATUS } from './useInquiry';
+import NoticeComplete from './NoticeComplete';
+import InputForm from './InputForm';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
-import BreadcrumbsList, {
-  Breadcrumbs,
-} from '@/localShared/components/BreadcrumbsList';
-import PageTitle from '@/shared/components/PageTitle';
 
 const Inquiry: React.FC = () => {
-  const breadcrumbs: Breadcrumbs[] = [
-    {
-      path: '/',
-      text: 'ヘルプセンター',
-    },
-    {
-      path: '/inquiry',
-      text: 'お問い合わせ',
-    },
-  ];
+  const { inquiryState, sendInquiry } = useInquiry();
 
   return (
     <LayoutH2u options={globalConfig}>
-      <MainContainer>
-        <PageTitle text="お問い合わせ" />
-        <BreadcrumbsList breadcrumbs={breadcrumbs} />
-        <div>Inquiry</div>
-      </MainContainer>
+      {inquiryState.pageStatus === PAGE_STATUS.INIT && <div />}
+      {inquiryState.pageStatus === PAGE_STATUS.INPUT && (
+        <InputForm inquiryState={inquiryState} sendInquiry={sendInquiry} />
+      )}
+      {inquiryState.pageStatus === PAGE_STATUS.COMPLETE && <NoticeComplete />}
     </LayoutH2u>
   );
 };

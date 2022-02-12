@@ -33,6 +33,8 @@ const formValidations = {
     .required(validationMessages['required'])
     .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
     .length(16, validationMessages['length16']),
+
+  required: Yup.string().required(validationMessages['required']),
 };
 
 export default formValidations;

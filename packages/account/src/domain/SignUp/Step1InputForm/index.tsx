@@ -4,10 +4,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseSignUp } from '../useSignUp';
 import typo from '@/shared/styles/typo';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import TextField from '@/shared/components/parts/TextField';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import FormTextField from '@/shared/components/FormTextField';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -48,7 +48,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
           <Steps>STEP 1/2</Steps>
           <Text>お客様情報を入力してください</Text>
           <FieldSection>
-            <TextField
+            <FormTextField
               label={formLabels.loginId.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'loginId'),
@@ -59,7 +59,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
             />
           </FieldSection>
           <FieldSection>
-            <TextField
+            <FormTextField
               label={formLabels.password.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'password', 'password'),
@@ -70,10 +70,10 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
             />
           </FieldSection>
           <FieldSection>
-            <TextField
+            <FormTextField
               label={formLabels.email.label}
               fieldOptions={{
-                ...formikHelper.fieldOptions(formik, 'email'),
+                ...formikHelper.fieldOptions(formik, 'email', 'email'),
                 placeholder: formLabels.email.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'email')}

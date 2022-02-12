@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { UseEntryWabiken } from '../useEntryWabiken';
 import TitleInfo from './TitleInfo';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import MainContainer from '@/shared/components/MainContainer';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
 import PageTitle from '@/shared/components/PageTitle';
 

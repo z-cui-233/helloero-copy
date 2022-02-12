@@ -3,7 +3,7 @@ import { PrismicRichText } from '@prismicio/react';
 import styled from 'styled-components';
 import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import typo from '@/shared/styles/typo';
 import RichTextContainer from '@/localShared/components/RichTextContainer';

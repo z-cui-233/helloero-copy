@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { globalConfig } from 'src/globalConfig';
 import MenuCard from './MenuCard';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import typo from '@/shared/styles/typo';
 import PageTitle from '@/shared/components/PageTitle';
 

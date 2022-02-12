@@ -3,7 +3,7 @@ import { FormikHandlers, FormikProps } from 'formik';
 const fieldOptions = <T>(
   formik: FormikProps<T>,
   name: keyof T,
-  type: 'text' | 'password' | 'tel' = 'text'
+  type: 'text' | 'password' | 'tel' | 'email' = 'text'
 ): {
   type: string;
   name: string;

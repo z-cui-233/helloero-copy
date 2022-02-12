@@ -5,7 +5,7 @@ import { UserWabikenMeta } from '../../../../API';
 import { UsePurchasedList } from '../../usePurchasedList';
 import DetailButton from './DetailButton';
 import PlayButton from './PlayButton';
-import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
+import TitleThumbnail from '@/shared/components/TitleThumbnail';
 import device from '@/shared/styles/device';
 import { createTitleThumbnailUrl } from '@/shared/utils';
 
