@@ -18,23 +18,20 @@ export const PAGE_STATUS = {
   PLAY: 'PLAY',
   ERROR: 'ERROR',
 } as const;
-type PageStatus = typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 
-export interface UsePlayer {
-  playerState: {
-    pageStatus: PageStatus;
-    wabiken: string;
-    deviceId: string;
-    playerProps: PlayerProps | undefined;
-    errorMessage: {
-      title: string;
-      text: string;
-      errorCode: string;
-    };
+type State = {
+  pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
+  wabiken: string;
+  deviceId: string;
+  playerProps: PlayerProps | undefined;
+  errorMessage: {
+    title: string;
+    text: string;
+    errorCode: string;
   };
-}
+};
 
-const initialState: UsePlayer['playerState'] = {
+const initialState: State = {
   pageStatus: PAGE_STATUS.INIT,
   wabiken: '',
   deviceId: '',
@@ -46,12 +43,13 @@ const initialState: UsePlayer['playerState'] = {
   },
 };
 
+export type UsePlayer = {
+  playerState: State;
+};
+
 const usePlayer = (): UsePlayer => {
   const router = useRouter();
-
-  const [playerState, setPlayerState] =
-    useState<UsePlayer['playerState']>(initialState);
-
+  const [state, setState] = useState<State>(initialState);
   const { fetcher } = useAmplifyFetcher<
     GetPlayInfoQuery,
     GetPlayInfoQueryVariables
@@ -126,8 +124,8 @@ const usePlayer = (): UsePlayer => {
           const text = error.customMessage ?? '';
           const errorCode = error.customCode ? String(error.customCode) : '';
 
-          setPlayerState((playerState) => ({
-            ...playerState,
+          setState((state) => ({
+            ...state,
             pageStatus: PAGE_STATUS.ERROR,
             errorMessage: {
               title,
@@ -159,8 +157,8 @@ const usePlayer = (): UsePlayer => {
         const errorCode = apiData.errors?.[0]?.errorInfo?.code;
         const errorMessage = getErrorMessage('getPlayInfo', errorCode);
 
-        setPlayerState((playerState) => ({
-          ...playerState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.ERROR,
           errorMessage: {
             title: '再生できません',
@@ -178,8 +176,8 @@ const usePlayer = (): UsePlayer => {
           deviceId
         );
 
-      setPlayerState((playerState) => ({
-        ...playerState,
+      setState((state) => ({
+        ...state,
         pageStatus: playerProps ? PAGE_STATUS.PLAY : PAGE_STATUS.ERROR,
         wabiken,
         deviceId,
@@ -189,7 +187,7 @@ const usePlayer = (): UsePlayer => {
   }, [creatPlayerPropsFromPlayInfo, fetcher, router.query.wabiken]);
 
   return {
-    playerState,
+    playerState: state,
   };
 };
 

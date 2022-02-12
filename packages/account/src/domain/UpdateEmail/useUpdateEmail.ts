@@ -9,7 +9,7 @@ export const PAGE_STATUS = {
   COMPLETE: 'COMPLETE',
 } as const;
 
-type UpdateEmailState = {
+type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
   errorMessage: string;
   formValues: {
@@ -18,8 +18,17 @@ type UpdateEmailState = {
   };
 };
 
+const initialState: State = {
+  pageStatus: PAGE_STATUS.INIT,
+  errorMessage: '',
+  formValues: {
+    email: '',
+    verificationCode: '',
+  },
+};
+
 export type UseUpdateEmail = {
-  updateEmailState: UpdateEmailState;
+  updateEmailState: State;
   resendCurrentEmail: () => Promise<void>;
   requestNewEmail: () => void;
   confirmEmail: (values: { email: string }) => Promise<void>;
@@ -27,20 +36,15 @@ export type UseUpdateEmail = {
 };
 
 const useUpdateEmail = (): UseUpdateEmail => {
+  const [state, setState] = useState<State>(initialState);
+
   const {
     currentAuthenticatedUser,
     updateUserAttributes,
     verifyCurrentUserAttributeSubmit,
     verifyCurrentUserAttribute,
   } = useAmplifyAuth();
-  const [updateEmailState, setUpdateEmailState] = useState<UpdateEmailState>({
-    pageStatus: PAGE_STATUS.INIT,
-    errorMessage: '',
-    formValues: {
-      email: '',
-      verificationCode: '',
-    },
-  });
+
   const isLoading = useRef<boolean>(false);
 
   const resendCurrentEmail: UseUpdateEmail['resendCurrentEmail'] =
@@ -57,24 +61,24 @@ const useUpdateEmail = (): UseUpdateEmail => {
       if (verifyCurrentUserAttributeResponse.errorCode) {
         // ここでエラーになると、とても困るので、入力画面にしてしまう
         isLoading.current = false;
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.INPUT_EMAIL,
           errorMessage: verifyCurrentUserAttributeResponse.errorMessage,
         }));
         return;
       }
 
-      setUpdateEmailState((updateEmailState) => ({
-        ...updateEmailState,
+      setState((state) => ({
+        ...state,
         pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
         errorMessage: '',
       }));
     }, [verifyCurrentUserAttribute]);
 
   const requestNewEmail: UseUpdateEmail['requestNewEmail'] = useCallback(() => {
-    setUpdateEmailState((updateEmailState) => ({
-      ...updateEmailState,
+    setState((state) => ({
+      ...state,
       pageStatus: PAGE_STATUS.INPUT_EMAIL,
       errorMessage: '',
     }));
@@ -91,12 +95,12 @@ const useUpdateEmail = (): UseUpdateEmail => {
       if (currentAuthenticatedUserResponse.errorCode) {
         // ここでエラーになると、とても困る
         isLoading.current = false;
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.INPUT_EMAIL,
           errorMessage: currentAuthenticatedUserResponse.errorMessage,
           formValues: {
-            ...updateEmailState.formValues,
+            ...state.formValues,
             email: values.email,
           },
         }));
@@ -110,24 +114,24 @@ const useUpdateEmail = (): UseUpdateEmail => {
       isLoading.current = false;
 
       if (updateUserAttributesResponse.errorCode) {
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.INPUT_EMAIL,
           errorMessage: updateUserAttributesResponse.errorMessage,
           formValues: {
-            ...updateEmailState.formValues,
+            ...state.formValues,
             email: values.email,
           },
         }));
         return;
       }
 
-      setUpdateEmailState((updateEmailState) => ({
-        ...updateEmailState,
+      setState((state) => ({
+        ...state,
         pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
         errorMessage: '',
         formValues: {
-          ...updateEmailState.formValues,
+          ...state.formValues,
           email: values.email,
         },
       }));
@@ -150,8 +154,8 @@ const useUpdateEmail = (): UseUpdateEmail => {
       isLoading.current = false;
 
       if (verifyCurrentUserAttributeSubmitResponse.errorCode) {
-        setUpdateEmailState((updateEmailState) => ({
-          ...updateEmailState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.INPUT_VERIFICATION_CODE,
           errorMessage: verifyCurrentUserAttributeSubmitResponse.errorMessage,
         }));
@@ -159,8 +163,8 @@ const useUpdateEmail = (): UseUpdateEmail => {
         return;
       }
 
-      setUpdateEmailState((updateEmailState) => ({
-        ...updateEmailState,
+      setState((state) => ({
+        ...state,
         pageStatus: PAGE_STATUS.COMPLETE,
         errorMessage: '',
       }));
@@ -177,7 +181,7 @@ const useUpdateEmail = (): UseUpdateEmail => {
           (data) => data.Name === 'email_verified'
         );
 
-        setUpdateEmailState((updateEmailState) => ({
+        setState((updateEmailState) => ({
           ...updateEmailState,
           pageStatus:
             emailVerifiedStatus && emailVerifiedStatus.Value === 'false'
@@ -189,7 +193,7 @@ const useUpdateEmail = (): UseUpdateEmail => {
   }, [currentAuthenticatedUser]);
 
   return {
-    updateEmailState,
+    updateEmailState: state,
     resendCurrentEmail,
     requestNewEmail,
     confirmEmail,

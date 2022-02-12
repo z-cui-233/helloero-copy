@@ -14,7 +14,7 @@ export const PAGE_STATUS = {
   COMPLETE: 'COMPLETE',
 } as const;
 
-type ResetPasswordState = {
+type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
   errorMessage: string;
   isLogin: boolean;
@@ -26,8 +26,20 @@ type ResetPasswordState = {
   };
 };
 
+const initialState: State = {
+  pageStatus: PAGE_STATUS.STEP1_SEND_MAIL,
+  errorMessage: '',
+  destination: '',
+  isLogin: false,
+  formValues: {
+    loginId: '',
+    verificationCode: '',
+    newPassword: '',
+  },
+};
+
 export type UseResetPassword = {
-  resetPasswordState: ResetPasswordState;
+  resetPasswordState: State;
   sendVerificationCode: (values: { loginId: string }) => Promise<void>;
   verifyCodeAndUpdatePassword: (values: {
     verificationCode: string;
@@ -38,18 +50,7 @@ export type UseResetPassword = {
 const useResetPassword = () => {
   const { userInfo } = useLoginStateContext();
   const { forgotPassword, forgotPasswordSubmit, signIn } = useAmplifyAuth();
-  const [resetPasswordState, setResetPasswordState] =
-    useState<ResetPasswordState>({
-      pageStatus: PAGE_STATUS.STEP1_SEND_MAIL,
-      errorMessage: '',
-      destination: '',
-      isLogin: false,
-      formValues: {
-        loginId: '',
-        verificationCode: '',
-        newPassword: '',
-      },
-    });
+  const [state, setState] = useState<State>(initialState);
   const isLoading = useRef<boolean>(false);
 
   const sendVerificationCode: UseResetPassword['sendVerificationCode'] =
@@ -64,25 +65,25 @@ const useResetPassword = () => {
         isLoading.current = false;
 
         if (forgotPasswordResponse.errorCode) {
-          setResetPasswordState((resetPasswordState) => ({
-            ...resetPasswordState,
+          setState((state) => ({
+            ...state,
             errorMessage: forgotPasswordResponse.errorMessage,
             formValues: {
-              ...resetPasswordState.formValues,
+              ...state.formValues,
               userName: values.loginId,
             },
           }));
           return;
         }
 
-        setResetPasswordState((resetPasswordState) => ({
-          ...resetPasswordState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
           errorMessage: '',
           destination:
             forgotPasswordResponse.data?.CodeDeliveryDetails?.Destination ?? '',
           formValues: {
-            ...resetPasswordState.formValues,
+            ...state.formValues,
             loginId: values.loginId,
           },
         }));
@@ -99,19 +100,19 @@ const useResetPassword = () => {
         isLoading.current = true;
 
         const forgotPasswordSubmitResponse = await forgotPasswordSubmit({
-          loginId: resetPasswordState.formValues.loginId,
+          loginId: state.formValues.loginId,
           verificationCode: values.verificationCode,
           newPassword: values.newPassword,
         });
 
         if (forgotPasswordSubmitResponse.errorCode) {
           isLoading.current = false;
-          setResetPasswordState((resetPasswordState) => ({
-            ...resetPasswordState,
+          setState((state) => ({
+            ...state,
             pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
             errorMessage: forgotPasswordSubmitResponse.errorMessage,
             formValues: {
-              ...resetPasswordState.formValues,
+              ...state.formValues,
               ...values,
             },
           }));
@@ -120,18 +121,18 @@ const useResetPassword = () => {
 
         if (!userInfo.isLoggedIn) {
           const signInResponse = await signIn({
-            loginId: resetPasswordState.formValues.loginId,
+            loginId: state.formValues.loginId,
             password: values.newPassword,
           });
 
           if (signInResponse.errorCode) {
             isLoading.current = false;
-            setResetPasswordState((resetPasswordState) => ({
-              ...resetPasswordState,
+            setState((state) => ({
+              ...state,
               pageStatus: PAGE_STATUS.STEP2_INPUT_PASSWORD,
               errorMessage: signInResponse.errorMessage,
               formValues: {
-                ...resetPasswordState.formValues,
+                ...state.formValues,
                 ...values,
               },
             }));
@@ -145,26 +146,26 @@ const useResetPassword = () => {
         }
 
         isLoading.current = true;
-        setResetPasswordState((resetPasswordState) => ({
-          ...resetPasswordState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.COMPLETE,
           errorMessage: '',
           formValues: {
-            ...resetPasswordState.formValues,
+            ...state.formValues,
             ...values,
           },
         }));
       },
       [
         forgotPasswordSubmit,
-        resetPasswordState.formValues.loginId,
+        state.formValues.loginId,
         signIn,
         userInfo.isLoggedIn,
       ]
     );
 
   return {
-    resetPasswordState,
+    resetPasswordState: state,
     sendVerificationCode,
     verifyCodeAndUpdatePassword,
   };

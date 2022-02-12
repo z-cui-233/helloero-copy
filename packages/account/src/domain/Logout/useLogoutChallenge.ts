@@ -14,12 +14,16 @@ export const PAGE_STATUS = {
   CONFIRM: 'CONFIRM',
 } as const;
 
-type LogoutChallengeState = {
+type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
 };
 
-type UseLogoutChallenge = {
-  logoutChallengeState: LogoutChallengeState;
+const initialState: State = {
+  pageStatus: PAGE_STATUS.INIT,
+};
+
+export type UseLogoutChallenge = {
+  logoutChallengeState: State;
   invokeLogOut: () => Promise<void>;
 };
 
@@ -27,10 +31,7 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
   const router = useRouter();
   const { signOut } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const [logoutChallengeState, setLogoutChallengeState] =
-    useState<LogoutChallengeState>({
-      pageStatus: PAGE_STATUS.INIT,
-    });
+  const [state, setState] = useState<State>(initialState);
   const isLoading = useRef<boolean>(false);
 
   const invokeLogOut: UseLogoutChallenge['invokeLogOut'] =
@@ -54,7 +55,7 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
       return;
     }
 
-    if (logoutChallengeState.pageStatus !== PAGE_STATUS.INIT) {
+    if (state.pageStatus !== PAGE_STATUS.INIT) {
       return;
     }
 
@@ -63,19 +64,14 @@ const useLogoutChallenge = (): UseLogoutChallenge => {
       return;
     }
 
-    setLogoutChallengeState((logoutChallengeState) => ({
-      ...logoutChallengeState,
+    setState((state) => ({
+      ...state,
       pageStatus: PAGE_STATUS.CONFIRM,
     }));
-  }, [
-    isLoadedUserInfo,
-    logoutChallengeState.pageStatus,
-    router,
-    userInfo.isLoggedIn,
-  ]);
+  }, [isLoadedUserInfo, state.pageStatus, router, userInfo.isLoggedIn]);
 
   return {
-    logoutChallengeState,
+    logoutChallengeState: state,
     invokeLogOut,
   };
 };

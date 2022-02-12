@@ -31,13 +31,14 @@ const HelpTop: React.FC = () => {
     <LayoutH2u options={globalConfig}>
       <BigBar title="ヘルプセンター" />
       <MainContainer>
-        {MenuList.map((data) => {
+        {MenuList.map((data) => (
           <MenuCard
+            key={data.key}
             urlPattern={data.key}
             title={data.title}
             texts={data.text}
-          />;
-        })}
+          />
+        ))}
         <TermsLink>
           <Link href="/terms/service" passHref>
             <a>利用規約</a>

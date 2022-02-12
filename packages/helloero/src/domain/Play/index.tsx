@@ -7,19 +7,17 @@ import usePlayer, { PAGE_STATUS } from './usePlayer';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 
 const Play: React.FC = () => {
-  const store = usePlayer();
+  const { playerState } = usePlayer();
 
   return (
     <Container>
-      {store.playerState.pageStatus === PAGE_STATUS.PLAY &&
-        !!store.playerState.playerProps && (
-          <BabyStar {...store.playerState.playerProps} />
-        )}
-      {store.playerState.pageStatus === PAGE_STATUS.ERROR && (
+      {playerState.pageStatus === PAGE_STATUS.PLAY &&
+        !!playerState.playerProps && <BabyStar {...playerState.playerProps} />}
+      {playerState.pageStatus === PAGE_STATUS.ERROR && (
         <NoticeMessage
-          title={store.playerState.errorMessage.title}
-          text={store.playerState.errorMessage.text}
-          errorCode={store.playerState.errorMessage.errorCode}
+          title={playerState.errorMessage.title}
+          text={playerState.errorMessage.text}
+          errorCode={playerState.errorMessage.errorCode}
         />
       )}
     </Container>

@@ -14,24 +14,17 @@ export const DISPLAY_ORDER = {
 } as const;
 export type DisplayOrder = typeof DISPLAY_ORDER[keyof typeof DISPLAY_ORDER];
 
-export interface UsePurchasedList {
-  purchasedListState: {
-    isInitialized: boolean;
-    query: string;
-    displayOrder: DisplayOrder;
-    isShownDetail: boolean;
-    currentUserWabikenMeta: UserWabikenMeta | null;
-    userWabikenMetas: UserWabikenMeta[] | [];
-    nextToken: string | undefined;
-  };
-  updateSearchQuery: (newValue: string) => void;
-  updateDisplayOrder: (newValue: DisplayOrder) => void;
-  openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
-  closeTitleDetail: () => void;
-  fetchListData: (nextToken?: string) => Promise<void>;
-}
+type State = {
+  isInitialized: boolean;
+  query: string;
+  displayOrder: DisplayOrder;
+  isShownDetail: boolean;
+  currentUserWabikenMeta: UserWabikenMeta | null;
+  userWabikenMetas: UserWabikenMeta[] | [];
+  nextToken: string | undefined;
+};
 
-const initialState: UsePurchasedList['purchasedListState'] = {
+const initialState: State = {
   isInitialized: false,
   query: '',
   displayOrder: DISPLAY_ORDER.ADD,
@@ -41,9 +34,17 @@ const initialState: UsePurchasedList['purchasedListState'] = {
   nextToken: undefined,
 };
 
+export type UsePurchasedList = {
+  purchasedListState: State;
+  updateSearchQuery: (newValue: string) => void;
+  updateDisplayOrder: (newValue: DisplayOrder) => void;
+  openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
+  closeTitleDetail: () => void;
+  fetchListData: (nextToken?: string) => Promise<void>;
+};
+
 const usePurchasedList = (): UsePurchasedList => {
-  const [purchasedListState, setPurchasedListState] =
-    useState<UsePurchasedList['purchasedListState']>(initialState);
+  const [state, setState] = useState<State>(initialState);
 
   const { fetcher } = useAmplifyFetcher<
     ListUserWabikenMetasQuery,
@@ -52,8 +53,8 @@ const usePurchasedList = (): UsePurchasedList => {
 
   const updateSearchQuery: UsePurchasedList['updateSearchQuery'] = useCallback(
     (newValue) => {
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
+      setState((state) => ({
+        ...state,
         query: newValue,
       }));
     },
@@ -62,16 +63,16 @@ const usePurchasedList = (): UsePurchasedList => {
 
   const updateDisplayOrder: UsePurchasedList['updateDisplayOrder'] =
     useCallback((newValue) => {
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
+      setState((state) => ({
+        ...state,
         displayOrder: newValue,
       }));
     }, []);
 
   const openTitleDetail: UsePurchasedList['openTitleDetail'] = useCallback(
     (data) => {
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
+      setState((state) => ({
+        ...state,
         isShownDetail: true,
         currentUserWabikenMeta: data,
       }));
@@ -81,8 +82,8 @@ const usePurchasedList = (): UsePurchasedList => {
 
   const closeTitleDetail: UsePurchasedList['closeTitleDetail'] =
     useCallback(() => {
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
+      setState((state) => ({
+        ...state,
         isShownDetail: false,
         currentUserWabikenMeta: null,
       }));
@@ -101,11 +102,11 @@ const usePurchasedList = (): UsePurchasedList => {
 
       const newList = apiData.data?.listUserWabikenMetas?.items ?? [];
 
-      setPurchasedListState((purchasedListState) => ({
-        ...purchasedListState,
+      setState((state) => ({
+        ...state,
         isInitialized: true,
         userWabikenMetas: [
-          ...purchasedListState.userWabikenMetas,
+          ...state.userWabikenMetas,
           ...newList,
         ] as UserWabikenMeta[],
         nextToken: apiData.data?.listUserWabikenMetas?.nextToken ?? undefined,
@@ -119,7 +120,7 @@ const usePurchasedList = (): UsePurchasedList => {
   }, [fetchListData]);
 
   return {
-    purchasedListState,
+    purchasedListState: state,
     updateSearchQuery,
     updateDisplayOrder,
     openTitleDetail,
