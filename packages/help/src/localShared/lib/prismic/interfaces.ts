@@ -27,6 +27,10 @@ export type GuideTopDocument = prismicT.PrismicDocument<{
   }[];
 }>;
 
+export type TermsDocument = prismicT.PrismicDocument<{
+  text: prismicT.RichTextField;
+}>;
+
 export type SystemTroubleDocument = prismicT.PrismicDocument<{
   title: prismicT.RichTextField;
   text: prismicT.RichTextField;

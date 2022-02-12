@@ -11,7 +11,11 @@ import ButtonStandard from '@/shared/components/parts/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
-import { PRIVACY_URL, TERMS_URL } from '@/shared/constants/terms';
+import {
+  PRIVACY_URL,
+  TERMS_SERVICE_URL,
+  TERMS_ACCOUNT_URL,
+} from '@/shared/constants/terms';
 import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
@@ -84,9 +88,19 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
             <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
               個人情報の取扱いについて
             </a>
-
-            <a href={TERMS_URL} target="_blank" rel="noopener noreferrer">
-              利用規約
+            <a
+              href={TERMS_SERVICE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              サービス利用規約
+            </a>
+            <a
+              href={TERMS_ACCOUNT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              アカウント利用規約
             </a>
           </div>
         </Terms>
@@ -116,7 +130,7 @@ const FieldSection = styled.div`
 `;
 
 const Terms = styled.div`
-  ${typo.Note};
+  ${typo.Body};
   color: ${({ theme }) => theme.foreground.secondary};
   margin: 2rem 0 0;
 
@@ -125,10 +139,7 @@ const Terms = styled.div`
     color: inherit;
     text-decoration: underline;
     display: inline-block;
-
-    & + a {
-      margin: 0 0 0 0.5rem;
-    }
+    margin: 0.25rem 0.5rem 0 0;
   }
 `;
 

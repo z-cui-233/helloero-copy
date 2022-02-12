@@ -81,7 +81,7 @@ const StyledLink = styled.a`
 `;
 
 const Title = styled.h2`
-  ${typo.Lead1};
+  ${typo.Lead2};
 `;
 
 const Text = styled.p`

@@ -1,8 +1,7 @@
 import * as prismicT from '@prismicio/types';
 import React from 'react';
-import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import InfoCard from './InfoCard';
+import * as prismicH from '@prismicio/helpers';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/parts/MainContainer';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
@@ -10,6 +9,8 @@ import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 import PageTitle from '@/shared/components/PageTitle';
+import LinkList, { LinkListItemData } from '@/localShared/components/LinkList';
+import { convertDateToString } from '@/shared/utils';
 
 type Props = {
   infoDocuments: prismicT.Query<InfoDocument>;
@@ -27,33 +28,26 @@ const InfoList: React.FC<Props> = ({ infoDocuments }) => {
     },
   ];
 
+  const linkListData: LinkListItemData[] = infoDocuments.results.map((doc) => {
+    const date = prismicH.asDate(doc.data.publish_date);
+    const title = prismicH.asText(doc.data.title) ?? '';
+
+    return {
+      url: `/info/${doc.uid}`,
+      preTitle: convertDateToString(date),
+      title,
+    };
+  });
+
   return (
     <LayoutH2u options={globalConfig}>
       <MainContainer>
         <PageTitle text="お知らせ" />
         <BreadcrumbsList breadcrumbs={breadcrumbs} />
-        <List>
-          {infoDocuments.results.map((doc) => (
-            <ListItem key={doc.id}>
-              <InfoCard infoDocument={doc} />
-            </ListItem>
-          ))}
-        </List>
+        <LinkList data={linkListData} />
       </MainContainer>
     </LayoutH2u>
   );
 };
-
-const List = styled.ul`
-  margin: 2rem 0 0;
-`;
-
-const ListItem = styled.li`
-  border-bottom: 1px solid ${({ theme }) => theme.background.tertiary};
-
-  &:first-child {
-    border-top: 1px solid ${({ theme }) => theme.background.tertiary};
-  }
-`;
 
 export default InfoList;
