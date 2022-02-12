@@ -17,7 +17,7 @@ export const PAGE_STATUS = {
   NOTICE_USER_NOT_CONFIRMED: 'NOTICE_USER_NOT_CONFIRMED',
 } as const;
 
-type LoginChallengeState = {
+type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
   errorMessage: string;
   formValues: {
@@ -26,9 +26,18 @@ type LoginChallengeState = {
   };
 };
 
+const initialState: State = {
+  pageStatus: PAGE_STATUS.INIT,
+  errorMessage: '',
+  formValues: {
+    loginId: '',
+    password: '',
+  },
+};
+
 export type UseLoginChallenge = {
-  loginChallengeState: LoginChallengeState;
-  challengeLogin: (values: LoginChallengeState['formValues']) => Promise<void>;
+  loginChallengeState: State;
+  challengeLogin: (values: State['formValues']) => Promise<void>;
 };
 
 const isValidUrl = (backUrl: string): boolean => {
@@ -47,15 +56,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
   const router = useRouter();
   const { signIn } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const [loginChallengeState, setLoginChallengeState] =
-    useState<LoginChallengeState>({
-      pageStatus: PAGE_STATUS.INIT,
-      errorMessage: '',
-      formValues: {
-        loginId: '',
-        password: '',
-      },
-    });
+  const [state, setState] = useState<State>(initialState);
   const isLoading = useRef<boolean>(false);
 
   const redirect = useCallback((): void => {
@@ -79,8 +80,8 @@ const useLoginChallenge = (): UseLoginChallenge => {
       if (signInResponse.errorCode) {
         switch (signInResponse.errorCode) {
           case 'PasswordResetRequiredException': {
-            setLoginChallengeState((loginChallengeState) => ({
-              ...loginChallengeState,
+            setState((state) => ({
+              ...state,
               pageStatus: PAGE_STATUS.NOTICE_PASSWORD_RESET_REQUIRED,
               errorMessage: '',
             }));
@@ -88,8 +89,8 @@ const useLoginChallenge = (): UseLoginChallenge => {
           }
 
           case 'UserNotConfirmedException': {
-            setLoginChallengeState((loginChallengeState) => ({
-              ...loginChallengeState,
+            setState((state) => ({
+              ...state,
               pageStatus: PAGE_STATUS.NOTICE_USER_NOT_CONFIRMED,
               errorMessage: '',
             }));
@@ -97,8 +98,8 @@ const useLoginChallenge = (): UseLoginChallenge => {
           }
 
           default: {
-            setLoginChallengeState((loginChallengeState) => ({
-              ...loginChallengeState,
+            setState((state) => ({
+              ...state,
               errorMessage: signInResponse.errorMessage,
             }));
             return;
@@ -121,7 +122,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
       return;
     }
 
-    if (loginChallengeState.pageStatus !== PAGE_STATUS.INIT) {
+    if (state.pageStatus !== PAGE_STATUS.INIT) {
       return;
     }
 
@@ -130,19 +131,14 @@ const useLoginChallenge = (): UseLoginChallenge => {
       return;
     }
 
-    setLoginChallengeState((loginChallengeState) => ({
-      ...loginChallengeState,
+    setState((state) => ({
+      ...state,
       pageStatus: PAGE_STATUS.INPUT,
     }));
-  }, [
-    isLoadedUserInfo,
-    loginChallengeState.pageStatus,
-    redirect,
-    userInfo.isLoggedIn,
-  ]);
+  }, [isLoadedUserInfo, state.pageStatus, redirect, userInfo.isLoggedIn]);
 
   return {
-    loginChallengeState,
+    loginChallengeState: state,
     challengeLogin,
   };
 };

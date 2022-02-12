@@ -29,7 +29,7 @@ export const PAGE_STATUS = {
   COMPLETE: 'COMPLETE',
 } as const;
 
-type EntryWabikenState = {
+type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
   errorMessage: string;
   formValues: {
@@ -38,9 +38,18 @@ type EntryWabikenState = {
   getWabikenMetaQuery: GetWabikenMetaQuery | null;
 };
 
+const initialState: State = {
+  pageStatus: PAGE_STATUS.INIT,
+  errorMessage: '',
+  formValues: {
+    wabiken: '',
+  },
+  getWabikenMetaQuery: null,
+};
+
 export type UseEntryWabiken = {
-  entryWabikenState: EntryWabikenState;
-  confirmWabiken: (values: EntryWabikenState['formValues']) => Promise<void>;
+  entryWabikenState: State;
+  confirmWabiken: (values: State['formValues']) => Promise<void>;
   consumeWabiken: () => Promise<void>;
 };
 
@@ -59,17 +68,7 @@ const isCreateUserWabikenMetaInput = (
 
 const useEntryWabiken = (): UseEntryWabiken => {
   const router = useRouter();
-
-  const [entryWabikenState, setEntryWabikenState] = useState<EntryWabikenState>(
-    {
-      pageStatus: PAGE_STATUS.INIT,
-      errorMessage: '',
-      formValues: {
-        wabiken: '',
-      },
-      getWabikenMetaQuery: null,
-    }
-  );
+  const [state, setState] = useState<State>(initialState);
 
   const {
     fetcher: getWabikenMetaQueryFetcher,
@@ -101,22 +100,20 @@ const useEntryWabiken = (): UseEntryWabiken => {
       });
 
       if (apiData.errors) {
-        const errorMessage = getErrorMessage(
-          'getWabikenMeta',
-          apiData.errors?.[0]?.errorInfo?.code
-        );
-
-        setEntryWabikenState((entryWabikenState) => ({
-          ...entryWabikenState,
+        setState((state) => ({
+          ...state,
           pageStatus: PAGE_STATUS.INPUT,
-          errorMessage,
+          errorMessage: getErrorMessage(
+            'getWabikenMeta',
+            apiData.errors?.[0]?.errorInfo?.code
+          ),
           formValues: values,
         }));
         return;
       }
 
-      setEntryWabikenState((entryWabikenState) => ({
-        ...entryWabikenState,
+      setState((state) => ({
+        ...state,
         pageStatus: PAGE_STATUS.CONFIRM,
         errorMessage: '',
         formValues: values,
@@ -132,12 +129,12 @@ const useEntryWabiken = (): UseEntryWabiken => {
         return;
       }
 
-      const getWabikenMeta = entryWabikenState.getWabikenMetaQuery
+      const getWabikenMeta = state.getWabikenMetaQuery
         ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
 
       if (!getWabikenMeta) {
-        setEntryWabikenState((entryWabikenState) => ({
-          ...entryWabikenState,
+        setState((state) => ({
+          ...state,
           errorMessage: MESSAGES.default,
         }));
         return;
@@ -147,7 +144,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       const activateWabikenApiData = await activateWabikenFetcher(
         activateWabiken,
         {
-          id: entryWabikenState.formValues.wabiken,
+          id: state.formValues.wabiken,
         }
       );
 
@@ -164,14 +161,12 @@ const useEntryWabiken = (): UseEntryWabiken => {
         activateWabikenApiData.errors ||
         !isCreateUserWabikenMetaInput(createWabikenInput)
       ) {
-        const errorMessage = getErrorMessage(
-          'activateWabiken',
-          activateWabikenApiData.errors?.[0]?.errorInfo?.code
-        );
-
-        setEntryWabikenState((entryWabikenState) => ({
-          ...entryWabikenState,
-          errorMessage,
+        setState((state) => ({
+          ...state,
+          errorMessage: getErrorMessage(
+            'activateWabiken',
+            activateWabikenApiData.errors?.[0]?.errorInfo?.code
+          ),
         }));
         return;
       }
@@ -185,8 +180,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
       );
 
       if (createUserWabikenMetaApiData.errors) {
-        setEntryWabikenState((entryWabikenState) => ({
-          ...entryWabikenState,
+        setState((state) => ({
+          ...state,
           errorMessage: MESSAGES.default,
         }));
         return;
@@ -197,8 +192,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         path: cookieParams.wabiken.path,
       });
 
-      setEntryWabikenState((entryWabikenState) => ({
-        ...entryWabikenState,
+      setState((state) => ({
+        ...state,
         pageStatus: PAGE_STATUS.COMPLETE,
       }));
     }, [
@@ -206,8 +201,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
       activateWabikenLoading,
       createUserWabikenMetaFetcher,
       createUserWabikenMetaLoading,
-      entryWabikenState.formValues.wabiken,
-      entryWabikenState.getWabikenMetaQuery?.getWabikenMeta,
+      state.formValues.wabiken,
+      state.getWabikenMetaQuery?.getWabikenMeta,
     ]);
 
   useEffect(() => {
@@ -216,7 +211,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       ? (cookies[cookieParams.wabiken.name] as string)
       : '';
 
-    setEntryWabikenState((entryWabikenState) => ({
+    setState((entryWabikenState) => ({
       ...entryWabikenState,
       pageStatus: PAGE_STATUS.INPUT,
       formValues: { wabiken },
@@ -224,7 +219,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
   }, [router.query.wabiken]);
 
   return {
-    entryWabikenState,
+    entryWabikenState: state,
     confirmWabiken,
     consumeWabiken,
   };
