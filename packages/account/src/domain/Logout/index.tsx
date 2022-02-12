@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 import typo from '@/shared/styles/typo';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import MainContainer from '@/shared/components/MainContainer';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import PageTitle from '@/shared/components/PageTitle';
 

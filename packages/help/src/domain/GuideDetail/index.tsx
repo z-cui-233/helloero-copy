@@ -4,7 +4,7 @@ import { PrismicRichText } from '@prismicio/react';
 import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import { GuideDocument } from '@/localShared/lib/prismic/interfaces';
 import RichTextContainer from '@/localShared/components/RichTextContainer';
 import BreadcrumbsList, {

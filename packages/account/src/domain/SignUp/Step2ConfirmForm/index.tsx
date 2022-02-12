@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseSignUp } from '../useSignUp';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
-import TextField from '@/shared/components/parts/TextField';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import FormTextField from '@/shared/components/FormTextField';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -35,7 +35,7 @@ const Step2ConfirmForm: React.FC<Props> = ({ signUpState, verifyCode }) => {
         <Steps>STEP 2/2</Steps>
         <Text>メールアドレスに送信した本人確認コードを入力してください。</Text>
         <FieldSection>
-          <TextField
+          <FormTextField
             label={formLabels.verificationCode.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'verificationCode', 'tel'),

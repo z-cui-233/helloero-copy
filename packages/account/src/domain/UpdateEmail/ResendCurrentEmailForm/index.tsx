@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { UseUpdateEmail } from '../useUpdateEmail';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import MainContainer from '@/shared/components/MainContainer';
 import typo from '@/shared/styles/typo';
 import PageTitle from '@/shared/components/PageTitle';
 

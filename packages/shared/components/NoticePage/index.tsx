@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import typo from '../../styles/typo';
-import MainContainer from '../../components/parts/MainContainer';
+import MainContainer from '../MainContainer';
 
 type Props = {
   title?: string;

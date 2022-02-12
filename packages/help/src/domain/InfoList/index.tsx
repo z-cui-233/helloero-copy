@@ -3,7 +3,7 @@ import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import * as prismicH from '@prismicio/helpers';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
   Breadcrumbs,

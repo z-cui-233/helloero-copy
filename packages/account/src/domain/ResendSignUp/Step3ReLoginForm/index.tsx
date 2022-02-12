@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseResendSignUp } from '../useResendSignUp';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
-import TextField from '@/shared/components/parts/TextField';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import FormTextField from '@/shared/components/FormTextField';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -40,7 +40,7 @@ const Step3ReLoginForm: React.FC<Props> = ({
           <LoginId>{resendSignUpState.step1FormValues.loginId}</LoginId>
         </FieldSection>
         <FieldSection>
-          <TextField
+          <FormTextField
             label={formLabels.password.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'password', 'password'),

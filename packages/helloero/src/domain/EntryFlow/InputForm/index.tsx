@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseEntryWabiken } from '../useEntryWabiken';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import TextField from '@/shared/components/parts/TextField';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import FormTextField from '@/shared/components/FormTextField';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
@@ -33,7 +33,7 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
       <Section>
         <div>購入時に受け取った、シリアルコードを入力してください。</div>
         <FieldSection>
-          <TextField
+          <FormTextField
             label={formLabels.wabiken.label}
             fieldOptions={{
               ...formikHelper.fieldOptions(formik, 'wabiken'),

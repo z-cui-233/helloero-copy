@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonStandard, {
   BUTTON_ICONS,
-} from '@/shared/components/parts/ButtonStandard';
+} from '@/shared/components/ButtonStandard';
 import device from '@/shared/styles/device';
 import typo from '@/shared/styles/typo';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { UseResetPassword } from '../../useResetPassword';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import PageTitle from '@/shared/components/PageTitle';
 

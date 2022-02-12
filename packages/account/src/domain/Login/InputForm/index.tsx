@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { UseLoginChallenge } from '../useLoginChallenge';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import typo from '@/shared/styles/typo';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import TextField from '@/shared/components/parts/TextField';
+import FormTextField from '@/shared/components/FormTextField';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
@@ -44,7 +44,7 @@ const InputForm: React.FC<Props> = ({
       >
         <Section>
           <FieldSection>
-            <TextField
+            <FormTextField
               label={formLabels.loginId.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'loginId'),
@@ -55,7 +55,7 @@ const InputForm: React.FC<Props> = ({
             />
           </FieldSection>
           <FieldSection>
-            <TextField
+            <FormTextField
               label={formLabels.password.label}
               fieldOptions={{
                 ...formikHelper.fieldOptions(formik, 'password', 'password'),

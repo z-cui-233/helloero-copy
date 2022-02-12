@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseUpdateEmail } from '../useUpdateEmail';
-import ButtonStandard from '@/shared/components/parts/ButtonStandard';
-import MainContainer from '@/shared/components/parts/MainContainer';
-import TextField from '@/shared/components/parts/TextField';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import MainContainer from '@/shared/components/MainContainer';
+import FormTextField from '@/shared/components/FormTextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
@@ -40,10 +40,10 @@ const InputEmailForm: React.FC<Props> = ({
           ご希望のメールアドレスを入力して、本人確認コードを送信してください。
         </div>
         <FieldSection>
-          <TextField
+          <FormTextField
             label={formLabels.email.label}
             fieldOptions={{
-              ...formikHelper.fieldOptions(formik, 'email'),
+              ...formikHelper.fieldOptions(formik, 'email', 'email'),
               placeholder: formLabels.email.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(formik, 'email')}

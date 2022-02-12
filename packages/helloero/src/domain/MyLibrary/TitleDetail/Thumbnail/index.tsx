@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TitleThumbnail from '@/shared/components/parts/TitleThumbnail';
+import TitleThumbnail from '@/shared/components/TitleThumbnail';
 import device from '@/shared/styles/device';
 
 type Props = {

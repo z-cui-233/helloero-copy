@@ -4,7 +4,7 @@ import { PrismicText } from '@prismicio/react';
 import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import typo from '@/shared/styles/typo';
 import GuideCard from '@/localShared/components/GuideCard';

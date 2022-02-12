@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import typo from '../../../styles/typo';
-import AddIcon from '../../../assets/icon/add.svg';
-import PlayIcon from '../../../assets/icon/play_arrow.svg';
+import typo from '../../styles/typo';
+import AddIcon from '../../assets/icon/add.svg';
+import PlayIcon from '../../assets/icon/play_arrow.svg';
 
 type Props = {
   onClick?: (e: unknown) => unknown;

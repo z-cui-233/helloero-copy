@@ -3,7 +3,7 @@ import { globalConfig } from 'src/globalConfig';
 import AccountMenus from './AccountMenus';
 import SiteMenus from './SiteMenus';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/parts/MainContainer';
+import MainContainer from '@/shared/components/MainContainer';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 const Top: React.FC = () => {
