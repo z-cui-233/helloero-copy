@@ -44,7 +44,7 @@ const Step1InputForm: React.FC<Props> = ({ resendSignUpState, resendCode }) => {
             <FormTextField
               label={formLabels.loginId.label}
               fieldOptions={{
-                ...formikHelper.fieldOptions(formik, 'loginId'),
+                ...formikHelper.fieldOptions(formik, 'loginId', 'text'),
                 placeholder: formLabels.loginId.placeholder,
               }}
               validateMessage={formikHelper.errorMessage(formik, 'loginId')}

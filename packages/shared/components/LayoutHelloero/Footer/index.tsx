@@ -94,6 +94,10 @@ const LinkItem = styled.div`
 const StyledLink = styled.a`
   ${typo.Body};
   color: ${({ theme }) => theme.foreground.primaryInverted};
+
+  &:hover {
+    text-align: underline;
+  }
 `;
 
 export default Footer;

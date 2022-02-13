@@ -20,7 +20,7 @@ const ListController: React.FC<UsePurchasedList> = (props) => {
 };
 
 const Container = styled.div`
-  margin: 2rem 0 0;
+  margin: 1rem 0 0;
   display: grid;
   grid-template-columns: 1fr 2.5rem;
   grid-gap: 0.5rem;

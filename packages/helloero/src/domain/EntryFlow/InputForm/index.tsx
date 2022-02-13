@@ -36,7 +36,7 @@ const InputForm: React.FC<Props> = ({ entryWabikenState, confirmWabiken }) => {
           <FormTextField
             label={formLabels.wabiken.label}
             fieldOptions={{
-              ...formikHelper.fieldOptions(formik, 'wabiken'),
+              ...formikHelper.fieldOptions(formik, 'wabiken', 'text'),
               placeholder: formLabels.wabiken.placeholder,
             }}
             validateMessage={formikHelper.errorMessage(formik, 'wabiken')}

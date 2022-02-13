@@ -12,7 +12,7 @@ const FormValidateMessage: React.FC<Props> = ({ message }) => (
 
 const Container = styled.div`
   ${typo.Body};
-  color: ${({ theme }) => theme.keyColor.color5};
+  color: ${({ theme }) => theme.keyColor.error};
   margin: 0.5rem 0 0;
   line-height: 1.4;
   font-weight: bold;

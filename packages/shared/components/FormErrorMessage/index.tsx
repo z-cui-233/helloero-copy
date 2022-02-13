@@ -28,7 +28,7 @@ const Container = styled.div`
   position: relative;
 
   &:before {
-    background-color: ${({ theme }) => theme.keyColor.color5};
+    background-color: ${({ theme }) => theme.keyColor.error};
     opacity: 0.2;
     position: absolute;
     top: 0;
@@ -44,7 +44,7 @@ const Container = styled.div`
 const Text = styled.div`
   ${typo.Body};
   position: relative;
-  color: ${({ theme }) => theme.keyColor.color5};
+  color: ${({ theme }) => theme.keyColor.error};
   line-height: 1.4;
   font-weight: bold;
 `;

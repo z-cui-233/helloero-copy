@@ -4,16 +4,13 @@ import AccountMenus from './AccountMenus';
 import SiteMenus from './SiteMenus';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 const Top: React.FC = () => {
-  const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-
   return (
     <LayoutH2u options={globalConfig}>
       <MainContainer>
         <SiteMenus />
-        {isLoadedUserInfo && userInfo.isLoggedIn && <AccountMenus />}
+        <AccountMenus />
       </MainContainer>
     </LayoutH2u>
   );

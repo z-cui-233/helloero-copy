@@ -74,7 +74,7 @@ const Input = styled.input<CustomInputProps>`
   background-color: ${({ theme }) => theme.background.primary};
   border: 2px solid
     ${({ theme, isError = false }) =>
-      isError ? theme.keyColor.color5 : theme.foreground.tertiary};
+      isError ? theme.keyColor.error : theme.foreground.tertiary};
   box-shadow: none;
   color: ${({ theme }) => theme.foreground.primary};
   padding: 0.5rem 1rem;

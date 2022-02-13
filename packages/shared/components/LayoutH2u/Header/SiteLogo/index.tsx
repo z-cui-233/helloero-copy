@@ -8,15 +8,14 @@ type Props = {
   options: Config;
 };
 
-const SiteLogo: React.FC<Props> = ({ options }) => {
-  return (
-    <Link href={options.ACCOUNT} passHref>
-      <a>
-        <StyledLogo />
-      </a>
-    </Link>
-  );
-};
+const SiteLogo: React.FC<Props> = ({ options }) => (
+  // we need to add slash => https://github.com/vercel/next.js/issues/22130
+  <Link href={`${options.ACCOUNT}/`} passHref>
+    <a>
+      <StyledLogo />
+    </a>
+  </Link>
+);
 
 const StyledLogo = styled(Logo)`
   &&& {

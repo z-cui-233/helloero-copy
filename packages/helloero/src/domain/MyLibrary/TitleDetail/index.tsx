@@ -5,9 +5,9 @@ import { UserWabikenMeta } from '../../../API';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
-import PortalModal from '@/shared/components/PortalModal';
 import device from '@/shared/styles/device';
 import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
+import Portal from '@/shared/components/Portal';
 
 type Props = {
   userWabikenMeta: UserWabikenMeta | null;
@@ -23,37 +23,98 @@ const TitleDetail: React.FC<Props> = ({
   const router = useRouter();
 
   return isShownDetail && userWabikenMeta ? (
-    <PortalModal onClickClose={onClickClose}>
+    <Portal>
       <Container>
-        <div>
-          <ThumbnailContainer>
-            <Thumbnail
-              src={createTitleThumbnailUrl(
-                userWabikenMeta.content.thumbnails.standard
-              )}
-            />
-          </ThumbnailContainer>
-        </div>
-        <div>
-          <MetaContainer>
-            <MetaInfo
-              titleName={userWabikenMeta.content.displayName}
-              displayExpireDate={createExpireDate(
-                userWabikenMeta.validityPeriod,
-                userWabikenMeta.notValidAfter
-              )}
-              onClick={() => {
-                router.push(`/play/${userWabikenMeta.id}`);
-              }}
-            />
-          </MetaContainer>
-        </div>
+        <Grid>
+          <div>
+            <ThumbnailContainer>
+              <Thumbnail
+                src={createTitleThumbnailUrl(
+                  userWabikenMeta.content.thumbnails.standard
+                )}
+              />
+            </ThumbnailContainer>
+          </div>
+          <div>
+            <MetaContainer>
+              <MetaInfo
+                titleName={userWabikenMeta.content.displayName}
+                displayExpireDate={createExpireDate(
+                  userWabikenMeta.validityPeriod,
+                  userWabikenMeta.notValidAfter
+                )}
+                onClick={() => {
+                  router.push(`/play/${userWabikenMeta.id}`);
+                }}
+              />
+            </MetaContainer>
+          </div>
+        </Grid>
+        <CloseButton onClick={onClickClose} />
       </Container>
-    </PortalModal>
+    </Portal>
   ) : null;
 };
 
 const Container = styled.div`
+  background-color: ${({ theme }) => theme.background.primary};
+  max-width: 800px;
+  position: relative;
+  overflow: hidden;
+  width: calc(100% - 1rem);
+  margin: auto;
+`;
+
+const CloseButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  content: '';
+  display: block;
+  background-color: ${({ theme }) => theme.background.primaryInverted};
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.keyColor.color1};
+  }
+
+  &:before {
+    height: 2px;
+    width: 1.5rem;
+    content: '';
+    display: block;
+    background-color: ${({ theme }) => theme.background.primary};
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    height: 2px;
+    width: 1.5rem;
+    content: '';
+    display: block;
+    background-color: ${({ theme }) => theme.background.primary};
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transform: rotate(-45deg);
+  }
+`;
+
+const Grid = styled.div`
   display: grid;
   grid-template-columns: 40% 60%;
   grid-gap: 0;
@@ -61,6 +122,7 @@ const Container = styled.div`
   @media ${device.ltTablet} {
     display: block;
     max-width: 400px;
+    margin: 0 auto;
   }
 `;
 

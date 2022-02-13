@@ -12,8 +12,8 @@ const Arrow = styled(IconArrow)`
   top: 0;
   bottom: 0;
   right: 1rem;
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 0.7rem;
+  height: 0.7rem;
   margin: auto 0;
 `;
 

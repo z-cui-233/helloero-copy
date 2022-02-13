@@ -17,8 +17,8 @@ const MyLibrary: React.FC = () => {
   return (
     <LayoutHelloero options={globalConfig}>
       <MainContainer size="large">
-        <Title>購入済み作品</Title>
         <WabikenMenu />
+        <Title>購入済み作品</Title>
         <ListController {...store} />
         <TitleList
           purchasedListState={store.purchasedListState}
@@ -38,6 +38,7 @@ const MyLibrary: React.FC = () => {
 const Title = styled.div`
   ${typo.Heading1};
   line-height: 1.4;
+  margin: 3rem 0 0;
 `;
 
 export default withAmplifyAuth(MyLibrary, globalConfig);
