@@ -44,7 +44,7 @@ const SystemTrouble: React.FC<Props> = ({ systemTroubleDocument }) => {
 };
 
 const Section = styled.article`
-  margin: 2rem 0 0;
+  margin: 3rem 0 0;
 `;
 
 export default SystemTrouble;

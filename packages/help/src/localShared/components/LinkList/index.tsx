@@ -11,29 +11,39 @@ export type LinkListItemData = {
 };
 
 type Props = {
+  title?: string;
   data: LinkListItemData[];
 };
 
-const LinkList: React.FC<Props> = ({ data }) => (
+const LinkList: React.FC<Props> = ({ title, data }) => (
   <Container>
-    {data.map(({ url, preTitle, title }) => (
-      <ListItem key={url}>
-        <Link href={url} passHref>
-          <StyledLink>
-            <div>
-              <PreTitle>{preTitle}</PreTitle>
-              <Title>{title}</Title>
-            </div>
-            <ListRightArrow />
-          </StyledLink>
-        </Link>
-      </ListItem>
-    ))}
+    {title && <SectionTitle>{title}</SectionTitle>}
+    <ul>
+      {data.map(({ url, preTitle, title }) => (
+        <ListItem key={url}>
+          <Link href={url} passHref>
+            <StyledLink>
+              <div>
+                <PreTitle>{preTitle}</PreTitle>
+                <Title>{title}</Title>
+              </div>
+              <ListRightArrow />
+            </StyledLink>
+          </Link>
+        </ListItem>
+      ))}
+    </ul>
   </Container>
 );
 
-const Container = styled.ul`
-  margin: 2rem 0 0;
+const Container = styled.div`
+  margin: 3rem 0 0;
+`;
+
+const SectionTitle = styled.div`
+  ${typo.Lead1};
+  padding: 0 0 0 1rem;
+  margin: 0 0 1rem;
 `;
 
 const ListItem = styled.li`

@@ -49,7 +49,7 @@ const HelpTop: React.FC = () => {
 };
 
 const Menus = styled.section`
-  margin: 2rem 0 0;
+  margin: 3rem 0 0;
 `;
 
 const TermsLink = styled.div`
