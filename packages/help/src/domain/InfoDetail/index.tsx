@@ -54,7 +54,7 @@ const InfoDetail: React.FC<Props> = ({ infoDocument }) => {
 };
 
 const Section = styled.article`
-  margin: 2rem 0 0;
+  margin: 3rem 0 0;
 `;
 
 const ReleaseDate = styled.div`
