@@ -67,7 +67,8 @@ const Container = styled.section`
 `;
 
 const StyledLink = styled.a`
-  border: 1px solid ${({ theme }) => theme.background.tertiary};
+  border: 1px solid ${({ theme }) => theme.background.quinary};
+  border-radius: 0.2rem;
   padding: 1.5rem 2.5rem 1.5rem 4.5rem;
   display: block;
   text-decoration: none;
