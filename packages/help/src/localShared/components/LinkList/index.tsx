@@ -47,10 +47,10 @@ const SectionTitle = styled.div`
 `;
 
 const ListItem = styled.li`
-  border-bottom: 1px solid ${({ theme }) => theme.background.tertiary};
+  border-bottom: 1px solid ${({ theme }) => theme.background.quinary};
 
   &:first-child {
-    border-top: 1px solid ${({ theme }) => theme.background.tertiary};
+    border-top: 1px solid ${({ theme }) => theme.background.quinary};
   }
 `;
 

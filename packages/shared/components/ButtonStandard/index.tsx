@@ -68,7 +68,7 @@ const Button = styled.button<{ hasIcon: boolean }>`
   display: block;
   border: none;
   width: 100%;
-  max-width: 260px;
+  max-width: 15rem;
   margin: 0 auto;
   position: relative;
   padding: ${({ hasIcon }) => (hasIcon ? '0 1.5rem 0 2rem' : '0 1rem')};

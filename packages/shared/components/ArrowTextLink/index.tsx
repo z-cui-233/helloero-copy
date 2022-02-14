@@ -29,6 +29,12 @@ const StyledLink = styled.a`
   position: relative;
   padding: 0.25rem 1rem 0.25rem 0;
   text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.background.quinary};
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: ${({ theme }) => theme.background.quinary};
+  }
 `;
 
 const Icon = styled.div`
