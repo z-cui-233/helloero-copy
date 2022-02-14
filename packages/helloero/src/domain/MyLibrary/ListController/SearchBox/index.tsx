@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { UsePurchasedList } from '../../usePurchasedList';
 import typo from '@/shared/styles/typo';
 import Icon from '@/shared/assets/icon/search.svg';
+import useDebounce from '@/shared/hooks/useDebounce';
 
-const SearchBox: React.FC<UsePurchasedList> = ({
-  purchasedListState,
-  updateSearchQuery,
-}) => (
-  <Container>
-    <StyledIcon />
-    <Input
-      type="text"
-      value={purchasedListState.query}
-      placeholder="タイトル名で検索"
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        updateSearchQuery(e.target.value);
-      }}
-    />
-  </Container>
-);
+type Props = {
+  updateSearchQuery: UsePurchasedList['updateSearchQuery'];
+};
+
+const SearchBox: React.FC<Props> = ({ updateSearchQuery }) => {
+  const [query, setQuery] = useState<string>('');
+  const debouncedQuery = useDebounce<string>(query, 600);
+
+  useEffect(() => {
+    updateSearchQuery(debouncedQuery);
+  }, [debouncedQuery, updateSearchQuery]);
+
+  return (
+    <Container>
+      <StyledIcon />
+      <Input
+        type="text"
+        value={query}
+        placeholder="タイトル名で検索"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setQuery(e.target.value);
+        }}
+      />
+    </Container>
+  );
+};
 
 const Container = styled.div`
   position: relative;
