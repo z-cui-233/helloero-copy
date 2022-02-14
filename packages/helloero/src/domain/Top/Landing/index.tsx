@@ -10,8 +10,7 @@ const Landing: React.FC = () => {
   const router = useRouter();
 
   const handleClickSingIn = (): void => {
-    const backUrl = encodeURIComponent(globalConfig.HELLOERO);
-    router.push(`${globalConfig.ACCOUNT}/login?back=${backUrl}`);
+    router.push(`${globalConfig.ACCOUNT}/login`);
   };
 
   return (
