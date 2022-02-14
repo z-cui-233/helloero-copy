@@ -83,9 +83,7 @@ const Links = styled.div`
 `;
 
 const LinkItem = styled.div`
-  & + & {
-    margin: 0 0 0 0.5rem;
-  }
+  margin: 0 1.5rem 0 0;
 `;
 
 const StyledLink = styled.a`
