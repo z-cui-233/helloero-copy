@@ -7,6 +7,7 @@ const validationMessages = {
   min8: '8文字以上で入力してください',
   length16: '16文字で入力してください',
   alphanumerical: '半角英数字で入力してください',
+  alphanumericalKigo: '半角英数字記号で入力してください',
   numerical: '半角数字で入力してください',
 } as const;
 
@@ -17,12 +18,18 @@ const formValidations = {
 
   loginId: Yup.string()
     .required(validationMessages['required'])
-    .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
+    .matches(
+      /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/,
+      validationMessages['alphanumericalKigo']
+    )
     .min(6, validationMessages['min6']),
 
   password: Yup.string()
     .required(validationMessages['required'])
-    .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])
+    .matches(
+      /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/,
+      validationMessages['alphanumericalKigo']
+    )
     .min(8, validationMessages['min8']),
 
   email: Yup.string()
