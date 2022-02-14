@@ -1,4 +1,5 @@
 import React from 'react';
+import { globalConfig } from 'src/globalConfig';
 import NoticePage from '@/shared/components/NoticePage';
 
 const NoticeComplete: React.FC = () => (
@@ -7,8 +8,8 @@ const NoticeComplete: React.FC = () => (
     texts="登録が完了しました"
     links={[
       {
-        href: '/',
-        label: 'ホーム',
+        href: globalConfig.HELLOERO,
+        label: 'HELLOEROに進む',
       },
     ]}
   />

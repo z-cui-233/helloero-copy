@@ -64,7 +64,7 @@ const useLoginChallenge = (): UseLoginChallenge => {
       ? decodeURIComponent(router.query.back as string)
       : '';
 
-    router.replace(isValidUrl(backUrl) ? backUrl : '/');
+    router.replace(isValidUrl(backUrl) ? backUrl : globalConfig.HELLOERO);
   }, [router]);
 
   const challengeLogin: UseLoginChallenge['challengeLogin'] = useCallback(
