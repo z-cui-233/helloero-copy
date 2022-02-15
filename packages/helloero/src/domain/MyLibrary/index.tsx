@@ -12,23 +12,33 @@ import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import MainContainer from '@/shared/components/MainContainer';
 
 const MyLibrary: React.FC = () => {
-  const store = usePurchasedList();
+  const {
+    purchasedListState,
+    updateSearchQuery,
+    updateDisplayOrder,
+    openTitleDetail,
+    closeTitleDetail,
+    fetchUserWabikenMetas,
+  } = usePurchasedList();
 
   return (
     <LayoutHelloero options={globalConfig}>
       <MainContainer size="large">
         <WabikenMenu />
         <Title>購入済み作品</Title>
-        <ListController {...store} />
+        <ListController
+          updateSearchQuery={updateSearchQuery}
+          updateDisplayOrder={updateDisplayOrder}
+        />
         <TitleList
-          purchasedListState={store.purchasedListState}
-          openTitleDetail={store.openTitleDetail}
-          fetchListData={store.fetchListData}
+          purchasedListState={purchasedListState}
+          openTitleDetail={openTitleDetail}
+          fetchUserWabikenMetas={fetchUserWabikenMetas}
         />
         <TitleDetail
-          userWabikenMeta={store.purchasedListState.currentUserWabikenMeta}
-          isShownDetail={store.purchasedListState.isShownDetail}
-          onClickClose={store.closeTitleDetail}
+          userWabikenMeta={purchasedListState.currentUserWabikenMeta}
+          isShownDetail={purchasedListState.isShownDetail}
+          onClickClose={closeTitleDetail}
         />
       </MainContainer>
     </LayoutHelloero>

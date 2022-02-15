@@ -1,14 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-  ListUserWabikenMetasQuery,
-  ListUserWabikenMetasQueryVariables,
+  ModelSortDirection,
   UserWabikenMeta,
+  UserWabikenMetaByOwnerByContentDisplayNameQuery,
+  UserWabikenMetaByOwnerByContentDisplayNameQueryVariables,
+  UserWabikenMetaByOwnerByNotValidAfterQuery,
+  UserWabikenMetaByOwnerByNotValidAfterQueryVariables,
 } from '../../API';
-import { listUserWabikenMetas } from '../../graphql/queries';
+import {
+  userWabikenMetaByOwnerByContentDisplayName,
+  userWabikenMetaByOwnerByNotValidAfter,
+} from '../../graphql/queries';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 export const DISPLAY_ORDER = {
-  ADD: 'add',
+  ADD_ASC: 'add_asc',
+  ADD_DESC: 'add_desc',
   NAME_ASC: 'name_asc',
   NAME_DESC: 'name_desc',
 } as const;
@@ -21,17 +29,17 @@ type State = {
   isShownDetail: boolean;
   currentUserWabikenMeta: UserWabikenMeta | null;
   userWabikenMetas: UserWabikenMeta[] | [];
-  nextToken: string | undefined;
+  hasNext: boolean;
 };
 
 const initialState: State = {
   isInitialized: false,
   query: '',
-  displayOrder: DISPLAY_ORDER.ADD,
+  displayOrder: DISPLAY_ORDER.ADD_DESC,
   isShownDetail: false,
   currentUserWabikenMeta: null,
   userWabikenMetas: [],
-  nextToken: undefined,
+  hasNext: false,
 };
 
 export type UsePurchasedList = {
@@ -40,31 +48,139 @@ export type UsePurchasedList = {
   updateDisplayOrder: (newValue: DisplayOrder) => void;
   openTitleDetail: (userWabikenMeta: UserWabikenMeta) => void;
   closeTitleDetail: () => void;
-  fetchListData: (nextToken?: string) => Promise<void>;
+  fetchUserWabikenMetas: (args: {
+    query: State['query'];
+    displayOrder: State['displayOrder'];
+  }) => Promise<void>;
 };
 
+// stateにいれると無限Loopするので、react外に置く
+let nextToken: string | undefined | null = undefined;
+
 const usePurchasedList = (): UsePurchasedList => {
+  const { userInfo } = useLoginStateContext();
   const [state, setState] = useState<State>(initialState);
 
-  const { fetcher } = useAmplifyFetcher<
-    ListUserWabikenMetasQuery,
-    ListUserWabikenMetasQueryVariables
+  const { fetcher: notValidAfterQueryFetcher } = useAmplifyFetcher<
+    UserWabikenMetaByOwnerByNotValidAfterQuery,
+    UserWabikenMetaByOwnerByNotValidAfterQueryVariables
   >();
 
+  const { fetcher: displayNameQueryFetcher } = useAmplifyFetcher<
+    UserWabikenMetaByOwnerByContentDisplayNameQuery,
+    UserWabikenMetaByOwnerByContentDisplayNameQueryVariables
+  >();
+
+  const fetchUserWabikenMetas: UsePurchasedList['fetchUserWabikenMetas'] =
+    useCallback(
+      async (args) => {
+        const fetchData = async (): Promise<{
+          items: UserWabikenMeta[] | [];
+          newNextToken: string | undefined | null;
+        }> => {
+          const notValidAfter = { gt: Math.round(new Date().getTime() / 1000) };
+          const queryParams = {
+            owner: userInfo.userName ?? '',
+            sortDirection:
+              args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
+              args.displayOrder === DISPLAY_ORDER.NAME_DESC
+                ? ModelSortDirection.DESC
+                : ModelSortDirection.ASC,
+            filter: {
+              or: [
+                {
+                  contentDisplayName: {
+                    contains: args.query ?? undefined,
+                  },
+                },
+                {
+                  contentDisplayNameKana: {
+                    contains: args.query ?? undefined,
+                  },
+                },
+              ],
+            },
+            nextToken,
+          };
+
+          if (
+            args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
+            args.displayOrder === DISPLAY_ORDER.ADD_ASC
+          ) {
+            const apiData = await notValidAfterQueryFetcher(
+              userWabikenMetaByOwnerByNotValidAfter,
+              {
+                ...queryParams,
+                notValidAfter,
+              }
+            );
+
+            return {
+              items:
+                (apiData.data?.userWabikenMetaByOwnerByNotValidAfter
+                  ?.items as UserWabikenMeta[]) ?? [],
+              newNextToken:
+                apiData.data?.userWabikenMetaByOwnerByNotValidAfter
+                  ?.nextToken ?? undefined,
+            };
+          }
+
+          const apiData = await displayNameQueryFetcher(
+            userWabikenMetaByOwnerByContentDisplayName,
+            {
+              ...queryParams,
+              filter: {
+                ...queryParams.filter,
+                notValidAfter,
+              },
+            }
+          );
+
+          return {
+            items:
+              (apiData.data?.userWabikenMetaByOwnerByContentDisplayName
+                ?.items as UserWabikenMeta[]) ?? [],
+            newNextToken:
+              apiData.data?.userWabikenMetaByOwnerByContentDisplayName
+                ?.nextToken ?? undefined,
+          };
+        };
+
+        const { items, newNextToken } = await fetchData();
+
+        setState((state) => ({
+          ...state,
+          isInitialized: true,
+          userWabikenMetas: !nextToken
+            ? (items as UserWabikenMeta[])
+            : ([...state.userWabikenMetas, ...items] as UserWabikenMeta[]),
+          hasNext: !!newNextToken,
+        }));
+
+        nextToken = newNextToken;
+      },
+      [displayNameQueryFetcher, notValidAfterQueryFetcher, userInfo.userName]
+    );
+
   const updateSearchQuery: UsePurchasedList['updateSearchQuery'] = useCallback(
-    (newValue) => {
-      setState((state) => ({
-        ...state,
+    async (newValue) => {
+      nextToken = undefined;
+
+      setState({
+        ...initialState,
         query: newValue,
-      }));
+      });
     },
     []
   );
 
   const updateDisplayOrder: UsePurchasedList['updateDisplayOrder'] =
     useCallback((newValue) => {
+      nextToken = undefined;
+
       setState((state) => ({
-        ...state,
+        ...initialState,
+        query: state.query,
         displayOrder: newValue,
       }));
     }, []);
@@ -89,35 +205,12 @@ const usePurchasedList = (): UsePurchasedList => {
       }));
     }, []);
 
-  const fetchListData: UsePurchasedList['fetchListData'] = useCallback(
-    async (nextToken) => {
-      const apiData = await fetcher(listUserWabikenMetas, {
-        filter: {
-          notValidAfter: {
-            gt: Math.round(new Date().getTime() / 1000),
-          },
-        },
-        nextToken: nextToken ?? null,
-      });
-
-      const newList = apiData.data?.listUserWabikenMetas?.items ?? [];
-
-      setState((state) => ({
-        ...state,
-        isInitialized: true,
-        userWabikenMetas: [
-          ...state.userWabikenMetas,
-          ...newList,
-        ] as UserWabikenMeta[],
-        nextToken: apiData.data?.listUserWabikenMetas?.nextToken ?? undefined,
-      }));
-    },
-    [fetcher]
-  );
-
   useEffect(() => {
-    fetchListData();
-  }, [fetchListData]);
+    fetchUserWabikenMetas({
+      query: state.query,
+      displayOrder: state.displayOrder,
+    });
+  }, [fetchUserWabikenMetas, state.displayOrder, state.query]);
 
   return {
     purchasedListState: state,
@@ -125,7 +218,7 @@ const usePurchasedList = (): UsePurchasedList => {
     updateDisplayOrder,
     openTitleDetail,
     closeTitleDetail,
-    fetchListData,
+    fetchUserWabikenMetas,
   };
 };
 

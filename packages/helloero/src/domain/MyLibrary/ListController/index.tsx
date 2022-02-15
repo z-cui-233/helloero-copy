@@ -4,20 +4,26 @@ import { UsePurchasedList } from '../usePurchasedList';
 import SearchBox from './SearchBox';
 import SortBox from './SortBox';
 
-const ListController: React.FC<UsePurchasedList> = (props) => {
-  return (
-    <Container>
-      <React.Fragment>
-        <div>
-          <SearchBox {...props} />
-        </div>
-        <div>
-          <SortBox {...props} />
-        </div>
-      </React.Fragment>
-    </Container>
-  );
+type Props = {
+  updateSearchQuery: UsePurchasedList['updateSearchQuery'];
+  updateDisplayOrder: UsePurchasedList['updateDisplayOrder'];
 };
+
+const ListController: React.FC<Props> = ({
+  updateSearchQuery,
+  updateDisplayOrder,
+}) => (
+  <Container>
+    <React.Fragment>
+      <div>
+        <SearchBox updateSearchQuery={updateSearchQuery} />
+      </div>
+      <div>
+        <SortBox updateDisplayOrder={updateDisplayOrder} />
+      </div>
+    </React.Fragment>
+  </Container>
+);
 
 const Container = styled.div`
   margin: 1rem 0 0;
