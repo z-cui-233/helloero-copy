@@ -31,6 +31,7 @@ type UserWabikenMeta implements WabikenMetaBase
   issuerTrace: String
   createdAt: AWSTimestamp!
   contentDisplayName: String!
+  contentDisplayNameKana: String!
   content: UserContentMeta!
   """
   following are required fields in UserWabikenMeta (as they are activated wabikens)
@@ -47,6 +48,11 @@ type UserWabikenMeta implements WabikenMetaBase
       name: "byOwnerByContentDisplayName"
       queryField: "userWabikenMetaByOwnerByContentDisplayName"
       sortKeyFields: ["contentDisplayName"]
+    )
+    @index(
+      name: "byOwnerByContentDisplayNameKana"
+      queryField: "userWabikenMetaByOwnerByContentDisplayNameKana"
+      sortKeyFields: ["contentDisplayNameKana"]
     )
 }
 
@@ -76,6 +82,7 @@ type ContentMeta implements ContentMetaBase {
   id: ID!
   key: ContentMetaKey!
   displayName: String
+  displayNameKana: String
   catchphrase: String
   comment: String
   duration: Int

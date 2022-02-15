@@ -15,6 +15,7 @@ export const onCreateUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {
@@ -77,6 +78,7 @@ export const onUpdateUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {
@@ -139,6 +141,7 @@ export const onDeleteUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {

@@ -15,6 +15,7 @@ const mapContentMeta = (content) => ({
     providerId: content.key.provider_id,
   },
   displayName: content.display_name,
+  displayNameKana: content.display_name_kana,
   catchphrase: content.catchphrase,
   comment: content.comment,
   duration: content.duration,

@@ -59,6 +59,7 @@ const isCreateUserWabikenMetaInput = (
   return !!(
     input &&
     (input as CreateUserWabikenMetaInput).contentDisplayName &&
+    (input as CreateUserWabikenMetaInput).contentDisplayNameKana &&
     input.activatedAt &&
     input.content &&
     input.content.key &&
@@ -155,6 +156,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
         notValidAfter: activateWabikenApiData.data?.activateWabiken?.wabiken
           .notValidAfter as number,
         contentDisplayName: getWabikenMeta.wabiken.content.displayName,
+        contentDisplayNameKana: getWabikenMeta.wabiken.content.displayNameKana,
       };
 
       if (

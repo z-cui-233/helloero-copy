@@ -22,6 +22,7 @@ export const activateWabiken = /* GraphQL */ `
             providerId
           }
           displayName
+          displayNameKana
           catchphrase
           comment
           duration
@@ -80,6 +81,7 @@ export const createUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {
@@ -145,6 +147,7 @@ export const updateUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {
@@ -210,6 +213,7 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
       issuerTrace
       createdAt
       contentDisplayName
+      contentDisplayNameKana
       content {
         id
         key {
