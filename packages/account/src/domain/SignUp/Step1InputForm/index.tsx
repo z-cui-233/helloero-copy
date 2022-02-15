@@ -28,7 +28,7 @@ const Step1InputForm: React.FC<Props> = ({ signUpState, challengeSignUp }) => {
     initialValues: signUpState.step1FormValues,
     validationSchema: Yup.object().shape({
       loginId: formValidations.loginId,
-      password: formValidations.password,
+      password: formValidations.passwordRegister,
       email: formValidations.email,
     }),
     onSubmit: challengeSignUp,

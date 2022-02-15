@@ -8,6 +8,7 @@ const validationMessages = {
   length16: '16文字で入力してください',
   alphanumerical: '半角英数字で入力してください',
   alphanumericalKigo: '半角英数字記号で入力してください',
+  alphanumericalKigoRequired: '英数字両方を含む必要があります',
   numerical: '半角数字で入力してください',
 } as const;
 
@@ -29,6 +30,14 @@ const formValidations = {
     .matches(
       /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/,
       validationMessages['alphanumericalKigo']
+    )
+    .min(8, validationMessages['min8']),
+
+  passwordRegister: Yup.string()
+    .required(validationMessages['required'])
+    .matches(
+      /^(?=.*[A-Z|a-z])(?=.*[0-9])[a-zA-Z0-9!-/:-@¥[-`{-~]*$/,
+      validationMessages['alphanumericalKigoRequired']
     )
     .min(8, validationMessages['min8']),
 

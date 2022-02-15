@@ -26,7 +26,7 @@ const ResetPasswordStep2: React.FC<Props> = ({
     initialValues: resetPasswordState.formValues,
     validationSchema: Yup.object().shape({
       verificationCode: formValidations.verificationCode,
-      newPassword: formValidations.password,
+      newPassword: formValidations.passwordRegister,
     }),
     onSubmit: verifyCodeAndUpdatePassword,
   });
