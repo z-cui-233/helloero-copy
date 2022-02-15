@@ -146,6 +146,7 @@ export const getUserWabikenMeta = /* GraphQL */ `
           providerId
         }
         displayName
+        displayNameKana
         catchphrase
         comment
         duration
@@ -218,6 +219,7 @@ export const listUserWabikenMetas = /* GraphQL */ `
             providerId
           }
           displayName
+          displayNameKana
           catchphrase
           comment
           duration
@@ -298,6 +300,7 @@ export const userWabikenMetaByOwnerByNotValidAfter = /* GraphQL */ `
             providerId
           }
           displayName
+          displayNameKana
           catchphrase
           comment
           duration
@@ -378,6 +381,7 @@ export const userWabikenMetaByOwnerByContentDisplayName = /* GraphQL */ `
             providerId
           }
           displayName
+          displayNameKana
           catchphrase
           comment
           duration
@@ -458,6 +462,7 @@ export const userWabikenMetaByOwnerByContentDisplayNameKana = /* GraphQL */ `
             providerId
           }
           displayName
+          displayNameKana
           catchphrase
           comment
           duration

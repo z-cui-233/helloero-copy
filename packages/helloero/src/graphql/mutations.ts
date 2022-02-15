@@ -90,6 +90,7 @@ export const createUserWabikenMeta = /* GraphQL */ `
           providerId
         }
         displayName
+        displayNameKana
         catchphrase
         comment
         duration
@@ -156,6 +157,7 @@ export const updateUserWabikenMeta = /* GraphQL */ `
           providerId
         }
         displayName
+        displayNameKana
         catchphrase
         comment
         duration
@@ -222,6 +224,7 @@ export const deleteUserWabikenMeta = /* GraphQL */ `
           providerId
         }
         displayName
+        displayNameKana
         catchphrase
         comment
         duration

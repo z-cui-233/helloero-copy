@@ -101,6 +101,7 @@ type UserContentMeta implements ContentMetaBase {
   id: ID!
   key: ContentMetaKey!
   displayName: String!
+  displayNameKana: String!
   catchphrase: String!
   comment: String!
   duration: Int!

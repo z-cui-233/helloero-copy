@@ -60,6 +60,7 @@ export type UserContentMeta = {
   id: string;
   key: ContentMetaKey;
   displayName: string;
+  displayNameKana: string;
   catchphrase: string;
   comment: string;
   duration: number;
@@ -150,6 +151,7 @@ export type UserContentMetaInput = {
   id?: string | null;
   key: ContentMetaKeyInput;
   displayName: string;
+  displayNameKana: string;
   catchphrase: string;
   comment: string;
   duration: number;
@@ -535,6 +537,7 @@ export type CreateUserWabikenMetaMutation = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -611,6 +614,7 @@ export type UpdateUserWabikenMetaMutation = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -687,6 +691,7 @@ export type DeleteUserWabikenMetaMutation = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -905,6 +910,7 @@ export type GetUserWabikenMetaQuery = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -984,6 +990,7 @@ export type ListUserWabikenMetasQuery = {
           providerId: string;
         };
         displayName: string;
+        displayNameKana: string;
         catchphrase: string;
         comment: string;
         duration: number;
@@ -1068,6 +1075,7 @@ export type UserWabikenMetaByOwnerByNotValidAfterQuery = {
           providerId: string;
         };
         displayName: string;
+        displayNameKana: string;
         catchphrase: string;
         comment: string;
         duration: number;
@@ -1152,6 +1160,7 @@ export type UserWabikenMetaByOwnerByContentDisplayNameQuery = {
           providerId: string;
         };
         displayName: string;
+        displayNameKana: string;
         catchphrase: string;
         comment: string;
         duration: number;
@@ -1236,6 +1245,7 @@ export type UserWabikenMetaByOwnerByContentDisplayNameKanaQuery = {
           providerId: string;
         };
         displayName: string;
+        displayNameKana: string;
         catchphrase: string;
         comment: string;
         duration: number;
@@ -1313,6 +1323,7 @@ export type OnCreateUserWabikenMetaSubscription = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -1388,6 +1399,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
@@ -1463,6 +1475,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
         providerId: string;
       };
       displayName: string;
+      displayNameKana: string;
       catchphrase: string;
       comment: string;
       duration: number;
