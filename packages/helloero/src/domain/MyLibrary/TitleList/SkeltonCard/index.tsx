@@ -5,13 +5,13 @@ const SkeltonCard: React.FC = () => <Container />;
 
 const flash = keyframes`
   0% {
-    opacity: 0.2;
+    opacity: 0.4;
   }
   50% {
     opacity: 0.6;
   }
   100% {
-    opacity: 0.2;
+    opacity: 0.4;
   }
 `;
 

@@ -1,18 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-  ModelSortDirection,
+  SearchableSortDirection,
+  SearchableUserWabikenMetaSortableFields,
+  SearchUserWabikenMetasQuery,
+  SearchUserWabikenMetasQueryVariables,
   UserWabikenMeta,
-  UserWabikenMetaByOwnerByContentDisplayNameQuery,
-  UserWabikenMetaByOwnerByContentDisplayNameQueryVariables,
-  UserWabikenMetaByOwnerByNotValidAfterQuery,
-  UserWabikenMetaByOwnerByNotValidAfterQueryVariables,
 } from '../../API';
-import {
-  userWabikenMetaByOwnerByContentDisplayName,
-  userWabikenMetaByOwnerByNotValidAfter,
-} from '../../graphql/queries';
+import { searchUserWabikenMetas } from '../../graphql/queries';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 export const DISPLAY_ORDER = {
   ADD_ASC: 'add_asc',
@@ -58,108 +53,62 @@ export type UsePurchasedList = {
 let nextToken: string | undefined | null = undefined;
 
 const usePurchasedList = (): UsePurchasedList => {
-  const { userInfo } = useLoginStateContext();
   const [state, setState] = useState<State>(initialState);
 
-  const { fetcher: notValidAfterQueryFetcher } = useAmplifyFetcher<
-    UserWabikenMetaByOwnerByNotValidAfterQuery,
-    UserWabikenMetaByOwnerByNotValidAfterQueryVariables
-  >();
-
-  const { fetcher: displayNameQueryFetcher } = useAmplifyFetcher<
-    UserWabikenMetaByOwnerByContentDisplayNameQuery,
-    UserWabikenMetaByOwnerByContentDisplayNameQueryVariables
+  const { fetcher: searchFetcher } = useAmplifyFetcher<
+    SearchUserWabikenMetasQuery,
+    SearchUserWabikenMetasQueryVariables
   >();
 
   const fetchUserWabikenMetas: UsePurchasedList['fetchUserWabikenMetas'] =
     useCallback(
       async (args) => {
-        const fetchData = async (): Promise<{
-          items: UserWabikenMeta[] | [];
-          newNextToken: string | undefined | null;
-        }> => {
-          const notValidAfter = { gt: Math.round(new Date().getTime() / 1000) };
-          const queryParams = {
-            owner: userInfo.userName ?? '',
-            sortDirection:
-              args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
-              args.displayOrder === DISPLAY_ORDER.NAME_DESC
-                ? ModelSortDirection.DESC
-                : ModelSortDirection.ASC,
-            filter: {
-              or: [
-                {
-                  contentDisplayName: {
-                    contains: args.query ?? undefined,
-                  },
-                },
-                {
-                  contentDisplayNameKana: {
-                    contains: args.query ?? undefined,
-                  },
-                },
-              ],
-            },
-            nextToken,
-          };
-
-          if (
-            args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
-            args.displayOrder === DISPLAY_ORDER.ADD_ASC
-          ) {
-            const apiData = await notValidAfterQueryFetcher(
-              userWabikenMetaByOwnerByNotValidAfter,
-              {
-                ...queryParams,
-                notValidAfter,
-              }
-            );
-
-            return {
-              items:
-                (apiData.data?.userWabikenMetaByOwnerByNotValidAfter
-                  ?.items as UserWabikenMeta[]) ?? [],
-              newNextToken:
-                apiData.data?.userWabikenMetaByOwnerByNotValidAfter
-                  ?.nextToken ?? undefined,
-            };
-          }
-
-          const apiData = await displayNameQueryFetcher(
-            userWabikenMetaByOwnerByContentDisplayName,
+        const apiData = await searchFetcher(searchUserWabikenMetas, {
+          sort: [
             {
-              ...queryParams,
-              filter: {
-                ...queryParams.filter,
-                notValidAfter,
-              },
-            }
-          );
+              direction:
+                args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
+                args.displayOrder === DISPLAY_ORDER.NAME_DESC
+                  ? SearchableSortDirection.desc
+                  : SearchableSortDirection.asc,
+              field:
+                args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
+                args.displayOrder === DISPLAY_ORDER.ADD_ASC
+                  ? SearchableUserWabikenMetaSortableFields.notValidAfter
+                  : SearchableUserWabikenMetaSortableFields.contentDisplayNameKana,
+            },
+          ],
+          filter: {
+            notValidAfter: { gt: Math.round(new Date().getTime() / 1000) },
+            or: args.query
+              ? [
+                  { contentDisplayName: { match: args.query } },
+                  { contentDisplayNameKana: { match: args.query } },
+                ]
+              : undefined,
+          },
+          nextToken,
+        });
 
-          return {
-            items:
-              (apiData.data?.userWabikenMetaByOwnerByContentDisplayName
-                ?.items as UserWabikenMeta[]) ?? [],
-            newNextToken:
-              apiData.data?.userWabikenMetaByOwnerByContentDisplayName
-                ?.nextToken ?? undefined,
-          };
-        };
+        const items =
+          (apiData.data?.searchUserWabikenMetas?.items as UserWabikenMeta[]) ??
+          [];
 
-        const { items, newNextToken } = await fetchData();
+        const newNextToken =
+          apiData.data?.searchUserWabikenMetas?.nextToken ?? undefined;
 
         setState((state) => ({
           ...state,
           isInitialized: true,
           userWabikenMetas: !nextToken
-            ? (items as UserWabikenMeta[])
-            : ([...state.userWabikenMetas, ...items] as UserWabikenMeta[]),
+            ? items
+            : [...state.userWabikenMetas, ...items],
           hasNext: !!newNextToken,
         }));
 
         nextToken = newNextToken;
       },
-      [displayNameQueryFetcher, notValidAfterQueryFetcher, userInfo.userName]
+      [searchFetcher]
     );
 
   const updateSearchQuery: UsePurchasedList['updateSearchQuery'] = useCallback(
