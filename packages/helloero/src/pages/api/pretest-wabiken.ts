@@ -5,7 +5,6 @@ import {
 } from 'u-next/api';
 import { globalConfig } from 'src/globalConfig';
 import { DEVICE_CODE } from '@/localShared/constants';
-import { cookieParams } from '@/shared/constants/cookies';
 
 const WABIT_URL = process.env.WABIT_URL;
 
@@ -13,7 +12,7 @@ const pretestWabikenApiHandler: NextApiHandler<
   PretestWabikenApiResponse
 > = async (req, res) => {
   try {
-    const uuid = req.cookies[cookieParams.uuid.name];
+    const uuid = req.query.uuid;
 
     if (!uuid) {
       throw new Error('uuid does not exists');
