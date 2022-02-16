@@ -12,6 +12,7 @@ interface WabikenMetaBase {
 
 type UserWabikenMeta implements WabikenMetaBase
   @model
+  @searchable
   @auth(
     rules: [
       { allow: owner, operations: [read, create] }

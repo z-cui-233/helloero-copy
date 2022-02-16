@@ -40,7 +40,7 @@
         "IdentityPoolName": "h2umonopackageshelloc636e5bc_identitypool_c636e5bc__develop",
         "UserPoolName": "h2umonopackageshelloc636e5bc_userpool_c636e5bc"
       },
-      "lastPushTimeStamp": "2022-02-15T10:06:26.864Z",
+      "lastPushTimeStamp": "2022-02-16T06:59:01.983Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/auth/h2umonopackageshelloc636e5bc-cloudformation-template.json",
         "logicalId": "authh2umonopackageshelloc636e5bc"
@@ -59,7 +59,7 @@
         "Name": "helloeroApiLambdaResolver-develop",
         "LambdaExecutionRole": "h2umonopackageshelloLambdaRolea5a071ac-develop"
       },
-      "lastPushTimeStamp": "2022-02-15T10:06:26.888Z",
+      "lastPushTimeStamp": "2022-02-16T06:59:02.003Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/function/helloeroApiLambdaResolver-cloudformation-template.json",
         "logicalId": "functionhelloeroApiLambdaResolver"
@@ -68,9 +68,9 @@
         "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
         "s3Key": "amplify-builds/helloeroApiLambdaResolver-48442b34495376573363-build.zip"
       },
-      "lastBuildTimeStamp": "2022-02-15T10:03:14.669Z",
+      "lastBuildTimeStamp": "2022-02-16T06:35:29.840Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-02-15T10:03:14.882Z",
+      "lastPackageTimeStamp": "2022-02-16T06:35:30.495Z",
       "distZipFilename": "helloeroApiLambdaResolver-48442b34495376573363-build.zip",
       "lastPushDirHash": "59A1ldKwikpiQXjcMYS3YFPhmYc="
     }
@@ -92,12 +92,12 @@
         "GraphQLAPIIdOutput": "af7aleonmzawdbu6a3ixpcdaxu",
         "GraphQLAPIEndpointOutput": "https://qqryr42xevbk7nx7yhd3kgx7si.appsync-api.ap-northeast-1.amazonaws.com/graphql"
       },
-      "lastPushTimeStamp": "2022-02-15T10:06:26.888Z",
+      "lastPushTimeStamp": "2022-02-16T06:59:02.003Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apihelloeroApi"
       },
-      "lastPushDirHash": "nvy8CKp1mRMZhnIiGQgZUO5+bdI="
+      "lastPushDirHash": "aCgfg/8h2tYN6LoW4mg2bB6jOTY="
     }
   }
 }
