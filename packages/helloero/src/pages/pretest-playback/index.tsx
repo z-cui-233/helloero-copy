@@ -9,8 +9,8 @@ const Page: NextPage = () => {
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELLOERO}
-        title="HELLOERO powered by H2U"
-        description="シンプルに、カジュアルに。アダルトコンテンツを楽しもう。ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。"
+        title="テスト動画再生 - HELLOERO powered by H2U"
+        description="購入前に動画が再生できるか確認してください。"
       />
       <PretestPlayback />
     </React.Fragment>
