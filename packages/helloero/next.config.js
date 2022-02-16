@@ -17,6 +17,9 @@ module.exports = {
   poweredByHeader: false,
   compress: false,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
+  env: {
+    wabitUrl: process.env.WABIT_URL,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
