@@ -4,9 +4,23 @@ helloero, account, help sites for h2u
 
 ## Preparation for local development
 
-### STEP1: add config file
+### STEP1: add ENV
 
-## 1.1 account
+#### 1.1 for private repo install
+
+add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
+
+#### 1.2 for ENV value
+
+into `packages/helloero/.env.local`
+
+```
+WABITAPI=THIS_IS_WABIT_DEV_API_URL
+```
+
+### STEP2: add config file
+
+#### 2.1 account
 
 1. Go to `/packages/account`
 2. Run `rm -rf amplify`
@@ -26,7 +40,7 @@ helloero, account, help sites for h2u
 
 5. Verify auto-generation of `/src/aws-export.js`
 
-## 1.2 helloero
+#### 2.2 helloero
 
 1. Go to `/packages/helloero`
 2. Run `rm -rf amplify`
@@ -34,17 +48,13 @@ helloero, account, help sites for h2u
 4. Set up same as account.
 5. Verify auto-generation of `/src/aws-export.js`
 
-## 1.3 help
+#### 2.3 help
 
 1. Go to `/packages/help`
 2. Run `rm -rf amplify`
 3. Run `amplify pull --appId d1lfbnhojp19y0 --envName develop` (will be redirected to browser for login-credential input)
 4. Set up same as account.
 5. Verify auto-generation of `/src/aws-export.js`
-
-### STEP2: add ENV
-
-add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 
 ### STEP3: Add hosts
 

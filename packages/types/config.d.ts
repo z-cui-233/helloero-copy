@@ -4,4 +4,5 @@ export interface Config {
   HELLOERO: string;
   HELP: string;
   ACCOUNT: string;
+  PRETEST_WABIKEN: string;
 }
