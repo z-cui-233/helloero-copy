@@ -6,8 +6,6 @@ import {
 import { globalConfig } from 'src/globalConfig';
 import { DEVICE_CODE } from '@/localShared/constants';
 
-const WABIT_URL = process.env.WABIT_URL;
-
 const pretestWabikenApiHandler: NextApiHandler<
   PretestWabikenApiResponse
 > = async (req, res) => {
@@ -18,7 +16,7 @@ const pretestWabikenApiHandler: NextApiHandler<
       throw new Error('uuid does not exists');
     }
 
-    const url = `${WABIT_URL}/v2/playinfo/${globalConfig.PRETEST_WABIKEN}?device_code=${DEVICE_CODE}&device_id=${uuid}`;
+    const url = `${process.env.wabitUrl}/v2/playinfo/${globalConfig.PRETEST_WABIKEN}?device_code=${DEVICE_CODE}&device_id=${uuid}`;
     const apiData = (await fetch(url, {
       method: 'GET',
       headers: {
