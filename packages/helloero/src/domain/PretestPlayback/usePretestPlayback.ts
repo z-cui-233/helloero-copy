@@ -122,9 +122,12 @@ const usePretestPlayback = (): UsePretestPlayback => {
   useEffect(() => {
     (async () => {
       const cookies = parseCookies();
+      const userAgent = encodeURIComponent(window.navigator.userAgent);
       const deviceId = encodeURIComponent(cookies[cookieParams.uuid.name]);
 
-      const apiData = await fetcher(`/api/pretest-wabiken?uuid=${deviceId}`);
+      const apiData = await fetcher(
+        `/api/pretest-wabiken?uuid=${deviceId}&userAgent=${userAgent}`
+      );
       const playerProps = creatPlayerPropsFromPlayInfo(apiData.data, deviceId);
 
       setState((state) => ({

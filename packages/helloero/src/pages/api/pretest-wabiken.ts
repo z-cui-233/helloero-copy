@@ -112,7 +112,7 @@ const pretestWabikenApiHandler: NextApiHandler<
 > = async (req, res) => {
   try {
     const apiData = await fetchPlayInfoFromWabitApi({
-      userAgent: req.headers['user-agent'] ?? '',
+      userAgent: decodeURIComponent(req.query.userAgent as string),
       uuid: req.query.uuid as string,
     });
 
