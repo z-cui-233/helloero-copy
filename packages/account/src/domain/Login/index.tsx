@@ -10,7 +10,7 @@ const Login: React.FC = () => {
   const { loginChallengeState, challengeLogin } = useLoginChallenge();
 
   return (
-    <LayoutH2u options={globalConfig}>
+    <LayoutH2u options={globalConfig} needLogin={false}>
       {loginChallengeState.pageStatus === PAGE_STATUS.INPUT && (
         <InputForm
           loginChallengeState={loginChallengeState}

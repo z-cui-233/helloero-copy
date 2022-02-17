@@ -11,7 +11,7 @@ const Top: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
 
   return (
-    <LayoutH2u options={globalConfig}>
+    <LayoutH2u options={globalConfig} needLogin={false}>
       {isLoadedUserInfo && (
         <MainContainer>
           {userInfo.isLoggedIn && <AccountMenus />}

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
@@ -12,11 +11,8 @@ type Props = {
 
 const LoginButton: React.FC<Props> = ({ options }) => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
-  const router = useRouter();
 
-  return isLoadedUserInfo &&
-    !userInfo.isLoggedIn &&
-    router.pathname !== '/login' ? (
+  return isLoadedUserInfo && !userInfo.isLoggedIn ? (
     <Link href={`${options.ACCOUNT}/login`} passHref>
       <Container>
         <div>ログイン</div>
