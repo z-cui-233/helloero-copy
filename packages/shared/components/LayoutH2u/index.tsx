@@ -13,12 +13,17 @@ Router.events.on('routeChangeError', () => NProgress.done());
 type Props = {
   children: React.ReactNode;
   options: Config;
+  needLogin?: boolean;
 };
 
-const LayoutH2u: React.VFC<Props> = ({ children, options }) => {
+const LayoutH2u: React.VFC<Props> = ({
+  children,
+  options,
+  needLogin = true,
+}) => {
   return (
     <Container>
-      <Header options={options} />
+      <Header options={options} needLogin={needLogin} />
       <Main>{children}</Main>
       <Footer options={options} />
     </Container>

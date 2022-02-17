@@ -7,14 +7,15 @@ import UserName from './UserName';
 
 type Props = {
   options: Config;
+  needLogin: boolean;
 };
 
-const Header: React.FC<Props> = ({ options }) => {
+const Header: React.FC<Props> = ({ options, needLogin }) => {
   return (
     <Container>
       <HeaderContents>
         <SiteLogo options={options} />
-        <LoginButton options={options} />
+        {needLogin && <LoginButton options={options} />}
         <UserName />
       </HeaderContents>
     </Container>
