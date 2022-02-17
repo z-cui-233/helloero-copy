@@ -6,14 +6,18 @@ type Props = {
   host: string;
   title: string;
   description?: string;
+  canonicalUrl?: string;
 };
 
-const MetaTags: React.FC<Props> = ({ host, title, description }) => {
+const MetaTags: React.FC<Props> = ({
+  host,
+  title,
+  description,
+  canonicalUrl,
+}) => {
   const { asPath } = useRouter();
-
-  const canonicalPath = asPath.split('?')[0];
-  const canonicalUrl = `${host}/${canonicalPath}`;
-  const ogImageUrl = `${host}/images/share.jpg`;
+  const path = asPath.split('?')[0];
+  const url = canonicalUrl ?? `${host}/${path}`;
 
   return (
     <Head>
@@ -27,9 +31,9 @@ const MetaTags: React.FC<Props> = ({ host, title, description }) => {
         content={description}
         key="og:description"
       />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={ogImageUrl} />
-      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:url" content={url} />
+      <meta property="og:image" content={`${host}/images/share.jpg`} />
+      <link rel="canonical" href={url} />
     </Head>
   );
 };
