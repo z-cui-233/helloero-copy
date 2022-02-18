@@ -24,7 +24,7 @@ type State = {
   isShownDetail: boolean;
   currentUserWabikenMeta: UserWabikenMeta | null;
   userWabikenMetas: UserWabikenMeta[] | [];
-  hasNext: boolean;
+  total: number;
 };
 
 const initialState: State = {
@@ -34,7 +34,7 @@ const initialState: State = {
   isShownDetail: false,
   currentUserWabikenMeta: null,
   userWabikenMetas: [],
-  hasNext: false,
+  total: 0,
 };
 
 export type UsePurchasedList = {
@@ -103,7 +103,7 @@ const usePurchasedList = (): UsePurchasedList => {
           userWabikenMetas: !nextToken
             ? items
             : [...state.userWabikenMetas, ...items],
-          hasNext: !!newNextToken,
+          total: apiData.data?.searchUserWabikenMetas?.total ?? 0,
         }));
 
         nextToken = newNextToken;
