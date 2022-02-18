@@ -55,6 +55,8 @@ export const MESSAGES = {
     // 既にステータスが CONFIRMED になっている場合に起こる。
     UserNotFoundException: 'ログインIDが正しいかご確認下さい。',
     // username が存在しない・無効化されている場合に起こる。
+    LimitExceededException:
+      '一定回数間違えたため、本人確認コードを送信できません。しばらく時間をおいてから、再度お試しください。',
   },
   authSignIn: {
     UserNotConfirmedException: 'このアカウントはまだ登録が完了していません。',
