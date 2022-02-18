@@ -37,7 +37,10 @@ const TitleList: React.FC<Props> = ({
                   displayOrder: purchasedListState.displayOrder,
                 });
               }}
-              hasMore={purchasedListState.hasNext}
+              hasMore={
+                purchasedListState.total >
+                purchasedListState.userWabikenMetas.length
+              }
               loader={<Loading>...</Loading>}
             >
               <List>
