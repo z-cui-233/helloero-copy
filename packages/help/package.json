@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.6",
-    "@prismicio/client": "^6.0.0-beta.5",
+    "@prismicio/client": "^6.3.0",
     "@prismicio/react": "^2.0.2",
     "@u-next/site_config": "file:../site_config",
     "aws-amplify": "^4.3.14",
