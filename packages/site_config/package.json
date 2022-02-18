@@ -1,0 +1,14 @@
+{
+  "name": "@u-next/site_config",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {},
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "build": "echo 'no build'",
+    "lint": "echo 'no lint'",
+    "lint:fix": "echo 'no lint:fix'"
+  }
+}

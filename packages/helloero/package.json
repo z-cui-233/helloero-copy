@@ -1,0 +1,57 @@
+{
+  "name": "helloero",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --dir src",
+    "lint:fix": "next lint --dir src --fix"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-components": "^1.9.6",
+    "@u-next/site_config": "file:../site_config",
+    "@u-next/videoplayer-react": "^1.5.0",
+    "aws-amplify": "^4.3.14",
+    "dateformat": "^5.0.2",
+    "formik": "^2.2.9",
+    "next": "11.1.2",
+    "nookies": "^2.5.2",
+    "nprogress": "^0.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-intl": "^5.24.1",
+    "react-spring": "^9.4.0",
+    "react-transition-group": "^4.4.2",
+    "react-use": "^17.3.2",
+    "styled-components": "^5.3.3",
+    "styled-reset": "^4.3.4",
+    "td-js-sdk": "^3.0.0",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.1.2",
+    "@types/dateformat": "^5.0.0",
+    "@types/node": "^17.0.7",
+    "@types/nprogress": "^0.2.0",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.19",
+    "@types/u-next": "file:../types",
+    "@types/uuid": "^8.3.3",
+    "@types/yup": "^0.29.13",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "babel-plugin-styled-components": "^2.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^12.0.5",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "typescript": "^4.5.4"
+  }
+}

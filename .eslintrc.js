@@ -8,6 +8,21 @@ module.exports = {
     '@next/next/no-img-element': 'off',
     '@next/next/no-html-link-for-pages': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
+    'import/order': [
+      'warn',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
+        ],
+      },
+    ],
   },
   env: {
     browser: true,
@@ -20,5 +35,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'prettier',
+    'next/core-web-vitals',
   ],
+  plugins: ['import'],
 };

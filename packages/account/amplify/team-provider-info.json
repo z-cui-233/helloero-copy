@@ -1,0 +1,15 @@
+{
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-h2umonopackagesaccou-develop-101316-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackagesaccou-develop-101316-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackagesaccou-develop-101316-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-h2umonopackagesaccou-develop-101316-deployment",
+      "UnauthRoleName": "amplify-h2umonopackagesaccou-develop-101316-unauthRole",
+      "StackName": "amplify-h2umonopackagesaccou-develop-101316",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackagesaccou-develop-101316/92ab9dc0-8347-11ec-b358-06782e15d9b5",
+      "AmplifyAppId": "d2n1qbnmkdgxvt"
+    }
+  }
+}
