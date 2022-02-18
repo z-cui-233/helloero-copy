@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
+import { MESSAGES } from '@/shared/constants/messages';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -12,6 +13,7 @@ export const PAGE_STATUS = {
 type State = {
   pageStatus: typeof PAGE_STATUS[keyof typeof PAGE_STATUS];
   errorMessage: string;
+  currentEmail: string;
   formValues: {
     email: string;
     verificationCode: string;
@@ -21,6 +23,7 @@ type State = {
 const initialState: State = {
   pageStatus: PAGE_STATUS.INIT,
   errorMessage: '',
+  currentEmail: '',
   formValues: {
     email: '',
     verificationCode: '',
@@ -91,6 +94,19 @@ const useUpdateEmail = (): UseUpdateEmail => {
       }
       isLoading.current = true;
 
+      if (values.email === state.currentEmail) {
+        isLoading.current = false;
+        setState((state) => ({
+          ...state,
+          pageStatus: PAGE_STATUS.INPUT_EMAIL,
+          errorMessage: MESSAGES.custom.mailIsNotChanged,
+          formValues: {
+            ...state.formValues,
+          },
+        }));
+        return;
+      }
+
       const currentAuthenticatedUserResponse = await currentAuthenticatedUser();
       if (currentAuthenticatedUserResponse.errorCode) {
         // ここでエラーになると、とても困る
@@ -136,7 +152,7 @@ const useUpdateEmail = (): UseUpdateEmail => {
         },
       }));
     },
-    [currentAuthenticatedUser, updateUserAttributes]
+    [currentAuthenticatedUser, state.currentEmail, updateUserAttributes]
   );
 
   const verifyCode: UseUpdateEmail['verifyCode'] = useCallback(
@@ -181,12 +197,17 @@ const useUpdateEmail = (): UseUpdateEmail => {
           (data) => data.Name === 'email_verified'
         );
 
+        const currentEmail = data?.UserAttributes.find(
+          (data) => data.Name === 'email'
+        );
+
         setState((updateEmailState) => ({
           ...updateEmailState,
           pageStatus:
             emailVerifiedStatus && emailVerifiedStatus.Value === 'false'
               ? PAGE_STATUS.RE_SEND_CURRENT_EMAIL
               : PAGE_STATUS.INPUT_EMAIL,
+          currentEmail: currentEmail?.Value ?? '',
         }));
       });
     })();

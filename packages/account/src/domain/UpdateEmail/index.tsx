@@ -17,6 +17,8 @@ const UpdateEmail: React.FC = () => {
     verifyCode,
   } = useUpdateEmail();
 
+  console.log(updateEmailState);
+
   return (
     <LayoutH2u options={globalConfig}>
       {updateEmailState.pageStatus === PAGE_STATUS.RE_SEND_CURRENT_EMAIL && (
