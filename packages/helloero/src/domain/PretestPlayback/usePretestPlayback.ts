@@ -1,7 +1,6 @@
 import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
-import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { PretestWabikenApiResponse } from 'src/pages/api/pretest-wabiken';
 import useVariousFetch from '@/shared/hooks/useVariousFetcher';
 import { cookieParams } from '@/shared/constants/cookies';
@@ -34,10 +33,10 @@ const initialState: State = {
 
 export type UsePretestPlayback = {
   playerState: State;
+  playbackStart: () => Promise<void>;
 };
 
 const usePretestPlayback = (): UsePretestPlayback => {
-  const router = useRouter();
   const [state, setState] = useState<State>(initialState);
   const { fetcher } = useVariousFetch<PretestWabikenApiResponse>();
 
@@ -97,7 +96,10 @@ const usePretestPlayback = (): UsePretestPlayback => {
         },
         isRealtime: false,
         onBackClick: () => {
-          router.push('/');
+          setState((state) => ({
+            ...state,
+            pageStatus: PAGE_STATUS.INIT,
+          }));
         },
         onError: (error: PlayerError) => {
           const title = error.customTitle ?? '';
@@ -116,11 +118,11 @@ const usePretestPlayback = (): UsePretestPlayback => {
         },
       };
     },
-    [router]
+    []
   );
 
-  useEffect(() => {
-    (async () => {
+  const playbackStart: UsePretestPlayback['playbackStart'] =
+    useCallback(async () => {
       const cookies = parseCookies();
       const userAgent = encodeURIComponent(window.navigator.userAgent);
       const deviceId = encodeURIComponent(cookies[cookieParams.uuid.name]);
@@ -136,11 +138,13 @@ const usePretestPlayback = (): UsePretestPlayback => {
         deviceId,
         playerProps,
       }));
-    })();
-  }, [creatPlayerPropsFromPlayInfo, fetcher]);
+
+      return;
+    }, [creatPlayerPropsFromPlayInfo, fetcher]);
 
   return {
     playerState: state,
+    playbackStart,
   };
 };
 
