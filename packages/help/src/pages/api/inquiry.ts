@@ -1,6 +1,64 @@
+import { SendEmailCommand, SESClient } from '@aws-sdk/client-ses';
+import dateFormat from 'dateformat';
 import { NextApiHandler } from 'next';
 import { ApiResponse } from 'u-next/api';
-import { InquiryTypeKeys } from '@/localShared/constants/inquiry';
+import {
+  InquiryTypeKeys,
+  INQUIRY_TYPE_MAP,
+} from '@/localShared/constants/inquiry';
+
+const credentials = process.env.accessKeyId &&
+  process.env.secretAccessKey && {
+    credentials: {
+      accessKeyId: process.env.accessKeyId,
+      secretAccessKey: process.env.secretAccessKey,
+    },
+  };
+
+const sesClient = new SESClient({
+  region: 'ap-northeast-1',
+  ...credentials,
+});
+
+const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
+  Destination: {
+    /* required */
+    CcAddresses: [],
+    ToAddresses: [args.contactEmail],
+    BccAddresses: ['support@h2u.jp'],
+  },
+  Message: {
+    Body: {
+      Text: {
+        Charset: 'UTF-8',
+        Data: `H2U サポートセンターです。
+
+以下の内容でお問い合わせを承りました。あらためてご返信差し上げますのでお待ちください。
+お問い合わせの内容によっては、ご返信に数日いただく場合がございます。
+
+●お問い合わせ日時：${dateFormat(new Date(), 'yyyy年m月d日 HH:MM')}
+●ご連絡先メールアドレス：${args.contactEmail}
+●ご登録のメールアドレス：${args.registeredEmail}
+
+●お問い合わせ内容
+${INQUIRY_TYPE_MAP.get(args.inquiryType)}
+
+${args.detail}
+
+=====================================
+H2U サポートセンター support@h2u.jp
+=====================================
+※本メールの内容につきましては、無断転載・引用することを堅くお断りいたします。
+`,
+      },
+    },
+    Subject: {
+      Charset: 'UTF-8',
+      Data: '【サポート】お問い合わせを承りました。',
+    },
+  },
+  Source: 'support@h2u.jp',
+});
 
 export type InquiryApiRequest = {
   inquiryType: InquiryTypeKeys;
@@ -18,10 +76,11 @@ const inquiryApiHandler: NextApiHandler<ApiResponse> = async (
       throw new Error('method is not match');
     }
 
-    const body = req.body as InquiryApiRequest;
+    const sendEmailCommandInput = createSendEmailCommandInput(
+      req.body as InquiryApiRequest
+    );
 
-    // eslint-disable-next-line no-console
-    console.log(body);
+    await sesClient.send(new SendEmailCommand(sendEmailCommandInput));
 
     return res.status(200).json({
       result: true,
