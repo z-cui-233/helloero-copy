@@ -8,7 +8,9 @@ import {
 } from '@/localShared/constants/inquiry';
 
 const credentials = process.env.accessKeyId &&
-  process.env.secretAccessKey && {
+  process.env.secretAccessKey &&
+  process.env.accessKeyId !== '' &&
+  process.env.secretAccessKey !== '' && {
     credentials: {
       accessKeyId: process.env.accessKeyId,
       secretAccessKey: process.env.secretAccessKey,
