@@ -59,7 +59,7 @@ H2U サポートセンター support@h2u.jp
       Data: '【サポート】お問い合わせを承りました。',
     },
   },
-  Source: 'support@h2u.jp',
+  Source: 'H2U <support@h2u.jp>',
 });
 
 export type InquiryApiRequest = {
