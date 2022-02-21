@@ -76,7 +76,6 @@ const PreTitle = styled.div`
 const Title = styled.h2`
   ${typo.Standard};
   color: ${({ theme }) => theme.foreground.primary};
-  font-weight: bold;
 `;
 
 export default LinkList;

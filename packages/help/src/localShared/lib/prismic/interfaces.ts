@@ -40,4 +40,5 @@ export type TermsDocument = prismicT.PrismicDocument<{
 export type SystemTroubleDocument = prismicT.PrismicDocument<{
   title: prismicT.RichTextField;
   text: prismicT.RichTextField;
+  is_show: prismicT.BooleanField;
 }>;
