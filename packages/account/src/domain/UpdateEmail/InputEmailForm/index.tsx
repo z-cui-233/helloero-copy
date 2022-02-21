@@ -11,6 +11,7 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import PageTitle from '@/shared/components/PageTitle';
+import DefinitionListCard from '@/shared/components/DefinitionListCard';
 
 type Props = {
   updateEmailState: UseUpdateEmail['updateEmailState'];
@@ -31,6 +32,10 @@ const InputEmailForm: React.FC<Props> = ({
     onSubmit: confirmEmail,
   });
 
+  const emailString = updateEmailState.currentEmail.split('@')[0];
+  const padLength = emailString.length - 1;
+  const firstDigits = emailString.slice(0, 1);
+
   return (
     <MainContainer>
       <FormErrorMessage message={updateEmailState.errorMessage} />
@@ -39,6 +44,23 @@ const InputEmailForm: React.FC<Props> = ({
         <div>
           ご希望のメールアドレスを入力して、本人確認コードを送信してください。
         </div>
+      </Section>
+      <Section>
+        <DefinitionListCard
+          data={[
+            {
+              title: '現在のメールドレス',
+              textsChildren: (
+                <div>
+                  {firstDigits.padEnd(padLength, '*')}@
+                  {updateEmailState.currentEmail.split('@')[1]}
+                </div>
+              ),
+            },
+          ]}
+        />
+      </Section>
+      <Section>
         <FieldSection>
           <FormTextField
             label={formLabels.email.label}
