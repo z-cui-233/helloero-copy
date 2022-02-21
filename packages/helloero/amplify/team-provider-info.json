@@ -1,26 +1,25 @@
 {
-  "develop": {
+  "main": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-h2umonopackageshello-develop-51032-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-authRole",
+      "AuthRoleName": "amplify-helloero-main-23612-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-main-23612-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-main-23612-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
-      "UnauthRoleName": "amplify-h2umonopackageshello-develop-51032-unauthRole",
-      "StackName": "amplify-h2umonopackageshello-develop-51032",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshello-develop-51032/48754d20-831d-11ec-9d18-0e35c8638783",
+      "DeploymentBucketName": "amplify-helloero-main-23612-deployment",
+      "UnauthRoleName": "amplify-helloero-main-23612-unauthRole",
+      "StackName": "amplify-helloero-main-23612",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-main-23612/74d66c60-4d98-11ec-8163-0a965a79b63d",
       "AmplifyAppId": "d2lpn6hawe153k"
     },
     "categories": {
-      "auth": {
-        "h2umonopackageshelloc636e5bc": {}
-      },
       "function": {
         "helloeroApiLambdaResolver": {
-          "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
-          "s3Key": "amplify-builds/helloeroApiLambdaResolver-48442b34495376573363-build.zip",
-          "wabitUrl": "http://cfn-wab-ALB-L679I7IIG7OI-375596238.ap-northeast-1.elb.amazonaws.com"
+          "deploymentBucketName": "amplify-helloero-main-23612-deployment",
+          "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip"
         }
+      },
+      "auth": {
+        "h2umonopackageshelloc636e5bc": {}
       }
     }
   }

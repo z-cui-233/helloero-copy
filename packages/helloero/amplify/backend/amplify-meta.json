@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-h2umonopackageshello-develop-51032-authRole",
-      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-h2umonopackageshello-develop-51032-authRole",
+      "AuthRoleName": "amplify-helloero-main-23612-authRole",
+      "UnauthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-main-23612-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::094309139025:role/amplify-helloero-main-23612-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
-      "UnauthRoleName": "amplify-h2umonopackageshello-develop-51032-unauthRole",
-      "StackName": "amplify-h2umonopackageshello-develop-51032",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshello-develop-51032/48754d20-831d-11ec-9d18-0e35c8638783",
+      "DeploymentBucketName": "amplify-helloero-main-23612-deployment",
+      "UnauthRoleName": "amplify-helloero-main-23612-unauthRole",
+      "StackName": "amplify-helloero-main-23612",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-helloero-main-23612/74d66c60-4d98-11ec-8163-0a965a79b63d",
       "AmplifyAppId": "d2lpn6hawe153k"
     }
   },
@@ -31,18 +31,18 @@
         "verificationMechanisms": ["EMAIL"]
       },
       "output": {
-        "CreatedSNSRole": "arn:aws:iam::094309139025:role/snsc636e5bc51032-develop",
-        "UserPoolId": "ap-northeast-1_qSxUth64s",
-        "AppClientIDWeb": "70p5v295aai8u49ag3c538a1vu",
-        "AppClientID": "1ko9h539q5tfkrjq4o6onqv75h",
-        "IdentityPoolId": "ap-northeast-1:47db5939-0b53-4ef5-b2c4-7f7bdd2ea7a9",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_qSxUth64s",
-        "IdentityPoolName": "h2umonopackageshelloc636e5bc_identitypool_c636e5bc__develop",
+        "CreatedSNSRole": "arn:aws:iam::094309139025:role/snsc636e5bc23612-main",
+        "UserPoolId": "ap-northeast-1_rzNmKnu8q",
+        "AppClientIDWeb": "6p06vl68e57l312s26r79gm1og",
+        "AppClientID": "2jqkp53koe5tchfgmsas4up68e",
+        "IdentityPoolId": "ap-northeast-1:1171191a-a1ce-4381-9e17-9903cfb34af6",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_rzNmKnu8q",
+        "IdentityPoolName": "h2umonopackageshelloc636e5bc_identitypool_c636e5bc__main",
         "UserPoolName": "h2umonopackageshelloc636e5bc_userpool_c636e5bc"
       },
-      "lastPushTimeStamp": "2022-02-16T06:59:01.983Z",
+      "lastPushTimeStamp": "2022-02-21T12:51:37.803Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/auth/h2umonopackageshelloc636e5bc-cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-main-23612-deployment/amplify-cfn-templates/auth/h2umonopackageshelloc636e5bc-cloudformation-template.json",
         "logicalId": "authh2umonopackageshelloc636e5bc"
       }
     }
@@ -55,24 +55,19 @@
       "dependsOn": [],
       "output": {
         "Region": "ap-northeast-1",
-        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroApiLambdaResolver-develop",
-        "Name": "helloeroApiLambdaResolver-develop",
-        "LambdaExecutionRole": "h2umonopackageshelloLambdaRolea5a071ac-develop"
+        "Arn": "arn:aws:lambda:ap-northeast-1:094309139025:function:helloeroApiLambdaResolver-main",
+        "Name": "helloeroApiLambdaResolver-main",
+        "LambdaExecutionRole": "h2umonopackageshelloLambdaRolea5a071ac-main"
       },
-      "lastPushTimeStamp": "2022-02-16T06:59:02.003Z",
+      "lastPushTimeStamp": "2022-02-21T12:51:37.805Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/function/helloeroApiLambdaResolver-cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-main-23612-deployment/amplify-cfn-templates/function/helloeroApiLambdaResolver-cloudformation-template.json",
         "logicalId": "functionhelloeroApiLambdaResolver"
       },
       "s3Bucket": {
-        "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
-        "s3Key": "amplify-builds/helloeroApiLambdaResolver-48442b34495376573363-build.zip"
-      },
-      "lastBuildTimeStamp": "2022-02-16T06:35:29.840Z",
-      "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-02-16T06:35:30.495Z",
-      "distZipFilename": "helloeroApiLambdaResolver-48442b34495376573363-build.zip",
-      "lastPushDirHash": "59A1ldKwikpiQXjcMYS3YFPhmYc="
+        "deploymentBucketName": "amplify-helloero-main-23612-deployment",
+        "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip"
+      }
     }
   },
   "api": {
@@ -89,15 +84,14 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "af7aleonmzawdbu6a3ixpcdaxu",
-        "GraphQLAPIEndpointOutput": "https://qqryr42xevbk7nx7yhd3kgx7si.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+        "GraphQLAPIIdOutput": "5qypk7jhwbfixghcre3agqa4wy",
+        "GraphQLAPIEndpointOutput": "https://abgwxcpcwnhjrhmr4wogq672pm.appsync-api.ap-northeast-1.amazonaws.com/graphql"
       },
-      "lastPushTimeStamp": "2022-02-16T06:59:02.003Z",
+      "lastPushTimeStamp": "2022-02-21T12:51:37.806Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-main-23612-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apihelloeroApi"
-      },
-      "lastPushDirHash": "aCgfg/8h2tYN6LoW4mg2bB6jOTY="
+      }
     }
   }
 }
