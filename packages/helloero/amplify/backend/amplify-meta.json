@@ -87,7 +87,7 @@
         "GraphQLAPIIdOutput": "5qypk7jhwbfixghcre3agqa4wy",
         "GraphQLAPIEndpointOutput": "https://abgwxcpcwnhjrhmr4wogq672pm.appsync-api.ap-northeast-1.amazonaws.com/graphql"
       },
-      "lastPushTimeStamp": "2022-02-21T12:51:37.806Z",
+      "lastPushTimeStamp": "2022-02-21T13:14:35.990Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-helloero-main-23612-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apihelloeroApi"
