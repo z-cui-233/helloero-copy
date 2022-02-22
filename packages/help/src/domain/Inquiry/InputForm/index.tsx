@@ -42,7 +42,7 @@ const InputForm: React.FC<Props> = ({ inquiryState, sendInquiry }) => {
     validationSchema: Yup.object().shape({
       detail: formValidations.required,
       contactEmail: formValidations.email,
-      registeredEmail: formValidations.email,
+      registeredEmail: formValidations.optEmail,
     }),
     onSubmit: sendInquiry,
   });
