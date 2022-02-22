@@ -45,6 +45,8 @@ const formValidations = {
     .required(validationMessages['required'])
     .email(validationMessages['email']),
 
+  optEmail: Yup.string().email(validationMessages['email']),
+
   wabiken: Yup.string()
     .required(validationMessages['required'])
     .matches(/^[0-9a-zA-Z]*$/, validationMessages['alphanumerical'])

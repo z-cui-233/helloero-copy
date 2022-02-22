@@ -32,7 +32,6 @@ type Props = {
 };
 
 const HelpTop: React.FC<Props> = ({ systemTroubleDocument }) => {
-  console.log(systemTroubleDocument);
   return (
     <LayoutH2u options={globalConfig}>
       <MainContainer>
