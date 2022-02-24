@@ -40,7 +40,8 @@
       "function": {
         "helloeroApiLambdaResolver": {
           "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
-          "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip"
+          "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip",
+          "wabitUrl": "http://cfn-wab-alb-l679i7iig7oi-375596238.ap-northeast-1.elb.amazonaws.com/"
         },
         "h2umonopackageshelloc636e5bcPostConfirmation": {}
       },
