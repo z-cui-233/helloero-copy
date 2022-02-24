@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import MenuCard from './MenuCard';
+import SystemTrouble from './SystemTrouble';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
 import ArrowTextLink from '@/shared/components/ArrowTextLink';
+import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
 
 const MenuList = [
   {
@@ -25,11 +27,16 @@ const MenuList = [
   },
 ] as const;
 
-const HelpTop: React.FC = () => {
+type Props = {
+  systemTroubleDocument: SystemTroubleDocument;
+};
+
+const HelpTop: React.FC<Props> = ({ systemTroubleDocument }) => {
   return (
     <LayoutH2u options={globalConfig}>
       <MainContainer>
         <PageTitle text="ヘルプセンター" />
+        <SystemTrouble systemTroubleDocument={systemTroubleDocument} />
         <Menus>
           {MenuList.map((data) => (
             <MenuCard

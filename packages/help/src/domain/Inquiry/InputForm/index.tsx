@@ -3,6 +3,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { UseInquiry } from '../useInquiry';
+import PriorConfirmation from './PriorConfirmation';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
@@ -41,7 +42,7 @@ const InputForm: React.FC<Props> = ({ inquiryState, sendInquiry }) => {
     validationSchema: Yup.object().shape({
       detail: formValidations.required,
       contactEmail: formValidations.email,
-      registeredEmail: formValidations.email,
+      registeredEmail: formValidations.optEmail,
     }),
     onSubmit: sendInquiry,
   });
@@ -51,6 +52,7 @@ const InputForm: React.FC<Props> = ({ inquiryState, sendInquiry }) => {
       <FormErrorMessage message={inquiryState.errorMessage} />
       <PageTitle text="お問い合わせ" />
       <BreadcrumbsList breadcrumbs={breadcrumbs} />
+      <PriorConfirmation />
       <form
         onSubmit={(e) => {
           e.preventDefault();

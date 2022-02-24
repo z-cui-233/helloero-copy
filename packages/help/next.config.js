@@ -17,6 +17,10 @@ module.exports = {
   poweredByHeader: false,
   compress: false,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
+  env: {
+    accessKeyId: process.env.ACCESSKEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESSKEY,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

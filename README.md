@@ -10,13 +10,25 @@ helloero, account, help sites for h2u
 
 add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 
-#### 1.2 for ENV value
+#### 1.2 for ENV value for helloero
 
 into `packages/helloero/.env.local`
 
 ```
 WABITAPI=THIS_IS_WABIT_DEV_API_URL
 ```
+
+#### 1.3 for ENV value for help
+
+into `packages/help/.env.local`
+
+```
+ACCESSKEY_ID=THIS_IS_ACCESSKEY_ID
+SECRET_ACCESSKEY=THIS_IS_SECRET_ACCESSKEY
+```
+
+you can generate from here
+https://console.aws.amazon.com/iam/home#/users/t-nakajima?section=security_credentials
 
 ### STEP2: add config file
 

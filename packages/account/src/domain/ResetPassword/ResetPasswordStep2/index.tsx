@@ -7,11 +7,11 @@ import ButtonStandard from '@/shared/components/ButtonStandard';
 import MainContainer from '@/shared/components/MainContainer';
 import FormTextField from '@/shared/components/FormTextField';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
-import typo from '@/shared/styles/typo';
 import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import PageTitle from '@/shared/components/PageTitle';
+import DefinitionListCard from '@/shared/components/DefinitionListCard';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];
@@ -45,9 +45,18 @@ const ResetPasswordStep2: React.FC<Props> = ({
           <div>
             下記のメールアドレスに送信した本人確認コードと、ご希望のパスワードを入力してください。
           </div>
-          <FieldSection>
-            <DestinationMail>{resetPasswordState.destination}</DestinationMail>
-          </FieldSection>
+        </Section>
+        <Section>
+          <DefinitionListCard
+            data={[
+              {
+                title: 'メールドレス',
+                textsChildren: <div>{resetPasswordState.destination}</div>,
+              },
+            ]}
+          />
+        </Section>
+        <Section>
           <FieldSection>
             <FormTextField
               label={formLabels.verificationCode.label}
@@ -86,12 +95,6 @@ const ResetPasswordStep2: React.FC<Props> = ({
     </MainContainer>
   );
 };
-
-const DestinationMail = styled.div`
-  ${typo.Standard};
-  font-weight: bold;
-  margin: 1rem 0 0;
-`;
 
 const Section = styled.div`
   margin: 2rem 0 0;

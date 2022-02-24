@@ -17,15 +17,21 @@ export type GuideDocument = prismicT.PrismicDocument<{
 export type GuideCategoryDocument = prismicT.PrismicDocument<{
   management_title: prismicT.RichTextField;
   title: prismicT.RichTextField;
-  guide_links: { guide_link: GuideDocument }[]; // 正しい設定が不明
-}>;
+}> & {
+  data: {
+    guide_links: { guide_link: GuideDocument }[]; // 正しい設定が不明
+  };
+};
 
 export type GuideTopDocument = prismicT.PrismicDocument<{
   title: prismicT.RichTextField;
-  category_links: {
-    category_link: GuideCategoryDocument; // 正しい設定が不明
-  }[];
-}>;
+}> & {
+  data: {
+    category_links: {
+      category_link: GuideCategoryDocument; // 正しい設定が不明
+    }[];
+  };
+};
 
 export type TermsDocument = prismicT.PrismicDocument<{
   text: prismicT.RichTextField;
@@ -34,4 +40,5 @@ export type TermsDocument = prismicT.PrismicDocument<{
 export type SystemTroubleDocument = prismicT.PrismicDocument<{
   title: prismicT.RichTextField;
   text: prismicT.RichTextField;
+  is_show: prismicT.BooleanField;
 }>;
