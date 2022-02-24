@@ -8,8 +8,7 @@ config.update({ region: 'ap-northeast-1' });
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-exports.handler = async (event, _ /* context */, callback) => {
-  console.log('Post Confirmation trigger enter');
+exports.handler = async (event) => {
   const cognitoServiceProvider = new CognitoIdentityServiceProvider({
     apiVersion: '2016-04-18',
   });
@@ -30,8 +29,7 @@ exports.handler = async (event, _ /* context */, callback) => {
       console.log('Succeeded creating userid');
     } catch (e) {
       console.log(`Failed creating userid with error: ${e.message}`);
+      throw new Error('Post-confirmation: failed creating userid');
     }
   }
-  console.log('Post Confirmation trigger exit');
-  callback(null, event);
 };
