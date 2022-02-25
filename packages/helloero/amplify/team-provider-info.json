@@ -16,7 +16,7 @@
         "helloeroApiLambdaResolver": {
           "deploymentBucketName": "amplify-helloero-main-23612-deployment",
           "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip",
-          "wabitUrl": "http://cfn-wab-alb-l679i7iig7oi-375596238.ap-northeast-1.elb.amazonaws.com"
+          "wabitUrl": "https://wabit-api.ca.unext.jp"
         }
       },
       "auth": {
@@ -34,16 +34,20 @@
       "UnauthRoleName": "amplify-h2umonopackageshello-develop-51032-unauthRole",
       "StackName": "amplify-h2umonopackageshello-develop-51032",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:094309139025:stack/amplify-h2umonopackageshello-develop-51032/48754d20-831d-11ec-9d18-0e35c8638783",
-      "AmplifyAppId": "d2lpn6hawe153k"
+      "AmplifyAppId": "d2lpn6hawe153k",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "function": {
         "helloeroApiLambdaResolver": {
           "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
           "s3Key": "amplify-builds/helloeroApiLambdaResolver-79496b6833754b616a6a-build.zip",
-          "wabitUrl": "http://cfn-wab-alb-l679i7iig7oi-375596238.ap-northeast-1.elb.amazonaws.com/"
+          "wabitUrl": "https://wabit-api.awsdev.unext.dev"
         },
-        "h2umonopackageshelloc636e5bcPostConfirmation": {}
+        "h2umonopackageshelloc636e5bcPostConfirmation": {
+          "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
+          "s3Key": "amplify-builds/h2umonopackageshelloc636e5bcPostConfirmation-72352b3634345638775a-build.zip"
+        }
       },
       "auth": {
         "h2umonopackageshelloc636e5bc": {}
