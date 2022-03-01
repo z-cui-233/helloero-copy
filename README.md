@@ -2,9 +2,10 @@
 
 helloero, account, help sites for h2u
 
+## AWS Amplify
 For more Amplify related knowledge [refer this](/Amplify-dev-notes.md)
 
-## Urls
+## Deployment urls
 
 ### IT
 
