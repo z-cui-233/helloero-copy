@@ -2,6 +2,24 @@
 
 helloero, account, help sites for h2u
 
+For more Amplify related knowledge [refer this](/Amplify-dev-notes.md)
+
+## Urls
+
+### IT
+
+- <https://helloero.h2ujp.unext.dev>
+- <https://account.h2ujp.unext.dev>
+- <https://help.h2ujp.unext.dev>
+
+### Prod
+
+- <https://helloero.h2u.jp/>
+- <https://account.h2u.jp/>
+- <https://help.h2u.jp/>
+
+> Basic auth (if required): erokunai/erokunai
+
 ## Preparation for local development
 
 ### STEP1: add ENV
@@ -28,7 +46,7 @@ SECRET_ACCESSKEY=THIS_IS_SECRET_ACCESSKEY
 ```
 
 you can generate from here
-https://console.aws.amazon.com/iam/home#/users/t-nakajima?section=security_credentials
+<https://console.aws.amazon.com/iam/home#/users/t-nakajima?section=security_credentials>
 
 ### STEP2: add config file
 
@@ -110,7 +128,7 @@ If need to updated backend, please use a separate env for dev/testing by followi
 
 you can get wabiken for IT-env by this command.
 
-https://wiki.unext-info.jp/pages/viewpage.action?pageId=110732068
+<https://wiki.unext-info.jp/pages/viewpage.action?pageId=110732068>
 
 ```
 curl -X POST -H "Content-Type: application/json" \
