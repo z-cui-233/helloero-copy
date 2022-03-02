@@ -23,7 +23,7 @@ const Page: NextPage = () => {
       });
     }
 
-    router.replace(`/${router.locale}/entry/flow`);
+    router.replace('/entry/flow');
   }, [router]);
 
   return (
