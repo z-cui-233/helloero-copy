@@ -7,7 +7,7 @@ exports.handler = async (event) => {
       claimsToAddOrOverride: {
         userid: event.request.userAttributes['custom:userid'],
       },
-      claimsToSuppress: [],
+      claimsToSuppress: ['custom:userid'],
     },
   };
   // Return to Amazon Cognito
