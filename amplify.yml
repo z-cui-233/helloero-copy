@@ -16,9 +16,7 @@ applications:
             - npm ci
         build:
           commands:
-            - cd packages/account
-            - npm i
-            - npm run build
+            - npm run build -workspace account
       artifacts:
         baseDirectory: .next
         files:
@@ -42,9 +40,7 @@ applications:
             - npm ci
         build:
           commands:
-            - cd packages/helloero
-            - npm i
-            - npm run build
+            - npm run build -workspace helloero
       artifacts:
         baseDirectory: .next
         files:
@@ -68,9 +64,7 @@ applications:
             - npm ci
         build:
           commands:
-            - cd packages/help
-            - npm i
-            - npm run build
+            - npm run build -workspace help
       artifacts:
         baseDirectory: .next
         files:
