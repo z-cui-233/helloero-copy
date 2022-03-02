@@ -12,17 +12,11 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "lint-staged",
-    "lint": "npm run --workspaces lint",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "lint": "npm run --workspaces lint"
   },
   "devDependencies": {
     "husky": "^7.0.4",
     "lint-staged": "^12.1.5",
     "prettier": "^2.5.1"
-  },
-  "dependencies": {
-    "next": "^11.1.4"
   }
 }
