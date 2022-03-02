@@ -9,6 +9,12 @@
           "resourceName": "h2umonopackageshelloc636e5bcPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": ["Arn", "Name"]
+        },
+        {
+          "category": "function",
+          "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
+          "triggerProvider": "Cognito",
+          "attributes": ["Arn", "Name"]
         }
       ],
       "customAuth": false,
@@ -34,6 +40,11 @@
       "dependsOn": []
     },
     "h2umonopackageshelloc636e5bcPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "h2umonopackageshelloc636e5bcPreTokenGeneration": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

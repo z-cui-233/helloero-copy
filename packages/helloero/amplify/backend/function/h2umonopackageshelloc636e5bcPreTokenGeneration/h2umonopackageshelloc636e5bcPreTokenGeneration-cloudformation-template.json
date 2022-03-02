@@ -2,10 +2,6 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "Lambda resource stack creation using Amplify CLI",
   "Parameters": {
-    "GROUP": {
-      "Type": "String",
-      "Default": ""
-    },
     "modules": {
       "Type": "String",
       "Default": "",
@@ -37,12 +33,6 @@
     },
     "env": {
       "Type": "String"
-    },
-    "deploymentBucketName": {
-      "Type": "String"
-    },
-    "s3Key": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -67,12 +57,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "h2umonopackageshelloc636e5bcPostConfirmation",
+            "h2umonopackageshelloc636e5bcPreTokenGeneration",
             {
               "Fn::Join": [
                 "",
                 [
-                  "h2umonopackageshelloc636e5bcPostConfirmation",
+                  "h2umonopackageshelloc636e5bcPreTokenGeneration",
                   "-",
                   {
                     "Ref": "env"
@@ -92,25 +82,12 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "GROUP": {
-              "Ref": "GROUP"
             }
           }
         },
-        "Role": {
-          "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
-        },
+        "Role": { "Fn::GetAtt": ["LambdaExecutionRole", "Arn"] },
         "Runtime": "nodejs14.x",
-        "Timeout": 25,
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        }
+        "Timeout": 25
       }
     },
     "LambdaExecutionRole": {
@@ -119,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "h2umonopackageshelloc636e5bcPostConfirmation",
+            "h2umonopackageshelloc636e5bcPreTokenGeneration",
             {
               "Fn::Join": [
                 "",
                 [
-                  "h2umonopackageshelloc636e5bcPostConfirmation",
+                  "h2umonopackageshelloc636e5bcPreTokenGeneration",
                   "-",
                   {
                     "Ref": "env"
@@ -153,11 +130,7 @@
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
+        "Roles": [{ "Ref": "LambdaExecutionRole" }],
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
@@ -172,15 +145,9 @@
                 "Fn::Sub": [
                   "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*",
                   {
-                    "region": {
-                      "Ref": "AWS::Region"
-                    },
-                    "account": {
-                      "Ref": "AWS::AccountId"
-                    },
-                    "lambda": {
-                      "Ref": "LambdaFunction"
-                    }
+                    "region": { "Ref": "AWS::Region" },
+                    "account": { "Ref": "AWS::AccountId" },
+                    "lambda": { "Ref": "LambdaFunction" }
                   }
                 ]
               }
@@ -188,30 +155,6 @@
           ]
         }
       }
-    },
-    "CustomLambdaExecutionPolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "custom-lambda-execution-policy",
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": ["cognito-idp:AdminUpdateUserAttributes"],
-              "Resource": [
-                "arn:aws:cognito-idp:ap-northeast-1:094309139025:userpool/ap-northeast-1_qSxUth64s"
-              ]
-            }
-          ]
-        },
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ]
-      },
-      "DependsOn": "LambdaExecutionRole"
     }
   },
   "Outputs": {
@@ -221,9 +164,7 @@
       }
     },
     "Arn": {
-      "Value": {
-        "Fn::GetAtt": ["LambdaFunction", "Arn"]
-      }
+      "Value": { "Fn::GetAtt": ["LambdaFunction", "Arn"] }
     },
     "LambdaExecutionRole": {
       "Value": {

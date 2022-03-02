@@ -44,20 +44,27 @@
         "resourceName": "h2umonopackageshelloc636e5bcPostConfirmation",
         "triggerProvider": "Cognito",
         "attributes": ["Arn", "Name"]
+      },
+      {
+        "category": "function",
+        "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
+        "triggerProvider": "Cognito",
+        "attributes": ["Arn", "Name"]
       }
     ],
     "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
     "triggers": {
-      "PostConfirmation": ["custom"]
+      "PostConfirmation": ["custom"],
+      "PreTokenGeneration": ["alter-claims"]
     },
     "hostedUI": false,
     "authProviders": [],
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"h2umonopackageshelloc636e5bcPostConfirmation\"\n  }\n]",
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"h2umonopackageshelloc636e5bcPostConfirmation\"\n  },\n  {\n    \"triggerType\": \"PreTokenGeneration\",\n    \"lambdaFunctionName\": \"h2umonopackageshelloc636e5bcPreTokenGeneration\"\n  }\n]",
     "permissions": []
   }
 }

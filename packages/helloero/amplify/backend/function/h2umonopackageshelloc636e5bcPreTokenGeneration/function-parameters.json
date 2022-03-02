@@ -1,0 +1,15 @@
+{
+  "trigger": true,
+  "modules": ["alter-claims"],
+  "parentResource": "h2umonopackageshelloc636e5bc",
+  "functionName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
+  "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/Users/j-ziad/.nvm/versions/node/v16.13.1/lib/node_modules/@aws-amplify/cli/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PreTokenGeneration",
+  "triggerTemplate": "PreTokenGeneration.json.ejs",
+  "triggerEventPath": "PreTokenGeneration.event.json",
+  "roleName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
+  "skipEdit": true,
+  "enableCors": false
+}
