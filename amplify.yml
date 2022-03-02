@@ -17,7 +17,6 @@ applications:
         build:
           commands:
             - cd packages/account
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
@@ -43,7 +42,6 @@ applications:
         build:
           commands:
             - cd packages/helloero
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
@@ -69,7 +67,6 @@ applications:
         build:
           commands:
             - cd packages/help
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
