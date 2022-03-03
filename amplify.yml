@@ -18,7 +18,8 @@ applications:
             - npm i -prefix packages/account
         build:
           commands:
-            - npm run build -prefix packages/account
+            - cd packages/account
+            - npm run build
       artifacts:
         baseDirectory: .next
         files:
@@ -44,7 +45,8 @@ applications:
             - npm i -prefix packages/helloero
         build:
           commands:
-            - npm run build -prefix packages/helloero
+            - cd packages/helloero
+            - npm run build
       artifacts:
         baseDirectory: .next
         files:
@@ -70,7 +72,8 @@ applications:
             - npm i -prefix packages/help
         build:
           commands:
-            - npm run build -prefix packages/help
+            - cd packages/help
+            - npm run build
       artifacts:
         baseDirectory: .next
         files:
