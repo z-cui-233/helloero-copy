@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 import React, { useEffect } from 'react';
 import { globalConfig } from 'src/globalConfig';
@@ -23,7 +23,7 @@ const Page: NextPage = () => {
       });
     }
 
-    router.replace(`/${router.locale}/entry/flow`);
+    router.replace('/entry/flow');
   }, [router]);
 
   return (

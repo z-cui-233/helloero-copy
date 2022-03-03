@@ -1,5 +1,5 @@
 import { Hub } from 'aws-amplify';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   AuthState,

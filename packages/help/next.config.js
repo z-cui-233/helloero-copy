@@ -16,6 +16,7 @@ module.exports = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: false,
+  productionBrowserSourceMaps: true,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
   env: {
     accessKeyId: process.env.ACCESSKEY_ID,
