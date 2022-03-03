@@ -13,11 +13,11 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/account
         build:
           commands:
             - cd packages/account
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
@@ -39,11 +39,11 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/helloero
         build:
           commands:
             - cd packages/helloero
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
@@ -65,11 +65,11 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/help
         build:
           commands:
             - cd packages/help
-            - npm i
             - npm run build
       artifacts:
         baseDirectory: .next
