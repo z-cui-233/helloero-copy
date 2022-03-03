@@ -13,10 +13,12 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/shared
+            - npm i -prefix packages/account
         build:
           commands:
-            - npm run build -workspace account
+            - npm run build -prefix packages/account
       artifacts:
         baseDirectory: .next
         files:
@@ -37,10 +39,12 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/shared
+            - npm i -prefix packages/helloero
         build:
           commands:
-            - npm run build -workspace helloero
+            - npm run build -prefix packages/helloero
       artifacts:
         baseDirectory: .next
         files:
@@ -61,10 +65,12 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm ci
+            - npm i -prefix packages/types
+            - npm i -prefix packages/shared
+            - npm i -prefix packages/help
         build:
           commands:
-            - npm run build -workspace help
+            - npm run build -prefix packages/help
       artifacts:
         baseDirectory: .next
         files:
