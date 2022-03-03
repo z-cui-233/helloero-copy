@@ -13,8 +13,6 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm i -prefix packages/types
-            - npm i -prefix packages/shared
             - npm i -prefix packages/account
         build:
           commands:
@@ -40,8 +38,6 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm i -prefix packages/types
-            - npm i -prefix packages/shared
             - npm i -prefix packages/helloero
         build:
           commands:
@@ -67,8 +63,6 @@ applications:
             - cd ../../
             - nvm install lts/gallium
             - echo -e "@u-next:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=${NPM_PULL_TOKEN}" > .npmrc
-            - npm i -prefix packages/types
-            - npm i -prefix packages/shared
             - npm i -prefix packages/help
         build:
           commands:
