@@ -39,22 +39,6 @@ type UserWabikenMeta implements WabikenMetaBase
   """
   activatedAt: AWSTimestamp!
   owner: String
-    @index(name: "byOwnerByActivatedAt", sortKeyFields: ["activatedAt"])
-    @index(
-      name: "byOwnerByNotValidAfter"
-      queryField: "userWabikenMetaByOwnerByNotValidAfter"
-      sortKeyFields: ["notValidAfter"]
-    )
-    @index(
-      name: "byOwnerByContentDisplayName"
-      queryField: "userWabikenMetaByOwnerByContentDisplayName"
-      sortKeyFields: ["contentDisplayName"]
-    )
-    @index(
-      name: "byOwnerByContentDisplayNameKana"
-      queryField: "userWabikenMetaByOwnerByContentDisplayNameKana"
-      sortKeyFields: ["contentDisplayNameKana"]
-    )
 }
 
 type WabikenMeta implements WabikenMetaBase {
