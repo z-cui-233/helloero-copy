@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { globalConfig } from 'src/globalConfig';
 import { PrismicRichText } from '@prismicio/react';
+import { globalConfig } from 'src/globalConfig';
 import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';

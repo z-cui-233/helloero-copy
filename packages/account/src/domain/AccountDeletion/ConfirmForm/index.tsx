@@ -3,7 +3,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { UseAccountDeletion } from '../useAccountDeletion';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
@@ -13,6 +12,7 @@ import FormCheckBox from '@/shared/components/FormCheckBox';
 import Portal from '@/shared/components/Portal';
 import PortalModalDialog from '@/shared/components/PortalModalDialog';
 import formikHelper from '@/shared/utils/formikHelper';
+import { UseAccountDeletion } from '../useAccountDeletion';
 
 type Props = {
   accountDeletionState: UseAccountDeletion['accountDeletionState'];

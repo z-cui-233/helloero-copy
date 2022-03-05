@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { UseUpdateEmail } from '../useUpdateEmail';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import MainContainer from '@/shared/components/MainContainer';
 import FormTextField from '@/shared/components/FormTextField';
@@ -12,6 +11,7 @@ import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import PageTitle from '@/shared/components/PageTitle';
 import DefinitionListCard from '@/shared/components/DefinitionListCard';
+import { UseUpdateEmail } from '../useUpdateEmail';
 
 type Props = {
   updateEmailState: UseUpdateEmail['updateEmailState'];

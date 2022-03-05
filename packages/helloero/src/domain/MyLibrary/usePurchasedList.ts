@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 import {
   SearchableSortDirection,
   SearchableUserWabikenMetaSortableFields,
@@ -7,7 +8,6 @@ import {
   UserWabikenMeta,
 } from '../../API';
 import { searchUserWabikenMetas } from '../../graphql/queries';
-import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 
 export const DISPLAY_ORDER = {
   ADD_ASC: 'add_asc',

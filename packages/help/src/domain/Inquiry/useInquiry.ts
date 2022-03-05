@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { InquiryApiRequest } from 'src/pages/api/inquiry';
 import { ApiResponse } from 'u-next/api';
+import { InquiryApiRequest } from 'src/pages/api/inquiry';
 import { INQUIRY_TYPE_MAP } from '@/localShared/constants/inquiry';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';

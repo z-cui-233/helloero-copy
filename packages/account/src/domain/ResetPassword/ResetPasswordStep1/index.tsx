@@ -1,8 +1,8 @@
 import React from 'react';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { UseResetPassword } from '../useResetPassword';
 import GuestUserForm from './GuestUserForm';
 import LoggedInUserForm from './LoggedInUserForm';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];

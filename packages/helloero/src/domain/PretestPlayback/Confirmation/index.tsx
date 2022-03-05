@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import { UsePretestPlayback } from '../usePretestPlayback';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
 import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
 import ButtonStandard from '@/shared/components/ButtonStandard';
+import { UsePretestPlayback } from '../usePretestPlayback';
 
 type Props = {
   playbackStart: UsePretestPlayback['playbackStart'];
