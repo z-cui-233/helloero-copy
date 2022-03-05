@@ -3,12 +3,12 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Amplify from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import config from '../aws-exports';
 import theme from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import GlobalHead from '@/shared/components/GlobalHead';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import GlobalScripts from '@/shared/components/GlobalScripts';
+import config from '../aws-exports';
 
 Amplify.configure({
   ...config,

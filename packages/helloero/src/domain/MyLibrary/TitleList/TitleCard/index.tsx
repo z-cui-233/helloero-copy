@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+import TitleThumbnail from '@/shared/components/TitleThumbnail';
+import device from '@/shared/styles/device';
+import { createTitleThumbnailUrl } from '@/shared/utils';
 import { UserWabikenMeta } from '../../../../API';
 import { UsePurchasedList } from '../../usePurchasedList';
 import DetailButton from './DetailButton';
 import PlayButton from './PlayButton';
-import TitleThumbnail from '@/shared/components/TitleThumbnail';
-import device from '@/shared/styles/device';
-import { createTitleThumbnailUrl } from '@/shared/utils';
 
 type Props = {
   userWabikenMeta: UserWabikenMeta;

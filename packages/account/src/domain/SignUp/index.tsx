@@ -1,10 +1,10 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 import NoticeComplete from './NoticeComplete';
 import Step1InputForm from './Step1InputForm';
 import Step2ConfirmForm from './Step2ConfirmForm';
 import useSignUp, { PAGE_STATUS } from './useSignUp';
-import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const SignUp: React.FC = () => {
   const { signUpState, challengeSignUp, verifyCode } = useSignUp();

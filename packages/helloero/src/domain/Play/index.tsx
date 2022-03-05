@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Player as BabyStar } from '@u-next/videoplayer-react';
 import { globalConfig } from 'src/globalConfig';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import NoticeMessage from './NoticeMessage';
 import usePlayer, { PAGE_STATUS } from './usePlayer';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 
 const Play: React.FC = () => {
   const { playerState } = usePlayer();

@@ -1,7 +1,7 @@
 import { NextApiHandler } from 'next';
 import { ApiResponse } from 'u-next/api';
-import { globalConfig } from 'src/globalConfig';
 import { PlayInfoWabitResponse } from 'u-next/wabit';
+import { globalConfig } from 'src/globalConfig';
 import { GetPlayInfoQuery } from 'src/API';
 import { DEVICE_CODE } from '@/localShared/constants';
 

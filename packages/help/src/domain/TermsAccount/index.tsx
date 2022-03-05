@@ -1,6 +1,6 @@
 import React from 'react';
-import { globalConfig } from 'src/globalConfig';
 import { PrismicRichText } from '@prismicio/react';
+import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';
 import { TermsDocument } from '@/localShared/lib/prismic/interfaces';

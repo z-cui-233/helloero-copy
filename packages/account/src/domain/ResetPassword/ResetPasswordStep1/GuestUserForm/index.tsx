@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import React from 'react';
 import styled from 'styled-components';
-import { UseResetPassword } from '../../useResetPassword';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import FormTextField from '@/shared/components/FormTextField';
 import formValidations from '@/shared/utils/formValidations';
@@ -11,6 +10,7 @@ import formikHelper from '@/shared/utils/formikHelper';
 import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import PageTitle from '@/shared/components/PageTitle';
+import { UseResetPassword } from '../../useResetPassword';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];

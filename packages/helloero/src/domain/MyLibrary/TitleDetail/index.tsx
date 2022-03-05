@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+import device from '@/shared/styles/device';
+import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
+import Portal from '@/shared/components/Portal';
 import { UserWabikenMeta } from '../../../API';
 import { UsePurchasedList } from '../usePurchasedList';
 import MetaInfo from './MetaInfo';
 import Thumbnail from './Thumbnail';
-import device from '@/shared/styles/device';
-import { createExpireDate, createTitleThumbnailUrl } from '@/shared/utils';
-import Portal from '@/shared/components/Portal';
 
 type Props = {
   userWabikenMeta: UserWabikenMeta | null;

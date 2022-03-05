@@ -2,16 +2,16 @@ import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useCallback, useEffect, useState } from 'react';
+import { DEVICE_CODE } from '@/localShared/constants';
+import { cookieParams } from '@/shared/constants/cookies';
+import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import { getErrorMessage } from '@/shared/utils';
+import { getPlayInfo } from '../../graphql/queries';
 import {
   GetPlayInfoQuery,
   GetPlayInfoQueryVariables,
   PlayInfo,
 } from '../../API';
-import { getPlayInfo } from '../../graphql/queries';
-import { DEVICE_CODE } from '@/localShared/constants';
-import { cookieParams } from '@/shared/constants/cookies';
-import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
-import { getErrorMessage } from '@/shared/utils';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
