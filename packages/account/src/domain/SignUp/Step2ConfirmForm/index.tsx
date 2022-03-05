@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { UseSignUp } from '../useSignUp';
 import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import typo from '@/shared/styles/typo';
@@ -12,6 +11,7 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import PageTitle from '@/shared/components/PageTitle';
+import { UseSignUp } from '../useSignUp';
 
 type Props = {
   signUpState: UseSignUp['signUpState'];

@@ -1,10 +1,10 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
+import LayoutH2u from '@/shared/components/LayoutH2u';
 import useResetPassword, { PAGE_STATUS } from './useResetPassword';
 import ResetPasswordStep1 from './ResetPasswordStep1';
 import NoticeComplete from './NoticeComplete';
 import ResetPasswordStep2 from './ResetPasswordStep2';
-import LayoutH2u from '@/shared/components/LayoutH2u';
 
 const ResetPassword: React.FC = () => {
   const {

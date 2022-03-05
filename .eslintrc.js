@@ -21,6 +21,13 @@ module.exports = {
           'object',
           'type',
         ],
+        pathGroups: [
+          {
+            pattern: '@/**',
+            group: 'parent',
+            position: 'before',
+          },
+        ],
       },
     ],
   },

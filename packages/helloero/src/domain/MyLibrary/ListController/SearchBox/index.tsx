@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { UsePurchasedList } from '../../usePurchasedList';
 import typo from '@/shared/styles/typo';
 import Icon from '@/shared/assets/icon/search.svg';
 import useDebounce from '@/shared/hooks/useDebounce';
+import { UsePurchasedList } from '../../usePurchasedList';
 
 type Props = {
   updateSearchQuery: UsePurchasedList['updateSearchQuery'];

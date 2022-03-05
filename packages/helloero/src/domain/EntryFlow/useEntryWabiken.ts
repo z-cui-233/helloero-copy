@@ -2,6 +2,15 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { destroyCookie, parseCookies } from 'nookies';
 import { globalConfig } from 'src/globalConfig';
+import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import { getErrorMessage } from '@/shared/utils';
+import { cookieParams } from '@/shared/constants/cookies';
+import { MESSAGES } from '@/shared/constants/messages';
+import { getWabikenMeta } from '../../graphql/queries';
+import {
+  activateWabiken,
+  createUserWabikenMeta,
+} from '../../graphql/mutations';
 import {
   ActivateWabikenMutation,
   ActivateWabikenMutationVariables,
@@ -12,15 +21,6 @@ import {
   GetWabikenMetaQueryVariables,
   WabikenMeta,
 } from '../../API';
-import {
-  activateWabiken,
-  createUserWabikenMeta,
-} from '../../graphql/mutations';
-import { getWabikenMeta } from '../../graphql/queries';
-import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
-import { getErrorMessage } from '@/shared/utils';
-import { cookieParams } from '@/shared/constants/cookies';
-import { MESSAGES } from '@/shared/constants/messages';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

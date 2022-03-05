@@ -1,11 +1,11 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
+import device from '@/shared/styles/device';
+import typo from '@/shared/styles/typo';
 import { UsePurchasedList } from '../usePurchasedList';
 import TitleCard from './TitleCard';
 import SkeltonCard from './SkeltonCard';
-import device from '@/shared/styles/device';
-import typo from '@/shared/styles/typo';
 
 type Props = {
   purchasedListState: UsePurchasedList['purchasedListState'];

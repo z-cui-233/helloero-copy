@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import MainContainer from '@/shared/components/MainContainer';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import PageTitle from '@/shared/components/PageTitle';
+import useLogoutChallenge, { PAGE_STATUS } from './useLogoutChallenge';
 
 const Logout: React.FC = () => {
   const { logoutChallengeState, invokeLogOut } = useLogoutChallenge();

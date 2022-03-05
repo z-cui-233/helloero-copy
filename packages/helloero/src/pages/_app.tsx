@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider } from 'styled-components';
 import Amplify from 'aws-amplify';
 import { IntlProvider } from 'react-intl';
-import config from '../aws-exports';
-import { globalConfig } from '../globalConfig';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import GlobalHead from '@/shared/components/GlobalHead';
 import theme from '@/shared/styles/theme';
@@ -14,6 +12,8 @@ import GlobalScripts from '@/shared/components/GlobalScripts';
 import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import { cookieParams } from '@/shared/constants/cookies';
 import { i18n_messages } from '@/localShared/constants/babystar';
+import { globalConfig } from '../globalConfig';
+import config from '../aws-exports';
 
 Amplify.configure({
   ...config,

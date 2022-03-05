@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UseResetPassword } from '../../useResetPassword';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import PageTitle from '@/shared/components/PageTitle';
+import { UseResetPassword } from '../../useResetPassword';
 
 type Props = {
   resetPasswordState: UseResetPassword['resetPasswordState'];

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import { UseLoginChallenge } from '../useLoginChallenge';
 import MainContainer from '@/shared/components/MainContainer';
 import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/ButtonStandard';
@@ -13,6 +12,7 @@ import formValidations from '@/shared/utils/formValidations';
 import formLabels from '@/shared/utils/formLabels';
 import formikHelper from '@/shared/utils/formikHelper';
 import PageTitle from '@/shared/components/PageTitle';
+import { UseLoginChallenge } from '../useLoginChallenge';
 
 type Props = {
   loginChallengeState: UseLoginChallenge['loginChallengeState'];

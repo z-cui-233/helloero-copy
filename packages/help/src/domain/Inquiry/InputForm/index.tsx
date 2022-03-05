@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { UseInquiry } from '../useInquiry';
-import PriorConfirmation from './PriorConfirmation';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
@@ -19,6 +17,8 @@ import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import FormRadioBox from '@/shared/components/FormRadioBox';
 import FormTextAreaField from '@/shared/components/FormTextAreaField';
 import FormValidateMessage from '@/shared/components/FormValidateMessage';
+import { UseInquiry } from '../useInquiry';
+import PriorConfirmation from './PriorConfirmation';
 
 type Props = {
   inquiryState: UseInquiry['inquiryState'];
