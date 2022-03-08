@@ -10,6 +10,7 @@ export type WabikenMetaResponse = {
 
 export type WabikenMeta = {
   __typename: 'WabikenMeta';
+  // token
   id: string;
   version: number;
   notValidBefore: number;
@@ -38,6 +39,7 @@ export type WabikenMetaBase = {
 
 export type UserWabikenMeta = {
   __typename: 'UserWabikenMeta';
+  // id is same as token
   id: string;
   version: number;
   notValidBefore: number;
@@ -50,6 +52,7 @@ export type UserWabikenMeta = {
   contentDisplayName: string;
   contentDisplayNameKana: string;
   content: UserContentMeta;
+  // following are required fields in UserWabikenMeta (as they are activated wabikens)
   activatedAt: number;
   owner?: string | null;
   updatedAt: string;
@@ -578,6 +581,7 @@ export type ActivateWabikenMutation = {
     __typename: 'WabikenMetaResponse';
     wabiken: {
       __typename: 'WabikenMeta';
+      // token
       id: string;
       version: number;
       notValidBefore: number;
@@ -653,6 +657,7 @@ export type CreateUserWabikenMetaMutationVariables = {
 export type CreateUserWabikenMetaMutation = {
   createUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -716,6 +721,7 @@ export type CreateUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -730,6 +736,7 @@ export type UpdateUserWabikenMetaMutationVariables = {
 export type UpdateUserWabikenMetaMutation = {
   updateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -793,6 +800,7 @@ export type UpdateUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -807,6 +815,7 @@ export type DeleteUserWabikenMetaMutationVariables = {
 export type DeleteUserWabikenMetaMutation = {
   deleteUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -870,6 +879,7 @@ export type DeleteUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -885,6 +895,7 @@ export type GetWabikenMetaQuery = {
     __typename: 'WabikenMetaResponse';
     wabiken: {
       __typename: 'WabikenMeta';
+      // token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1033,6 +1044,7 @@ export type SearchUserWabikenMetasQuery = {
     __typename: 'SearchableUserWabikenMetaConnection';
     items: Array<{
       __typename: 'UserWabikenMeta';
+      // id is same as token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1096,6 +1108,7 @@ export type SearchUserWabikenMetasQuery = {
         };
         mainEpisodeCode: string;
       };
+      // following are required fields in UserWabikenMeta (as they are activated wabikens)
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
@@ -1132,6 +1145,7 @@ export type GetUserWabikenMetaQueryVariables = {
 export type GetUserWabikenMetaQuery = {
   getUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1195,6 +1209,7 @@ export type GetUserWabikenMetaQuery = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1212,6 +1227,7 @@ export type ListUserWabikenMetasQuery = {
     __typename: 'ModelUserWabikenMetaConnection';
     items: Array<{
       __typename: 'UserWabikenMeta';
+      // id is same as token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1275,6 +1291,7 @@ export type ListUserWabikenMetasQuery = {
         };
         mainEpisodeCode: string;
       };
+      // following are required fields in UserWabikenMeta (as they are activated wabikens)
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
@@ -1290,6 +1307,7 @@ export type OnCreateUserWabikenMetaSubscriptionVariables = {
 export type OnCreateUserWabikenMetaSubscription = {
   onCreateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1353,6 +1371,7 @@ export type OnCreateUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1366,6 +1385,7 @@ export type OnUpdateUserWabikenMetaSubscriptionVariables = {
 export type OnUpdateUserWabikenMetaSubscription = {
   onUpdateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1429,6 +1449,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1442,6 +1463,7 @@ export type OnDeleteUserWabikenMetaSubscriptionVariables = {
 export type OnDeleteUserWabikenMetaSubscription = {
   onDeleteUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1505,6 +1527,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;

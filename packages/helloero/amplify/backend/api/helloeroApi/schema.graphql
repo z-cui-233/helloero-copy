@@ -15,7 +15,7 @@ type UserWabikenMeta implements WabikenMetaBase
   @searchable
   @auth(
     rules: [
-      { allow: owner, operations: [read, create] }
+      { allow: owner, operations: [read, create], identityClaim: "userid" }
       { allow: groups, groups: ["Admin"] }
     ]
   ) {

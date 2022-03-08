@@ -1,6 +1,6 @@
 import React from 'react';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
 import theme from '@/shared/styles/theme';
@@ -20,6 +20,14 @@ Amplify.configure({
       expires: 365,
       sameSite: 'lax',
       secure: true,
+    },
+  },
+  API: {
+    graphql_headers: async () => {
+      const session = await Auth.currentSession();
+      return {
+        Authorization: session.getIdToken().getJwtToken(),
+      };
     },
   },
 });

@@ -3,7 +3,7 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import nookies from 'nookies';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider } from 'styled-components';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import { IntlProvider } from 'react-intl';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import GlobalHead from '@/shared/components/GlobalHead';
@@ -25,6 +25,14 @@ Amplify.configure({
       expires: 365,
       sameSite: 'lax',
       secure: true,
+    },
+  },
+  API: {
+    graphql_headers: async () => {
+      const session = await Auth.currentSession();
+      return {
+        Authorization: session.getIdToken().getJwtToken(),
+      };
     },
   },
 });
