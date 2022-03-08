@@ -83,7 +83,7 @@ const usePurchasedList = (): UsePurchasedList => {
             or: args.query
               ? [
                   { contentDisplayName: { match: args.query } },
-                  { contentDisplayNameKana: { match: args.query } },
+                  { contentDisplayNameKana: { wildcard: `*${args.query}*` } },
                 ]
               : undefined,
           },
