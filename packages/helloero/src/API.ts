@@ -10,6 +10,7 @@ export type WabikenMetaResponse = {
 
 export type WabikenMeta = {
   __typename: 'WabikenMeta';
+  // token
   id: string;
   version: number;
   notValidBefore: number;
@@ -38,6 +39,7 @@ export type WabikenMetaBase = {
 
 export type UserWabikenMeta = {
   __typename: 'UserWabikenMeta';
+  // id is same as token
   id: string;
   version: number;
   notValidBefore: number;
@@ -50,6 +52,7 @@ export type UserWabikenMeta = {
   contentDisplayName: string;
   contentDisplayNameKana: string;
   content: UserContentMeta;
+  // following are required fields in UserWabikenMeta (as they are activated wabikens)
   activatedAt: number;
   owner?: string | null;
   updatedAt: string;
@@ -569,30 +572,6 @@ export type ModelUserWabikenMetaConnection = {
   nextToken?: string | null;
 };
 
-export type ModelIntKeyConditionInput = {
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-};
-
-export enum ModelSortDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
-}
-
-export type ModelStringKeyConditionInput = {
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-};
-
 export type ActivateWabikenMutationVariables = {
   id: string;
 };
@@ -602,6 +581,7 @@ export type ActivateWabikenMutation = {
     __typename: 'WabikenMetaResponse';
     wabiken: {
       __typename: 'WabikenMeta';
+      // token
       id: string;
       version: number;
       notValidBefore: number;
@@ -677,6 +657,7 @@ export type CreateUserWabikenMetaMutationVariables = {
 export type CreateUserWabikenMetaMutation = {
   createUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -740,6 +721,7 @@ export type CreateUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -754,6 +736,7 @@ export type UpdateUserWabikenMetaMutationVariables = {
 export type UpdateUserWabikenMetaMutation = {
   updateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -817,6 +800,7 @@ export type UpdateUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -831,6 +815,7 @@ export type DeleteUserWabikenMetaMutationVariables = {
 export type DeleteUserWabikenMetaMutation = {
   deleteUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -894,6 +879,7 @@ export type DeleteUserWabikenMetaMutation = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -909,6 +895,7 @@ export type GetWabikenMetaQuery = {
     __typename: 'WabikenMetaResponse';
     wabiken: {
       __typename: 'WabikenMeta';
+      // token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1057,6 +1044,7 @@ export type SearchUserWabikenMetasQuery = {
     __typename: 'SearchableUserWabikenMetaConnection';
     items: Array<{
       __typename: 'UserWabikenMeta';
+      // id is same as token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1120,6 +1108,7 @@ export type SearchUserWabikenMetasQuery = {
         };
         mainEpisodeCode: string;
       };
+      // following are required fields in UserWabikenMeta (as they are activated wabikens)
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
@@ -1156,6 +1145,7 @@ export type GetUserWabikenMetaQueryVariables = {
 export type GetUserWabikenMetaQuery = {
   getUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1219,6 +1209,7 @@ export type GetUserWabikenMetaQuery = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1236,6 +1227,7 @@ export type ListUserWabikenMetasQuery = {
     __typename: 'ModelUserWabikenMetaConnection';
     items: Array<{
       __typename: 'UserWabikenMeta';
+      // id is same as token
       id: string;
       version: number;
       notValidBefore: number;
@@ -1299,261 +1291,7 @@ export type ListUserWabikenMetasQuery = {
         };
         mainEpisodeCode: string;
       };
-      activatedAt: number;
-      owner?: string | null;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-};
-
-export type UserWabikenMetaByOwnerByNotValidAfterQueryVariables = {
-  owner: string;
-  notValidAfter?: ModelIntKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserWabikenMetaFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type UserWabikenMetaByOwnerByNotValidAfterQuery = {
-  userWabikenMetaByOwnerByNotValidAfter?: {
-    __typename: 'ModelUserWabikenMetaConnection';
-    items: Array<{
-      __typename: 'UserWabikenMeta';
-      id: string;
-      version: number;
-      notValidBefore: number;
-      notValidAfter: number;
-      lockRequired: boolean;
-      playbackRemaining: number;
-      validityPeriod: number;
-      issuerTrace?: string | null;
-      createdAt: number;
-      contentDisplayName: string;
-      contentDisplayNameKana: string;
-      content: {
-        __typename: 'UserContentMeta';
-        id: string;
-        key: {
-          __typename: 'ContentMetaKey';
-          id: string;
-          type: string;
-          providerId: string;
-        };
-        displayName: string;
-        displayNameKana: string;
-        catchphrase: string;
-        comment: string;
-        duration: number;
-        evaluationPoint: number;
-        maker: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        series: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        salePeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        paymentBadge: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        thumbnails: {
-          __typename: 'ContentMetaThumbnail';
-          packageL?: string | null;
-          packageM?: string | null;
-          packageS?: string | null;
-          standard?: string | null;
-          tsptFhds?: string | null;
-          tsptFwxga?: string | null;
-        };
-        mainEpisodeCode: string;
-      };
-      activatedAt: number;
-      owner?: string | null;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-};
-
-export type UserWabikenMetaByOwnerByContentDisplayNameQueryVariables = {
-  owner: string;
-  contentDisplayName?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserWabikenMetaFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type UserWabikenMetaByOwnerByContentDisplayNameQuery = {
-  userWabikenMetaByOwnerByContentDisplayName?: {
-    __typename: 'ModelUserWabikenMetaConnection';
-    items: Array<{
-      __typename: 'UserWabikenMeta';
-      id: string;
-      version: number;
-      notValidBefore: number;
-      notValidAfter: number;
-      lockRequired: boolean;
-      playbackRemaining: number;
-      validityPeriod: number;
-      issuerTrace?: string | null;
-      createdAt: number;
-      contentDisplayName: string;
-      contentDisplayNameKana: string;
-      content: {
-        __typename: 'UserContentMeta';
-        id: string;
-        key: {
-          __typename: 'ContentMetaKey';
-          id: string;
-          type: string;
-          providerId: string;
-        };
-        displayName: string;
-        displayNameKana: string;
-        catchphrase: string;
-        comment: string;
-        duration: number;
-        evaluationPoint: number;
-        maker: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        series: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        salePeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        paymentBadge: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        thumbnails: {
-          __typename: 'ContentMetaThumbnail';
-          packageL?: string | null;
-          packageM?: string | null;
-          packageS?: string | null;
-          standard?: string | null;
-          tsptFhds?: string | null;
-          tsptFwxga?: string | null;
-        };
-        mainEpisodeCode: string;
-      };
-      activatedAt: number;
-      owner?: string | null;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-};
-
-export type UserWabikenMetaByOwnerByContentDisplayNameKanaQueryVariables = {
-  owner: string;
-  contentDisplayNameKana?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserWabikenMetaFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-};
-
-export type UserWabikenMetaByOwnerByContentDisplayNameKanaQuery = {
-  userWabikenMetaByOwnerByContentDisplayNameKana?: {
-    __typename: 'ModelUserWabikenMetaConnection';
-    items: Array<{
-      __typename: 'UserWabikenMeta';
-      id: string;
-      version: number;
-      notValidBefore: number;
-      notValidAfter: number;
-      lockRequired: boolean;
-      playbackRemaining: number;
-      validityPeriod: number;
-      issuerTrace?: string | null;
-      createdAt: number;
-      contentDisplayName: string;
-      contentDisplayNameKana: string;
-      content: {
-        __typename: 'UserContentMeta';
-        id: string;
-        key: {
-          __typename: 'ContentMetaKey';
-          id: string;
-          type: string;
-          providerId: string;
-        };
-        displayName: string;
-        displayNameKana: string;
-        catchphrase: string;
-        comment: string;
-        duration: number;
-        evaluationPoint: number;
-        maker: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        series: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        releaseDate: string;
-        publicPeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        salePeriod: {
-          __typename: 'Period';
-          since?: number | null;
-          until?: number | null;
-        };
-        paymentBadge: {
-          __typename: 'CodeName';
-          code: string;
-          name: string;
-        };
-        thumbnails: {
-          __typename: 'ContentMetaThumbnail';
-          packageL?: string | null;
-          packageM?: string | null;
-          packageS?: string | null;
-          standard?: string | null;
-          tsptFhds?: string | null;
-          tsptFwxga?: string | null;
-        };
-        mainEpisodeCode: string;
-      };
+      // following are required fields in UserWabikenMeta (as they are activated wabikens)
       activatedAt: number;
       owner?: string | null;
       updatedAt: string;
@@ -1569,6 +1307,7 @@ export type OnCreateUserWabikenMetaSubscriptionVariables = {
 export type OnCreateUserWabikenMetaSubscription = {
   onCreateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1632,6 +1371,7 @@ export type OnCreateUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1645,6 +1385,7 @@ export type OnUpdateUserWabikenMetaSubscriptionVariables = {
 export type OnUpdateUserWabikenMetaSubscription = {
   onUpdateUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1708,6 +1449,7 @@ export type OnUpdateUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
@@ -1721,6 +1463,7 @@ export type OnDeleteUserWabikenMetaSubscriptionVariables = {
 export type OnDeleteUserWabikenMetaSubscription = {
   onDeleteUserWabikenMeta?: {
     __typename: 'UserWabikenMeta';
+    // id is same as token
     id: string;
     version: number;
     notValidBefore: number;
@@ -1784,6 +1527,7 @@ export type OnDeleteUserWabikenMetaSubscription = {
       };
       mainEpisodeCode: string;
     };
+    // following are required fields in UserWabikenMeta (as they are activated wabikens)
     activatedAt: number;
     owner?: string | null;
     updatedAt: string;
