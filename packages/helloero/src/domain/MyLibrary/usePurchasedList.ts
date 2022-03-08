@@ -82,8 +82,8 @@ const usePurchasedList = (): UsePurchasedList => {
             notValidAfter: { gt: Math.round(new Date().getTime() / 1000) },
             or: args.query
               ? [
-                  { contentDisplayName: { match: args.query } },
-                  { contentDisplayNameKana: { match: args.query } },
+                  { contentDisplayName: { wildcard: `*${args.query}*` } },
+                  { contentDisplayNameKana: { wildcard: `*${args.query}*` } },
                 ]
               : undefined,
           },
