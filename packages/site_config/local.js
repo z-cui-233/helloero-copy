@@ -4,7 +4,7 @@ const config = {
   HELLOERO: 'https://helloero.local.h2u.jp',
   HELP: 'https://help.local.h2u.jp',
   ACCOUNT: 'https://account.local.h2u.jp',
-  PRETEST_WABIKEN: 'PSNFYKG4L7JR2MY8',
+  PRETEST_WABIKEN: 'S5T37BTVRQ2N2VNN',
 };
 
 module.exports.default = config;
