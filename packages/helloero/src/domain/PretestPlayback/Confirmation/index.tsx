@@ -19,7 +19,11 @@ const Confirmation: React.FC<Props> = ({ playbackStart }) => (
         <Text>
           テスト動画を再生して、お客様の視聴環境を確認してください。
           <br />
-          <a href={globalConfig.HELP} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`${globalConfig.HELP}/guide/browse/category5`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             対応デバイス
           </a>
         </Text>
