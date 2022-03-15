@@ -204,6 +204,18 @@ type PlayInfoResponse {
   result: Boolean!
 }
 
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [read], identityClaim: "userid" }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: ID!
+  owner: String!
+}
+
 type Query {
   getWabikenMeta(id: ID!): WabikenMetaResponse
     @function(name: "helloeroApiLambdaResolver")

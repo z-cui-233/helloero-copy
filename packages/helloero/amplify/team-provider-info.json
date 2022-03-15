@@ -47,6 +47,10 @@
         "h2umonopackageshelloc636e5bcPostConfirmation": {
           "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
           "s3Key": "amplify-builds/h2umonopackageshelloc636e5bcPostConfirmation-72352b3634345638775a-build.zip"
+        },
+        "h2umonopackageshelloc636e5bcPreTokenGeneration": {
+          "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
+          "s3Key": "amplify-builds/h2umonopackageshelloc636e5bcPreTokenGeneration-78486841504471673569-build.zip"
         }
       },
       "auth": {
