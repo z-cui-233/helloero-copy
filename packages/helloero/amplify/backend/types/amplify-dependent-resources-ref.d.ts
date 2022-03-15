@@ -18,6 +18,18 @@ export type AmplifyDependentResourcesAttributes = {
       Region: 'string';
       LambdaExecutionRole: 'string';
     };
+    h2umonopackageshelloc636e5bcPostConfirmation: {
+      Name: 'string';
+      Arn: 'string';
+      LambdaExecutionRole: 'string';
+      Region: 'string';
+    };
+    h2umonopackageshelloc636e5bcPreTokenGeneration: {
+      Name: 'string';
+      Arn: 'string';
+      LambdaExecutionRole: 'string';
+      Region: 'string';
+    };
   };
   api: {
     helloeroApi: {
