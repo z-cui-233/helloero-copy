@@ -27,8 +27,7 @@ const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
     /* required */
     CcAddresses: [],
     ToAddresses: [args.contactEmail],
-    // BccAddresses: ['support@h2u.jp'],
-    BccAddresses: ['tk-ookubo@unext.jp'],
+    BccAddresses: ['support@h2u.jp'],
   },
   Message: {
     Body: {
