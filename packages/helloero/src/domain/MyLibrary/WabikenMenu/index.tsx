@@ -6,13 +6,13 @@ const WabikenMenu: React.FC = () => (
     <div>
       <ArrowTextLink href="/entry/flow" text="購入したシリアルコードの登録" />
     </div>
-    <div>
+    {/* <div>
       <ArrowTextLink
         href="https://www.amazon.co.jp/b?node=5378643051"
         text="ストア"
         target="_blank"
       />
-    </div>
+    </div> */}
   </div>
 );
 
