@@ -12,6 +12,11 @@
       "AmplifyAppId": "d2lpn6hawe153k"
     },
     "categories": {
+      "api": {
+        "helloeroApi": {
+          "OpenSearchInstanceType": "t2.medium.search"
+        }
+      },
       "function": {
         "helloeroApiLambdaResolver": {
           "deploymentBucketName": "amplify-helloero-main-23612-deployment",
@@ -38,6 +43,11 @@
       "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-h2umonopackageshello-develop-51032-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
+      "api": {
+        "helloeroApi": {
+          "OpenSearchInstanceType": "t2.small.search"
+        }
+      },
       "function": {
         "helloeroApiLambdaResolver": {
           "deploymentBucketName": "amplify-h2umonopackageshello-develop-51032-deployment",
