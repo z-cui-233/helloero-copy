@@ -6,9 +6,10 @@ import InputForm from './InputForm';
 import ConfirmForm from './ConfirmForm';
 import NoticeComplete from './NoticeComplete';
 import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
+import WaitForCompletion from './WaitForCompletion';
 
 const EntryFlow: React.FC = () => {
-  const { entryWabikenState, confirmWabiken, consumeWabiken } =
+  const { entryWabikenState, confirmWabiken, consumeWabiken, waitComplete } =
     useEntryWabiken();
 
   return (
@@ -24,6 +25,9 @@ const EntryFlow: React.FC = () => {
           entryWabikenState={entryWabikenState}
           consumeWabiken={consumeWabiken}
         />
+      )}
+      {entryWabikenState.pageStatus === PAGE_STATUS.WAITING && (
+        <WaitForCompletion waitComplete={waitComplete} />
       )}
       {entryWabikenState.pageStatus === PAGE_STATUS.COMPLETE && (
         <NoticeComplete />
