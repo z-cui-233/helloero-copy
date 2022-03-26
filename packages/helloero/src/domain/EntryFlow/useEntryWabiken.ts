@@ -26,6 +26,7 @@ export const PAGE_STATUS = {
   INIT: 'INIT',
   INPUT: 'INPUT',
   CONFIRM: 'CONFIRM',
+  WAITING: 'WAITING',
   COMPLETE: 'COMPLETE',
 } as const;
 
@@ -51,6 +52,7 @@ export type UseEntryWabiken = {
   entryWabikenState: State;
   confirmWabiken: (values: State['formValues']) => Promise<void>;
   consumeWabiken: () => Promise<void>;
+  waitComplete: () => void;
 };
 
 const isCreateUserWabikenMetaInput = (
@@ -196,7 +198,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
 
       setState((state) => ({
         ...state,
-        pageStatus: PAGE_STATUS.COMPLETE,
+        pageStatus: PAGE_STATUS.WAITING,
       }));
     }, [
       activateWabikenFetcher,
@@ -206,6 +208,14 @@ const useEntryWabiken = (): UseEntryWabiken => {
       state.formValues.wabiken,
       state.getWabikenMetaQuery?.getWabikenMeta,
     ]);
+
+  // WF-9467 dynamoDBの書き込みが遅いため、少し待ってから移動させる
+  const waitComplete: UseEntryWabiken['waitComplete'] = useCallback(() => {
+    setState((state) => ({
+      ...state,
+      pageStatus: PAGE_STATUS.COMPLETE,
+    }));
+  }, []);
 
   useEffect(() => {
     const cookies = parseCookies();
@@ -224,6 +234,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
     entryWabikenState: state,
     confirmWabiken,
     consumeWabiken,
+    waitComplete,
   };
 };
 
