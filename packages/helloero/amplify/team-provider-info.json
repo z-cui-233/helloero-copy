@@ -14,7 +14,7 @@
     "categories": {
       "api": {
         "helloeroApi": {
-          "OpenSearchInstanceType": "m5.large.elasticsearch"
+          "ElasticsearchInstanceType": "m5.large.elasticsearch"
         }
       },
       "function": {
@@ -45,7 +45,7 @@
     "categories": {
       "api": {
         "helloeroApi": {
-          "OpenSearchInstanceType": "t3.small.elasticsearch"
+          "ElasticsearchInstanceType": "t3.small.elasticsearch"
         }
       },
       "function": {
