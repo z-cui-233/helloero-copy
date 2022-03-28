@@ -87,13 +87,15 @@ const usePretestPlayback = (): UsePretestPlayback => {
                 sceneSearchUrl: sceneSearchData.sceneSearchUrl,
               })) ?? [],
         })),
-        sessionArgs: {
-          type: 'isem',
-          isemToken: playInfo.endpoints[0].isem.isemToken,
-          baseUrl: playInfo.endpoints[0].isem.endpoint,
-          deviceId,
-          overwrite: true,
-        },
+        sessionArgs: playInfo.endpoints[0].isem
+          ? {
+              type: 'isem',
+              isemToken: playInfo.endpoints[0].isem.isemToken,
+              baseUrl: playInfo.endpoints[0].isem.endpoint,
+              deviceId,
+              overwrite: true,
+            }
+          : undefined,
         isRealtime: false,
         onBackClick: () => {
           setState((state) => ({
