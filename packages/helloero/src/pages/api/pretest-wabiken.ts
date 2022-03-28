@@ -88,11 +88,13 @@ const mapPlayInfoEndpoint = (
     })
   ),
   playables: mapPlayables(endpoint.playables),
-  isem: {
-    version: endpoint.isem.version,
-    endpoint: endpoint.isem.endpoint,
-    isemToken: endpoint.isem.header['U-Isem-Token'],
-  },
+  isem: endpoint.isem
+    ? {
+        version: endpoint.isem.version,
+        endpoint: endpoint.isem.endpoint,
+        isemToken: endpoint.isem.header['U-Isem-Token'],
+      }
+    : undefined,
 });
 
 const mapPlayerProps = (
