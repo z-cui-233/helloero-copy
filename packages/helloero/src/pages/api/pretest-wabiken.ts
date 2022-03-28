@@ -2,23 +2,53 @@ import { NextApiHandler } from 'next';
 import { ApiResponse } from 'u-next/api';
 import { PlayInfoWabitResponse } from 'u-next/wabit';
 import { globalConfig } from 'src/globalConfig';
-import { GetPlayInfoQuery } from 'src/API';
 import { DEVICE_CODE } from '@/localShared/constants';
 
-type NestedOmit<T, K extends keyof T> = {
-  [P in keyof Omit<T, K>]: T[P] extends Array<infer R>
-    ? K extends keyof R
-      ? Array<NestedOmit<R, K>>
-      : Array<R>
-    : K extends keyof T[P]
-    ? NestedOmit<T[P], K>
-    : T[P];
-};
-
-type GetPlayInfo = NonNullable<GetPlayInfoQuery['getPlayInfo']>['playInfo'];
-
 export interface PretestWabikenApiResponse extends ApiResponse {
-  data: NestedOmit<GetPlayInfo, '__typename'>;
+  data: {
+    type: string;
+    landingPage: string;
+    endpoints: Array<{
+      id: string;
+      displayName: string;
+      sceneSearchList: Array<{
+        type: string;
+        cdns: Array<{
+          sceneSearchUrl: string;
+          extra: {
+            width: number;
+            height: number;
+          };
+        }>;
+      }>;
+      playables: Array<{
+        type: string;
+        cdns: Array<{
+          cdnId?: string | null;
+          weight: number;
+          playlistUrl: string;
+          licenseUrlList: Array<{
+            drmType: string;
+            version: string;
+            endpoint: string;
+          }>;
+        }>;
+      }>;
+      isem?: {
+        version: string;
+        endpoint: string;
+        isemToken: string;
+      };
+      extra: {
+        playToken: string;
+        playTokenHash: string;
+      };
+    }>;
+    refreshToken: string;
+    playbackRemaining: number;
+    notValidBefore: number;
+    notValidAfter: number;
+  };
 }
 
 const fetchPlayInfoFromWabitApi = (args: {
@@ -42,7 +72,7 @@ const fetchPlayInfoFromWabitApi = (args: {
 };
 
 const mapPlayableCdn = (
-  cdn: PlayInfoWabitResponse['playinfo']['endpoints'][0]['playables']['dash'][0]
+  cdn: PlayInfoWabitResponse['playinfo']['endpoints'][number]['playables']['dash'][number]
 ) => ({
   cdnId: null,
   weight: cdn.weight,
@@ -55,7 +85,7 @@ const mapPlayableCdn = (
 });
 
 const mapPlayables = (
-  playables: PlayInfoWabitResponse['playinfo']['endpoints'][0]['playables']
+  playables: PlayInfoWabitResponse['playinfo']['endpoints'][number]['playables']
 ) =>
   Object.entries(playables).map(([type, cdns]) => ({
     type,
@@ -63,7 +93,7 @@ const mapPlayables = (
   }));
 
 const mapSceneSearch = (
-  sceneSearch: PlayInfoWabitResponse['playinfo']['endpoints'][0]['scene_search_list']['IMS_M'][0]
+  sceneSearch: PlayInfoWabitResponse['playinfo']['endpoints'][number]['scene_search_list']['IMS_M'][number]
 ) => ({
   sceneSearchUrl: sceneSearch.scene_search_url,
   extra: {
@@ -73,7 +103,7 @@ const mapSceneSearch = (
 });
 
 const mapPlayInfoEndpoint = (
-  endpoint: PlayInfoWabitResponse['playinfo']['endpoints'][0]
+  endpoint: PlayInfoWabitResponse['playinfo']['endpoints'][number]
 ) => ({
   id: endpoint.id,
   displayName: endpoint.display_name,
@@ -97,9 +127,7 @@ const mapPlayInfoEndpoint = (
     : undefined,
 });
 
-const mapPlayerProps = (
-  data: PlayInfoWabitResponse
-): PretestWabikenApiResponse['data'] => ({
+const mapPlayerProps = (data: PlayInfoWabitResponse) => ({
   type: data.playinfo.type,
   landingPage: data.playinfo.landing_page,
   refreshToken: data.playinfo.refresh_token,
