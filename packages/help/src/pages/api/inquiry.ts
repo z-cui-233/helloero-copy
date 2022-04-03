@@ -23,9 +23,9 @@ const sesClient = new SESClient({
 });
 
 const getCurrentDateByJST = (): Date => {
-  const date = new Date();
-  date.setTime(date.getTime() + 1000 * 60 * 60 * 9); // JSTに変換
-  return date;
+  return new Date(
+    Date.now() + (new Date().getTimezoneOffset() + 9 * 60) * 60 * 1000
+  );
 };
 
 const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
