@@ -22,6 +22,12 @@ const sesClient = new SESClient({
   ...credentials,
 });
 
+const getCurrentDateByJST = (): Date => {
+  const date = new Date();
+  date.setTime(date.getTime() + 1000 * 60 * 60 * 9); // JSTに変換
+  return date;
+};
+
 const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
   Destination: {
     /* required */
@@ -39,7 +45,7 @@ const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
 以下の内容でお問い合わせを承りました。あらためてご返信差し上げますのでお待ちください。
 お問い合わせの内容によっては、ご返信に数日いただく場合がございます。
 
-●お問い合わせ日時：${dateFormat(new Date(), 'yyyy年m月d日 HH:MM')}
+●お問い合わせ日時：${dateFormat(getCurrentDateByJST(), 'yyyy年m月d日 HH:MM')}
 ●ご連絡先メールアドレス：${args.contactEmail}
 ●ご登録のメールアドレス：${args.registeredEmail}
 
