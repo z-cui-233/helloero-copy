@@ -6,22 +6,20 @@ type Props = {
   onClick: () => void;
 };
 
-const HamburgerButton: React.FC<Props> = ({ isDisplayedMenu, onClick }) => {
-  return (
-    <Container tabIndex={0} onClick={onClick} isDisplayedMenu={isDisplayedMenu}>
-      <TopLine isDisplayedMenu={isDisplayedMenu} />
-      <CenterLine isDisplayedMenu={isDisplayedMenu} />
-      <BottomLine isDisplayedMenu={isDisplayedMenu} />
-    </Container>
-  );
-};
+const HamburgerButton: React.FC<Props> = ({ isDisplayedMenu, onClick }) => (
+  <Container tabIndex={0} onClick={onClick} isDisplayedMenu={isDisplayedMenu}>
+    <TopLine isDisplayedMenu={isDisplayedMenu} />
+    <CenterLine isDisplayedMenu={isDisplayedMenu} />
+    <BottomLine isDisplayedMenu={isDisplayedMenu} />
+  </Container>
+);
 
 const Container = styled.div<{ isDisplayedMenu: boolean }>`
   background-color: ${({ theme, isDisplayedMenu }) =>
     isDisplayedMenu ? theme.keyColor.color3 : theme.background.primaryInverted};
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   width: 4rem;
   height: 4rem;

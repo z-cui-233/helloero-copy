@@ -20,15 +20,13 @@ const LayoutH2u: React.VFC<Props> = ({
   children,
   options,
   needLogin = true,
-}) => {
-  return (
-    <Container>
-      <Header options={options} needLogin={needLogin} />
-      <Main>{children}</Main>
-      <Footer options={options} />
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <Header options={options} needLogin={needLogin} />
+    <Main>{children}</Main>
+    <Footer options={options} />
+  </Container>
+);
 
 const Container = styled.div`
   display: flex;
