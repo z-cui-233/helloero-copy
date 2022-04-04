@@ -10,20 +10,18 @@ type Props = {
   options: Config;
 };
 
-const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => {
-  return (
-    <Container isDisplayedMenu={isDisplayedMenu}>
-      <Grid>
-        <GridContainer>
-          <LogoMark />
-        </GridContainer>
-        <GridContainer>
-          <MenuList options={options} />
-        </GridContainer>
-      </Grid>
-    </Container>
-  );
-};
+const Menus: React.FC<Props> = ({ isDisplayedMenu, options }) => (
+  <Container isDisplayedMenu={isDisplayedMenu}>
+    <Grid>
+      <GridContainer>
+        <LogoMark />
+      </GridContainer>
+      <GridContainer>
+        <MenuList options={options} />
+      </GridContainer>
+    </Grid>
+  </Container>
+);
 
 const Container = styled.div<{ isDisplayedMenu: boolean }>`
   overflow-y: scroll;

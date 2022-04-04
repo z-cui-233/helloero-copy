@@ -10,43 +10,41 @@ type Props = {
   options: Config;
 };
 
-const Footer: React.FC<Props> = ({ options }) => {
-  return (
-    <Container>
-      <Contents>
-        <Logo>
-          <IconH2U />
-        </Logo>
-        <Links>
-          <LinkItem>
-            <StyledLink href={options.ACCOUNT}>アカウント</StyledLink>
-          </LinkItem>
-          <LinkItem>
-            <StyledLink href={options.HELP}>ヘルプ</StyledLink>
-          </LinkItem>
-          <LinkItem>
-            <StyledLink
-              href={COMPANY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              運営会社
-            </StyledLink>
-          </LinkItem>
-          <LinkItem>
-            <StyledLink
-              href={`${options.HELP}/terms`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              利用規約
-            </StyledLink>
-          </LinkItem>
-        </Links>
-      </Contents>
-    </Container>
-  );
-};
+const Footer: React.FC<Props> = ({ options }) => (
+  <Container>
+    <Contents>
+      <Logo>
+        <IconH2U />
+      </Logo>
+      <Links>
+        <LinkItem>
+          <StyledLink href={options.ACCOUNT}>アカウント</StyledLink>
+        </LinkItem>
+        <LinkItem>
+          <StyledLink href={options.HELP}>ヘルプ</StyledLink>
+        </LinkItem>
+        <LinkItem>
+          <StyledLink
+            href={COMPANY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            運営会社
+          </StyledLink>
+        </LinkItem>
+        <LinkItem>
+          <StyledLink
+            href={`${options.HELP}/terms`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            利用規約
+          </StyledLink>
+        </LinkItem>
+      </Links>
+    </Contents>
+  </Container>
+);
 
 const Container = styled.footer`
   margin: 5rem auto;

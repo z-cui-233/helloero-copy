@@ -4,6 +4,7 @@ import { Config } from 'u-next/config';
 import HamburgerButton from './HamburgerButton';
 import Menus from './Menus';
 import SiteLogo from './SiteLogo';
+import UserName from './UserName';
 
 type Props = {
   options: Config;
@@ -20,6 +21,7 @@ const Header: React.FC<Props> = ({ options }) => {
     <Container>
       <HeaderContents>
         <SiteLogo />
+        <UserName />
         <HamburgerButton
           isDisplayedMenu={isDisplayedMenu}
           onClick={handleClickHamburger}

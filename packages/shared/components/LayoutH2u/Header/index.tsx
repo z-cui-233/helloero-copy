@@ -10,17 +10,15 @@ type Props = {
   needLogin: boolean;
 };
 
-const Header: React.FC<Props> = ({ options, needLogin }) => {
-  return (
-    <Container>
-      <HeaderContents>
-        <SiteLogo options={options} />
-        {needLogin && <LoginButton options={options} />}
-        <UserName />
-      </HeaderContents>
-    </Container>
-  );
-};
+const Header: React.FC<Props> = ({ options, needLogin }) => (
+  <Container>
+    <HeaderContents>
+      <SiteLogo options={options} />
+      {needLogin && <LoginButton options={options} />}
+      <UserName />
+    </HeaderContents>
+  </Container>
+);
 
 const Container = styled.header`
   background-color: ${({ theme }) => theme.keyColor.color1};
