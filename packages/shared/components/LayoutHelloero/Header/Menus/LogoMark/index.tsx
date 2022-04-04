@@ -4,20 +4,18 @@ import device from '../../../../../styles/device';
 import LogoRotate from '../../../../../assets/logo/helloeroFullRedRotate.svg';
 import Logo from '../../../../../assets/logo/helloeroFullRed.svg';
 
-const LogoMark: React.FC = () => {
-  return (
-    <Container>
-      <BackGroundColor>
-        <LogoRotateContainer>
-          <StyledLogoRotate />
-        </LogoRotateContainer>
-        <LogoContainer>
-          <StyledLogo />
-        </LogoContainer>
-      </BackGroundColor>
-    </Container>
-  );
-};
+const LogoMark: React.FC = () => (
+  <Container>
+    <BackGroundColor>
+      <LogoRotateContainer>
+        <StyledLogoRotate />
+      </LogoRotateContainer>
+      <LogoContainer>
+        <StyledLogo />
+      </LogoContainer>
+    </BackGroundColor>
+  </Container>
+);
 
 const Container = styled.div`
   height: 100%;

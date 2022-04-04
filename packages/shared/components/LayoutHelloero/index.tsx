@@ -15,15 +15,13 @@ type Props = {
   options: Config;
 };
 
-const LayoutHelloero: React.VFC<Props> = ({ children, options }) => {
-  return (
-    <Container>
-      <Header options={options} />
-      <Main>{children}</Main>
-      <Footer options={options} />
-    </Container>
-  );
-};
+const LayoutHelloero: React.VFC<Props> = ({ children, options }) => (
+  <Container>
+    <Header options={options} />
+    <Main>{children}</Main>
+    <Footer options={options} />
+  </Container>
+);
 
 const Container = styled.div`
   display: flex;
