@@ -36,7 +36,7 @@ Extra notes for managing this mono-repo projects deployed on AWS using AWS Ampli
 
 ## Our Amplify usage
 
-<details open>
+<details>
   <summary> To know how we are using amplify 👉  </summary>
 <br />
 
