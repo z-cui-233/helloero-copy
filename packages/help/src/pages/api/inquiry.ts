@@ -1,4 +1,8 @@
-import { SendEmailCommand, SESClient } from '@aws-sdk/client-ses';
+import {
+  SendEmailCommand,
+  SendEmailCommandInput,
+  SESClient,
+} from '@aws-sdk/client-ses';
 import dateFormat from 'dateformat';
 import { NextApiHandler } from 'next';
 import { ApiResponse } from 'u-next/api';
@@ -28,12 +32,13 @@ const getCurrentDateByJST = (): Date => {
   );
 };
 
-const createSendEmailCommandInput = (args: InquiryApiRequest) => ({
+const createSendEmailCommandInput = (
+  args: InquiryApiRequest
+): SendEmailCommandInput => ({
   Destination: {
     /* required */
     CcAddresses: [],
     ToAddresses: [args.contactEmail],
-    // BccAddresses: ['support@h2u.jp'],
     BccAddresses: ['crm@h2u.jp'],
   },
   Message: {
@@ -67,6 +72,7 @@ H2U サポートセンター support@h2u.jp
     },
   },
   Source: 'H2U <support@h2u.jp>',
+  ReplyToAddresses: ['support@h2u.jp', args.contactEmail],
 });
 
 export type InquiryApiRequest = {

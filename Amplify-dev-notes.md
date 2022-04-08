@@ -3,6 +3,9 @@
 Extra notes for managing this mono-repo projects deployed on AWS using AWS Amplify
 
 ## Basics
+<details>
+  <summary>Amplify fundamentals are mentioned here 👉 </summary>
+  <br />
 
 - There are two ways to manage Amplify apps:
   - Amplify Console
@@ -27,9 +30,15 @@ Extra notes for managing this mono-repo projects deployed on AWS using AWS Ampli
   
 > Extra: [Welcome guide](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html)
 
+</details>
+
 ---
 
 ## Our Amplify usage
+
+<details>
+  <summary> To know how we are using amplify 👉  </summary>
+<br />
 
 - We have a mono-repo with three apps under `/packages/` root
 
@@ -63,17 +72,26 @@ We are using two lamda functions for `helloero` app
 
 - Provisioned in `helloero` project and imported through `Amplify Studio` in `account` and `help` projects
 
+### Caution ⚠️ 
+Cuz `account` and `help` projects have "imported auth" we need to provide some environmental-variables to automatic CI/CD builds to work probably.
+- Env-variable are: `AMPLIFY_IDENTITYPOOL_ID, AMPLIFY_USERPOOL_ID, AMPLIFY_NATIVECLIENT_ID, AMPLIFY_WEBCLIENT_ID`
+  <img width="1256" alt="image" src="https://user-images.githubusercontent.com/24664222/162371225-93268964-18fb-4b5b-812d-c2e00c708c9a.png">
+
+
 ### GraphQL
 
 - We are using GrapqhQL v2 api, also called AWS Appsync, [reference](https://docs.amplify.aws/cli/graphql/overview/)
 - Schema can be found in amplify folder in `/packages/helloero`
 - We are using Elastic search enabled by a directive `@searchable` in graphql schema
 
+### Domain management
+Is done by amplify setting for corresponding projects
+
 ---
 
-## Caution
+## Caution ⚠️ 
 
 - Be careful with `amplify push` until we setup proper service-accounts with particular IAM permissions that we do not end-up deleting resources for some backends
 - If you need to modify backend for testing, one way is to clone `develop` backend env and use the cloned-env for testing. Like:
 <img width="1482" alt="image" src="https://user-images.githubusercontent.com/24664222/156098064-e35e054a-e3fb-48cd-a1eb-91bcabb73bdd.png">
-
+</details>
