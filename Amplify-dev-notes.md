@@ -3,6 +3,9 @@
 Extra notes for managing this mono-repo projects deployed on AWS using AWS Amplify
 
 ## Basics
+<details>
+  <summary>Amplify fundamentals are mentioned here 👉 </summary>
+  <br />
 
 - There are two ways to manage Amplify apps:
   - Amplify Console
@@ -27,9 +30,15 @@ Extra notes for managing this mono-repo projects deployed on AWS using AWS Ampli
   
 > Extra: [Welcome guide](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html)
 
+</details>
+
 ---
 
 ## Our Amplify usage
+
+<details open>
+  <summary> To know how we are using amplify 👉  </summary>
+<br />
 
 - We have a mono-repo with three apps under `/packages/` root
 
@@ -85,4 +94,4 @@ Is done by amplify setting for corresponding projects
 - Be careful with `amplify push` until we setup proper service-accounts with particular IAM permissions that we do not end-up deleting resources for some backends
 - If you need to modify backend for testing, one way is to clone `develop` backend env and use the cloned-env for testing. Like:
 <img width="1482" alt="image" src="https://user-images.githubusercontent.com/24664222/156098064-e35e054a-e3fb-48cd-a1eb-91bcabb73bdd.png">
-
+</details>
