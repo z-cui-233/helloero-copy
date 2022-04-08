@@ -39,7 +39,6 @@ const createSendEmailCommandInput = (
     /* required */
     CcAddresses: [],
     ToAddresses: [args.contactEmail],
-    // BccAddresses: ['support@h2u.jp'],
     BccAddresses: ['crm@h2u.jp'],
   },
   Message: {
@@ -73,7 +72,7 @@ H2U サポートセンター support@h2u.jp
     },
   },
   Source: 'H2U <support@h2u.jp>',
-  ReplyToAddresses: ['support@h2u.jp'],
+  ReplyToAddresses: ['support@h2u.jp', args.contactEmail],
 });
 
 export type InquiryApiRequest = {
