@@ -21,7 +21,7 @@ const Landing: React.FC = () => {
             <ImageBox>
               <img
                 src={`/images/top/cover${Math.floor(Math.random() * 3)}.jpg`}
-                alt="HELLOERO(ハローエロ)"
+                alt="HELLO ERO(ハローエロ)"
               />
             </ImageBox>
           </Artwork>
@@ -32,7 +32,9 @@ const Landing: React.FC = () => {
               シンプルに、カジュアルに。アダルトコンテンツを楽しもう。
             </Title>
             <Text>
-              ようこそ、HELLOERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。
+              {
+                'ようこそ、HELLO ERO(ハローエロ)へ。さあ、今すぐログインして、購入済みのコードを使って視聴をスタートしましょう。はじめてご利用の方はアカウント登録からお願いします。'
+              }
             </Text>
             <ButtonContainer>
               <ButtonStandard

@@ -15,7 +15,7 @@ const Page: NextPage<Props> = ({ termsDocument }) => {
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELP}
-        title="HELLOEROサービス利⽤規約 - H2U ヘルプセンター"
+        title="HELLO ERO サービス利⽤規約 - H2U ヘルプセンター"
       />
       <TermsService termsDocument={termsDocument} />
     </React.Fragment>
