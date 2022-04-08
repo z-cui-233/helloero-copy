@@ -9,7 +9,7 @@ const Page: NextPage = () => {
     <React.Fragment>
       <MetaTags
         host={globalConfig.HELLOERO}
-        title="コード入力 - HELLOERO powered by H2U"
+        title="コード入力 - HELLO ERO powered by H2U"
       />
       <EntryFlow />
     </React.Fragment>

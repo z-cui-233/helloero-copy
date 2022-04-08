@@ -9,7 +9,7 @@ const NoticeComplete: React.FC = () => (
     links={[
       {
         href: globalConfig.HELLOERO,
-        label: 'HELLOEROに進む',
+        label: 'HELLO EROに進む',
       },
     ]}
   />
