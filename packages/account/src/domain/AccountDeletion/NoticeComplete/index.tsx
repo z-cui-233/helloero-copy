@@ -5,7 +5,7 @@ const NoticeComplete: React.FC = () => (
   <NoticePage
     title="H2Uアカウントの削除が完了しました"
     texts={[
-      'U-NEXTをご利用いただきありがとうございました。',
+      'H2Uをご利用いただきありがとうございました。',
       'またのご利用を心よりお待ちしております。',
     ]}
     links={[
