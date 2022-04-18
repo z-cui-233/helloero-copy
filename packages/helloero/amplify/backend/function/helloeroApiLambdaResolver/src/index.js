@@ -20,7 +20,9 @@ const getPlayInfo = async (event) => {
   const { wabikenId, deviceCode, deviceId } = event.arguments;
   const lock = event.identity.username;
   const response = await axios.get(
-    `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${lock}`,
+    `/v2/playinfo/${wabikenId}?device_id=${deviceId}&device_code=${deviceCode}&lock=${encodeURIComponent(
+      lock
+    )}`,
     {
       headers: { ...getUserAgentHeader(event) },
     }
