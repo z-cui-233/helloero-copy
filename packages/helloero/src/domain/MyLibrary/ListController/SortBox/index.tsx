@@ -11,11 +11,11 @@ import {
 const OPTIONS = [
   {
     key: DISPLAY_ORDER.ADD_DESC,
-    text: '購入日の新しい順',
+    text: '登録日の新しい順',
   },
   {
     key: DISPLAY_ORDER.ADD_ASC,
-    text: '購入日の古い順',
+    text: '登録日の古い順',
   },
   {
     key: DISPLAY_ORDER.NAME_ASC,

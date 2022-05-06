@@ -74,7 +74,7 @@ const usePurchasedList = (): UsePurchasedList => {
               field:
                 args.displayOrder === DISPLAY_ORDER.ADD_DESC ||
                 args.displayOrder === DISPLAY_ORDER.ADD_ASC
-                  ? SearchableUserWabikenMetaSortableFields.notValidAfter
+                  ? SearchableUserWabikenMetaSortableFields.activatedAt
                   : SearchableUserWabikenMetaSortableFields.contentDisplayNameKana,
             },
           ],
