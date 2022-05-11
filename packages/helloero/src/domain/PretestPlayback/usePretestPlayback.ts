@@ -96,12 +96,6 @@ const usePretestPlayback = (): UsePretestPlayback => {
           : undefined,
         isRealtime: false,
         autoplay: false,
-        onClose: () => {
-          setState((state) => ({
-            ...state,
-            pageStatus: PAGE_STATUS.INIT,
-          }));
-        },
         onError: (error: PlayerError) => {
           const title = error.customTitle ?? '';
           const text = error.customMessage ?? '';
