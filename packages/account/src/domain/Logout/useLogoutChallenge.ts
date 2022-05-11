@@ -4,8 +4,8 @@ import {
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
 import { Hub } from 'aws-amplify';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 

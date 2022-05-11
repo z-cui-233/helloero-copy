@@ -1,17 +1,19 @@
-import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
+import { PlayerError, PlayerProps } from '@u-next/defaultplayer';
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { DEVICE_CODE } from '@/localShared/constants';
 import { cookieParams } from '@/shared/constants/cookies';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
 import { getErrorMessage } from '@/shared/utils';
-import { getPlayInfo } from '../../graphql/queries';
 import {
   GetPlayInfoQuery,
   GetPlayInfoQueryVariables,
+  GetWabikenMetaQuery,
+  GetWabikenMetaQueryVariables,
   PlayInfo,
 } from '../../API';
+import { getPlayInfo, getWabikenMeta } from '../../graphql/queries';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -49,88 +51,101 @@ export type UsePlayer = {
 
 const usePlayer = (): UsePlayer => {
   const router = useRouter();
-  const [state, setState] = useState<State>(initialState);
-  const { fetcher } = useAmplifyFetcher<
+  const [state, setState] = React.useState<State>(initialState);
+
+  const { fetcher: getWabikenMetaQueryFetcher } = useAmplifyFetcher<
+    GetWabikenMetaQuery,
+    GetWabikenMetaQueryVariables
+  >();
+
+  const { fetcher: getPlayInfoQueryFetcher } = useAmplifyFetcher<
     GetPlayInfoQuery,
     GetPlayInfoQueryVariables
   >();
 
-  const creatPlayerPropsFromPlayInfo = useCallback(
-    (playInfo: PlayInfo, deviceId: string): PlayerProps => {
-      return {
-        playbackAuthorization: 'playtoken',
-        authorizationToken: playInfo.endpoints[0].extra.playToken,
-        endPoints: playInfo.endpoints.map((endpointData) => ({
-          displayName: endpointData.displayName,
-          playables: endpointData.playables.reduce((result, current) => {
-            let appendValue = {};
-
-            if (
-              ['dash', 'hls-cmaf', 'hls-fp', 'hls-s-aes'].includes(current.type)
-            ) {
-              appendValue = {
+  const creatPlayerPropsFromPlayInfo = React.useCallback(
+    (props: {
+      playInfo: PlayInfo;
+      deviceId: string;
+      titleName: string;
+    }): PlayerProps => ({
+      playbackAuthorization: 'playtoken',
+      authorizationToken: props.playInfo.endpoints[0].extra.playToken,
+      endPoints: props.playInfo.endpoints.map((endpointData) => ({
+        title: props.titleName,
+        playables: endpointData.playables.reduce((result, current) => {
+          const appendValue = [
+            'dash',
+            'hls-cmaf',
+            'hls-fp',
+            'hls-s-aes',
+          ].includes(current.type)
+            ? {
                 [current.type]: current.cdns.map((cdnData) => ({
                   id: cdnData.cdnId,
                   weight: cdnData.weight,
                   licenseUrls:
                     cdnData.licenseUrlList?.reduce(
-                      (result2, current2) => {
-                        result2[current2.drmType] = current2.endpoint;
-                        return result2;
-                      },
-                      {} as {
-                        [key: string]: string;
-                      }
+                      (result2, current2) => ({
+                        ...result2,
+                        ...{ [current2.drmType]: current2.endpoint },
+                      }),
+                      {}
                     ) ?? [],
                   manifestUrl: cdnData.playlistUrl,
                 })),
-              };
-            }
+              }
+            : {};
 
-            return {
-              ...result,
-              ...appendValue,
-            };
-          }, {}),
-          sceneSearchLists:
-            endpointData.sceneSearchList
-              .find((sceneSearchData) => sceneSearchData.type === 'IMS_M')
-              ?.cdns.map((sceneSearchData) => ({
-                sceneSearchUrl: sceneSearchData.sceneSearchUrl,
-              })) ?? [],
-        })),
-        sessionArgs: {
-          type: 'isem',
-          isemToken: playInfo.endpoints[0].isem.isemToken,
-          baseUrl: playInfo.endpoints[0].isem.endpoint,
-          deviceId,
-          overwrite: true,
-        },
-        isRealtime: false,
-        onBackClick: () => {
-          router.back();
-        },
-        onError: (error: PlayerError) => {
-          const title = error.customTitle ?? '';
-          const text = error.customMessage ?? '';
-          const errorCode = error.customCode ? String(error.customCode) : '';
+          return {
+            ...result,
+            ...appendValue,
+          };
+        }, {}),
+        sceneSearchList: endpointData.sceneSearchList.reduce(
+          (result, current) => ({
+            ...result,
+            ...{ [current.type]: current.cdns[0].sceneSearchUrl },
+          }),
+          {}
+        ),
+      })),
+      sessionArgs: {
+        type: 'isem',
+        isemToken: props.playInfo.endpoints[0].isem.isemToken,
+        baseUrl: props.playInfo.endpoints[0].isem.endpoint,
+        deviceId: props.deviceId,
+        overwrite: true,
+      },
+      isRealtime: false,
+      autoplay: true,
+      onClose: () => {
+        router.back();
+      },
+      onError: (error: PlayerError) => {
+        const title = error.customTitle ?? '';
+        const text = error.customMessage ?? '';
+        const errorCode = error.customCode ? String(error.customCode) : '';
 
-          setState((state) => ({
-            ...state,
-            pageStatus: PAGE_STATUS.ERROR,
-            errorMessage: {
-              title,
-              text,
-              errorCode,
-            },
-          }));
-        },
-      };
-    },
+        setState((state) => ({
+          ...state,
+          pageStatus: PAGE_STATUS.ERROR,
+          errorMessage: {
+            title,
+            text,
+            errorCode,
+          },
+        }));
+      },
+      theme: {
+        keyColor: 'rgba(230, 0, 50, 1)',
+      },
+      isInline: false,
+    }),
     [router]
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     (async () => {
       const wabiken = router.query.wabiken
         ? (router.query.wabiken as string)
@@ -138,14 +153,20 @@ const usePlayer = (): UsePlayer => {
 
       const cookies = parseCookies();
       const deviceId = encodeURIComponent(cookies[cookieParams.uuid.name]);
-      const apiData = await fetcher(getPlayInfo, {
-        wabikenId: wabiken,
-        deviceCode: DEVICE_CODE,
-        deviceId,
-      });
 
-      if (apiData.errors) {
-        const errorCode = apiData.errors?.[0]?.errorInfo?.code;
+      const [getWabikenMetaApiData, getPlayInfoApiData] = await Promise.all([
+        getWabikenMetaQueryFetcher(getWabikenMeta, {
+          id: wabiken,
+        }),
+        getPlayInfoQueryFetcher(getPlayInfo, {
+          wabikenId: wabiken,
+          deviceCode: DEVICE_CODE,
+          deviceId,
+        }),
+      ]);
+
+      if (getPlayInfoApiData.errors) {
+        const errorCode = getPlayInfoApiData.errors?.[0]?.errorInfo?.code;
         const errorMessage = getErrorMessage('getPlayInfo', errorCode);
 
         setState((state) => ({
@@ -161,11 +182,14 @@ const usePlayer = (): UsePlayer => {
       }
 
       const playerProps =
-        apiData.data?.getPlayInfo?.playInfo &&
-        creatPlayerPropsFromPlayInfo(
-          apiData.data.getPlayInfo.playInfo as PlayInfo,
-          deviceId
-        );
+        getPlayInfoApiData.data?.getPlayInfo?.playInfo &&
+        creatPlayerPropsFromPlayInfo({
+          playInfo: getPlayInfoApiData.data.getPlayInfo.playInfo as PlayInfo,
+          deviceId,
+          titleName:
+            getWabikenMetaApiData.data?.getWabikenMeta?.wabiken.content
+              .displayName ?? '',
+        });
 
       setState((state) => ({
         ...state,
@@ -175,7 +199,12 @@ const usePlayer = (): UsePlayer => {
         playerProps,
       }));
     })();
-  }, [creatPlayerPropsFromPlayInfo, fetcher, router.query.wabiken]);
+  }, [
+    creatPlayerPropsFromPlayInfo,
+    getPlayInfoQueryFetcher,
+    getWabikenMetaQueryFetcher,
+    router.query.wabiken,
+  ]);
 
   return {
     playerState: state,

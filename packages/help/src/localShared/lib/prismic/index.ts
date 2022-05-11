@@ -1,6 +1,6 @@
 import * as prismic from '@prismicio/client';
-import * as prismicT from '@prismicio/types';
 import * as prismicH from '@prismicio/helpers';
+import * as prismicT from '@prismicio/types';
 import { GetServerSidePropsContext } from 'next';
 import {
   GuideDocument,

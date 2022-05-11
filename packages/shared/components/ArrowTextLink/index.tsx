@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 import IconArrow from '../../assets/icon/arrow_right.svg';
 import typo from '../../styles/typo';

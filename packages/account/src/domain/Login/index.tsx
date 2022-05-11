@@ -1,10 +1,10 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import useLoginChallenge, { PAGE_STATUS } from './useLoginChallenge';
 import InputForm from './InputForm';
 import NoticePasswordResetRequired from './NoticePasswordResetRequired';
 import NoticeUserNotConfirmed from './NoticeUserNotConfirmed';
+import useLoginChallenge, { PAGE_STATUS } from './useLoginChallenge';
 
 const Login: React.FC = () => {
   const { loginChallengeState, challengeLogin } = useLoginChallenge();

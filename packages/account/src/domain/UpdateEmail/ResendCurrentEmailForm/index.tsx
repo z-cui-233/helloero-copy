@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import MainContainer from '@/shared/components/MainContainer';
-import typo from '@/shared/styles/typo';
 import PageTitle from '@/shared/components/PageTitle';
+import typo from '@/shared/styles/typo';
 import { UseUpdateEmail } from '../useUpdateEmail';
 
 type Props = {

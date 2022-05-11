@@ -1,19 +1,19 @@
-import React from 'react';
+import Amplify, { Auth } from 'aws-amplify';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import nookies from 'nookies';
-import { v4 as uuidv4 } from 'uuid';
-import { ThemeProvider } from 'styled-components';
-import Amplify, { Auth } from 'aws-amplify';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
-import GlobalStyle from '@/shared/styles/globalStyle';
-import GlobalHead from '@/shared/components/GlobalHead';
-import theme from '@/shared/styles/theme';
-import GlobalScripts from '@/shared/components/GlobalScripts';
-import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
-import { cookieParams } from '@/shared/constants/cookies';
+import { ThemeProvider } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import { i18n_messages } from '@/localShared/constants/babystar';
-import { globalConfig } from '../globalConfig';
+import GlobalHead from '@/shared/components/GlobalHead';
+import GlobalScripts from '@/shared/components/GlobalScripts';
+import { cookieParams } from '@/shared/constants/cookies';
+import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
+import GlobalStyle from '@/shared/styles/globalStyle';
+import theme from '@/shared/styles/theme';
 import config from '../aws-exports';
+import { globalConfig } from '../globalConfig';
 
 Amplify.configure({
   ...config,

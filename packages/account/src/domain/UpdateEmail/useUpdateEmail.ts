@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 import { MESSAGES } from '@/shared/constants/messages';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',

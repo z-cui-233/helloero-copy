@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Auth } from 'aws-amplify';
+import React, { useContext, useEffect, useState } from 'react';
 
 type UserInfo = {
   isLoggedIn: boolean;

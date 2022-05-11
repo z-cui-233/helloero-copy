@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import typo from '@/shared/styles/typo';
 import { MESSAGES } from '@/shared/constants/messages';
+import typo from '@/shared/styles/typo';
 
 type Props = {
   title: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import NoticePage from '@/shared/components/NoticePage';
 import LayoutH2u from '@/shared/components/LayoutH2u';
+import NoticePage from '@/shared/components/NoticePage';
 
 type Props = {
   statusCode: number;

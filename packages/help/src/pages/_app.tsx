@@ -1,13 +1,13 @@
-import React from 'react';
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Amplify, { Auth } from 'aws-amplify';
-import { ThemeProvider } from 'styled-components';
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
+import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import theme from '@/shared/styles/theme';
-import GlobalStyle from '@/shared/styles/globalStyle';
+import { ThemeProvider } from 'styled-components';
 import GlobalHead from '@/shared/components/GlobalHead';
-import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
 import GlobalScripts from '@/shared/components/GlobalScripts';
+import { LoginStateContextProvider } from '@/shared/context/LoginStateContext';
+import GlobalStyle from '@/shared/styles/globalStyle';
+import theme from '@/shared/styles/theme';
 import config from '../aws-exports';
 
 Amplify.configure({

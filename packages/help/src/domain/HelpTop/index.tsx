@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
+import styled from 'styled-components';
+import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
+import ArrowTextLink from '@/shared/components/ArrowTextLink';
 import LayoutH2u from '@/shared/components/LayoutH2u';
 import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
-import ArrowTextLink from '@/shared/components/ArrowTextLink';
-import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
-import SystemTrouble from './SystemTrouble';
 import MenuCard from './MenuCard';
+import SystemTrouble from './SystemTrouble';
 
 const MenuList = [
   {

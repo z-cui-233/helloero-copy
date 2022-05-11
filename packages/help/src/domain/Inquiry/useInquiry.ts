@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ApiResponse } from 'u-next/api';
 import { InquiryApiRequest } from 'src/pages/api/inquiry';
+import { ApiResponse } from 'u-next/api';
 import { INQUIRY_TYPE_MAP } from '@/localShared/constants/inquiry';
-import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 import useVariousFetch from '@/shared/hooks/useVariousFetcher';
 
 export const PAGE_STATUS = {

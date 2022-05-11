@@ -1,14 +1,14 @@
-import React from 'react';
 import * as prismicH from '@prismicio/helpers';
+import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/MainContainer';
-import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
-import PageTitle from '@/shared/components/PageTitle';
 import LinkList, { LinkListItemData } from '@/localShared/components/LinkList';
+import { GuideCategoryDocument } from '@/localShared/lib/prismic/interfaces';
+import LayoutH2u from '@/shared/components/LayoutH2u';
+import MainContainer from '@/shared/components/MainContainer';
+import PageTitle from '@/shared/components/PageTitle';
 
 type Props = {
   guideCategoryDocument: GuideCategoryDocument;

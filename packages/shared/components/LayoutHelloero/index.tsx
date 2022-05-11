@@ -1,7 +1,7 @@
+import { Router } from 'next/router';
+import NProgress from 'nprogress';
 import React from 'react';
 import styled from 'styled-components';
-import NProgress from 'nprogress';
-import { Router } from 'next/router';
 import { Config } from 'u-next/config';
 import Footer from './Footer';
 import Header from './Header';

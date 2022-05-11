@@ -1,8 +1,8 @@
+import { ISignUpResult } from 'amazon-cognito-identity-js';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { useCallback } from 'react';
-import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { CodeDeliveryDetails } from 'u-next/amplify';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 import { MessageKeys, MESSAGES } from '../constants/messages';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

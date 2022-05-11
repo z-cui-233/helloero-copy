@@ -1,11 +1,11 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import Step1InputForm from './Step1InputForm';
-import useResendSignUp, { PAGE_STATUS } from './useResendSignUp';
-import Step2ConfirmForm from './Step2ConfirmForm';
 import NoticeComplete from './NoticeComplete';
+import Step1InputForm from './Step1InputForm';
+import Step2ConfirmForm from './Step2ConfirmForm';
 import Step3ReLoginForm from './Step3ReLoginForm';
+import useResendSignUp, { PAGE_STATUS } from './useResendSignUp';
 
 const ResendSignUp: React.FC = () => {
   const { resendSignUpState, resendCode, verifyCode, invokeLogin } =

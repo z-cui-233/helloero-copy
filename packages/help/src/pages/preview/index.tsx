@@ -1,7 +1,7 @@
 import * as prismic from '@prismicio/client';
 import { NextPage, GetServerSideProps } from 'next';
-import React from 'react';
 import nookies from 'nookies';
+import React from 'react';
 import { fetchPreviewUrl } from '@/localShared/lib/prismic';
 
 const Page: NextPage = () => <div>preview page</div>;

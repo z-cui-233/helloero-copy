@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import typo from '@/shared/styles/typo';
+import styled from 'styled-components';
 import LogoHelloero from '@/shared/assets/logo/helloeroBlack.svg';
 import device from '@/shared/styles/device';
+import typo from '@/shared/styles/typo';
 
 const SiteMenus: React.FC = () => {
   return (

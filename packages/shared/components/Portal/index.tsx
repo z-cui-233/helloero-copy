@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
 import { createPortal } from 'react-dom';
+import styled, { keyframes } from 'styled-components';
 
 type Props = {
   children: React.ReactNode;

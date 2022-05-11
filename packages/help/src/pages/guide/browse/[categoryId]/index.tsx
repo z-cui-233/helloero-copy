@@ -1,6 +1,6 @@
+import * as prismicH from '@prismicio/helpers';
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
-import * as prismicH from '@prismicio/helpers';
 import { globalConfig } from 'src/globalConfig';
 import GuideBrowse from '@/domain/GuideBrowse';
 import { fetchGuideByCategoryId } from '@/localShared/lib/prismic';

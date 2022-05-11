@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 import Logo from '../../../../assets/logo/helloeroBlack.svg';
 import device from '../../../../styles/device';

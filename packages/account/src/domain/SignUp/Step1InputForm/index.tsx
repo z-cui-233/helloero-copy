@@ -1,21 +1,21 @@
+import { useFormik } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import typo from '@/shared/styles/typo';
-import MainContainer from '@/shared/components/MainContainer';
+import ButtonStandard from '@/shared/components/ButtonStandard';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import FormTextField from '@/shared/components/FormTextField';
-import ButtonStandard from '@/shared/components/ButtonStandard';
-import formValidations from '@/shared/utils/formValidations';
-import formLabels from '@/shared/utils/formLabels';
-import formikHelper from '@/shared/utils/formikHelper';
+import MainContainer from '@/shared/components/MainContainer';
+import PageTitle from '@/shared/components/PageTitle';
 import {
   PRIVACY_URL,
   TERMS_SERVICE_URL,
   TERMS_ACCOUNT_URL,
 } from '@/shared/constants/terms';
-import PageTitle from '@/shared/components/PageTitle';
+import typo from '@/shared/styles/typo';
+import formLabels from '@/shared/utils/formLabels';
+import formValidations from '@/shared/utils/formValidations';
+import formikHelper from '@/shared/utils/formikHelper';
 import { UseSignUp } from '../useSignUp';
 
 type Props = {

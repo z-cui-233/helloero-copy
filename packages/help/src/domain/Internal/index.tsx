@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
+import styled from 'styled-components';
 import LayoutH2u from '@/shared/components/LayoutH2u';
-import typo from '@/shared/styles/typo';
 import MainContainer from '@/shared/components/MainContainer';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
+import typo from '@/shared/styles/typo';
 
 const Internal: React.FC = () => {
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();

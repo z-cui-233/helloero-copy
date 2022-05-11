@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 import React, { useEffect } from 'react';
 import { globalConfig } from 'src/globalConfig';
-import { cookieParams } from '@/shared/constants/cookies';
 import MetaTags from '@/shared/components/MetaTags';
+import { cookieParams } from '@/shared/constants/cookies';
 
 const Page: NextPage = () => {
   const router = useRouter();

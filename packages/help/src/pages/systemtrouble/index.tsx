@@ -2,9 +2,9 @@ import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import SystemTrouble from '@/domain/SystemTrouble';
-import MetaTags from '@/shared/components/MetaTags';
 import { fetchSystemTroubleByUid } from '@/localShared/lib/prismic';
 import { SystemTroubleDocument } from '@/localShared/lib/prismic/interfaces';
+import MetaTags from '@/shared/components/MetaTags';
 
 type Props = {
   systemTroubleDocument: SystemTroubleDocument;

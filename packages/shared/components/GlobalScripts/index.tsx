@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import Script from 'next/script';
-import { CustomWindow, GTagConfig } from 'u-next/window';
 import Router, { useRouter } from 'next/router';
+import Script from 'next/script';
+import React, { useEffect } from 'react';
+import { CustomWindow, GTagConfig } from 'u-next/window';
 
 const GA_MEASUREMENT_ID = 'G-81ZW4FPFG7';
 

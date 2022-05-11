@@ -2,9 +2,9 @@ import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import TermsService from '@/domain/TermsService';
-import MetaTags from '@/shared/components/MetaTags';
 import { fetchTermsHelloEroService } from '@/localShared/lib/prismic';
 import { TermsDocument } from '@/localShared/lib/prismic/interfaces';
+import MetaTags from '@/shared/components/MetaTags';
 
 type Props = {
   termsDocument: TermsDocument;

@@ -1,5 +1,5 @@
-import { GetServerSideProps, NextPage } from 'next';
 import * as prismicT from '@prismicio/types';
+import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import InfoList from '@/domain/InfoList';

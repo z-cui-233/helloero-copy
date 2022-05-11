@@ -1,11 +1,11 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import typo from '@/shared/styles/typo';
 import IconGuide from '@/shared/assets/icon/help_guide.svg';
-import IconInquiry from '@/shared/assets/icon/help_inquiry.svg';
 import IconInfo from '@/shared/assets/icon/help_info.svg';
+import IconInquiry from '@/shared/assets/icon/help_inquiry.svg';
 import ListRightArrow from '@/shared/components/ListRightArrow';
+import typo from '@/shared/styles/typo';
 
 type UrlPattern = 'guide' | 'info' | 'inquiry';
 

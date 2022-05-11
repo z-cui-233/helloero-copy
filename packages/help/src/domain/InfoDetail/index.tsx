@@ -1,18 +1,18 @@
-import React from 'react';
-import { PrismicRichText } from '@prismicio/react';
-import styled from 'styled-components';
 import * as prismicH from '@prismicio/helpers';
+import { PrismicRichText } from '@prismicio/react';
+import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import MainContainer from '@/shared/components/MainContainer';
-import LayoutH2u from '@/shared/components/LayoutH2u';
-import typo from '@/shared/styles/typo';
-import RichTextContainer from '@/localShared/components/RichTextContainer';
-import { convertDateToString } from '@/shared/utils';
-import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
+import styled from 'styled-components';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
+import RichTextContainer from '@/localShared/components/RichTextContainer';
+import { InfoDocument } from '@/localShared/lib/prismic/interfaces';
+import LayoutH2u from '@/shared/components/LayoutH2u';
+import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
+import typo from '@/shared/styles/typo';
+import { convertDateToString } from '@/shared/utils';
 
 type Props = {
   infoDocument: InfoDocument;

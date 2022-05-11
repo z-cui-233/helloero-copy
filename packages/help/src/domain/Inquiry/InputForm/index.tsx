@@ -1,22 +1,22 @@
-import styled from 'styled-components';
-import React from 'react';
 import { useFormik } from 'formik';
+import React from 'react';
+import styled from 'styled-components';
 import * as Yup from 'yup';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
-import PageTitle from '@/shared/components/PageTitle';
-import MainContainer from '@/shared/components/MainContainer';
 import { INQUIRY_TYPE_MAP } from '@/localShared/constants/inquiry';
-import formValidations from '@/shared/utils/formValidations';
-import formikHelper from '@/shared/utils/formikHelper';
-import FormTextField from '@/shared/components/FormTextField';
-import typo from '@/shared/styles/typo';
 import ButtonStandard from '@/shared/components/ButtonStandard';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import FormRadioBox from '@/shared/components/FormRadioBox';
 import FormTextAreaField from '@/shared/components/FormTextAreaField';
+import FormTextField from '@/shared/components/FormTextField';
 import FormValidateMessage from '@/shared/components/FormValidateMessage';
+import MainContainer from '@/shared/components/MainContainer';
+import PageTitle from '@/shared/components/PageTitle';
+import typo from '@/shared/styles/typo';
+import formValidations from '@/shared/utils/formValidations';
+import formikHelper from '@/shared/utils/formikHelper';
 import { UseInquiry } from '../useInquiry';
 import PriorConfirmation from './PriorConfirmation';
 

@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import typo from '../../styles/typo';
-import FormValidateMessage from '../FormValidateMessage';
 import VisibilityIcon from '../../assets/icon/visibility_black_24dp.svg';
 import VisibilityOffIcon from '../../assets/icon/visibility_off_black_24dp.svg';
+import typo from '../../styles/typo';
+import FormValidateMessage from '../FormValidateMessage';
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;

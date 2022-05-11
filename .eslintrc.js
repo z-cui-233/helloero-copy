@@ -28,6 +28,9 @@ module.exports = {
             position: 'before',
           },
         ],
+        alphabetize: {
+          order: 'asc',
+        },
       },
     ],
   },

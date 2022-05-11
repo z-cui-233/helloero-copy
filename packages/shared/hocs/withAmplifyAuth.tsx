@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { Config } from 'u-next/config';
 import { useLoginStateContext } from '../context/LoginStateContext';
 

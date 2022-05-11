@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
-import typo from '../../../../../styles/typo';
 import ArrowLogo from '../../../../../assets/icon/arrow_right_white.svg';
 import { useLoginStateContext } from '../../../../../context/LoginStateContext';
 import device from '../../../../../styles/device';
+import typo from '../../../../../styles/typo';
 
 type Props = {
   options: Config;

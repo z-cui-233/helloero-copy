@@ -1,16 +1,16 @@
-import React from 'react';
-import Link from 'next/link';
-import styled from 'styled-components';
 import { useFormik } from 'formik';
+import Link from 'next/link';
+import React from 'react';
+import styled from 'styled-components';
 import * as Yup from 'yup';
+import ButtonStandard from '@/shared/components/ButtonStandard';
+import FormCheckBox from '@/shared/components/FormCheckBox';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
 import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
-import ButtonStandard from '@/shared/components/ButtonStandard';
-import typo from '@/shared/styles/typo';
-import FormCheckBox from '@/shared/components/FormCheckBox';
 import Portal from '@/shared/components/Portal';
 import PortalModalDialog from '@/shared/components/PortalModalDialog';
+import typo from '@/shared/styles/typo';
 import formikHelper from '@/shared/utils/formikHelper';
 import { UseAccountDeletion } from '../useAccountDeletion';
 

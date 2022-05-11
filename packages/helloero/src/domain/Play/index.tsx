@@ -1,7 +1,7 @@
+import { Player as DefaultPlayer } from '@u-next/defaultplayer';
 import React from 'react';
-import styled from 'styled-components';
-import { Player as BabyStar } from '@u-next/videoplayer-react';
 import { globalConfig } from 'src/globalConfig';
+import styled from 'styled-components';
 import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import NoticeMessage from './NoticeMessage';
 import usePlayer, { PAGE_STATUS } from './usePlayer';
@@ -12,7 +12,9 @@ const Play: React.FC = () => {
   return (
     <Container>
       {playerState.pageStatus === PAGE_STATUS.PLAY &&
-        !!playerState.playerProps && <BabyStar {...playerState.playerProps} />}
+        !!playerState.playerProps && (
+          <DefaultPlayer {...playerState.playerProps} />
+        )}
       {playerState.pageStatus === PAGE_STATUS.ERROR && (
         <NoticeMessage
           title={playerState.errorMessage.title}

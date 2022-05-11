@@ -1,15 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import { globalConfig } from 'src/globalConfig';
+import styled from 'styled-components';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
-import typo from '@/shared/styles/typo';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import MainContainer from '@/shared/components/MainContainer';
-import usePurchasedList from './usePurchasedList';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
+import typo from '@/shared/styles/typo';
 import ListController from './ListController';
 import TitleDetail from './TitleDetail';
 import TitleList from './TitleList';
 import WabikenMenu from './WabikenMenu';
+import usePurchasedList from './usePurchasedList';
 
 const MyLibrary: React.FC = () => {
   const {

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonStandard from '@/shared/components/ButtonStandard';
-import { useLoginStateContext } from '@/shared/context/LoginStateContext';
-import MainContainer from '@/shared/components/MainContainer';
 import FormErrorMessage from '@/shared/components/FormErrorMessage';
+import MainContainer from '@/shared/components/MainContainer';
 import PageTitle from '@/shared/components/PageTitle';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import { UseResetPassword } from '../../useResetPassword';
 
 type Props = {

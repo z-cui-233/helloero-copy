@@ -1,12 +1,11 @@
-import { PlayerError, PlayerProps } from '@u-next/videoplayer-react';
+import { PlayerError, PlayerProps } from '@u-next/defaultplayer';
 import { parseCookies } from 'nookies';
-import { useCallback, useState } from 'react';
+import React from 'react';
 import { PretestWabikenApiResponse } from 'src/pages/api/pretest-wabiken';
-import useVariousFetch from '@/shared/hooks/useVariousFetcher';
 import { cookieParams } from '@/shared/constants/cookies';
+import useVariousFetch from '@/shared/hooks/useVariousFetcher';
 
 export const PAGE_STATUS = {
-  INIT: 'INIT',
   PLAY: 'PLAY',
   ERROR: 'ERROR',
 } as const;
@@ -22,7 +21,7 @@ type State = {
 };
 
 const initialState: State = {
-  pageStatus: PAGE_STATUS.INIT,
+  pageStatus: PAGE_STATUS.PLAY,
   playerProps: undefined,
   errorMessage: {
     title: '',
@@ -33,71 +32,71 @@ const initialState: State = {
 
 export type UsePretestPlayback = {
   playerState: State;
-  playbackStart: () => Promise<void>;
 };
 
 const usePretestPlayback = (): UsePretestPlayback => {
-  const [state, setState] = useState<State>(initialState);
+  const [state, setState] = React.useState<State>(initialState);
   const { fetcher } = useVariousFetch<PretestWabikenApiResponse>();
 
-  const creatPlayerPropsFromPlayInfo = useCallback(
-    (
-      playInfo: PretestWabikenApiResponse['data'],
-      deviceId: string
-    ): PlayerProps => {
+  const creatPlayerPropsFromPlayInfo = React.useCallback(
+    (props: {
+      playInfo: PretestWabikenApiResponse['data'];
+      deviceId: string;
+    }): PlayerProps => {
       return {
         playbackAuthorization: 'playtoken',
-        authorizationToken: playInfo.endpoints[0].extra.playToken,
-        endPoints: playInfo.endpoints.map((endpointData) => ({
-          displayName: endpointData.displayName,
+        authorizationToken: props.playInfo.endpoints[0].extra.playToken,
+        endPoints: props.playInfo.endpoints.map((endpointData) => ({
+          title: 'テスト動画',
           playables: endpointData.playables.reduce((result, current) => {
-            let appendValue = {};
-
-            if (
-              ['dash', 'hls-cmaf', 'hls-fp', 'hls-s-aes'].includes(current.type)
-            ) {
-              appendValue = {
-                [current.type]: current.cdns.map((cdnData) => ({
-                  id: cdnData.cdnId,
-                  weight: cdnData.weight,
-                  licenseUrls:
-                    cdnData.licenseUrlList?.reduce(
-                      (result2, current2) => {
-                        result2[current2.drmType] = current2.endpoint;
-                        return result2;
-                      },
-                      {} as {
-                        [key: string]: string;
-                      }
-                    ) ?? [],
-                  manifestUrl: cdnData.playlistUrl,
-                })),
-              };
-            }
+            const appendValue = [
+              'dash',
+              'hls-cmaf',
+              'hls-fp',
+              'hls-s-aes',
+            ].includes(current.type)
+              ? {
+                  [current.type]: current.cdns.map((cdnData) => ({
+                    id: cdnData.cdnId,
+                    weight: cdnData.weight,
+                    licenseUrls:
+                      cdnData.licenseUrlList?.reduce(
+                        (result2, current2) => ({
+                          ...result2,
+                          ...{ [current2.drmType]: current2.endpoint },
+                        }),
+                        {}
+                      ) ?? [],
+                    manifestUrl: cdnData.playlistUrl,
+                  })),
+                }
+              : {};
 
             return {
               ...result,
               ...appendValue,
             };
           }, {}),
-          sceneSearchLists:
-            endpointData.sceneSearchList
-              .find((sceneSearchData) => sceneSearchData.type === 'IMS_M')
-              ?.cdns.map((sceneSearchData) => ({
-                sceneSearchUrl: sceneSearchData.sceneSearchUrl,
-              })) ?? [],
+          sceneSearchList: endpointData.sceneSearchList.reduce(
+            (result, current) => ({
+              ...result,
+              ...{ [current.type]: current.cdns[0].sceneSearchUrl },
+            }),
+            {}
+          ),
         })),
-        sessionArgs: playInfo.endpoints[0].isem
+        sessionArgs: props.playInfo.endpoints[0].isem
           ? {
               type: 'isem',
-              isemToken: playInfo.endpoints[0].isem.isemToken,
-              baseUrl: playInfo.endpoints[0].isem.endpoint,
-              deviceId,
+              isemToken: props.playInfo.endpoints[0].isem.isemToken,
+              baseUrl: props.playInfo.endpoints[0].isem.endpoint,
+              deviceId: props.deviceId,
               overwrite: true,
             }
           : undefined,
         isRealtime: false,
-        onBackClick: () => {
+        autoplay: false,
+        onClose: () => {
           setState((state) => ({
             ...state,
             pageStatus: PAGE_STATUS.INIT,
@@ -118,13 +117,17 @@ const usePretestPlayback = (): UsePretestPlayback => {
             },
           }));
         },
+        theme: {
+          keyColor: 'rgba(230, 0, 50, 1)',
+        },
+        isInline: true,
       };
     },
     []
   );
 
-  const playbackStart: UsePretestPlayback['playbackStart'] =
-    useCallback(async () => {
+  React.useEffect(() => {
+    (async () => {
       const cookies = parseCookies();
       const userAgent = encodeURIComponent(window.navigator.userAgent);
       const deviceId = encodeURIComponent(cookies[cookieParams.uuid.name]);
@@ -132,7 +135,11 @@ const usePretestPlayback = (): UsePretestPlayback => {
       const apiData = await fetcher(
         `/api/pretest-wabiken?uuid=${deviceId}&userAgent=${userAgent}`
       );
-      const playerProps = creatPlayerPropsFromPlayInfo(apiData.data, deviceId);
+
+      const playerProps = creatPlayerPropsFromPlayInfo({
+        playInfo: apiData.data,
+        deviceId,
+      });
 
       setState((state) => ({
         ...state,
@@ -140,13 +147,11 @@ const usePretestPlayback = (): UsePretestPlayback => {
         deviceId,
         playerProps,
       }));
-
-      return;
-    }, [creatPlayerPropsFromPlayInfo, fetcher]);
+    })();
+  }, [creatPlayerPropsFromPlayInfo, fetcher]);
 
   return {
     playerState: state,
-    playbackStart,
   };
 };
 

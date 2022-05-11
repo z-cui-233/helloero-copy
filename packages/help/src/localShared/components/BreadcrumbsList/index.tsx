@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
+import React from 'react';
 import { globalConfig } from 'src/globalConfig';
+import styled from 'styled-components';
 import typo from '@/shared/styles/typo';
 
 export type Breadcrumbs = {

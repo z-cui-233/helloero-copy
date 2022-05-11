@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Config } from 'u-next/config';
-import typo from '../../../styles/typo';
 import IconH2U from '../../../assets/logo/h2uWhite.svg';
-import device from '../../../styles/device';
 import { COMPANY_URL } from '../../../constants/terms';
+import device from '../../../styles/device';
+import typo from '../../../styles/typo';
 
 type Props = {
   options: Config;

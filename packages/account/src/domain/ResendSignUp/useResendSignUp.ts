@@ -1,11 +1,11 @@
-import { Hub } from 'aws-amplify';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   AuthState,
   AUTH_STATE_CHANGE_EVENT,
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
+import { Hub } from 'aws-amplify';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
 

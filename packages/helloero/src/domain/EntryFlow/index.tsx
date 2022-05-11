@@ -1,12 +1,12 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import LayoutHelloero from '@/shared/components/LayoutHelloero';
-import InputForm from './InputForm';
+import withAmplifyAuth from '@/shared/hocs/withAmplifyAuth';
 import ConfirmForm from './ConfirmForm';
+import InputForm from './InputForm';
 import NoticeComplete from './NoticeComplete';
-import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 import WaitForCompletion from './WaitForCompletion';
+import useEntryWabiken, { PAGE_STATUS } from './useEntryWabiken';
 
 const EntryFlow: React.FC = () => {
   const { entryWabikenState, confirmWabiken, consumeWabiken, waitComplete } =

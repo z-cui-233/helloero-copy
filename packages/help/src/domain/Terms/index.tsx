@@ -1,12 +1,12 @@
 import React from 'react';
 import { globalConfig } from 'src/globalConfig';
-import LayoutH2u from '@/shared/components/LayoutH2u';
-import MainContainer from '@/shared/components/MainContainer';
-import PageTitle from '@/shared/components/PageTitle';
 import BreadcrumbsList, {
   Breadcrumbs,
 } from '@/localShared/components/BreadcrumbsList';
 import LinkList, { LinkListItemData } from '@/localShared/components/LinkList';
+import LayoutH2u from '@/shared/components/LayoutH2u';
+import MainContainer from '@/shared/components/MainContainer';
+import PageTitle from '@/shared/components/PageTitle';
 import { PRIVACY_URL } from '@/shared/constants/terms';
 
 const Terms: React.FC = () => {
