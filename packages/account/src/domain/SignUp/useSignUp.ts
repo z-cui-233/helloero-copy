@@ -6,8 +6,10 @@ import {
 import { Hub } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { ThanksApiRouteResponse } from 'src/pages/api/thanks';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
+import useVariousFetch from '@/shared/hooks/useVariousFetcher';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -53,6 +55,7 @@ const useSignUp = (): UseSignUp => {
   const [state, setState] = useState<State>(initialState);
   const { signUp, confirmSignUp, signIn } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+  const { fetcher } = useVariousFetch<ThanksApiRouteResponse>();
   const isLoading = useRef<boolean>(false);
 
   const challengeSignUp: UseSignUp['challengeSignUp'] = useCallback(
@@ -118,6 +121,19 @@ const useSignUp = (): UseSignUp => {
         message: AuthState.SignIn,
       });
 
+      await fetcher('/api/thanks', {
+        method: 'POST',
+        cache: 'no-cache',
+        credentials: 'omit',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          loginId: state.step1FormValues.loginId,
+          mailAddress: state.step1FormValues.email,
+        }),
+      });
+
       isLoading.current = false;
       setState((signUpState) => ({
         ...signUpState,
@@ -128,8 +144,9 @@ const useSignUp = (): UseSignUp => {
     },
     [
       confirmSignUp,
-      isLoading,
+      fetcher,
       signIn,
+      state.step1FormValues.email,
       state.step1FormValues.loginId,
       state.step1FormValues.password,
     ]
