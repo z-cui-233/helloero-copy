@@ -18,8 +18,8 @@ module.exports = {
   compress: false,
   productionBrowserSourceMaps: true,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
-  env: {
-    wabitUrl: process.env.WABIT_URL,
+  serverRuntimeConfig: {
+    wabitUrl: process.env.WABIT_URL, // gqlと設定を共有するため、このURLはenvから取得
   },
   webpack(config) {
     config.module.rules.push({

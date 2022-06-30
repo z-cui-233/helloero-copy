@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { InquiryApiRequest } from 'src/pages/api/inquiry';
-import { ApiResponse } from 'u-next/api';
+import { ApiRouteResponse } from 'u-next/api';
 import { INQUIRY_TYPE_MAP } from '@/localShared/constants/inquiry';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
@@ -40,7 +40,7 @@ const useInquiry = (): UseInquiry => {
   const [state, setState] = useState<State>(initialState);
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
   const { currentAuthenticatedUser } = useAmplifyAuth();
-  const { fetcher } = useVariousFetch<ApiResponse>();
+  const { fetcher } = useVariousFetch<ApiRouteResponse>();
 
   const sendInquiry: UseInquiry['sendInquiry'] = useCallback(
     async (values) => {

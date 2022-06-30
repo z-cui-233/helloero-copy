@@ -4,5 +4,6 @@ export interface Config {
   HELLOERO: string;
   HELP: string;
   ACCOUNT: string;
+  H2UCRM: string;
   PRETEST_WABIKEN: string;
 }
