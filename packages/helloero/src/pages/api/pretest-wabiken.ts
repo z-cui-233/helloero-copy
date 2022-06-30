@@ -1,55 +1,56 @@
 import { NextApiHandler } from 'next';
-import { ApiResponse } from 'u-next/api';
-import { PlayInfoWabitResponse } from 'u-next/wabit';
+import getConfig from 'next/config';
 import { globalConfig } from 'src/globalConfig';
+import { ApiRouteResponse } from 'u-next/api';
+import { PlayInfoWabitResponse } from 'u-next/wabit';
 import { DEVICE_CODE } from '@/localShared/constants';
 
-export interface PretestWabikenApiResponse extends ApiResponse {
-  data: {
-    type: string;
-    landingPage: string;
-    endpoints: Array<{
-      id: string;
-      displayName: string;
-      sceneSearchList: Array<{
-        type: string;
-        cdns: Array<{
-          sceneSearchUrl: string;
-          extra: {
-            width: number;
-            height: number;
-          };
-        }>;
+const { serverRuntimeConfig } = getConfig();
+
+export type PretestWabikenApiResponse = ApiRouteResponse<{
+  type: string;
+  landingPage: string;
+  endpoints: Array<{
+    id: string;
+    displayName: string;
+    sceneSearchList: Array<{
+      type: string;
+      cdns: Array<{
+        sceneSearchUrl: string;
+        extra: {
+          width: number;
+          height: number;
+        };
       }>;
-      playables: Array<{
-        type: string;
-        cdns: Array<{
-          cdnId?: string | null;
-          weight: number;
-          playlistUrl: string;
-          licenseUrlList: Array<{
-            drmType: string;
-            version: string;
-            endpoint: string;
-          }>;
-        }>;
-      }>;
-      isem?: {
-        version: string;
-        endpoint: string;
-        isemToken: string;
-      };
-      extra: {
-        playToken: string;
-        playTokenHash: string;
-      };
     }>;
-    refreshToken: string;
-    playbackRemaining: number;
-    notValidBefore: number;
-    notValidAfter: number;
-  };
-}
+    playables: Array<{
+      type: string;
+      cdns: Array<{
+        cdnId?: string | null;
+        weight: number;
+        playlistUrl: string;
+        licenseUrlList: Array<{
+          drmType: string;
+          version: string;
+          endpoint: string;
+        }>;
+      }>;
+    }>;
+    isem?: {
+      version: string;
+      endpoint: string;
+      isemToken: string;
+    };
+    extra: {
+      playToken: string;
+      playTokenHash: string;
+    };
+  }>;
+  refreshToken: string;
+  playbackRemaining: number;
+  notValidBefore: number;
+  notValidAfter: number;
+}>;
 
 const fetchPlayInfoFromWabitApi = (args: {
   userAgent: string;
@@ -59,7 +60,7 @@ const fetchPlayInfoFromWabitApi = (args: {
     throw new Error('uuid does not exists');
   }
 
-  const url = `${process.env.wabitUrl}/v2/playinfo/${globalConfig.PRETEST_WABIKEN}?device_code=${DEVICE_CODE}&device_id=${args.uuid}`;
+  const url = `${serverRuntimeConfig.wabitUrl}/v2/playinfo/${globalConfig.PRETEST_WABIKEN}?device_code=${DEVICE_CODE}&device_id=${args.uuid}`;
   const options = {
     method: 'GET',
     headers: {

@@ -3,6 +3,7 @@
 helloero, account, help sites for h2u
 
 ## AWS Amplify
+
 For more Amplify related knowledge [refer this](/Amplify-dev-notes.md)
 
 ## Deployment urls
@@ -30,6 +31,17 @@ For more Amplify related knowledge [refer this](/Amplify-dev-notes.md)
 add token into `.bash_profile` for reading private module as `NPM_PULL_TOKEN`
 
 #### 1.2 for ENV value for helloero
+
+into `packages/account/.env.local`
+
+```
+ACCESSKEY_ID=THIS_IS_ACCESSKEY_ID
+SECRET_ACCESSKEY=THIS_IS_SECRET_ACCESSKEY
+H2UCRM_ACCOUNT=THIS_IS_H2UCRM_DEV_ACCOUNT_ID
+H2UCRM_PASSWORD=THIS_IS_H2UCRM_DEV_PASSWORD
+```
+
+#### 1.3 for ENV value for helloero
 
 into `packages/helloero/.env.local`
 

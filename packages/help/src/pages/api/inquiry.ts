@@ -5,19 +5,22 @@ import {
 } from '@aws-sdk/client-ses';
 import dateFormat from 'dateformat';
 import { NextApiHandler } from 'next';
-import { ApiResponse } from 'u-next/api';
+import getConfig from 'next/config';
+import { ApiRouteResponse } from 'u-next/api';
 import {
   InquiryTypeKeys,
   INQUIRY_TYPE_MAP,
 } from '@/localShared/constants/inquiry';
 
-const credentials = process.env.accessKeyId &&
-  process.env.secretAccessKey &&
-  process.env.accessKeyId !== '' &&
-  process.env.secretAccessKey !== '' && {
+const { serverRuntimeConfig } = getConfig();
+
+const credentials = serverRuntimeConfig.accessKeyId &&
+  serverRuntimeConfig.secretAccessKey &&
+  serverRuntimeConfig.accessKeyId !== '' &&
+  serverRuntimeConfig.secretAccessKey !== '' && {
     credentials: {
-      accessKeyId: process.env.accessKeyId,
-      secretAccessKey: process.env.secretAccessKey,
+      accessKeyId: serverRuntimeConfig.accessKeyId,
+      secretAccessKey: serverRuntimeConfig.secretAccessKey,
     },
   };
 
@@ -82,7 +85,7 @@ export type InquiryApiRequest = {
   registeredEmail: string;
 };
 
-const inquiryApiHandler: NextApiHandler<ApiResponse> = async (
+const inquiryApiHandler: NextApiHandler<ApiRouteResponse> = async (
   req,
   res
 ): Promise<void> => {
@@ -100,11 +103,13 @@ const inquiryApiHandler: NextApiHandler<ApiResponse> = async (
     return res.status(200).json({
       result: true,
       errorMessage: '',
+      data: null,
     });
   } catch (error) {
     return res.status(200).json({
       result: false,
       errorMessage: (error as Error).message,
+      data: null,
     });
   }
 };

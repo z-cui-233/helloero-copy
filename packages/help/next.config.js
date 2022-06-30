@@ -18,7 +18,7 @@ module.exports = {
   compress: false,
   productionBrowserSourceMaps: true,
   publicRuntimeConfig: loadConfig(process.env.APP_ENV),
-  env: {
+  serverRuntimeConfig: {
     accessKeyId: process.env.ACCESSKEY_ID,
     secretAccessKey: process.env.SECRET_ACCESSKEY,
   },
