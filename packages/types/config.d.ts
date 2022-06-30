@@ -6,4 +6,5 @@ export interface Config {
   ACCOUNT: string;
   H2UCRM: string;
   PRETEST_WABIKEN: string;
+  TD_DATABASE: string;
 }

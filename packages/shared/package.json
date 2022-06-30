@@ -19,7 +19,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "^5.3.3",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "ua-parser-js": "^1.0.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.1.2",
@@ -30,6 +31,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.19",
     "@types/u-next": "file:../types",
+    "@types/ua-parser-js": "^0.7.36",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "babel-plugin-styled-components": "^2.0.2",
     "eslint": "^7.32.0",

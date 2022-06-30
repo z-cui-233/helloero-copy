@@ -1,15 +1,19 @@
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { Auth } from 'aws-amplify';
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 
 type UserInfo = {
   isLoggedIn: boolean;
   userName: string | null;
+  customUserId: string | null;
+  email: string | null;
 };
 
 const initialState: UserInfo = {
   isLoggedIn: false,
   userName: '',
+  customUserId: '',
+  email: '',
 };
 
 const LoginStateContext = React.createContext({
@@ -22,23 +26,29 @@ type Props = {
 };
 
 const LoginStateContextProvider: React.VFC<Props> = ({ children }) => {
-  const [isLoadedUserInfo, setIsLoadedUserInfo] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string | null>(null);
-  const [authState, setAuthState] = useState<AuthState>();
+  const [isLoadedUserInfo, setIsLoadedUserInfo] =
+    React.useState<boolean>(false);
+  const [authState, setAuthState] = React.useState<AuthState>();
+  const [userInfo, setUserInfo] = React.useState<UserInfo>(initialState);
 
-  useEffect(() => {
+  React.useEffect(() => {
     Auth.currentAuthenticatedUser({ bypassCache: true })
       .then((user) => {
-        setUserName(user.username); // 少々強引な取り方
+        setUserInfo({
+          isLoggedIn: true,
+          userName: user.username,
+          customUserId: user.attributes['custom:userid'], // 少々強引な取り方
+          email: user.attributes['email'], // 少々強引な取り方
+        });
         setIsLoadedUserInfo(true);
       })
       .catch(() => {
-        setUserName(null);
+        setUserInfo(initialState);
         setIsLoadedUserInfo(true);
       });
   }, [authState]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     onAuthUIStateChange((nextAuthState) => {
       setAuthState(nextAuthState);
     });
@@ -48,10 +58,7 @@ const LoginStateContextProvider: React.VFC<Props> = ({ children }) => {
     <LoginStateContext.Provider
       value={{
         isLoadedUserInfo,
-        userInfo: {
-          isLoggedIn: isLoadedUserInfo && !!userName,
-          userName,
-        },
+        userInfo,
       }}
     >
       {children}
@@ -63,7 +70,7 @@ const useLoginStateContext = (): {
   isLoadedUserInfo: boolean;
   userInfo: UserInfo;
 } => {
-  const { isLoadedUserInfo, userInfo } = useContext(LoginStateContext);
+  const { isLoadedUserInfo, userInfo } = React.useContext(LoginStateContext);
 
   if (userInfo === null) {
     throw new Error('can not find LoginStateContextProvider');

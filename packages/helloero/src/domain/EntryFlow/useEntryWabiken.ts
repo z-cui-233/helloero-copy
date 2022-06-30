@@ -1,10 +1,12 @@
-import { useRouter } from 'next/router';
+import dateFormat from 'dateformat';
 import { destroyCookie, parseCookies } from 'nookies';
-import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { globalConfig } from 'src/globalConfig';
 import { cookieParams } from '@/shared/constants/cookies';
 import { MESSAGES } from '@/shared/constants/messages';
+import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyFetcher from '@/shared/hooks/useAmplifyFetcher';
+import useTdBridge from '@/shared/hooks/useTdBridge';
 import { getErrorMessage } from '@/shared/utils';
 import {
   ActivateWabikenMutation,
@@ -70,8 +72,9 @@ const isCreateUserWabikenMetaInput = (
 };
 
 const useEntryWabiken = (): UseEntryWabiken => {
-  const router = useRouter();
-  const [state, setState] = useState<State>(initialState);
+  const [state, setState] = React.useState<State>(initialState);
+  const { fetcher: tdBridgeFetcher } = useTdBridge();
+  const { userInfo } = useLoginStateContext();
 
   const {
     fetcher: getWabikenMetaQueryFetcher,
@@ -92,7 +95,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
     CreateUserWabikenMetaMutationVariables
   >();
 
-  const confirmWabiken: UseEntryWabiken['confirmWabiken'] = useCallback(
+  const confirmWabiken: UseEntryWabiken['confirmWabiken'] = React.useCallback(
     async (values) => {
       if (getWabikenMetaQueryLoading) {
         return;
@@ -103,8 +106,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
       });
 
       if (apiData.errors) {
-        setState((state) => ({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           pageStatus: PAGE_STATUS.INPUT,
           errorMessage: getErrorMessage(
             'getWabikenMeta',
@@ -115,8 +118,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         return;
       }
 
-      setState((state) => ({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         pageStatus: PAGE_STATUS.CONFIRM,
         errorMessage: '',
         formValues: values,
@@ -127,7 +130,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
   );
 
   const consumeWabiken: UseEntryWabiken['consumeWabiken'] =
-    useCallback(async () => {
+    React.useCallback(async () => {
       if (activateWabikenLoading || createUserWabikenMetaLoading) {
         return;
       }
@@ -136,8 +139,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         ?.getWabikenMeta as GetWabikenMetaQuery['getWabikenMeta'];
 
       if (!getWabikenMeta) {
-        setState((state) => ({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           errorMessage: MESSAGES.default,
         }));
         return;
@@ -165,8 +168,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         activateWabikenApiData.errors ||
         !isCreateUserWabikenMetaInput(createWabikenInput)
       ) {
-        setState((state) => ({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           errorMessage: getErrorMessage(
             'activateWabiken',
             activateWabikenApiData.errors?.[0]?.errorInfo?.code
@@ -184,11 +187,31 @@ const useEntryWabiken = (): UseEntryWabiken => {
       );
 
       if (createUserWabikenMetaApiData.errors) {
-        setState((state) => ({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           errorMessage: MESSAGES.default,
         }));
         return;
+      }
+
+      // 3. send TD log
+      try {
+        await tdBridgeFetcher(globalConfig, 'serial_code_activate_log', {
+          action_time: dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss'),
+          user_unique_key: userInfo.customUserId,
+          user_multi_account_id: null,
+          super_user_flg: 0,
+          market_platform: 'amazon',
+          provider_id: getWabikenMeta.wabiken.content.key.providerId,
+          product_code: null,
+          content_id_1: getWabikenMeta.wabiken.content.id,
+          content_id_2: null,
+          content_id_3: null,
+          sale_type_code: null,
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
       }
 
       destroyCookie(null, cookieParams.wabiken.name, {
@@ -196,8 +219,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
         path: cookieParams.wabiken.path,
       });
 
-      setState((state) => ({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         pageStatus: PAGE_STATUS.WAITING,
       }));
     }, [
@@ -207,28 +230,39 @@ const useEntryWabiken = (): UseEntryWabiken => {
       createUserWabikenMetaLoading,
       state.formValues.wabiken,
       state.getWabikenMetaQuery?.getWabikenMeta,
+      tdBridgeFetcher,
+      userInfo.userName,
     ]);
 
   // WF-9467 dynamoDBの書き込みが遅いため、少し待ってから移動させる
-  const waitComplete: UseEntryWabiken['waitComplete'] = useCallback(() => {
-    setState((state) => ({
-      ...state,
-      pageStatus: PAGE_STATUS.COMPLETE,
-    }));
-  }, []);
+  const waitComplete: UseEntryWabiken['waitComplete'] =
+    React.useCallback(() => {
+      setState((prevState) => ({
+        ...prevState,
+        pageStatus: PAGE_STATUS.COMPLETE,
+      }));
+    }, []);
 
-  useEffect(() => {
-    const cookies = parseCookies();
-    const wabiken = cookies[cookieParams.wabiken.name]
-      ? (cookies[cookieParams.wabiken.name] as string)
-      : '';
+  React.useEffect(() => {
+    (async () => {
+      if (state.pageStatus !== PAGE_STATUS.INIT) {
+        return;
+      }
 
-    setState((entryWabikenState) => ({
-      ...entryWabikenState,
-      pageStatus: PAGE_STATUS.INPUT,
-      formValues: { wabiken },
-    }));
-  }, [router.query.wabiken]);
+      const cookies = parseCookies();
+      const wabiken = cookies[cookieParams.wabiken.name]
+        ? (cookies[cookieParams.wabiken.name] as string)
+        : '';
+
+      setState((prevState) => ({
+        ...prevState,
+        pageStatus: PAGE_STATUS.INPUT,
+        formValues: {
+          wabiken,
+        },
+      }));
+    })();
+  }, [state.pageStatus]);
 
   return {
     entryWabikenState: state,

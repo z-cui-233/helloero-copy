@@ -7,6 +7,7 @@ const config = {
   H2UCRM:
     'http://un-crs-alb-phkak28brt73-1744225929.ap-northeast-1.elb.amazonaws.com',
   PRETEST_WABIKEN: 'S5T37BTVRQ2N2VNN',
+  TD_DATABASE: 'dev_h2u',
 };
 
 module.exports.default = config;
