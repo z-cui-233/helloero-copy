@@ -4,10 +4,13 @@ import {
   UI_AUTH_CHANNEL,
 } from '@aws-amplify/ui-components';
 import { Hub } from 'aws-amplify';
+import dateFormat from 'dateformat';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
+import { globalConfig } from 'src/globalConfig';
 import { useLoginStateContext } from '@/shared/context/LoginStateContext';
 import useAmplifyAuth from '@/shared/hooks/useAmplifyAuth';
+import useTdBridge from '@/shared/hooks/useTdBridge';
 
 export const PAGE_STATUS = {
   INIT: 'INIT',
@@ -43,33 +46,36 @@ export type UseAccountDeletion = {
 
 const useAccountDeletion = (): UseAccountDeletion => {
   const router = useRouter();
-  const [state, setState] = useState<State>(initialState);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [state, setState] = React.useState<State>(initialState);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { deleteUser } = useAmplifyAuth();
   const { isLoadedUserInfo, userInfo } = useLoginStateContext();
+  const { fetcher: tdBridgeFetcher } = useTdBridge();
 
   const toggleConfirmDialog: UseAccountDeletion['toggleConfirmDialog'] =
-    useCallback(() => {
-      setState((state) => ({
-        ...state,
-        isDisplayedConfirmDialog: !state.isDisplayedConfirmDialog,
+    React.useCallback(() => {
+      setState((prevState) => ({
+        ...prevState,
+        isDisplayedConfirmDialog: !prevState.isDisplayedConfirmDialog,
       }));
     }, []);
 
   const invokeDeletion: UseAccountDeletion['invokeDeletion'] =
-    useCallback(async () => {
+    React.useCallback(async () => {
       if (isLoading) {
         return;
       }
 
       setIsLoading(true);
 
+      /**
+       * 1. Deletion Account
+       */
       const deleteUserResponse = await deleteUser();
-
       if (deleteUserResponse.errorCode) {
         setIsLoading(false);
-        setState((state) => ({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           pageStatus: PAGE_STATUS.CONFIRM,
           errorMessage: deleteUserResponse.errorMessage,
           isDisplayedConfirmDialog: false,
@@ -77,20 +83,34 @@ const useAccountDeletion = (): UseAccountDeletion => {
         return;
       }
 
+      /**
+       * 2. Send TreasureData
+       */
+      await tdBridgeFetcher(globalConfig, 'user_account_log', {
+        action_time: dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss'),
+        user_unique_key: userInfo.customUserId,
+        user_multi_account_id: null,
+        super_user_flg: 0,
+        action_type: 'DELETE',
+      });
+
+      /**
+       * 3. Logout
+       */
       Hub.dispatch(UI_AUTH_CHANNEL, {
         event: AUTH_STATE_CHANGE_EVENT,
         message: AuthState.SignOut,
       });
 
-      setState((state) => ({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         pageStatus: PAGE_STATUS.COMPLETE,
         errorMessage: '',
         isDisplayedConfirmDialog: false,
       }));
-    }, [deleteUser, isLoading]);
+    }, [deleteUser, isLoading, tdBridgeFetcher, userInfo.customUserId]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isLoadedUserInfo) {
       return;
     }
@@ -104,11 +124,11 @@ const useAccountDeletion = (): UseAccountDeletion => {
       return;
     }
 
-    setState((state) => ({
-      ...state,
+    setState((prevState) => ({
+      ...prevState,
       pageStatus: PAGE_STATUS.CONFIRM,
     }));
-  }, [isLoadedUserInfo, state.pageStatus, router, userInfo.isLoggedIn]);
+  }, [isLoadedUserInfo, router, state.pageStatus, userInfo.isLoggedIn]);
 
   return {
     accountDeletionState: state,
