@@ -38,8 +38,6 @@ const useTdBridge = (): UseTdBridge => {
         ...reqData,
       };
 
-      console.log(params);
-
       const objJsonStr = JSON.stringify(params);
       const objJsonB64 = Buffer.from(objJsonStr).toString('base64');
       const encodedObjJsonB64 = encodeURIComponent(objJsonB64);
@@ -56,8 +54,10 @@ const useTdBridge = (): UseTdBridge => {
         }
       )
         .then((response) => response.json())
-        .catch(() => {
-          return;
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log((error as Error).message);
+          return Promise.reject({});
         })
         .finally(() => {
           setLoading(false);

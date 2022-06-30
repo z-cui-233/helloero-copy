@@ -33,6 +33,11 @@ const useVariousFetch = <T>(): {
             return json;
           });
         })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log((error as Error).message);
+          return Promise.reject({} as T);
+        })
         .finally(() => {
           setLoading(false);
         });
