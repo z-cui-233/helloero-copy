@@ -200,7 +200,7 @@ const useResendSignUp = (): UseResendSignUp => {
       await thanksFetcher('/api/thanks', {
         method: 'POST',
         cache: 'no-cache',
-        credentials: 'omit',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
