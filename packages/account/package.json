@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.6",
-    "@aws-sdk/client-ses": "^3.52.0",
+    "@aws-sdk/client-ses": "3.52.0",
     "@u-next/site_config": "file:../site_config",
     "aws-amplify": "^4.3.14",
     "dateformat": "^5.0.2",
