@@ -35,7 +35,7 @@ const useLoginIdReminder = (): UseLoginIdReminder => {
       await fetcher('/api/reminder', {
         method: 'POST',
         cache: 'no-cache',
-        credentials: 'omit',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
