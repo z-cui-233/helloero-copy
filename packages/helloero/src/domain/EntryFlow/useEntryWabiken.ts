@@ -207,7 +207,8 @@ const useEntryWabiken = (): UseEntryWabiken => {
           content_id_1: getWabikenMeta.wabiken.content.id,
           content_id_2: null,
           content_id_3: null,
-          sale_type_code: null,
+          sale_type_code:
+            getWabikenMeta.wabiken.validityPeriod === 0 ? 'EST' : 'TVOD',
         });
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -231,7 +232,7 @@ const useEntryWabiken = (): UseEntryWabiken => {
       state.formValues.wabiken,
       state.getWabikenMetaQuery?.getWabikenMeta,
       tdBridgeFetcher,
-      userInfo.userName,
+      userInfo.customUserId,
     ]);
 
   // WF-9467 dynamoDBの書き込みが遅いため、少し待ってから移動させる
