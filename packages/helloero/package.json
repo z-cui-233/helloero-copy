@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.6",
-    "@u-next/defaultplayer": "^1.2.2-develop.2",
+    "@u-next/defaultplayer": "^1.2.2",
     "@u-next/site_config": "file:../site_config",
     "aws-amplify": "^4.3.14",
     "dateformat": "^5.0.2",
