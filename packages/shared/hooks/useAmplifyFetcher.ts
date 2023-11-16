@@ -18,21 +18,24 @@ const useAmplifyFetcher = <TData, TVariables>(): {
       setLoading(true);
 
       return (
-        API.graphql(graphqlOperation(query, variables)) as Promise<
-          GraphQLResultEx<object>
-        >
-      )
-        .then((result: GraphQLResultEx<object>): GraphQLResultEx<object> => {
-          setData(result as unknown as GraphQLResultEx<TData>);
-          return result;
-        })
-        .catch((error) => {
-          setData(error as GraphQLResultEx<TData>);
-          return error;
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        // TODO type
+        (
+          API.graphql(graphqlOperation(query, variables as any)) as Promise<
+            GraphQLResultEx<object>
+          >
+        )
+          .then((result: GraphQLResultEx<object>): GraphQLResultEx<object> => {
+            setData(result as unknown as GraphQLResultEx<TData>);
+            return result;
+          })
+          .catch((error) => {
+            setData(error as GraphQLResultEx<TData>);
+            return error;
+          })
+          .finally(() => {
+            setLoading(false);
+          })
+      );
     },
     []
   );
