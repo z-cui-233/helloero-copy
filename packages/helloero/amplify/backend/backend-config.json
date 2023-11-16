@@ -1,44 +1,55 @@
 {
+  "api": {
+    "helloeroApi": {
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authh2umonopackageshelloc636e5bc"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "h2umonopackageshelloc636e5bc": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
+      "customAuth": false,
       "dependsOn": [
         {
+          "attributes": ["Arn", "Name"],
           "category": "function",
           "resourceName": "h2umonopackageshelloc636e5bcPostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": ["Arn", "Name"]
+          "triggerProvider": "Cognito"
         },
         {
+          "attributes": ["Arn", "Name"],
           "category": "function",
           "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration",
-          "triggerProvider": "Cognito",
-          "attributes": ["Arn", "Name"]
+          "triggerProvider": "Cognito"
         }
       ],
-      "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": ["EMAIL"],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": ["SMS"],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": ["EMAIL"],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": ["EMAIL"]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
   "function": {
-    "helloeroApiLambdaResolver": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
-    },
     "h2umonopackageshelloc636e5bcPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -48,23 +59,78 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "helloeroApiLambdaResolver": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
-  "api": {
-    "helloeroApi": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authh2umonopackageshelloc636e5bc"
-            }
-          },
-          "additionalAuthenticationProviders": []
+  "parameters": {
+    "AMPLIFY_api_helloeroApi_OpenSearchInstanceType": {
+      "usedBy": [
+        {
+          "category": "api",
+          "resourceName": "helloeroApi"
         }
-      }
+      ]
+    },
+    "AMPLIFY_function_h2umonopackageshelloc636e5bcPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "h2umonopackageshelloc636e5bcPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_h2umonopackageshelloc636e5bcPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "h2umonopackageshelloc636e5bcPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_h2umonopackageshelloc636e5bcPreTokenGeneration_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration"
+        }
+      ]
+    },
+    "AMPLIFY_function_h2umonopackageshelloc636e5bcPreTokenGeneration_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "h2umonopackageshelloc636e5bcPreTokenGeneration"
+        }
+      ]
+    },
+    "AMPLIFY_function_helloeroApiLambdaResolver_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "helloeroApiLambdaResolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_helloeroApiLambdaResolver_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "helloeroApiLambdaResolver"
+        }
+      ]
+    },
+    "AMPLIFY_function_helloeroApiLambdaResolver_wabitUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "helloeroApiLambdaResolver"
+        }
+      ]
     }
   }
 }

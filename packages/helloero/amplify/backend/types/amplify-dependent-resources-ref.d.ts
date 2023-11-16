@@ -1,40 +1,39 @@
 export type AmplifyDependentResourcesAttributes = {
+  api: {
+    helloeroApi: {
+      GraphQLAPIEndpointOutput: 'string';
+      GraphQLAPIIdOutput: 'string';
+    };
+  };
   auth: {
     h2umonopackageshelloc636e5bc: {
+      AppClientID: 'string';
+      AppClientIDWeb: 'string';
       IdentityPoolId: 'string';
       IdentityPoolName: 'string';
-      UserPoolId: 'string';
       UserPoolArn: 'string';
+      UserPoolId: 'string';
       UserPoolName: 'string';
-      AppClientIDWeb: 'string';
-      AppClientID: 'string';
-      CreatedSNSRole: 'string';
     };
   };
   function: {
-    helloeroApiLambdaResolver: {
-      Name: 'string';
-      Arn: 'string';
-      Region: 'string';
-      LambdaExecutionRole: 'string';
-    };
     h2umonopackageshelloc636e5bcPostConfirmation: {
-      Name: 'string';
       Arn: 'string';
       LambdaExecutionRole: 'string';
+      Name: 'string';
       Region: 'string';
     };
     h2umonopackageshelloc636e5bcPreTokenGeneration: {
-      Name: 'string';
       Arn: 'string';
       LambdaExecutionRole: 'string';
+      Name: 'string';
       Region: 'string';
     };
-  };
-  api: {
-    helloeroApi: {
-      GraphQLAPIIdOutput: 'string';
-      GraphQLAPIEndpointOutput: 'string';
+    helloeroApiLambdaResolver: {
+      Arn: 'string';
+      LambdaExecutionRole: 'string';
+      Name: 'string';
+      Region: 'string';
     };
   };
 };
