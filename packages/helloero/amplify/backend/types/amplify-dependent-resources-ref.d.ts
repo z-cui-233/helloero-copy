@@ -9,6 +9,7 @@ export type AmplifyDependentResourcesAttributes = {
     h2umonopackageshelloc636e5bc: {
       AppClientID: 'string';
       AppClientIDWeb: 'string';
+      CreatedSNSRole: 'string';
       IdentityPoolId: 'string';
       IdentityPoolName: 'string';
       UserPoolArn: 'string';
