@@ -7,6 +7,8 @@ const loadConfig = (env) => {
       return require('@u-next/site_config/prod.js').default;
     case 'itstg':
       return require('@u-next/site_config/itstg.js').default;
+    case 'itstg2':
+      return require('@u-next/site_config/itstg2.js').default;
     default:
       return require('@u-next/site_config/local.js').default;
   }
